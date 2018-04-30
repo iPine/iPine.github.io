@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>Tags · lf94me</title>
+    <title>统计数组中元素出现的次数 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -185,12 +187,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >iPine&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">统计数组中元素出现的次数</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>iPine's Blog.</a>
 </header>
@@ -204,24 +217,69 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            统计数组中元素出现的次数
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "codewar">codewar</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/26</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -307,14 +365,50 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p><img src="https://s1.ax1x.com/2018/04/30/CGL4nf.png" alt="题目描述"></p>
+<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function deleteNth(arr,n){
+  // ...
+  var re = [];
+  var arr1 = {};
+
+  for(i=0; i&lt;arr.length; i++){
+    !arr1[arr[i]] ? arr1[arr[i]] = 1 : arr1[arr[i]] += 1;
+    if(arr1[arr[i]] &lt;= n)
+      re.push(arr[i]);
+  }
+  return re;
+}
+</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function deleteNth(arr,x){
+    var obj = {};
+    return arr.filter(function(number){
+        obj[number] = obj[number] ? obj[number] + 1 : 1
+        return obj[number] &lt;= x
+    });
+}
+</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
+<li><p>定义统计数组中每个元素出现的次数的变量应该是个对象：<code>var arr1 = {}</code>; 而不是一个数组 var arr1 = []; （这样每个元素对应一个出现次数，之后就可检索出，出现某个次数的元素）</p>
+</li>
+<li><p>给一个数组(var re = [];)赋值：不是var re = [0];而是应该用<code>.push()</code>方法，<code>re.push(arr[i])</code>;</p>
+</li>
+</ul>
+
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018-04-27/" title= BuildTower >
+                    <div class="nextTitle">BuildTower</div>
+                </a>
+            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018-04-23/" title= 论文摘要写作思路实践 >
+                    <div class="prevTitle">论文摘要写作思路实践</div>
+                </a>
             
         </li>
     </ul>
@@ -422,6 +516,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的代码"><span class="toc-number">2.</span> <span class="toc-text">我的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clever"><span class="toc-number">3.</span> <span class="toc-text">Clever</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">4.</span> <span class="toc-text">Key</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -760,6 +872,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>

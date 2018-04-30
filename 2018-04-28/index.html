@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>Tags · lf94me</title>
+    <title>Directions Reduction · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -185,12 +187,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >iPine&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Directions Reduction</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>iPine's Blog.</a>
 </header>
@@ -204,24 +217,69 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            Directions Reduction
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "codewar">codewar</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/28</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -307,14 +365,75 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out).<br>If everything cancels out, return an empty array (stay in place);</p>
+<p>For example:</p>
+<blockquote>
+<p>dirReduc([“NORTH”, “SOUTH”, “SOUTH”, “EAST”, “WEST”, “NORTH”, “WEST”]) =&gt; [“WEST”]<br>dirReduc([“NORTH”, “SOUTH”, “SOUTH”, “EAST”, “WEST”, “NORTH”]) =&gt; []</p>
+</blockquote>
+<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function dirReduc(arr){
+  // ...
+  for(i=0; i&lt;arr.length; i++){
+    if(arr[i] == &quot;NORTH&quot;){
+      arr[i] = 1;
+    }else if(arr[i] == &quot;SOUTH&quot;){
+      arr[i] = -1;
+    }else if(arr[i] == &quot;EAST&quot;){
+      arr[i] = 2;
+    }else if(arr[i] == &quot;WEST&quot;){
+      arr[i] = -2;
+    }
+  }
+//   console.log(arr);
+  for(i=0; i&lt;arr.length; i++){  
+      if(arr[i] + arr[i+1] == 0){
+        arr.splice(i,2);
+        i -=2;
+        continue;
+      } 
+  }
+  for(i=0; i&lt;arr.length; i++){
+    if(arr[i] == 1){
+      arr[i] = &quot;NORTH&quot;;
+    }else if(arr[i] == -1){
+      arr[i] = &quot;SOUTH&quot;;
+    }else if(arr[i] == 2){
+      arr[i] = &quot;EAST&quot;;
+    }else if(arr[i] == -2){
+      arr[i] = &quot;WEST&quot;;
+    }
+  }
+  return arr;
+}
+</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function dirReduc(arr) {
+ var str = arr.join(&apos;&apos;), pattern = /NORTHSOUTH|EASTWEST|SOUTHNORTH|WESTEAST/; 
+ while (pattern.test(str)) 
+  str = str.replace(pattern,&apos;&apos;);
+ return str.match(/(NORTH|SOUTH|EAST|WEST)/g)||[]; 
+}
+</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
+<li><p>如何考虑重复判断数组arr里是否还有符合要求的字符对？<br>解决办法：下标i回到0，跳出当前循环，又从第一个元素开始判断剩余数组中的内容，重复这个过程，直到没有符合条件的元素</p>
+</li>
+<li><p>删除的数组的某一项用：<code>splice(index,len,[item])</code><br><em>注：该方法会改变原始数组</em><br>splice有3个参数，它也可以用来替换/删除/添加数组内某一个或者几个值<br><code>index</code>:数组开始下标（要删除的元素的下标）<br><code>len</code>: 替换/删除的长度<br><code>item</code>:替换的值，删除操作的话 item为空</p>
+</li>
+</ul>
+
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018-04-30/" title= Sudoku Solution Validator >
+                    <div class="nextTitle">Sudoku Solution Validator</div>
+                </a>
+            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018-04-27/" title= BuildTower >
+                    <div class="prevTitle">BuildTower</div>
+                </a>
             
         </li>
     </ul>
@@ -422,6 +541,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的代码"><span class="toc-number">2.</span> <span class="toc-text">我的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clever"><span class="toc-number">3.</span> <span class="toc-text">Clever</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">4.</span> <span class="toc-text">Key</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -760,6 +897,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>

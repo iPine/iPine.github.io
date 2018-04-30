@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>Tags · lf94me</title>
+    <title>Sudoku Solution Validator · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -185,12 +187,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >iPine&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Sudoku Solution Validator</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>iPine's Blog.</a>
 </header>
@@ -204,24 +217,69 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            Sudoku Solution Validator
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "codewar">codewar</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/30</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -307,7 +365,73 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Sudoku Background：<br>Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 sub-grids (also known as blocks) contain all of the digits from 1 to 9. </p>
+<p><img src="https://s1.ax1x.com/2018/04/30/CJ94ud.png" alt="题目描述"></p>
+<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function validSolution(board){
+  //TODO
+  var flag = 1;
+
+  for(j=0; j&lt;9; j++){
+    var sumcol = 0;
+    var sum = 0;
+// 计算列和是否为45
+    for(i=0; i&lt;9; i++){
+      sumcol += board[i][j];
+    }
+    if(sumcol != 45){
+        flag = 0;
+        break;
+    }
+// 计算行和是否为45，利用数组的方法求和
+    board[j].some(function(item,i){
+      sum += item;
+    })
+    if(sum != 45){
+      flag = 0;
+      break;
+    }
+  }
+// 计算前9个宫格的和是否为45
+  var sumgrid = 0;
+  for(k=0; k&lt;3; k++){   
+    for(l=0; l&lt;3; l++){
+      sumgrid += board[k][l];
+    }
+  }
+  if(sumgrid != 45){
+    flag = 0;
+  }
+
+  if(flag){
+    return true;
+  }else{
+    return false;
+  }
+}
+</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function equals45(n){ 
+return n == 45;
+} 
+function validSolution(board){
+var sumh = [0,0,0,0,0,0,0,0,0]; 
+var sumv = [0,0,0,0,0,0,0,0,0]; 
+osums = [[0,0,0],[0,0,0],[0,0,0]]; 
+for (var i=0;i&lt;9;i++){ 
+ for (var j=0;j&lt;9;j++){
+  sumh[i] += board[i][j]; 
+  sumv[j] += board[i][j]; // 这里我认为应该是board[j][i]
+  osums[Math.floor(i/3)][Math.floor(j/3)] += board[i][j]; 
+ } 
+} 
+for (var i=0;i&lt;3;i++)
+ if (!osums[i].every(equals45)) 
+  return false;
+return (sumh.every(equals45) &amp;&amp; sumv.every(equals45)); }
+</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
+<li><code>every()</code>方法只有数组中每一项执行回调函数结果合部为true才会返回，不然就会返回false。</li>
+</ul>
+<p><a href="http://www.jb51.net/article/81360.htm" target="_blank" rel="noopener">常见的数组操作方法</a></p>
+<p>-这个题的做法实质上是不能正确验证是否是数独解。因为若每个cell都是5，满足行、列、每个9宫格的和为45的条件，但不满足数独解的条件。</p>
+
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
@@ -315,6 +439,11 @@
             
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018-04-28/" title= Directions Reduction >
+                    <div class="prevTitle">Directions Reduction</div>
+                </a>
             
         </li>
     </ul>
@@ -422,6 +551,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的代码"><span class="toc-number">2.</span> <span class="toc-text">我的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clever"><span class="toc-number">3.</span> <span class="toc-text">Clever</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">4.</span> <span class="toc-text">Key</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -760,6 +907,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
