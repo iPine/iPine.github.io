@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-04-30T12:05:43.228Z</updated>
+  <updated>2018-05-01T11:47:36.530Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Range Extraction</title>
+    <link href="http://ipine.github.io/2018-05-01/"/>
+    <id>http://ipine.github.io/2018-05-01/</id>
+    <published>2018-05-01T05:30:00.000Z</published>
+    <updated>2018-05-01T11:47:36.530Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>A format for expressing an ordered list of integers is to use a comma separated list of either<br>• individual integers<br>• or a range of integers denoted by the starting integer separated from the end integer in the range by a dash, ‘-‘. The range includes all integers in the interval including both endpoints. It is not considered a range unless it spans at least 3 numbers. For example (“12, 13, 15-17”)<br>Complete the solution so that it takes a list of integers in increasing order and returns a correctly formatted string in the range format.</p><p>Example:<br>solution([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]);<br>// returns “-6,-3-1,3-5,7-11,14,15,17-20”</p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function solution(list){ // TODO: complete solution  var str = [];  for (i = 0; i &lt; list.length; i++) {    if ((list[i]+1) !== list[i+1]) {//完全没有连续的情况      str += list[i].toString() + &apos;,&apos;;    } else if ((list[i]+1) === list[i+1] &amp;&amp; (list[i+1]+1) === list[i+2] &amp;&amp; (list[i-1]+1) !== list[i]) {//有2个及其以上连续的情况      str += list[i].toString() + &apos;-&apos;;    } else if (str[str.length-1] === &apos;-&apos; &amp;&amp; (list[i]+1) !== list[i+1]) {//判断是否是range的最后一个元素      str += list[i].toString() + &apos;,&apos;;    } else if ((list[i]-1) === list[i-1] &amp;&amp; (list[i]+1) === list[i+1]) {      //属于range中的元素    } else if ((list[i]-1) === list[i-1] &amp;&amp; (list[i-1]-1) === list[i-2]) {//只有2个连续的情况      str += list[i].toString() + &apos;,&apos;;    } else {//新range开头      str += list[i].toString() + &apos;,&apos;;    }  }   return str.slice(0, -1);//去掉最后的逗号}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function solution(list){ for(var i = 0; i &lt; list.length; i++){  var j = i;  while(list[j] - list[j+1] == -1)   j++;  if(j != i &amp;&amp; j-i&gt;1)  list.splice(i, j-i+1, list[i] +&apos;-&apos;+list[j]);  } return list.join();}</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><p><code>.slice()</code> 方法可返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。（含头不含尾）</p><blockquote><p>语法：arrayObject.slice(start,end)</p></blockquote></li><li><p>用到了<code>.splice()</code>方法，替换数组中的内容。</p><blockquote><p>参数包含:（起始下标，替换长度，替换内容）</p></blockquote></li><li><p><code>i</code>记录range开始位置，<code>j</code>记录range结束位置。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;A format for expressing an ordered list of integers is to use 
+      
+    
+    </summary>
+    
+      <category term="technique" scheme="http://ipine.github.io/categories/technique/"/>
+    
+    
+      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
+    
+      <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
+    
+  </entry>
   
   <entry>
     <title>Sudoku Solution Validator</title>
