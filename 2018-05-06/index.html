@@ -406,12 +406,7 @@ height:50vh;
  } 
  return res; 
 }
-</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ol>
-<li>思路是将a和b的最后一位相加，如果相加的结果大于10，取个位数部分，进位值<code>count+1</code>；并将结果放入到数组中。</li>
-<li>要一位一位相加，需要把a和b两个字符串转成字符串数组，用到<code>.split()</code>函数。</li>
-<li>还要注意判断a串和b串哪个更长，最后循环完后需要将最后一次的进位值放入数组。</li>
-<li>以上步骤得到的数组不是最终结果，还要先<code>翻转</code>，再<code>变成字符串</code>，最后用<code>.replace()</code>方法将首位的0去掉。</li>
-</ol>
+</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><p>1 . 思路是将a和b的最后一位相加，如果相加的结果大于10，取个位数部分，进位值<code>count+1</code>；并将结果放入到数组中。<br>2 . 要一位一位相加，需要把a和b两个字符串转成字符串数组，用到<code>.split()</code>函数。<br>3 . 还要注意判断a串和b串哪个更长，最后循环完后需要将最后一次的进位值放入数组。<br>4 . 以上步骤得到的数组不是最终结果，还要先<code>翻转</code>，再将字符串数组<code>变成字符串</code>，最后用<code>.replace()</code>方法将首位的0去掉。</p>
 
     </article>
     <!-- 前后页  -->
@@ -728,8 +723,6 @@ top:50vh;
     
     
     
-    
-    
     <div class="total-archive"> Total : 17 </div>
     
     <div class="post-archive">
@@ -859,17 +852,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
     
+        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+    
         <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
     
-        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
         <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
     
         <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
     
         <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
-    
-        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
