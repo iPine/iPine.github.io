@@ -75,9 +75,9 @@
     <link href="http://ipine.github.io/2018-04-30/"/>
     <id>http://ipine.github.io/2018-04-30/</id>
     <published>2018-04-30T05:29:00.000Z</published>
-    <updated>2018-04-30T12:05:43.228Z</updated>
+    <updated>2018-05-06T10:41:57.798Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Sudoku Background：<br>Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 sub-grids (also known as blocks) contain all of the digits from 1 to 9. </p><p><img src="https://s1.ax1x.com/2018/04/30/CJ94ud.png" alt="题目描述"></p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function validSolution(board){  //TODO  var flag = 1;  for(j=0; j&lt;9; j++){    var sumcol = 0;    var sum = 0;// 计算列和是否为45    for(i=0; i&lt;9; i++){      sumcol += board[i][j];    }    if(sumcol != 45){        flag = 0;        break;    }// 计算行和是否为45，利用数组的方法求和    board[j].some(function(item,i){      sum += item;    })    if(sum != 45){      flag = 0;      break;    }  }// 计算前9个宫格的和是否为45  var sumgrid = 0;  for(k=0; k&lt;3; k++){       for(l=0; l&lt;3; l++){      sumgrid += board[k][l];    }  }  if(sumgrid != 45){    flag = 0;  }  if(flag){    return true;  }else{    return false;  }}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function equals45(n){ return n == 45;} function validSolution(board){var sumh = [0,0,0,0,0,0,0,0,0]; var sumv = [0,0,0,0,0,0,0,0,0]; osums = [[0,0,0],[0,0,0],[0,0,0]]; for (var i=0;i&lt;9;i++){  for (var j=0;j&lt;9;j++){  sumh[i] += board[i][j];   sumv[j] += board[i][j]; // 这里我认为应该是board[j][i]  osums[Math.floor(i/3)][Math.floor(j/3)] += board[i][j];  } } for (var i=0;i&lt;3;i++) if (!osums[i].every(equals45))   return false;return (sumh.every(equals45) &amp;&amp; sumv.every(equals45)); }</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><code>every()</code>方法只有数组中每一项执行回调函数结果合部为true才会返回，不然就会返回false。</li></ul><p><a href="http://www.jb51.net/article/81360.htm" target="_blank" rel="noopener">常见的数组操作方法</a></p><p>-这个题的做法实质上是不能正确验证是否是数独解。因为若每个cell都是5，满足行、列、每个9宫格的和为45的条件，但不满足数独解的条件。</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Sudoku Background：<br>Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 sub-grids (also known as blocks) contain all of the digits from 1 to 9. </p><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-6/15442296.jpg" alt="题目描述"></p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function validSolution(board){  //TODO  var flag = 1;  for(j=0; j&lt;9; j++){    var sumcol = 0;    var sum = 0;// 计算列和是否为45    for(i=0; i&lt;9; i++){      sumcol += board[i][j];    }    if(sumcol != 45){        flag = 0;        break;    }// 计算行和是否为45，利用数组的方法求和    board[j].some(function(item,i){      sum += item;    })    if(sum != 45){      flag = 0;      break;    }  }// 计算前9个宫格的和是否为45  var sumgrid = 0;  for(k=0; k&lt;3; k++){       for(l=0; l&lt;3; l++){      sumgrid += board[k][l];    }  }  if(sumgrid != 45){    flag = 0;  }  if(flag){    return true;  }else{    return false;  }}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function equals45(n){ return n == 45;} function validSolution(board){var sumh = [0,0,0,0,0,0,0,0,0]; var sumv = [0,0,0,0,0,0,0,0,0]; osums = [[0,0,0],[0,0,0],[0,0,0]]; for (var i=0;i&lt;9;i++){  for (var j=0;j&lt;9;j++){  sumh[i] += board[i][j];   sumv[j] += board[i][j]; // 这里我认为应该是board[j][i]  osums[Math.floor(i/3)][Math.floor(j/3)] += board[i][j];  } } for (var i=0;i&lt;3;i++) if (!osums[i].every(equals45))   return false;return (sumh.every(equals45) &amp;&amp; sumv.every(equals45)); }</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><code>every()</code>方法只有数组中每一项执行回调函数结果合部为true才会返回，不然就会返回false。</li></ul><p><a href="http://www.jb51.net/article/81360.htm" target="_blank" rel="noopener">常见的数组操作方法</a></p><p>-这个题的做法实质上是不能正确验证是否是数独解。因为若每个cell都是5，满足行、列、每个9宫格的和为45的条件，但不满足数独解的条件。</p>]]></content>
     
     <summary type="html">
     
@@ -129,15 +129,15 @@
     <link href="http://ipine.github.io/2018-04-27/"/>
     <id>http://ipine.github.io/2018-04-27/</id>
     <published>2018-04-27T06:49:00.000Z</published>
-    <updated>2018-04-30T12:05:50.560Z</updated>
+    <updated>2018-05-06T10:43:01.941Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Build a tower like this:<br>    <img src="https://s1.ax1x.com/2018/04/30/CJ9knA.png" alt="题目描述"></p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function towerBuilder(nFloors) {  // build here  var arr = [];  for(var i=0; i&lt;=nFloors-1; i++){    var stars = i*2+1;    var space = nFloors-1-i;    arr.push(&quot; &quot;.repeat(space) + &quot;*&quot;.repeat(stars) + &quot; &quot;.repeat(space));  }  return arr;  }</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><p>分别计算出空格个数和星星个数，将这些字符连接起来成串，放入字符串数组中。</p><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li>如何生成重复字符？ <code>&quot;字符&quot;.repeat(n)</code> 方法</li><li>如何将字符放入数组: 每次单考虑字符串数组中的一个元素，每个元素都是一串字符，用<code>+</code>连接形成字符串（元素），再使用<code>arr.push()</code> 方法将每个元素依次放入数组。</li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Build a tower like this:<br>    <img src="http://p8ay1ez22.bkt.clouddn.com/18-5-6/66768733.jpg" alt="题目描述"></p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function towerBuilder(nFloors) {  // build here  var arr = [];  for(var i=0; i&lt;=nFloors-1; i++){    var stars = i*2+1;    var space = nFloors-1-i;    arr.push(&quot; &quot;.repeat(space) + &quot;*&quot;.repeat(stars) + &quot; &quot;.repeat(space));  }  return arr;  }</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><p>分别计算出空格个数和星星个数，将这些字符连接起来成串，放入字符串数组中。</p><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li>如何生成重复字符？ <code>&quot;字符&quot;.repeat(n)</code> 方法</li><li>如何将字符放入数组: 每次单考虑字符串数组中的一个元素，每个元素都是一串字符，用<code>+</code>连接形成字符串（元素），再使用<code>arr.push()</code> 方法将每个元素依次放入数组。</li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Build a tower like this:&lt;br&gt;    &lt;img src=&quot;https://s1.ax1x.com/
+        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Build a tower like this:&lt;br&gt;    &lt;img src=&quot;http://p8ay1ez22.bkt
       
     
     </summary>
@@ -156,15 +156,15 @@
     <link href="http://ipine.github.io/2018-04-26/"/>
     <id>http://ipine.github.io/2018-04-26/</id>
     <published>2018-04-26T05:50:00.000Z</published>
-    <updated>2018-04-30T12:05:54.775Z</updated>
+    <updated>2018-05-06T10:45:40.167Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p><img src="https://s1.ax1x.com/2018/04/30/CGL4nf.png" alt="题目描述"></p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function deleteNth(arr,n){  // ...  var re = [];  var arr1 = {};  for(i=0; i&lt;arr.length; i++){    !arr1[arr[i]] ? arr1[arr[i]] = 1 : arr1[arr[i]] += 1;    if(arr1[arr[i]] &lt;= n)      re.push(arr[i]);  }  return re;}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function deleteNth(arr,x){    var obj = {};    return arr.filter(function(number){        obj[number] = obj[number] ? obj[number] + 1 : 1        return obj[number] &lt;= x    });}</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><p>定义统计数组中每个元素出现的次数的变量应该是个对象：<code>var arr1 = {}</code>; 而不是一个数组 var arr1 = []; （这样每个元素对应一个出现次数，之后就可检索出，出现某个次数的元素）</p></li><li><p>给一个数组(var re = [];)赋值：不是var re = [0];而是应该用<code>.push()</code>方法，<code>re.push(arr[i])</code>;</p></li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-6/88042726.jpg" alt="题目描述"></p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function deleteNth(arr,n){  // ...  var re = [];  var arr1 = {};  for(i=0; i&lt;arr.length; i++){    !arr1[arr[i]] ? arr1[arr[i]] = 1 : arr1[arr[i]] += 1;    if(arr1[arr[i]] &lt;= n)      re.push(arr[i]);  }  return re;}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function deleteNth(arr,x){    var obj = {};    return arr.filter(function(number){        obj[number] = obj[number] ? obj[number] + 1 : 1        return obj[number] &lt;= x    });}</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><p>定义统计数组中每个元素出现的次数的变量应该是个对象：<code>var arr1 = {}</code>; 而不是一个数组 var arr1 = []; （这样每个元素对应一个出现次数，之后就可检索出，出现某个次数的元素）</p></li><li><p>给一个数组(var re = [];)赋值：不是var re = [0];而是应该用<code>.push()</code>方法，<code>re.push(arr[i])</code>;</p></li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;https://s1.ax1x.com/2018/04/30/CGL4nf.png&quot; alt=&quot;题目描述
+        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://p8ay1ez22.bkt.clouddn.com/18-5-6/88042726.jpg
       
     
     </summary>
@@ -224,9 +224,9 @@
       <category term="method" scheme="http://ipine.github.io/categories/method/"/>
     
     
-      <category term="tool" scheme="http://ipine.github.io/tags/tool/"/>
-    
       <category term="paper" scheme="http://ipine.github.io/tags/paper/"/>
+    
+      <category term="tool" scheme="http://ipine.github.io/tags/tool/"/>
     
   </entry>
   
