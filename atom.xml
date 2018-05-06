@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-05-02T06:20:58.128Z</updated>
+  <updated>2018-05-06T12:53:24.339Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Adding Big Numbers</title>
+    <link href="http://ipine.github.io/2018-05-06/"/>
+    <id>http://ipine.github.io/2018-05-06/</id>
+    <published>2018-05-06T12:31:00.000Z</published>
+    <updated>2018-05-06T12:53:24.339Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>We need to sum big numbers and we require your help.<br>Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.<br>Example<br>add(“123”, “321”); -&gt; “444”<br>add(“11”, “99”); -&gt; “110”</p><p>Notes</p><ul><li>The input numbers are big.</li><li>The input is a string of only digits</li><li>The numbers are positives</li></ul><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function add(a, b) {  var arra =a.split(&apos;&apos;);  var arrb =b.split(&apos;&apos;);  var len = a.length &gt; b.length?a.length:b.length;  var result = [];  var count = 0;  for(i=0; i&lt;len; i++){    var temp;    if(i&gt;=a.length){      temp = Number(arrb.pop()) + count;    }else if(i&gt;=b.length){      temp = Number(arra.pop()) + count;    }else{      temp = (Number(arra.pop()) + Number(arrb.pop())) + count;    }    temp &gt;= 10?[temp,count]=[temp-10,1]:count=0;    result.push(temp);  }  result.push(count); // console.log(result);  return result.reverse().join(&apos;&apos;).replace(/^0+/,&apos;&apos;);//   return Number(a) + Number(b); // Fix this!}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function add (a, b) { var res = &apos;&apos;, c = 0 ; a = a.split(&apos;&apos;); b = b.split(&apos;&apos;); while (a.length || b.length || c) {   c += ~~a.pop() + ~~b.pop();  res = c % 10 + res;  c = c &gt; 9; }  return res; }</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ol><li>思路是将a和b的最后一位相加，如果相加的结果大于10，取个位数部分，进位值<code>count+1</code>；并将结果放入到数组中。</li><li>要一位一位相加，需要把a和b两个字符串转成字符串数组，用到<code>.split()</code>函数。</li><li>还要注意判断a串和b串哪个更长，最后循环完后需要将最后一次的进位值放入数组。</li><li>以上步骤得到的数组不是最终结果，还要先<code>翻转</code>，再<code>变成字符串</code>，最后用<code>.replace()</code>方法将首位的0去掉。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;We need to sum big numbers and we require your help.&lt;br&gt;Write 
+      
+    
+    </summary>
+    
+      <category term="technique" scheme="http://ipine.github.io/categories/technique/"/>
+    
+    
+      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
+    
+      <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
+    
+  </entry>
   
   <entry>
     <title>Find the missing term in an Arithmetic Progression</title>
