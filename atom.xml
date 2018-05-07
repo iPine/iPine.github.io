@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-05-06T12:57:11.607Z</updated>
+  <updated>2018-05-07T13:38:05.156Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Twice linear</title>
+    <link href="http://ipine.github.io/2018-05-07/"/>
+    <id>http://ipine.github.io/2018-05-07/</id>
+    <published>2018-05-07T13:34:00.000Z</published>
+    <updated>2018-05-07T13:38:05.156Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Consider a sequence u where u is defined as follows:<br>1 . The number u(0) = 1 is the first one in u.<br>2 . For each x in u, then y = 2 <em> x + 1 and z = 3 </em> x + 1 must be in utoo.<br>3 . There are no other numbers in u.<br>Ex: u = [1, 3, 4, 7, 9, 10, 13, 15, 19, 21, 22, 27, …]<br>1 gives 3 and 4, then 3 gives 7 and 10, 4 gives 9 and 13, then 7 gives 15 and 22 and so on…</p><ul><li>Task: Given parameter n the function dbl_linear (or dblLinear…) returns the element u(n) of the ordered (with &lt;) sequence u.</li><li>Example: dbl_linear(10) should return 22</li><li>Note: Focus attention on efficiency</li></ul><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function dblLinear(n) {    // your code    var res = [1];    var i=0,j=0;    while(res.length &lt;= n){      var y = res[i]*2+1;      var z = res[j]*3+1;      if(y&lt;z){        res.push(y);        i++;      }else if(y==z){        res.push(y);        i++;        j++;      }else{        res.push(z);        j++;      }    }    return res[n];}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function dblLinear(n) { var ai = 0, bi = 0, eq = 0; var sequence = [1]; while (ai + bi &lt; n + eq) {  var y = 2 * sequence[ai] + 1;  var z = 3 * sequence[bi] + 1; if (y &lt; z) {   sequence.push(y);  ai++;  } else if (y &gt; z) {  sequence.push(z);  bi++; } else {   sequence.push(y);  ai++; bi++; eq++;  }} return sequence.pop();}</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><pre><code>• 考虑效率问题，就不能将所有值都放入数组，再来排序，去重；且这种解法，不好控制循环的次数；• 想到在push元素进数组时就按从小到大的顺序放入，且遇到相同的元素就只push一次进数组• 具体思路就是每次将y和z中较小的一个放入数组，同时其对应的计数器+1；若y和z相等，放任意一个进数组，两个计算器都+1</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Consider a sequence u where u is defined as follows:&lt;br&gt;1 . Th
+      
+    
+    </summary>
+    
+      <category term="technique" scheme="http://ipine.github.io/categories/technique/"/>
+    
+    
+      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
+    
+      <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
+    
+  </entry>
   
   <entry>
     <title>Adding Big Numbers</title>
