@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>Adding Big Numbers · lf94me</title>
+    <title>Flex布局 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -201,7 +201,7 @@
                 <a href="/" >iPine&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Adding Big Numbers</a>
+                <a href="#" class="post-name">Flex布局</a>
             </div>
     </div>
     
@@ -233,7 +233,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Adding Big Numbers
+            Flex布局
             <!-- 404 -->
             
         </h1>
@@ -253,13 +253,13 @@ height:50vh;
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "codewars">codewars</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "css">css</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/05/06</span>
+                <span class="post-intro-time">2018/05/13</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -365,65 +365,73 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>We need to sum big numbers and we require your help.<br>Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.<br>Example<br>add(“123”, “321”); -&gt; “444”<br>add(“11”, “99”); -&gt; “110”</p>
-<p>Notes</p>
-<ul>
-<li>The input numbers are big.</li>
-<li>The input is a string of only digits</li>
-<li>The numbers are positives</li>
-</ul>
-<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function add(a, b) {
-  var arra =a.split(&apos;&apos;);
-  var arrb =b.split(&apos;&apos;);
-  var len = a.length &gt; b.length?a.length:b.length;
-  var result = [];
-  var count = 0;
-  for(i=0; i&lt;len; i++){
-    var temp;
-    if(i&gt;=a.length){
-      temp = Number(arrb.pop()) + count;
-    }else if(i&gt;=b.length){
-      temp = Number(arra.pop()) + count;
-    }else{
-      temp = (Number(arra.pop()) + Number(arrb.pop())) + count;
-    }
-    temp &gt;= 10?[temp,count]=[temp-10,1]:count=0;
-    result.push(temp);
-  }
-  result.push(count);
- // console.log(result);
-  return result.reverse().join(&apos;&apos;).replace(/^0+/,&apos;&apos;);
-//   return Number(a) + Number(b); // Fix this!
+        <p>最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。</p>
+<h3 id="网页布局"><a href="#网页布局" class="headerlink" title="网页布局"></a>网页布局</h3><p>区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖<code>display</code>属性+<code>position</code>属性+<code>float</code>属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。</p>
+<p>Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局<code>（display:flex）</code>，行内元素也可以使用<code>（display:inline-flex）</code>。</p>
+<blockquote>
+<p>注意：设为Flex布局以后，子元素的float,clear,和vertical-align属性将失去作用。</p>
+</blockquote>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</p>
+<h4 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h4><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-19/84888199.jpg" alt="容器"></p>
+<p>每个属性对应的含义是：</p>
+<p> • 项目排列方向；可取四个值： <code>row | row-reverse | column | column-reverse</code><br> • 项目是否换行，怎么换；可取三个值： <code>nowrap | wrap | wrap-reverse</code><br> • 前2个属性的简写; 取值： <code>&lt;flex-direction&gt; || &lt;flex-wrap&gt;</code><br> • 项目在主轴上的对齐方式，与主轴的方向有关；可取五个值： <code>flex-start | flex-end | center | space-between | space-around</code><br> • 项目在交叉轴上的对齐方式,与交叉轴的方向有关；可取五个值： <code>flex-start | flex-end | center | baseline | stretch</code><br> • 多根轴线的对齐方式，若项目只有一根轴线，该属性不起作用；可取六个值： <code>flex-start | flex-end | center | space-between | space-around | stretch</code></p>
+<h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-19/10672781.jpg" alt="项目"></p>
+<p>每个属性对应的含义是：</p>
+<p> • 项目排列顺序，值越小，排列越靠前；默认为0<br> • 有多余空间时，项目是否放大；默认为0，不放大<br> • 空间不够时，项目是否缩小；默认为1，缩小<br> • 分配多余空间之前，项目占据的主轴空间；默认为auto,即原本大小<br> • <code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>属性的简写（优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值），常用的两个快捷值： <code>auto(1 1 auto)和none(0 0 auto)</code><br> • 允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性；默认值为auto</p>
+<h3 id="我的布局"><a href="#我的布局" class="headerlink" title="我的布局"></a>我的布局</h3><h4 id="HTML结构"><a href="#HTML结构" class="headerlink" title="HTML结构"></a>HTML结构</h4><p> 1 . 包含所有区块的大div -&gt;.d3layout（容器）；<br> 2 . 大div里包含3个次大div -&gt;.block-row（既是容器又是项目）；<br> 3 . 每个次大div里包含5个或者2个小div -&gt; .block/.block_0（项目）；</p>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-19/19741905.jpg" alt="HTML结构"></p>
+<h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><h5 id="第一层的大div"><a href="#第一层的大div" class="headerlink" title="第一层的大div"></a>第一层的大div</h5><pre><code>.d3layout{
+    width: 935px;
+    margin: 20px 0;
+    height: 740px;
+/*flex布局容器*/
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: space-around;
 }
-</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function add (a, b) {
- var res = &apos;&apos;, c = 0 ;
- a = a.split(&apos;&apos;);
- b = b.split(&apos;&apos;);
- while (a.length || b.length || c) { 
-  c += ~~a.pop() + ~~b.pop();
-  res = c % 10 + res;
-  c = c &gt; 9;
- } 
- return res; 
+</code></pre><h5 id="第二层的次大div"><a href="#第二层的次大div" class="headerlink" title="第二层的次大div"></a>第二层的次大div</h5><pre><code>.rowTop,.rowMiddle,.rowBottom{
+    height: 202px;
+    width: 935px;
+/*flex布局项目*/
+    flex: auto; /*（1，1，auto）*/
+
+/*flex布局容器*/
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
 }
-</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><p>1 . 思路是将a和b的最后一位相加，如果相加的结果大于10，取个位数部分，进位值<code>count+1</code>；并将结果放入到数组中。<br>2 . 要一位一位相加，需要把a和b两个字符串转成字符串数组，用到<code>.split()</code>函数。<br>3 . 还要注意判断a串和b串哪个更长，最后循环完后需要将最后一次的进位值放入数组。<br>4 . 以上步骤得到的数组不是最终结果，还要先<code>翻转</code>，再将字符串数组<code>变成字符串</code>，最后用<code>.replace()</code>方法将首位的0去掉。</p>
+</code></pre><h5 id="第三层的小div"><a href="#第三层的小div" class="headerlink" title="第三层的小div"></a>第三层的小div</h5><pre><code>.block_0{
+    width: 703px;
+    height: 180px;
+  /*flex布局项目*/
+     flex: 0 1 auto;
+}
+
+.block{
+    width: 145px;
+    height: 180px;
+/*flex布局项目*/
+    flex: 0 1 auto;
+}
+</code></pre><h4 id="布局效果"><a href="#布局效果" class="headerlink" title="布局效果"></a>布局效果</h4><p>黑色为大div；红色为次大div；灰色为小div</p>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-19/86157629.jpg" alt="效果图"></p>
+<p>最终在实践过程中，又添了一层，灰色小div.block里还包括上下两个div，仍然用的flex布局。</p>
+<p>注：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?^%$" target="_blank" rel="noopener">基本概念参考来源</a></p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018-05-07/" title= Twice linear >
-                    <div class="nextTitle">Twice linear</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018-05-02/" title= Find the missing term in an Arithmetic Progression >
-                    <div class="prevTitle">Find the missing term in an Arithmetic Progression</div>
+                <a href= "/2018-05-07/" title= Twice linear >
+                    <div class="prevTitle">Twice linear</div>
                 </a>
             
         </li>
@@ -548,7 +556,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的代码"><span class="toc-number">2.</span> <span class="toc-text">我的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clever"><span class="toc-number">3.</span> <span class="toc-text">Clever</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">4.</span> <span class="toc-text">Key</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#网页布局"><span class="toc-number">1.</span> <span class="toc-text">网页布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#容器的属性"><span class="toc-number">2.1.</span> <span class="toc-text">容器的属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#项目的属性"><span class="toc-number">2.2.</span> <span class="toc-text">项目的属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的布局"><span class="toc-number">3.</span> <span class="toc-text">我的布局</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTML结构"><span class="toc-number">3.1.</span> <span class="toc-text">HTML结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSS"><span class="toc-number">3.2.</span> <span class="toc-text">CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#第一层的大div"><span class="toc-number">3.2.1.</span> <span class="toc-text">第一层的大div</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第二层的次大div"><span class="toc-number">3.2.2.</span> <span class="toc-text">第二层的次大div</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第三层的小div"><span class="toc-number">3.2.3.</span> <span class="toc-text">第三层的小div</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#布局效果"><span class="toc-number">3.3.</span> <span class="toc-text">布局效果</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
