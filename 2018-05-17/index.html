@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="description" content="Hello, it's me.">
+    <title>报告：多维数据的感知互补视图评估 · lf94me</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?iPinetongji";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >iPine&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">报告：多维数据的感知互补视图评估</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>iPine's Blog.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/door-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            报告：多维数据的感知互补视图评估
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "reading notes">reading notes</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "paper">paper</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/05/17</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
+    </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="报告：多维数据的感知互补视图评估"><a href="#报告：多维数据的感知互补视图评估" class="headerlink" title="报告：多维数据的感知互补视图评估"></a>报告：多维数据的感知互补视图评估</h1><ul>
+<li>论文原文：An Evaluation of Perceptually Complementary Views for Multivariate Data</li>
+<li>作者：Chunlei Chang,Tim Dwyer,Kim Marriott</li>
+<li>发表刊物/会议： <a href="http://itolab.is.ocha.ac.jp/pvis2018/" target="_blank" rel="noopener">PVis 2018</a></li>
+</ul>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>各个领域越来越多的自动化数据收集，因此越来越复杂的高维数据变得可用。有效的可视化和分析工具也越来越重要。多维数据的可视化技术和方法有很多，比如经典的MDS，PCA，但是这类方法在数据降维的过程中难免会损失原始数据的信息。而既能保证数据信息不丢失又能展示所有维度的信息，应用最广泛的是散点图矩阵<code>（SPLOMs）</code>和平行坐标图<code>（PCPs）</code>。</p>
+<h3 id="本文工作"><a href="#本文工作" class="headerlink" title="本文工作"></a>本文工作</h3><p>评估散点图矩阵（SPLOM）、平行坐标图（PCP）、以及这两种技术的并排组合图（ Combined ）在可视化多维数据时的各自优势。</p>
+<h3 id="重点贡献"><a href="#重点贡献" class="headerlink" title="重点贡献"></a>重点贡献</h3><p>1 . 总结6个用户分析多维数据时需要解决的Tasks；<br>2 . 总结5种志愿者在使用组合图时常用的策略；</p>
+<ul>
+<li><strong>论文作者为什么会想到评估组合视图呢？</strong></li>
+</ul>
+<blockquote>
+<p>思路来源于一篇感知互补网络可视化的评估论文（CHI 2017 Evaluating perceptually<br>complementary views for network exploration tasks），这篇论文比较网络的单个矩阵视图、节点链接视图、以及它们的并排组合，发现并排组合的综合视图有明显的优势。但是现在还没有人做过这种组合视图的评估工作。 </p>
+</blockquote>
+<blockquote>
+<p>注：感知互补视图，不同于多视图，在感觉上是互补的，即它们都展示相同的信息，但是对不同类型的分析任务有不同的和互补的支持。</p>
+</blockquote>
+<ul>
+<li><strong>本文的组合视图与以往研究工作中的组合视图有什么区别呢？</strong></li>
+</ul>
+<blockquote>
+<p>以往做法：使用复杂的视觉和交互设计将两种不同技术组合成单个可视化方案<br>  本文：更为直接地做法将两种技术视图并排放在一起</p>
+</blockquote>
+<ul>
+<li><strong>主要研究的问题？</strong></li>
+</ul>
+<blockquote>
+<p>Q1：PCP或SPLOM各自适合哪些任务？<br>  Q2：解决复杂任务时组合视图有没有优势？<br>  Q3：用户是否意识到不同视图的优点？ 如果有，他们用什么策略来解决分析任务。</p>
+</blockquote>
+<h2 id="视觉编码及交互设计"><a href="#视觉编码及交互设计" class="headerlink" title="视觉编码及交互设计"></a>视觉编码及交互设计</h2><h3 id="视觉编码"><a href="#视觉编码" class="headerlink" title="视觉编码"></a>视觉编码</h3><ul>
+<li>PCP：每个数据项都被编码为一条折线，标签命名轴表示数据维度和范围；</li>
+<li>SPLOM：每个数据项由多个圆点表示，对角线上的空白单元格用来显示维度标签，数据范围标记在左边和底边。</li>
+</ul>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/51062033.jpg" alt="图1"></p>
+<blockquote>
+<p>图1：可视化技术介绍</p>
+</blockquote>
+<h3 id="交互设计"><a href="#交互设计" class="headerlink" title="交互设计"></a>交互设计</h3><ul>
+<li>鼠标悬浮数据项，高亮，该数据点的相关信息展示在旁边</li>
+<li>范围过滤，选择范围内的数据项高亮</li>
+<li>组合视图Brush（两个视图的联动），包括上面两个交互技术的应用</li>
+<li><p>平行坐标轴和矩阵重排序</p>
+<p><strong> 维度排序步骤：</strong><br>1 .点击PCP的轴或者散点图的轴启动拖拽<br>2 .将选定的轴拖动到所需的位置。<br>3 .释放鼠标，两个视图更新</p>
+</li>
+</ul>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/15907245.jpg" alt="图2"></p>
+<blockquote>
+<p>图2 组合视图中轴的重排序</p>
+</blockquote>
+<h2 id="实验研究过程"><a href="#实验研究过程" class="headerlink" title="实验研究过程"></a>实验研究过程</h2><p>首先总结Tasks，确定6个通用任务，来源于以往基于PCP和SPLOM的评估工作。</p>
+<p>实验参与者需要回答每个任务后面的具体问题。问题是基于实验中使用的数据。</p>
+<ul>
+<li>实验数据：学生成绩数据，6个维度，包含姓名、性别和4门学科的分数。</li>
+</ul>
+<h3 id="Best-Performer"><a href="#Best-Performer" class="headerlink" title="Best-Performer"></a>Best-Performer</h3><ul>
+<li>Q： 哪个学生的平均分数最高？</li>
+</ul>
+<h3 id="Subset-Tracing"><a href="#Subset-Tracing" class="headerlink" title="Subset-Tracing"></a>Subset-Tracing</h3><ul>
+<li>Q： 年龄在22岁，科学分数少于75分但是数学分数最高的学生姓名是？</li>
+</ul>
+<h3 id="Object-Comparison"><a href="#Object-Comparison" class="headerlink" title="Object-Comparison"></a>Object-Comparison</h3><ul>
+<li>Q： 在所有4门学科中，标记3个数据为黄色，1个数据为蓝，要求找出标记为黄色的学生哪个与标记为蓝色的学生平均分最为相近？</li>
+</ul>
+<h3 id="Outlier-Detection"><a href="#Outlier-Detection" class="headerlink" title="Outlier-Detection"></a>Outlier-Detection</h3><ul>
+<li>Q： 找出工程得分高于其他三门课程的学生（最为明显的那一个）？</li>
+</ul>
+<h3 id="Correlation-Estimation"><a href="#Correlation-Estimation" class="headerlink" title="Correlation-Estimation"></a>Correlation-Estimation</h3><ul>
+<li>Q： 哪两门学科最为正相关？</li>
+</ul>
+<h3 id="Cluster-Identification"><a href="#Cluster-Identification" class="headerlink" title="Cluster-Identification"></a>Cluster-Identification</h3><ul>
+<li>Q： 在哪对维度上有明显的簇？（找视觉上聚在一起的点或线）</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p> 人造的学生成绩数据，共15个。3个训练集，12个用于正式实验。</p>
+<ul>
+<li>包括两个难易程度：容易6个、难6个。通过数据密度和答案选对的难易程度来控制题目的难易程度。</li>
+<li>容易：100-120个数据项；正确答案与候选答案之间相差较远。</li>
+<li>难：180-200个数据项；正确答案与几个候选答案之间很接近。</li>
+</ul>
+<h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><p> 实验分成A、B两个部分进行，每部分完成3个任务，时间花费在45分钟左右。参加A部分的人完成前3个任务，参加B部分的人完成后3个任务。</p>
+<ul>
+<li>每个参与者需要完成：3（任务）<em>12（数据）</em>3（可视化）次试验。</li>
+</ul>
+<h4 id="实验参与人员结构："><a href="#实验参与人员结构：" class="headerlink" title="实验参与人员结构："></a>实验参与人员结构：</h4><p> 全部来自于大学里的学生或工作人员。</p>
+<ul>
+<li>参加A部分的人，21名，8女13男；</li>
+<li>参加B部分的人，30名，9女21男；</li>
+<li>其中有9个人，同时参与两部分实验；</li>
+<li>年龄在19岁-55岁，平均年龄为29岁。</li>
+</ul>
+<h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><h4 id="电脑配置"><a href="#电脑配置" class="headerlink" title="电脑配置"></a>电脑配置</h4><ul>
+<li>英特尔酷睿i7 MacBook Pro（2016）和24英寸屏幕（1920×1080）</li>
+</ul>
+<h4 id="使用Tobii-X3-120眼动仪"><a href="#使用Tobii-X3-120眼动仪" class="headerlink" title="使用Tobii X3-120眼动仪"></a>使用Tobii X3-120眼动仪</h4><ul>
+<li>跟踪参与者眼睛在屏幕上的移动情况，收集数据，为后面分析参与者使用组合视图时使用的策略作准备。</li>
+</ul>
+<h4 id="交互方式"><a href="#交互方式" class="headerlink" title="交互方式"></a>交互方式</h4><ul>
+<li>通过鼠标和键盘进行答题和操作。</li>
+</ul>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><ul>
+<li>分成A，B两部分：A：完成前3个任务；B：完成后3个任务；</li>
+<li>为了实验条件平衡，每部分的参与者又分成2组，一组先用单独的一种可视化，后用组合可视化；另一组先用组合可视化，后用单独的可视化；对于同一个数据集，参与者在用不同可视化技术回答问题时，通过改变数据中学生的姓名和维度的排列顺序来避免可视化技术之间的影响；</li>
+<li>每个参与者的问题顺序随机；</li>
+<li>屏幕上方有计时条，参与者最多有30s使用可视化的时间；若在30s之内有答案，可按空格键停止计时；</li>
+<li>屏幕弹出答案选项，包括几个候选答案，以及“太难”、“都不是”选项。</li>
+</ul>
+<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><p> 1 .背景知识调查，调查参与者以往对两种可视化方法是否了解过。结果如图3所示。对于PCP技术，49%的人从未见过；而对于SPLOM技术，43%的人偶尔使用。</p>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/96842735.jpg" alt="图3"></p>
+<blockquote>
+<p>图3 参与者背景知识调查结果</p>
+</blockquote>
+<p> 2 .眼动仪校准<br> 要求参与者对眼动仪进行校准，用时不超过30秒。</p>
+<p> 3 .训练<br> 包括内容：</p>
+<ul>
+<li>指导每个参与者如何用可视化完成任务；</li>
+<li>每个任务有3个实例，训练之后给出正确答案；</li>
+<li>通过第一个实例来演示交互技术；正确通过一个实例后才能进入下一个实例；</li>
+<li><p>告诉参与者答题时间的限制，要尽可能快和准地完成实验。</p>
+<p>4 .正式实验<br>为每个参与者，呈现3种视图，每个视图都包含3个任务，每个任务包含12个不同数据集的问题。</p>
+<p>5 . 收集反馈</p>
+</li>
+<li>收集参与者对3种可视化方法在每个任务上的排名；</li>
+<li>收集参与者对每个可视化方法的优缺点评论。</li>
+</ul>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h4 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h4><ul>
+<li>每次试验的完成时间</li>
+<li>每次试验的准确率</li>
+<li>眼睛和鼠标的移动数据</li>
+<li>对于每个任务，参与者对可视化技术的主观偏好</li>
+</ul>
+<h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4><ul>
+<li>移除6次不合理数据，完成时间小于1s</li>
+<li>移除选“太难” 或“都没有” 的试验</li>
+</ul>
+<h4 id="统计分析"><a href="#统计分析" class="headerlink" title="统计分析"></a>统计分析</h4><ul>
+<li>数据不服从正态分布，使用Friedman test检验数据的总体差异性</li>
+<li>由于移除了不合理的数据导致样本量不等，成对差异比较使用Mann-Whitney U test</li>
+</ul>
+<h3 id="眼动仪数据分析"><a href="#眼动仪数据分析" class="headerlink" title="眼动仪数据分析"></a>眼动仪数据分析</h3><p> 通过分析眼动仪数据来了解参与者使用<strong>组合视图</strong>采用的策略。</p>
+<h4 id="数据收集-1"><a href="#数据收集-1" class="headerlink" title="数据收集"></a>数据收集</h4><p> 组合视图中的每次试验，测量参与者花在观察两个AOI（兴趣区域），即PCP和SPLOM上各自的停留和访问持续时间，用于检查和识别参与者策略。 </p>
+<h4 id="策略分类结果，总共分为5种，如图4所示。"><a href="#策略分类结果，总共分为5种，如图4所示。" class="headerlink" title="策略分类结果，总共分为5种，如图4所示。"></a>策略分类结果，总共分为5种，如图4所示。</h4><ul>
+<li>只看SPLOM，每次在PCP上停留时间不超过1s。</li>
+<li>只看PCP，每次在SPLOM上停留时间不超过1s。</li>
+<li>先看SPLOM，后看PCP，每次来回切换的停留时间不超过1s。</li>
+<li>先看PCP，后看SPLOM，每次来回切换的停留时间不超过1s。</li>
+<li>参与者视线在两个视图上频繁切换。</li>
+</ul>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/75032469.jpg" alt="图4"></p>
+<blockquote>
+<p>图4 组合视图中5种常见的使用策略</p>
+</blockquote>
+<h3 id="任务结果"><a href="#任务结果" class="headerlink" title="任务结果"></a>任务结果</h3><h4 id="T1：Best-Performer"><a href="#T1：Best-Performer" class="headerlink" title="T1：Best-Performer"></a>T1：Best-Performer</h4><ul>
+<li>时间，3种技术无显著差异</li>
+<li>准确率，PCP和Combined视图显著高于SPM</li>
+<li>参与者更喜欢用PCP视图</li>
+<li>眼追踪数据表明，参与者花在PCP上的时间多于SPLOM</li>
+</ul>
+<h4 id="T2：Subset-Tracing"><a href="#T2：Subset-Tracing" class="headerlink" title="T2：Subset-Tracing"></a>T2：Subset-Tracing</h4><ul>
+<li>时间，PCP和Combined视图显著快于SPLOM</li>
+<li>准确率，SPLOM显著最差</li>
+<li>参与者更喜欢用PCP视图</li>
+<li>眼追踪数据表明，Combined视图中，参与者花在PCP上的时间更多</li>
+</ul>
+<h4 id="T3：Object-Comparison"><a href="#T3：Object-Comparison" class="headerlink" title="T3：Object-Comparison"></a>T3：Object-Comparison</h4><ul>
+<li>时间，3种技术无显著差异</li>
+<li>准确率，SPLOM显著最差</li>
+<li>参与者更喜欢用Combined视图</li>
+<li>眼追踪数据表明，表明频繁切换视图策略最受欢迎，单独使用PCP与先使用PCP的比例相同，无人单独使用SPLOM</li>
+</ul>
+<h4 id="T4-Outlier-Detection"><a href="#T4-Outlier-Detection" class="headerlink" title="T4: Outlier-Detection"></a>T4: Outlier-Detection</h4><ul>
+<li>时间，PCP显著多于SPLOM和Combined视图</li>
+<li>准确率，SPLOM和Combined视图显著高于PCP</li>
+<li>参与者更喜欢用Combined视图</li>
+<li>眼追踪数据表明，频繁切换和先使用SPLOM最受欢迎</li>
+</ul>
+<h4 id="T5-Correlation-Estimation"><a href="#T5-Correlation-Estimation" class="headerlink" title="T5: Correlation-Estimation"></a>T5: Correlation-Estimation</h4><ul>
+<li>时间，PCP显著多于SPLOM和Combined视图</li>
+<li>准确率，所有技术之间都有显著性，SPLOM&gt;C&gt;PCP</li>
+<li>参与者更喜欢用SPLOM视图</li>
+<li>眼追踪数据表明，无人单独使用PCP，单独使用SPLOM的人最多</li>
+</ul>
+<h4 id="T6-Cluster-Identification"><a href="#T6-Cluster-Identification" class="headerlink" title="T6: Cluster-Identification"></a>T6: Cluster-Identification</h4><ul>
+<li>时间，SPLOM显著快于其余两个</li>
+<li>准确率，Combined视图最高，其次是SPLOM，最后是PCP</li>
+<li>参与者更喜欢用SPLOM视图</li>
+<li>眼追踪数据表明，只使用SPLOM的人最多，无人只使用PCP</li>
+</ul>
+<blockquote>
+<p>图5，图6，图7，图8展示了相关结果</p>
+</blockquote>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/17397410.jpg" alt="图5"></p>
+<blockquote>
+<p>图5 按任务分类的三种可视化技术中每一种的平均结果。黄色背景表明该值与相同指标下的其他值有显著差异；黑色加粗字体表明是该指标下的最优值。</p>
+</blockquote>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/12855836.jpg" alt="图6"></p>
+<blockquote>
+<p>图6 按任务分类的三种可视化技术中每一种的完成时间的平均值和标准偏差。</p>
+</blockquote>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/52541686.jpg" alt="图7"></p>
+<blockquote>
+<p>图7 按任务分类的三种可视化技术中每一种的准确率平均值和标准偏差。</p>
+</blockquote>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/82786381.jpg" alt="图8"></p>
+<blockquote>
+<p>图8 (a)每个任务下，参与者在Combined视图中的偏好选择；(b)每个任务下，参与者在Combined视图中使用的策略情况。</p>
+</blockquote>
+<h4 id="视图使用情况对比"><a href="#视图使用情况对比" class="headerlink" title="视图使用情况对比"></a>视图使用情况对比</h4><p> 组合视图中，参与者花费在每个视图中的时间对比图，如图9所示。</p>
+<blockquote>
+<p>发现：在前3个任务中，多数参与者使用PCP 1st and Parallel Use两种策略；后3个任务，则多数参与者使用SPLOM 1st and Parallel Use 两种策略</p>
+</blockquote>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/19142179.jpg" alt="图9"></p>
+<blockquote>
+<p>图9 用于查看Combined视图中每个视图的相对时长（栏高度）；1-3是训练任务。</p>
+</blockquote>
+<h2 id="结论总结"><a href="#结论总结" class="headerlink" title="结论总结"></a>结论总结</h2><p> 提出PCP和SPLOM的组合表示，主要探讨并评估多维数据的感知互补视图的影响。</p>
+<ul>
+<li><p><strong>PCP和SPLOM视图在感知上是互补的。</strong></p>
+<p>SPLOM点可视化可以帮助参与者理解整体（后3个Tasks）,PCP线可视化帮助参与者识别单个观察点，两种结合既可以解决整体任务又可以解决细节任务。</p>
+</li>
+<li><p><strong>并排放置感知互补的视图是获得两者优点的有效方法。</strong></p>
+<p>以往用复杂的设计和交互手段使两个技术结合成一种可视化方案并不是没有效果，但是这种效果普通参与者无法体验。更为直接的方法就是让两个视图并排放置在一起，本文的实验结果证明了这种做法是有效的。</p>
+</li>
+<li><p><strong>基于眼动追踪数据，针对组合视图确定了五种常用视图使用策略。</strong></p>
+</li>
+<li><p><strong>有些人在没有意识的情况下使用互补视图的优势。</strong></p>
+<p>参与者给出的每个任务下对技术的主观偏好与眼动仪追踪数据分析的结果并不完全一致，使用组合视图时，参与者主观偏好某一种可视化技术，但是眼动仪数据表明他们使用组合策略时间更久。这说明参与者其实在没有意识的情况下已经体验了互补视图的优势。</p>
+</li>
+<li><p><strong>当一个视图对于特定任务明显比另一视图更好时，使用组合视图会有更多的时间开销。</strong></p>
+<p>例如分析任务5，SPLOM视图明显比PCP更适合。当使用Combined视图时，会花费更多的时间，但是准确率仍然能够保证。</p>
+</li>
+</ul>
+<h2 id="缺陷与未来工作"><a href="#缺陷与未来工作" class="headerlink" title="缺陷与未来工作"></a>缺陷与未来工作</h2><h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
+<li><p>尽管得出组合视图在6个任务中的5个上都表现好，但是标准偏差比较高。</p>
+</li>
+<li><p>整个实验使用的数据密度(100-200)太小，数据结构单一。意味着碰到数据密度很大，或者其他数据结构时，本文的实验结果不一定适用。</p>
+</li>
+</ul>
+<h3 id="未来研究方向"><a href="#未来研究方向" class="headerlink" title="未来研究方向"></a>未来研究方向</h3><ul>
+<li><p>研究互补性对其他类型数据集的影响（例如，对于分层数据和动态网络）。</p>
+</li>
+<li><p>哪些视图可以产生互补效应？有没有有效的分类？一个视图以数据项为中心（例如PCP和节点链接图）和一个视图以关系为中心（如SPLOM和邻接矩阵），这是不是一种有效的分类呢？还需要更多的研究。</p>
+</li>
+<li><p>可以进一步研究训练对人们使用组合图的有效性的影响。有经验的参与者知道利用Combined视图的优势，而无经验的用户则可能只会使用单个视图，说明训练对人们的策略使用是有影响的。还可以进一步确定组合图的使用是否有助于人们学习更有效地使用单个视图。</p>
+</li>
+</ul>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018-05-13/" title= Flex布局 >
+                    <div class="prevTitle">Flex布局</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC8zNTc1NC8xMjI5MA>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:931514355@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/iPine" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+            
+                <span class="iconfont-archer qq" title=qq>
+                  
+                  <img class="profile-qr" src="/assets/my_qq.jpg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#报告：多维数据的感知互补视图评估"><span class="toc-number">1.</span> <span class="toc-text">报告：多维数据的感知互补视图评估</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍"><span class="toc-number">1.1.</span> <span class="toc-text">背景介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本文工作"><span class="toc-number">1.1.1.</span> <span class="toc-text">本文工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重点贡献"><span class="toc-number">1.1.2.</span> <span class="toc-text">重点贡献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉编码及交互设计"><span class="toc-number">1.2.</span> <span class="toc-text">视觉编码及交互设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#视觉编码"><span class="toc-number">1.2.1.</span> <span class="toc-text">视觉编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交互设计"><span class="toc-number">1.2.2.</span> <span class="toc-text">交互设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验研究过程"><span class="toc-number">1.3.</span> <span class="toc-text">实验研究过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Best-Performer"><span class="toc-number">1.3.1.</span> <span class="toc-text">Best-Performer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Subset-Tracing"><span class="toc-number">1.3.2.</span> <span class="toc-text">Subset-Tracing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-Comparison"><span class="toc-number">1.3.3.</span> <span class="toc-text">Object-Comparison</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Outlier-Detection"><span class="toc-number">1.3.4.</span> <span class="toc-text">Outlier-Detection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Correlation-Estimation"><span class="toc-number">1.3.5.</span> <span class="toc-text">Correlation-Estimation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cluster-Identification"><span class="toc-number">1.3.6.</span> <span class="toc-text">Cluster-Identification</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验"><span class="toc-number">1.4.</span> <span class="toc-text">实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据"><span class="toc-number">1.4.1.</span> <span class="toc-text">数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参与者"><span class="toc-number">1.4.2.</span> <span class="toc-text">参与者</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实验参与人员结构："><span class="toc-number">1.4.2.1.</span> <span class="toc-text">实验参与人员结构：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实验环境"><span class="toc-number">1.4.3.</span> <span class="toc-text">实验环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#电脑配置"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">电脑配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用Tobii-X3-120眼动仪"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">使用Tobii X3-120眼动仪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交互方式"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">交互方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实验设计"><span class="toc-number">1.4.4.</span> <span class="toc-text">实验设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实验过程"><span class="toc-number">1.4.5.</span> <span class="toc-text">实验过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验结果"><span class="toc-number">1.5.</span> <span class="toc-text">实验结果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据分析"><span class="toc-number">1.5.1.</span> <span class="toc-text">数据分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据收集"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">数据收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据处理"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">数据处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#统计分析"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">统计分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#眼动仪数据分析"><span class="toc-number">1.5.2.</span> <span class="toc-text">眼动仪数据分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据收集-1"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">数据收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#策略分类结果，总共分为5种，如图4所示。"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">策略分类结果，总共分为5种，如图4所示。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#任务结果"><span class="toc-number">1.5.3.</span> <span class="toc-text">任务结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#T1：Best-Performer"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">T1：Best-Performer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#T2：Subset-Tracing"><span class="toc-number">1.5.3.2.</span> <span class="toc-text">T2：Subset-Tracing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#T3：Object-Comparison"><span class="toc-number">1.5.3.3.</span> <span class="toc-text">T3：Object-Comparison</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#T4-Outlier-Detection"><span class="toc-number">1.5.3.4.</span> <span class="toc-text">T4: Outlier-Detection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#T5-Correlation-Estimation"><span class="toc-number">1.5.3.5.</span> <span class="toc-text">T5: Correlation-Estimation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#T6-Cluster-Identification"><span class="toc-number">1.5.3.6.</span> <span class="toc-text">T6: Cluster-Identification</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#视图使用情况对比"><span class="toc-number">1.5.3.7.</span> <span class="toc-text">视图使用情况对比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论总结"><span class="toc-number">1.6.</span> <span class="toc-text">结论总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缺陷与未来工作"><span class="toc-number">1.7.</span> <span class="toc-text">缺陷与未来工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#缺陷"><span class="toc-number">1.7.1.</span> <span class="toc-text">缺陷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#未来研究方向"><span class="toc-number">1.7.2.</span> <span class="toc-text">未来研究方向</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 20 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/17</span><a class="archive-post-title" href= "/2018-05-17/" >报告：多维数据的感知互补视图评估</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2018-05-13/" >Flex布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/07</span><a class="archive-post-title" href= "/2018-05-07/" >Twice linear</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/06</span><a class="archive-post-title" href= "/2018-05-06/" >Adding Big Numbers</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/02</span><a class="archive-post-title" href= "/2018-05-02/" >Find the missing term in an Arithmetic Progression</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span><a class="archive-post-title" href= "/2018-05-01/" >Range Extraction</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span><a class="archive-post-title" href= "/2018-04-30/" >Sudoku Solution Validator</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2018-04-28/" >Directions Reduction</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/27</span><a class="archive-post-title" href= "/2018-04-27/" >BuildTower</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2018-04-26/" >统计数组中元素出现的次数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/23</span><a class="archive-post-title" href= "/2018-04-23/" >论文摘要写作思路实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2018-03-27/" >论文Latex排版-初入坑</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2018-03-25/" >表达自己的需求</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/27</span><a class="archive-post-title" href= "/2018-02-27/" >黑客与画家</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/19</span><a class="archive-post-title" href= "/2018-01-19/" >黑客与画家</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/17</span><a class="archive-post-title" href= "/2018-01-17/" >反思</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2017-07-31/" >看在出门前</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2016-01-05/" >2016.1.5</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2015 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2015-12-29/" >岁月神偷</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/26</span><a class="archive-post-title" href= "/2015-11-26/" >如何阅读一本书</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
+    
+        <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
+    
+        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+    
+        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
+    
+        <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
+    
+        <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
+    
+        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="read"><span class="iconfont-archer">&#xe60a;</span>read</span>
+    
+        <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
+    
+        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
+    
+        <span class="sidebar-category-name" data-categories="method"><span class="iconfont-archer">&#xe60a;</span>method</span>
+    
+        <span class="sidebar-category-name" data-categories="technique"><span class="iconfont-archer">&#xe60a;</span>technique</span>
+    
+        <span class="sidebar-category-name" data-categories="technique-summary"><span class="iconfont-archer">&#xe60a;</span>technique-summary</span>
+    
+        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'iPine'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
+</html>
+
+
