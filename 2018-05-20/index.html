@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>Find the missing term in an Arithmetic Progression · lf94me</title>
+    <title>CSS :before :after应用 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -201,7 +201,7 @@
                 <a href="/" >iPine&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Find the missing term in an Arithmetic Progression</a>
+                <a href="#" class="post-name">CSS :before :after应用</a>
             </div>
     </div>
     
@@ -233,7 +233,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Find the missing term in an Arithmetic Progression
+            CSS :before :after应用
             <!-- 404 -->
             
         </h1>
@@ -253,13 +253,13 @@ height:50vh;
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "codewars">codewars</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "css">css</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/05/02</span>
+                <span class="post-intro-time">2018/05/20</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -365,52 +365,111 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an Arithmetic Progression. There is however one hitch: exactly one term from the original series is missing from the set of numbers which have been given to you. The rest of the given series is the same as the original AP. Find the missing term.<br>You have to write the function findMissing(list), list will always be at least 3 numbers. The missing term will never be the first or last one.</p>
-<p>Example :<br>findMissing([1,3,5,9,11]) == 7</p>
-<blockquote>
-<p>PS: This is a sample question of the facebook engineer challenge on interviewstreet. I found it quite fun to solve on paper using math, derive the algo that way.</p>
+        <p>前面总结过将<a href="">Flex布局</a>应用在区块图的布局中，现在需要在区块<code>.block</code>之间显示每个块产生的时间间隔，以及一个小三角符号。这里总结用伪元素<code>:before</code> ，<code>:after</code> 来实现该效果。</p>
+<h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><h4 id="基本语法格式"><a href="#基本语法格式" class="headerlink" title="基本语法格式"></a>基本语法格式</h4><blockquote>
+<p>selector:pseudo-element {property:value;}<br>  selector.class:pseudo-element {property:value;}</p>
 </blockquote>
-<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>var findMissing = function (list) { 
-  var len = list.length;
-  var x = Math.abs((list[1]-list[0])) &lt; Math.abs((list[len-1]-list[len-2])) ? Math.abs((list[1]-list[0])):Math.abs((list[len-1]-list[len-2]));
-  console.log(x);
-  for(i=0; i&lt;len; i++){
-    if(list[len-1] &gt; list[0]){
-      if(list.indexOf(list[i]+x) == -1)
-      return list[i]+x;
-    }else if(list[len-1] &lt; list[0]){
-      if(list.indexOf(list[i]-x) == -1)
-      return list[i]-x;
-    }
-  }
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p>方便给某些选择器添加特殊效果。</p>
+<h4 id="before"><a href="#before" class="headerlink" title=":before"></a>:before</h4><p>用来给指定的元素的内容之前插入新内容；</p>
+<h4 id="after"><a href="#after" class="headerlink" title=":after"></a>:after</h4><p>用来给指定的元素的内容之后插入新内容。</p>
+<h4 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h4><pre><code>.first:before{
+    content: &apos;It\&apos;s &apos;;
+    color: blue;
 }
-</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>var findMissing = function (list) { 
-    var step = (list[list.length - 1] - list[0]) / (list.length); 
-    return list.filter(function(val, index) { return val !== (list[0] + index * step); })[0] - step; 
-}
-</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
-<li><p>关键点1要找到等差值，利用题目中给的信息：第一个和最后一个数不会缺失；将这两个数分别与它们的后一个和前一个数相减，小的那个差就是等差值；</p>
+
+&lt;p class=&quot;first&quot;&gt;me&lt;/p&gt;
+</code></pre><ul>
+<li>效果：</li>
+</ul>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/44955663.jpg" alt="例1"></p>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><ul>
+<li><p>通过伪元素 <code>:before</code> ，<code>:after</code>添加的新内容区域默认的<code>display</code> 属性值为<code>inline</code>。可以像修改其他元素一样修改它的样式，可以将它的 <code>display</code> 属性值来改为 <code>block</code>。</p>
 </li>
-<li><p>关键点2要注意数列中可能有负数，按照关键点1求等差值的做法，则求解的时候要取绝对值；且需要判断数列是递增还是递减；</p>
+<li><p>对于伪元素 <code>:before</code> 和 <code>:after</code> ，属性 <code>content</code> <strong>必须设置</strong>。</p>
+</li>
+<li><p>属性 <code>content</code> 的值可以是多类型的</p>
 </li>
 </ul>
-
+<h5 id="再举栗子"><a href="#再举栗子" class="headerlink" title="再举栗子"></a>再举栗子</h5><p> 1 . 可以是一张图片的url </p>
+<pre><code>content: url( &quot;img/me.png&quot; )
+</code></pre><p> 2 . 可以配合伪类使用，常配合伪类 :hover </p>
+<pre><code>.first:hover:before{
+    content:&apos;It\&apos;s &apos;;
+    color:red;
+ }
+&lt;p class=&quot;first&quot;&gt;me&lt;/p&gt;
+</code></pre><p>注意两者使用的顺序，伪类 <code>:hover</code> 在前，伪元素<code>:before</code>在后，如果顺序改为 <code>.before:before:hover</code> ,则无效。</p>
+<ul>
+<li>效果：</li>
+</ul>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/54128140.jpg" alt="例2"></p>
+<blockquote>
+<p>鼠标移上去就显示It’s，且颜色是红色</p>
+</blockquote>
+<p>3 . 配合取值函数attr()使用</p>
+<pre><code>a:before{
+     content: attr(title);
+}
+&lt;a href=&quot;http://www.taobao.com&quot; title=&quot;我的最爱&quot;&gt;买买买&lt;/a&gt;
+</code></pre><ul>
+<li>效果：</li>
+</ul>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/3773922.jpg" alt="例3"></p>
+<h3 id="我的练习"><a href="#我的练习" class="headerlink" title="我的练习"></a>我的练习</h3><h4 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h4><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/51524863.jpg" alt="图1"></p>
+<blockquote>
+<p>图1 两个红色线框中的内容为实现效果</p>
+</blockquote>
+<h4 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h4><h5 id="HTML结构"><a href="#HTML结构" class="headerlink" title="HTML结构"></a>HTML结构</h5><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-20/30610342.jpg" alt="图2"></p>
+<blockquote>
+<p>图2 3个大的横排div，每个横排大div里，假设都有5个<code>.block</code>区块div</p>
+</blockquote>
+<h5 id="CSS设置"><a href="#CSS设置" class="headerlink" title="CSS设置"></a>CSS设置</h5><p>以<code>.rowMiddle</code>行里的<code>.block</code>为例，用<code>:before</code>控制小三角的显示和位置；用<code>:after</code>控制区块产生的间隔时间的显示和位置</p>
+<p>/<em><code>.rowMiddle</code>中每个<code>.block</code>后面的小三角符号的处理，控制 <code>:before</code></em>/</p>
+<pre><code>.rowMiddle .block:not(:first-child)::before{
+    content: &apos;&apos;;
+    display: block;
+    width: 9px; 
+    height: 9px;
+    background-image: url(../images/chainicon1.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 60%;
+    left: -20%;
+}
+</code></pre><p>/<em><code>.rowMiddle</code>中每个<code>.block</code>的产生时间间隔，控制 <code>:after</code></em>/</p>
+<pre><code>.rowMiddle .block:not(:first-child)::after{
+    content: attr(data-content);
+    font-size: 12px;
+    display: block;
+    width: 36px; 
+    height: 15px;
+    line-height: 15px;
+    position: absolute;
+    top: 30%;
+    left: -27%;
+}
+</code></pre><blockquote>
+<p>注：attr(data-content)中 <code>data-content</code>的值通过js计算得到。每个<code>.block</code>的产生时间间隔不同，在js中为每个<code>.block</code>添加一个<code>.timewait</code>类，并设置属性<code>data-content</code>的值。</p>
+</blockquote>
+<h5 id="JS代码"><a href="#JS代码" class="headerlink" title="JS代码"></a>JS代码</h5><pre><code>$(&quot;.rowMiddle .block&quot;).each(function(i){
+    // 控制after伪类,为每个block添加不同的产生时间信息
+    // CSS中的.attr只能应用在伪类中的content属性
+    var timeWait = 0;
+        timeWait = blockData[4+i].time - blockData[5+i].time;
+        $(this).addClass(&apos;timewait&apos;).attr(&apos;data-content&apos;,timeWait+&apos;秒&apos;);
+});
+</code></pre>
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018-05-06/" title= Adding Big Numbers >
-                    <div class="nextTitle">Adding Big Numbers</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018-05-01/" title= Range Extraction >
-                    <div class="prevTitle">Range Extraction</div>
+                <a href= "/2018-05-17/" title= 报告：多维数据的感知互补视图评估 >
+                    <div class="prevTitle">报告：多维数据的感知互补视图评估</div>
                 </a>
             
         </li>
@@ -535,7 +594,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的代码"><span class="toc-number">2.</span> <span class="toc-text">我的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clever"><span class="toc-number">3.</span> <span class="toc-text">Clever</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">4.</span> <span class="toc-text">Key</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#伪元素"><span class="toc-number">1.</span> <span class="toc-text">伪元素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本语法格式"><span class="toc-number">1.1.</span> <span class="toc-text">基本语法格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#作用"><span class="toc-number">1.2.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#before"><span class="toc-number">1.3.</span> <span class="toc-text">:before</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#after"><span class="toc-number">1.4.</span> <span class="toc-text">:after</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#举个栗子"><span class="toc-number">1.5.</span> <span class="toc-text">举个栗子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#说明"><span class="toc-number">1.6.</span> <span class="toc-text">说明</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#再举栗子"><span class="toc-number">1.6.1.</span> <span class="toc-text">再举栗子</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的练习"><span class="toc-number">2.</span> <span class="toc-text">我的练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#最终效果图"><span class="toc-number">2.1.</span> <span class="toc-text">最终效果图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现代码"><span class="toc-number">2.2.</span> <span class="toc-text">实现代码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HTML结构"><span class="toc-number">2.2.1.</span> <span class="toc-text">HTML结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CSS设置"><span class="toc-number">2.2.2.</span> <span class="toc-text">CSS设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#JS代码"><span class="toc-number">2.2.3.</span> <span class="toc-text">JS代码</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
