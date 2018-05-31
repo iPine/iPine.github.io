@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>Twice linear · lf94me</title>
+    <title>判断一个数是否是2的幂 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -201,7 +201,7 @@
                 <a href="/" >iPine&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Twice linear</a>
+                <a href="#" class="post-name">判断一个数是否是2的幂</a>
             </div>
     </div>
     
@@ -233,7 +233,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Twice linear
+            判断一个数是否是2的幂
             <!-- 404 -->
             
         </h1>
@@ -251,15 +251,15 @@ height:50vh;
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "javascript">javascript</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "面试题">面试题</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "codewars">codewars</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "code">code</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/05/07</span>
+                <span class="post-intro-time">2018/05/30</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -365,56 +365,53 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Consider a sequence u where u is defined as follows:<br>1 . The number u(0) = 1 is the first one in u.<br>2 . For each x in u, then y = 2 <em> x + 1 and z = 3 </em> x + 1 must be in utoo.<br>3 . There are no other numbers in u.<br>Ex: u = [1, 3, 4, 7, 9, 10, 13, 15, 19, 21, 22, 27, …]<br>1 gives 3 and 4, then 3 gives 7 and 10, 4 gives 9 and 13, then 7 gives 15 and 22 and so on…</p>
-<ul>
-<li>Task: Given parameter n the function dbl_linear (or dblLinear…) returns the element u(n) of the ordered (with &lt;) sequence u.</li>
-<li>Example: dbl_linear(10) should return 22</li>
-<li>Note: Focus attention on efficiency</li>
+        <h2 id="最近在看《技术之瞳》，编程语言部分有一个笔试题目"><a href="#最近在看《技术之瞳》，编程语言部分有一个笔试题目" class="headerlink" title=" 最近在看《技术之瞳》，编程语言部分有一个笔试题目"></a> 最近在看《技术之瞳》，编程语言部分有一个笔试题目</h2><h3 id="Q：请填写一个表达式，用于判断一个数是否是2的幂？"><a href="#Q：请填写一个表达式，用于判断一个数是否是2的幂？" class="headerlink" title="Q：请填写一个表达式，用于判断一个数是否是2的幂？"></a>Q：请填写一个表达式，用于判断一个数是否是2的幂？</h3><h3 id="A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。"><a href="#A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。" class="headerlink" title="A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。"></a>A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。</h3><pre><code>n&gt;0? (n&amp;(n-1))==0:false
+</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><h4 id="将2的幂次方写成二进制形式后，很容易就会发现有一个特点："><a href="#将2的幂次方写成二进制形式后，很容易就会发现有一个特点：" class="headerlink" title="将2的幂次方写成二进制形式后，很容易就会发现有一个特点："></a>将2的幂次方写成二进制形式后，很容易就会发现有一个特点：</h4><blockquote>
+<p>二进制中只有一个1，并且1后面跟了n个0。如果将这个数减去1后会发现，那个1会变为0，而原来的n个0会变为1。</p>
+</blockquote>
+<h4 id="举栗子说明"><a href="#举栗子说明" class="headerlink" title="举栗子说明"></a>举栗子说明</h4><pre><code>十进制   二进制
+ 2        10
+ 4        100
+ 8        1000
+ 16       10000
+ ...       ...
+ 2-1      01
+ 4-1      011
+ 8-1      0111
+ 16-1     01111
+</code></pre><blockquote>
+<p>因此将原来的数与其减去1后的数字进行<code>&amp;</code>运算,为零，则原来的数是2的幂。</p>
+</blockquote>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><ul>
+<li><code>&amp;</code> 按位与运算符：两位同时为1，结果才为1，否则为0。</li>
 </ul>
-<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function dblLinear(n) {
-    // your code
-    var res = [1];
-    var i=0,j=0;
-    while(res.length &lt;= n){
-      var y = res[i]*2+1;
-      var z = res[j]*3+1;
-      if(y&lt;z){
-        res.push(y);
-        i++;
-      }else if(y==z){
-        res.push(y);
-        i++;
-        j++;
-      }else{
-        res.push(z);
-        j++;
-      }
-    }
-    return res[n];
-}
-</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function dblLinear(n) { 
-var ai = 0, bi = 0, eq = 0; 
-var sequence = [1]; 
-while (ai + bi &lt; n + eq) { 
- var y = 2 * sequence[ai] + 1; 
- var z = 3 * sequence[bi] + 1;
- if (y &lt; z) { 
-  sequence.push(y);
-  ai++; 
- } else if (y &gt; z) {
-  sequence.push(z);
-  bi++;
- } else { 
-  sequence.push(y);
-  ai++; bi++; eq++; 
- }
-}
- return sequence.pop();
-}
-</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
-<li>考虑效率问题，就不能将所有值都放入数组，再来排序，去重；且这种解法，不好控制循环的次数；</li>
-<li>想到在push元素进数组时就按从小到大的顺序放入，且遇到相同的元素就只push一次进数组</li>
-<li>具体思路就是每次将y和z中较小的一个放入数组，同时其对应的计数器+1；若y和z相等，放任意一个进数组，两个计算器都+1</li>
+<h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 清零；想让某个数清零，则另找一个数（原数为1的位置，新数为0），两个数作与运算。<br> 2 . 取一个数中的某些位；若想取低字节位，则可和8个1作与运算。<br> 3 . 保留指定位；若23，即10111，想保留左起的2,3,5位，则可和01101（13）作与运算。</p>
+<ul>
+<li><code>|</code> 按位或运算符：两位中有一个为1，结果就为1。</li>
+</ul>
+<h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 按位或运算常用来对一个数据的某些位定值为1；若想使18，即10010的低4位改为1，则只需和13（1101）进行按位或运算即可。</p>
+<ul>
+<li><code>^</code> 异或运算符：两位值不同，结果为1，否则为0。</li>
+</ul>
+<h4 id="作用：-2"><a href="#作用：-2" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 交换两个值，不用临时变量；</p>
+<h5 id="举栗子说明-1"><a href="#举栗子说明-1" class="headerlink" title="举栗子说明"></a>举栗子说明</h5><pre><code>a=3 (011), b=5 (101);      
+a=a^b;                  
+b=a^b;               
+b=a^b;        
+</code></pre><h5 id="另一种方式"><a href="#另一种方式" class="headerlink" title="另一种方式"></a>另一种方式</h5><pre><code>a=a+b; 
+b=a-b;
+a=a-b;
+</code></pre><ul>
+<li><code>~</code> 取反运算符：将0变1，1变0；用于求整数的二进制反码。</li>
+</ul>
+<ul>
+<li><code>&lt;&lt;</code> 左移运算符：各二进制位全部左移若干位，左边丢弃，右边补0。</li>
+</ul>
+<ul>
+<li><code>&gt;&gt;</code> 右移运算符：各二进制位全部右移若干位，正数左补0，负数左补1，右边丢弃。</li>
+</ul>
+<ul>
+<li>两个不同长度的数据进行位运算时，系统会将二者按右端对齐，然后进行位运算。短的那个数据如果是负数，左边补1，否则补0。</li>
 </ul>
 
     </article>
@@ -422,17 +419,12 @@ while (ai + bi &lt; n + eq) {
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018-05-13/" title= Flex布局 >
-                    <div class="nextTitle">Flex布局</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018-05-06/" title= Adding Big Numbers >
-                    <div class="prevTitle">Adding Big Numbers</div>
+                <a href= "/2018-05-20/" title= CSS :before :after应用 >
+                    <div class="prevTitle">CSS :before :after应用</div>
                 </a>
             
         </li>
@@ -557,7 +549,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我的代码"><span class="toc-number">2.</span> <span class="toc-text">我的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clever"><span class="toc-number">3.</span> <span class="toc-text">Clever</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">4.</span> <span class="toc-text">Key</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#最近在看《技术之瞳》，编程语言部分有一个笔试题目"><span class="toc-number">1.</span> <span class="toc-text"> 最近在看《技术之瞳》，编程语言部分有一个笔试题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q：请填写一个表达式，用于判断一个数是否是2的幂？"><span class="toc-number">1.1.</span> <span class="toc-text">Q：请填写一个表达式，用于判断一个数是否是2的幂？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。"><span class="toc-number">1.2.</span> <span class="toc-text">A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">1.3.</span> <span class="toc-text">Key</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#将2的幂次方写成二进制形式后，很容易就会发现有一个特点："><span class="toc-number">1.3.1.</span> <span class="toc-text">将2的幂次方写成二进制形式后，很容易就会发现有一个特点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#举栗子说明"><span class="toc-number">1.3.2.</span> <span class="toc-text">举栗子说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Note"><span class="toc-number">1.4.</span> <span class="toc-text">Note</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作用："><span class="toc-number">1.4.1.</span> <span class="toc-text">作用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#作用：-1"><span class="toc-number">1.4.2.</span> <span class="toc-text">作用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#作用：-2"><span class="toc-number">1.4.3.</span> <span class="toc-text">作用：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#举栗子说明-1"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">举栗子说明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#另一种方式"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">另一种方式</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-05-20T12:46:17.646Z</updated>
+  <updated>2018-05-31T03:04:41.640Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>判断一个数是否是2的幂</title>
+    <link href="http://ipine.github.io/2018-05-30/"/>
+    <id>http://ipine.github.io/2018-05-30/</id>
+    <published>2018-05-30T13:59:00.000Z</published>
+    <updated>2018-05-31T03:04:41.640Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="最近在看《技术之瞳》，编程语言部分有一个笔试题目"><a href="#最近在看《技术之瞳》，编程语言部分有一个笔试题目" class="headerlink" title=" 最近在看《技术之瞳》，编程语言部分有一个笔试题目"></a> 最近在看《技术之瞳》，编程语言部分有一个笔试题目</h2><h3 id="Q：请填写一个表达式，用于判断一个数是否是2的幂？"><a href="#Q：请填写一个表达式，用于判断一个数是否是2的幂？" class="headerlink" title="Q：请填写一个表达式，用于判断一个数是否是2的幂？"></a>Q：请填写一个表达式，用于判断一个数是否是2的幂？</h3><h3 id="A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。"><a href="#A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。" class="headerlink" title="A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。"></a>A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。</h3><pre><code>n&gt;0? (n&amp;(n-1))==0:false</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><h4 id="将2的幂次方写成二进制形式后，很容易就会发现有一个特点："><a href="#将2的幂次方写成二进制形式后，很容易就会发现有一个特点：" class="headerlink" title="将2的幂次方写成二进制形式后，很容易就会发现有一个特点："></a>将2的幂次方写成二进制形式后，很容易就会发现有一个特点：</h4><blockquote><p>二进制中只有一个1，并且1后面跟了n个0。如果将这个数减去1后会发现，那个1会变为0，而原来的n个0会变为1。</p></blockquote><h4 id="举栗子说明"><a href="#举栗子说明" class="headerlink" title="举栗子说明"></a>举栗子说明</h4><pre><code>十进制   二进制 2        10 4        100 8        1000 16       10000 ...       ... 2-1      01 4-1      011 8-1      0111 16-1     01111</code></pre><blockquote><p>因此将原来的数与其减去1后的数字进行<code>&amp;</code>运算,为零，则原来的数是2的幂。</p></blockquote><h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><ul><li><code>&amp;</code> 按位与运算符：两位同时为1，结果才为1，否则为0。</li></ul><h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 清零；想让某个数清零，则另找一个数（原数为1的位置，新数为0），两个数作与运算。<br> 2 . 取一个数中的某些位；若想取低字节位，则可和8个1作与运算。<br> 3 . 保留指定位；若23，即10111，想保留左起的2,3,5位，则可和01101（13）作与运算。</p><ul><li><code>|</code> 按位或运算符：两位中有一个为1，结果就为1。</li></ul><h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 按位或运算常用来对一个数据的某些位定值为1；若想使18，即10010的低4位改为1，则只需和13（1101）进行按位或运算即可。</p><ul><li><code>^</code> 异或运算符：两位值不同，结果为1，否则为0。</li></ul><h4 id="作用：-2"><a href="#作用：-2" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 交换两个值，不用临时变量；</p><h5 id="举栗子说明-1"><a href="#举栗子说明-1" class="headerlink" title="举栗子说明"></a>举栗子说明</h5><pre><code>a=3 (011), b=5 (101);      a=a^b;                  b=a^b;               b=a^b;        </code></pre><h5 id="另一种方式"><a href="#另一种方式" class="headerlink" title="另一种方式"></a>另一种方式</h5><pre><code>a=a+b; b=a-b;a=a-b;</code></pre><ul><li><code>~</code> 取反运算符：将0变1，1变0；用于求整数的二进制反码。</li></ul><ul><li><code>&lt;&lt;</code> 左移运算符：各二进制位全部左移若干位，左边丢弃，右边补0。</li></ul><ul><li><code>&gt;&gt;</code> 右移运算符：各二进制位全部右移若干位，正数左补0，负数左补1，右边丢弃。</li></ul><ul><li>两个不同长度的数据进行位运算时，系统会将二者按右端对齐，然后进行位运算。短的那个数据如果是负数，左边补1，否则补0。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;最近在看《技术之瞳》，编程语言部分有一个笔试题目&quot;&gt;&lt;a href=&quot;#最近在看《技术之瞳》，编程语言部分有一个笔试题目&quot; class=&quot;headerlink&quot; title=&quot; 最近在看《技术之瞳》，编程语言部分有一个笔试题目&quot;&gt;&lt;/a&gt; 最近在看《技术之瞳》，编
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="面试题" scheme="http://ipine.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+      <category term="code" scheme="http://ipine.github.io/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>CSS :before :after应用</title>
@@ -526,31 +553,6 @@
     
     
       <category term="essay" scheme="http://ipine.github.io/tags/essay/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>岁月神偷</title>
-    <link href="http://ipine.github.io/2015-12-29/"/>
-    <id>http://ipine.github.io/2015-12-29/</id>
-    <published>2015-12-29T07:10:00.000Z</published>
-    <updated>2018-04-16T05:05:18.184Z</updated>
-    
-    <content type="html"><![CDATA[<p>《岁月神偷》片中任达华饰演倔强又好强的父亲，无论是猛烈台风来临时，还是儿子被疾病缠身时，他总是倾尽所有来关爱亲人。最令人印象深刻的是任达华通过“手”的细节所展现的演技。父亲为了患癌儿子能输上新鲜血液，当掉戒指露出让人心疼的深深戒痕；为了在儿子墓前栽下可以遮荫的树，父亲的手被划伤满是触目惊心的血痕；而吴君如在戏里更是颠覆了大笑姑婆的本色，但是却保有了她的伶牙俐齿和积极的心态</p><blockquote><p>一步难，一步佳，难一步，佳一步，难又一步，佳又一步，日子总要信，总要过。最好的时光里过着苦大于甜的生活。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;《岁月神偷》片中任达华饰演倔强又好强的父亲，无论是猛烈台风来临时，还是儿子被疾病缠身时，他总是倾尽所有来关爱亲人。最令人印象深刻的是任达华通过“手”的细节所展现的演技。父亲为了患癌儿子能输上新鲜血液，当掉戒指露出让人心疼的深深戒痕；为了在儿子墓前栽下可以遮荫的树，父亲的手被
-      
-    
-    </summary>
-    
-      <category term="life" scheme="http://ipine.github.io/categories/life/"/>
-    
-    
-      <category term="movie" scheme="http://ipine.github.io/tags/movie/"/>
     
   </entry>
   
