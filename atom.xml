@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-06-06T06:44:23.856Z</updated>
+  <updated>2018-06-11T12:49:24.762Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>冒泡排序</title>
+    <link href="http://ipine.github.io/2018-06-11/"/>
+    <id>http://ipine.github.io/2018-06-11/</id>
+    <published>2018-06-11T12:27:00.000Z</published>
+    <updated>2018-06-11T12:49:24.762Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><blockquote><p>理论：<br>    1.比较轮数n-1。<br>    2.比较次数n-1。<br>    3.符合某个条件交换位置。</p></blockquote><blockquote><p>核心： 双重for循环。</p></blockquote><p><strong>步骤：</strong></p><p>1 .双重for循环。</p><p>2 .指定轮数和次数。</p><p>3 .判断是否符合标准。如果符合标准交换位置。</p><h3 id="版本比较"><a href="#版本比较" class="headerlink" title="版本比较"></a>版本比较</h3><p> 将数组元素从小到大排序：</p><h4 id="初始版"><a href="#初始版" class="headerlink" title="初始版"></a>初始版</h4><p>按照前面的步骤很容易写出以下代码：</p><pre><code>var arr = [7,6,5,4,3,2,1];//1.双重for循环。(外循环控制轮数)  for(var i=0;i&lt;arr.length-1;i++){    //2.指定轮数和次数（内循环控制次数）    for(var j=0;j&lt;arr.length-1;j++){        //3.判断是否符合标准。如果符合标准交换位置。                           if(arr[j] &gt; arr[j+1]){            var temp = arr[j];            arr[j] = arr[j+1];            arr[j+1] = temp;        }    }}</code></pre><blockquote><p><strong>改进思路</strong>：每比较一轮，就少比较一次。（每一轮都会比较出一个最大值，后一轮就没有必要再比较那个值了，所以每比较一轮，就少比较一次。）</p></blockquote><h4 id="改进版"><a href="#改进版" class="headerlink" title="改进版"></a>改进版</h4><pre><code>var arr = [7,6,5,4,3,2,1];    var m = 0;    var n = 0;for(var i=0;i&lt;arr.length-1;i++){    for(var j=0;j&lt;arr.length-1-i;j++){                       if(arr[j] &gt; arr[j+1]){            var temp = arr[j];            arr[j] = arr[j+1];            arr[j+1] = temp;        }        m++;//记录比较次数    }    n++;//记录比较轮数}console.log(arr);console.log(m);console.log(n);</code></pre><blockquote><p><strong>再升级思路</strong>：如果比较完，提前结束比较。（判断，如果本次比较没有移动任何元素，那么说明已经比较完成。）</p></blockquote><h4 id="升级版"><a href="#升级版" class="headerlink" title="升级版"></a>升级版</h4><pre><code>var arr = [1, 2, 3, 4, 5, 6, 7];var m = 0;var n = 0;for(var i=0;i&lt;arr.length-1;i++){    //开闭原则。（写在第一个for循环里，是为了每轮比较先初始化bool变量变为true。）    var bool = true;    for(var j=0;j&lt;arr.length-1-i;j++){        if(arr[j] &gt; arr[j+1]){            var temp = arr[j];            arr[j] = arr[j+1];            arr[j+1] = temp;            //如果有交换，则bool置false。            bool = false;        }        m++;    }    n++;    //如果本轮比较没有任何元素相互交换位置，那么说明已经比较完成，可以跳出循环。    if(bool){        break;    }}console.log(arr);console.log(m);console.log(n);</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;冒泡排序&quot;&gt;&lt;a href=&quot;#冒泡排序&quot; class=&quot;headerlink&quot; title=&quot;冒泡排序&quot;&gt;&lt;/a&gt;冒泡排序&lt;/h3&gt;&lt;h4 id=&quot;基本思想&quot;&gt;&lt;a href=&quot;#基本思想&quot; class=&quot;headerlink&quot; title=&quot;基本思想&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="排序算法" scheme="http://ipine.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>js实现before :after伪类样式修改</title>
@@ -524,34 +549,6 @@
     
     
       <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>反思</title>
-    <link href="http://ipine.github.io/2018-01-17/"/>
-    <id>http://ipine.github.io/2018-01-17/</id>
-    <published>2018-01-17T01:49:00.000Z</published>
-    <updated>2018-04-16T14:10:48.413Z</updated>
-    
-    <content type="html"><![CDATA[<p><em>1月16日，老师在群里怼学姐，当时大家都很懵，也很无语。但是通过他们的对话，我觉得我应该学习学姐的优点并反思自己工作中的不足。</em></p><p>对我来说：</p><p>1 .CMH学姐的细心和细节思考的态度和做论文的方式值得我学习。</p><p>2 .SYM学姐的论文整理、每日进度汇报方式值得借鉴，特别注意借鉴好的便利的工具能取得较好的效果。</p><p>3 .有自己的做事风格，对于老师交代的事要完成并且要有自己的思考，去细化和充实内容，这样才能让他人感受到你在认真对待手中的事，在用脑子去做，而不是为了应付任务。</p><p>4 .下图是老师发飙后第二天，走路时想到的就记在了手机便签上。</p><p><img src="http://i1.bvimg.com/641774/6ae668705272c538t.jpg" alt="1-17反思"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;em&gt;1月16日，老师在群里怼学姐，当时大家都很懵，也很无语。但是通过他们的对话，我觉得我应该学习学姐的优点并反思自己工作中的不足。&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;对我来说：&lt;/p&gt;
-&lt;p&gt;1 .CMH学姐的细心和细节思考的态度和做论文的方式值得我学习。&lt;/p&gt;
-&lt;p&gt;2 .S
-      
-    
-    </summary>
-    
-      <category term="work" scheme="http://ipine.github.io/categories/work/"/>
-    
-    
-      <category term="essay" scheme="http://ipine.github.io/tags/essay/"/>
     
   </entry>
   
