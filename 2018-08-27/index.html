@@ -368,52 +368,53 @@ height:50vh;
         <p>这几天在爬区块链的数据，需要进一步做处理。在爬取过程中，遇到了问题。</p>
 <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>当我需要读取一个字典结构的数据，该数据存在<code>json</code>文件中,类似于如下所示数据。</p>
 <pre><code>{
-    &quot;hash160&quot;: &quot;6c6be098a685e95270812137e8b01b1ae7d8ffd0&quot;,
+  &quot;hash160&quot;: &quot;6c6be098a685e95270812137e8b01b1ae7d8ffd0&quot;,
   &quot;address&quot;: &quot;1AtHDAdBEw6bUtnjYQbbYjVKvSmRrdmomY&quot;,
   &quot;n_tx&quot;: 2,
   &quot;total_received&quot;: 60451790,
   &quot;total_sent&quot;: 60451790,
   &quot;final_balance&quot;: 0,
 }
-</code></pre><p>我使用jupyter notebook 运行如下代码，<strong>读取</strong> 该文件中的数据：</p>
+</code></pre><p>我使用<code>jupyter notebook</code> 运行如下代码，<strong>读</strong> 该文件中的数据：</p>
 <pre><code>with open(&apos;xxx.json&apos;,&apos;r&apos;) as f:
     lines = json.loads(f.read())
 </code></pre><p>程序抛出异常： </p>
 <blockquote>
-<p>Extra data: line 1 column 225215 (char 225214)</p>
+<p><strong>Extra data:</strong> line 1 column 225215 (char 225214)</p>
 </blockquote>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>发生以上错误原因是json只能读取一个文档对象。刚才读取的字典数据在文件中的格式不正确，导致无法正确读取数据。解决办法有两个：</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>发生以上错误原因是<code>json</code>只能读取一个文档对象。刚才读的字典数据在文件中的格式不正确，导致无法正确读数据。解决办法有两个：</p>
 <h4 id="方法一：单行读取文件"><a href="#方法一：单行读取文件" class="headerlink" title="方法一：单行读取文件"></a>方法一：单行读取文件</h4><ul>
-<li><p>适用于有多行json，行与行之间没有关联的情况</p>
-<p> with open(‘xxx.json’,’r’) as f:</p>
-<pre><code>for line in f.readlines():
-   dic = json.loads(line)
-</code></pre></li>
+<li>适用于有多行json，行与行之间没有关联的情况</li>
 </ul>
-<h4 id="方法二：保存数据源的时候，格式化为一个对象"><a href="#方法二：保存数据源的时候，格式化为一个对象" class="headerlink" title="方法二：保存数据源的时候，格式化为一个对象"></a>方法二：保存数据源的时候，格式化为一个对象</h4><ul>
-<li><p>适用于普遍情况；将这个文件写成一个大的json</p>
-<p> with open(‘address.json’,’a’) as f:</p>
-<pre><code>for line in address:
-    #循环，写入多条记录；最外层格式化
-    f.write(&apos;{&quot;address&quot;:[&apos;)
-    #将每条记录以json格式写入f
-    f.write(json.dumps(line,ensure_ascii=False,indent=2 ) + &apos;\n&apos;)
-    f.write(&apos;,&apos;)
-    f.write(&apos;]}&apos;)
-</code></pre></li>
-<li><p>读取时再作为一个文档对象处理</p>
-<p> with open(‘address.json’,’a’) as f:</p>
-<pre><code>str_json = json.loads(f.read())
-</code></pre></li>
+<pre><code>with open(&apos;xxx.json&apos;,&apos;r&apos;) as f:
+   for line in f.readlines():
+      dic = json.loads(line)
+</code></pre><h4 id="方法二：保存数据源的时候，格式化为一个对象"><a href="#方法二：保存数据源的时候，格式化为一个对象" class="headerlink" title="方法二：保存数据源的时候，格式化为一个对象"></a>方法二：保存数据源的时候，格式化为一个对象</h4><ul>
+<li>适用于普遍情况；将这个文件写成一个大的json</li>
 </ul>
-<h4 id="读写json文件函数"><a href="#读写json文件函数" class="headerlink" title="读写json文件函数"></a>读写json文件函数</h4><ul>
-<li><p>写json<br>一般都是方法二提到的json格式，整个文件中的数据是一个大json。函数如下</p>
-<p> f.write(json.dumps())<br><code>json.dumps()</code>函数是将一个Python数据类型列表进行json格式的编码。可以理解为：<code>json.dumps()</code>函数是将字典转化为字符串</p>
-</li>
-<li><p>读json<br>函数如下</p>
-<p> json.loads(f.read())<br><code>json.loads()</code>函数是将json格式数据转换为字典。可以理解为：<code>json.loads()</code>函数是将字符串转化为字典</p>
-</li>
+<pre><code>with open(&apos;address.json&apos;,&apos;a&apos;) as f:
+    for line in address:
+        #循环，写入多条记录；最外层格式化
+        f.write(&apos;{&quot;address&quot;:[&apos;)
+        #将每条记录以json格式写入f
+        f.write(json.dumps(line,ensure_ascii=False,indent=2 ) + &apos;\n&apos;)
+        f.write(&apos;,&apos;)
+        f.write(&apos;]}&apos;)
+</code></pre><ul>
+<li>读取时再作为一个文档对象处理</li>
 </ul>
+<pre><code>with open(&apos;address.json&apos;,&apos;a&apos;) as f:
+    str_json = json.loads(f.read())
+</code></pre><h4 id="读写json文件函数"><a href="#读写json文件函数" class="headerlink" title="读写json文件函数"></a>读写json文件函数</h4><ul>
+<li>写json<br>一般都是方法二提到的json格式，整个文件中的数据是一个大json。函数如下</li>
+</ul>
+<pre><code>f.write(json.dumps())
+</code></pre><p> <code>json.dumps()</code>函数是将一个Python数据类型列表进行json格式的编码。可以理解为：<code>json.dumps()</code>函数是将字典转化为字符串</p>
+<ul>
+<li>读json<br>函数如下</li>
+</ul>
+<pre><code>json.loads(f.read())
+</code></pre><p> <code>json.loads()</code>函数是将json格式数据转换为字典。可以理解为：<code>json.loads()</code>函数是将字符串转化为字典</p>
 
     </article>
     <!-- 前后页  -->
@@ -563,8 +564,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
     
     
     
@@ -1057,19 +1056,19 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
+        <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
     
         <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
     
-        <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
-    
-        <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
-    
-        <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
+        <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
     
         <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
         <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
+    
+        <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
+    
+        <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
     
         <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
@@ -1077,13 +1076,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
     
-        <span class="sidebar-tag-name" data-tags="teleplay"><span class="iconfont-archer">&#xe606;</span>teleplay</span>
-    
         <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
         <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
+    
+        <span class="sidebar-tag-name" data-tags="teleplay"><span class="iconfont-archer">&#xe606;</span>teleplay</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1118,15 +1117,15 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
-    
         <span class="sidebar-category-name" data-categories="read"><span class="iconfont-archer">&#xe60a;</span>read</span>
+    
+        <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
     
         <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
     
-        <span class="sidebar-category-name" data-categories="technique"><span class="iconfont-archer">&#xe60a;</span>technique</span>
-    
         <span class="sidebar-category-name" data-categories="method"><span class="iconfont-archer">&#xe60a;</span>method</span>
+    
+        <span class="sidebar-category-name" data-categories="technique"><span class="iconfont-archer">&#xe60a;</span>technique</span>
     
         <span class="sidebar-category-name" data-categories="technique-summary"><span class="iconfont-archer">&#xe60a;</span>technique-summary</span>
     
