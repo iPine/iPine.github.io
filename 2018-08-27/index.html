@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>lf94me</title>
+    <title>json读取数据出错 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -185,12 +187,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >iPine&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">json读取数据出错</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>iPine's Blog.</a>
 </header>
@@ -204,24 +217,69 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            json读取数据出错
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "python">python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "json">json</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/08/27</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -305,92 +363,101 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>这几天在爬区块链的数据，需要进一步做处理。在爬取过程中，遇到了问题。</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>当我需要读取一个字典结构的数据，该数据存在<code>json</code>文件中,类似于如下所示数据。</p>
+<pre><code>{
+    &quot;hash160&quot;: &quot;6c6be098a685e95270812137e8b01b1ae7d8ffd0&quot;,
+  &quot;address&quot;: &quot;1AtHDAdBEw6bUtnjYQbbYjVKvSmRrdmomY&quot;,
+  &quot;n_tx&quot;: 2,
+  &quot;total_received&quot;: 60451790,
+  &quot;total_sent&quot;: 60451790,
+  &quot;final_balance&quot;: 0,
+}
+</code></pre><p>我使用jupyter notebook 运行如下代码，<strong>读取</strong> 该文件中的数据：</p>
+<pre><code>with open(&apos;xxx.json&apos;,&apos;r&apos;) as f:
+    lines = json.loads(f.read())
+</code></pre><p>程序抛出异常： </p>
+<blockquote>
+<p>Extra data: line 1 column 225215 (char 225214)</p>
+</blockquote>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>发生以上错误原因是json只能读取一个文档对象。刚才读取的字典数据在文件中的格式不正确，导致无法正确读取数据。解决办法有两个：</p>
+<h4 id="方法一：单行读取文件"><a href="#方法一：单行读取文件" class="headerlink" title="方法一：单行读取文件"></a>方法一：单行读取文件</h4><ul>
+<li><p>适用于有多行json，行与行之间没有关联的情况</p>
+<p> with open(‘xxx.json’,’r’) as f:</p>
+<pre><code>for line in f.readlines():
+   dic = json.loads(line)
+</code></pre></li>
+</ul>
+<h4 id="方法二：保存数据源的时候，格式化为一个对象"><a href="#方法二：保存数据源的时候，格式化为一个对象" class="headerlink" title="方法二：保存数据源的时候，格式化为一个对象"></a>方法二：保存数据源的时候，格式化为一个对象</h4><ul>
+<li><p>适用于普遍情况；将这个文件写成一个大的json</p>
+<p> with open(‘address.json’,’a’) as f:</p>
+<pre><code>for line in address:
+    #循环，写入多条记录；最外层格式化
+    f.write(&apos;{&quot;address&quot;:[&apos;)
+    #将每条记录以json格式写入f
+    f.write(json.dumps(line,ensure_ascii=False,indent=2 ) + &apos;\n&apos;)
+    f.write(&apos;,&apos;)
+    f.write(&apos;]}&apos;)
+</code></pre></li>
+<li><p>读取时再作为一个文档对象处理</p>
+<p> with open(‘address.json’,’a’) as f:</p>
+<pre><code>str_json = json.loads(f.read())
+</code></pre></li>
+</ul>
+<h4 id="读写json文件函数"><a href="#读写json文件函数" class="headerlink" title="读写json文件函数"></a>读写json文件函数</h4><ul>
+<li><p>写json<br>一般都是方法二提到的json格式，整个文件中的数据是一个大json。函数如下</p>
+<p> f.write(json.dumps())<br><code>json.dumps()</code>函数是将一个Python数据类型列表进行json格式的编码。可以理解为：<code>json.dumps()</code>函数是将字典转化为字符串</p>
+</li>
+<li><p>读json<br>函数如下</p>
+<p> json.loads(f.read())<br><code>json.loads()</code>函数是将json格式数据转换为字典。可以理解为：<code>json.loads()</code>函数是将字符串转化为字典</p>
+</li>
+</ul>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018-08-04/" title= 2018为期一个月的暑期记事 >
+                    <div class="prevTitle">2018为期一个月的暑期记事</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC8zNTc1NC8xMjI5MA>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
     
     
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018-08-04/" >
-                
-                    <span>2018为期一个月的暑期记事</span>
-            </a>
-            <div class="abstract-content">
-                假装是总结的暑期记事
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/04</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "essay">essay</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "reading notes">reading notes</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "teleplay">teleplay</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2016-01-05/" >
-                
-                    <span>2016.1.5</span>
-            </a>
-            <div class="abstract-content">
-                瞎想
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/01/05</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "essay">essay</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2015-12-29/" >
-                
-                    <span>岁月神偷</span>
-            </a>
-            <div class="abstract-content">
-                《岁月神偷》 观后感
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2015/12/29</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "movie">movie</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -467,6 +534,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决办法"><span class="toc-number">2.</span> <span class="toc-text">解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一：单行读取文件"><span class="toc-number">2.1.</span> <span class="toc-text">方法一：单行读取文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二：保存数据源的时候，格式化为一个对象"><span class="toc-number">2.2.</span> <span class="toc-text">方法二：保存数据源的时候，格式化为一个对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读写json文件函数"><span class="toc-number">2.3.</span> <span class="toc-text">读写json文件函数</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1067,6 +1152,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-08-06T06:34:09.260Z</updated>
+  <updated>2018-08-27T11:43:23.455Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>json读取数据出错</title>
+    <link href="http://ipine.github.io/2018-08-27/"/>
+    <id>http://ipine.github.io/2018-08-27/</id>
+    <published>2018-08-27T10:50:00.000Z</published>
+    <updated>2018-08-27T11:43:23.455Z</updated>
+    
+    <content type="html"><![CDATA[<p>这几天在爬区块链的数据，需要进一步做处理。在爬取过程中，遇到了问题。</p><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>当我需要读取一个字典结构的数据，该数据存在<code>json</code>文件中,类似于如下所示数据。</p><pre><code>{    &quot;hash160&quot;: &quot;6c6be098a685e95270812137e8b01b1ae7d8ffd0&quot;,  &quot;address&quot;: &quot;1AtHDAdBEw6bUtnjYQbbYjVKvSmRrdmomY&quot;,  &quot;n_tx&quot;: 2,  &quot;total_received&quot;: 60451790,  &quot;total_sent&quot;: 60451790,  &quot;final_balance&quot;: 0,}</code></pre><p>我使用jupyter notebook 运行如下代码，<strong>读取</strong> 该文件中的数据：</p><pre><code>with open(&apos;xxx.json&apos;,&apos;r&apos;) as f:    lines = json.loads(f.read())</code></pre><p>程序抛出异常： </p><blockquote><p>Extra data: line 1 column 225215 (char 225214)</p></blockquote><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>发生以上错误原因是json只能读取一个文档对象。刚才读取的字典数据在文件中的格式不正确，导致无法正确读取数据。解决办法有两个：</p><h4 id="方法一：单行读取文件"><a href="#方法一：单行读取文件" class="headerlink" title="方法一：单行读取文件"></a>方法一：单行读取文件</h4><ul><li><p>适用于有多行json，行与行之间没有关联的情况</p><p> with open(‘xxx.json’,’r’) as f:</p><pre><code>for line in f.readlines():   dic = json.loads(line)</code></pre></li></ul><h4 id="方法二：保存数据源的时候，格式化为一个对象"><a href="#方法二：保存数据源的时候，格式化为一个对象" class="headerlink" title="方法二：保存数据源的时候，格式化为一个对象"></a>方法二：保存数据源的时候，格式化为一个对象</h4><ul><li><p>适用于普遍情况；将这个文件写成一个大的json</p><p> with open(‘address.json’,’a’) as f:</p><pre><code>for line in address:    #循环，写入多条记录；最外层格式化    f.write(&apos;{&quot;address&quot;:[&apos;)    #将每条记录以json格式写入f    f.write(json.dumps(line,ensure_ascii=False,indent=2 ) + &apos;\n&apos;)    f.write(&apos;,&apos;)    f.write(&apos;]}&apos;)</code></pre></li><li><p>读取时再作为一个文档对象处理</p><p> with open(‘address.json’,’a’) as f:</p><pre><code>str_json = json.loads(f.read())</code></pre></li></ul><h4 id="读写json文件函数"><a href="#读写json文件函数" class="headerlink" title="读写json文件函数"></a>读写json文件函数</h4><ul><li><p>写json<br>一般都是方法二提到的json格式，整个文件中的数据是一个大json。函数如下</p><p> f.write(json.dumps())<br><code>json.dumps()</code>函数是将一个Python数据类型列表进行json格式的编码。可以理解为：<code>json.dumps()</code>函数是将字典转化为字符串</p></li><li><p>读json<br>函数如下</p><p> json.loads(f.read())<br><code>json.loads()</code>函数是将json格式数据转换为字典。可以理解为：<code>json.loads()</code>函数是将字符串转化为字典</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这几天在爬区块链的数据，需要进一步做处理。在爬取过程中，遇到了问题。&lt;/p&gt;
+&lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h3&gt;&lt;p&gt;当我需要读取一个字典结构的数据，该数据存
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="python" scheme="http://ipine.github.io/tags/python/"/>
+    
+      <category term="json" scheme="http://ipine.github.io/tags/json/"/>
+    
+  </entry>
   
   <entry>
     <title>2018为期一个月的暑期记事</title>
@@ -40,9 +68,9 @@
       <category term="life" scheme="http://ipine.github.io/categories/life/"/>
     
     
-      <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
-    
       <category term="essay" scheme="http://ipine.github.io/tags/essay/"/>
+    
+      <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
     
       <category term="teleplay" scheme="http://ipine.github.io/tags/teleplay/"/>
     
@@ -518,33 +546,6 @@
       
       
         &lt;h3 id=&quot;《人性的弱点》&quot;&gt;&lt;a href=&quot;#《人性的弱点》&quot; class=&quot;headerlink&quot; title=&quot;《人性的弱点》&quot;&gt;&lt;/a&gt;&lt;em&gt;《人性的弱点》&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;&amp;emsp;&amp;emsp;我们要学会表达真实的自己，遇到不开心的事要主动跟朋友说；为
-      
-    
-    </summary>
-    
-      <category term="read" scheme="http://ipine.github.io/categories/read/"/>
-    
-    
-      <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>黑客与画家</title>
-    <link href="http://ipine.github.io/2018-02-27/"/>
-    <id>http://ipine.github.io/2018-02-27/</id>
-    <published>2018-02-27T13:04:00.000Z</published>
-    <updated>2018-04-30T08:45:38.927Z</updated>
-    
-    <content type="html"><![CDATA[<p> 以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。</p><hr><h3 id="低级语言"><a href="#低级语言" class="headerlink" title="低级语言"></a>低级语言</h3><h4 id="什么叫机器语言"><a href="#什么叫机器语言" class="headerlink" title="什么叫机器语言"></a>什么叫机器语言</h4><p> 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。</p><h4 id="什么叫汇编语言"><a href="#什么叫汇编语言" class="headerlink" title="什么叫汇编语言"></a>什么叫汇编语言</h4><p> 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是<code>add</code>。</p><blockquote><p>机器语言和汇编语言的共同问题就是，只能让大多数计算机做一些很简单的事情。</p></blockquote><h4 id="为什么使用低级语言"><a href="#为什么使用低级语言" class="headerlink" title="为什么使用低级语言"></a>为什么使用低级语言</h4><p>当考虑效率问题时。</p><blockquote><p>如果你非常关注运行速度，那么最好使用接近机器的语言。</p></blockquote><p>比如说，C 语言就是一种低层次语言，很接近硬件，几乎堪称可移植的汇编语言。大多数操作系统都是用C语言写的。</p><p><em>那么问题来了，硬件速度越来越快了，底层次语言的作用越来越小，为什么不抛弃C语言呢？</em></p><p><em>原因：人们可能想保留缓存区溢出攻击，使得程序员保持警惕！</em></p><h4 id="缓存区溢出攻击"><a href="#缓存区溢出攻击" class="headerlink" title="缓存区溢出攻击"></a>缓存区溢出攻击</h4><p>当你在C语言中为输入的内容分配出一片内存（<code>缓存</code>）时，它会被分配在当前运行代码的<code>返回地址</code>旁边。</p><ul><li><code>返回地址</code>：指的是一块特定内存，当前代码运行完毕以后，就要运行这块内存中包含的代码。</li><li><code>缓冲区(buffer）</code>: 一个内存区域，用来保存程序需要的输入数据，或者将程序的输出数据累积起来，到一定数量后再输出。</li></ul><p>假定有人打算入侵你的计算机，他们猜出你会为某种输入分配256字节的<code>缓存</code>，于是他们就提交<strong>多于256字节的内容</strong>，目的是覆盖旁边的<code>返回地址</code>。那么，当前代码运行完毕之后，程序的控制权就交给了他们指定的内存地址。这个地址通常是缓存的首地址，当中放的是入侵者事前编好的机器码。于是，入侵者的程序就运行在你的计算机上了。</p><p>在C语言中，一旦接受用户输入的时候<strong>没有检查输入长度</strong>，就创造出了一个安全漏洞。利用这种漏洞的攻击行为就被称为<code>缓存区溢出攻击</code>。</p><blockquote><p>如果使用更抽象的高级语言，上面的事情是不可能发生的。</p></blockquote><h3 id="高级语言-与低级语言的关系"><a href="#高级语言-与低级语言的关系" class="headerlink" title="高级语言,与低级语言的关系"></a>高级语言,与低级语言的关系</h3><p>简便方式书写程序所用的语言就是高级语言，其优点是使得程序更具有可移植性，而不同计算机的机器语言是不一样的。</p><p>高级语言（简便方式书写的程序，就像一行<code>if</code> 语句）可以通过编译器转变为低级语言（硬件可以理解的语言）。</p><h3 id="编译器与解释器区别"><a href="#编译器与解释器区别" class="headerlink" title="编译器与解释器区别"></a>编译器与解释器区别</h3><p><code>编译器</code> 不是低级语言唯一的实现方法，另一种方法是使用<code>解释器</code>。</p><ul><li>解释器： 实时地将代码解释为相应的机器语言，然后一行行运行。</li><li>编译器： 先将整个程序全部翻译成机器语言，然后再运行。</li></ul><blockquote><p>当编程语言变得很抽象时，就可完全脱离硬件，但是问题是太抽象的话，能解决的问题太少。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt; 以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&quot;低级语言&quot;&gt;&lt;a href=&quot;#低级语言&quot; class=&quot;headerlink&quot; title=&quot;低级语言&quot;&gt;&lt;/a&gt;低级语言&lt;/h3&gt;&lt;h4 id=&quot;什么叫机器语言&quot;&gt;&lt;a
       
     
     </summary>
