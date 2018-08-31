@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>黑客与画家 · lf94me</title>
+    <title>UnboundLocalError · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -201,7 +201,7 @@
                 <a href="/" >iPine&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">黑客与画家</a>
+                <a href="#" class="post-name">UnboundLocalError</a>
             </div>
     </div>
     
@@ -226,14 +226,14 @@ height:50vh;
     
     <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/intro/read-bg.webp)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.webp)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            黑客与画家
+            UnboundLocalError
             <!-- 404 -->
             
         </h1>
@@ -251,13 +251,13 @@ height:50vh;
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "reading notes">reading notes</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "python">python</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/02/27</span>
+                <span class="post-intro-time">2018/08/29</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -363,57 +363,91 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p> 以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。</p>
-<hr>
-<h3 id="低级语言"><a href="#低级语言" class="headerlink" title="低级语言"></a>低级语言</h3><h4 id="什么叫机器语言"><a href="#什么叫机器语言" class="headerlink" title="什么叫机器语言"></a>什么叫机器语言</h4><p> 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。</p>
-<h4 id="什么叫汇编语言"><a href="#什么叫汇编语言" class="headerlink" title="什么叫汇编语言"></a>什么叫汇编语言</h4><p> 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是<code>add</code>。</p>
+        <p>做《Python编程：从入门到实践》一书中的练习时，运行一段代码，遇到了变量引用的错误：</p>
 <blockquote>
-<p>机器语言和汇编语言的共同问题就是，只能让大多数计算机做一些很简单的事情。</p>
+<p>UnboundLocalError: local variable ‘range’ referenced before assignment</p>
 </blockquote>
-<h4 id="为什么使用低级语言"><a href="#为什么使用低级语言" class="headerlink" title="为什么使用低级语言"></a>为什么使用低级语言</h4><p>当考虑效率问题时。</p>
-<blockquote>
-<p>如果你非常关注运行速度，那么最好使用接近机器的语言。</p>
-</blockquote>
-<p>比如说，C 语言就是一种低层次语言，很接近硬件，几乎堪称可移植的汇编语言。大多数操作系统都是用C语言写的。</p>
-<p><em>那么问题来了，硬件速度越来越快了，底层次语言的作用越来越小，为什么不抛弃C语言呢？</em></p>
-<p><em>原因：人们可能想保留缓存区溢出攻击，使得程序员保持警惕！</em></p>
-<h4 id="缓存区溢出攻击"><a href="#缓存区溢出攻击" class="headerlink" title="缓存区溢出攻击"></a>缓存区溢出攻击</h4><p>当你在C语言中为输入的内容分配出一片内存（<code>缓存</code>）时，它会被分配在当前运行代码的<code>返回地址</code>旁边。</p>
-<ul>
-<li><code>返回地址</code>：指的是一块特定内存，当前代码运行完毕以后，就要运行这块内存中包含的代码。</li>
-<li><code>缓冲区(buffer）</code>: 一个内存区域，用来保存程序需要的输入数据，或者将程序的输出数据累积起来，到一定数量后再输出。</li>
-</ul>
-<p>假定有人打算入侵你的计算机，他们猜出你会为某种输入分配256字节的<code>缓存</code>，于是他们就提交<strong>多于256字节的内容</strong>，目的是覆盖旁边的<code>返回地址</code>。那么，当前代码运行完毕之后，程序的控制权就交给了他们指定的内存地址。这个地址通常是缓存的首地址，当中放的是入侵者事前编好的机器码。于是，入侵者的程序就运行在你的计算机上了。</p>
-<p>在C语言中，一旦接受用户输入的时候<strong>没有检查输入长度</strong>，就创造出了一个安全漏洞。利用这种漏洞的攻击行为就被称为<code>缓存区溢出攻击</code>。</p>
-<blockquote>
-<p>如果使用更抽象的高级语言，上面的事情是不可能发生的。</p>
-</blockquote>
-<h3 id="高级语言-与低级语言的关系"><a href="#高级语言-与低级语言的关系" class="headerlink" title="高级语言,与低级语言的关系"></a>高级语言,与低级语言的关系</h3><p>简便方式书写程序所用的语言就是高级语言，其优点是使得程序更具有可移植性，而不同计算机的机器语言是不一样的。</p>
-<p>高级语言（简便方式书写的程序，就像一行<code>if</code> 语句）可以通过编译器转变为低级语言（硬件可以理解的语言）。</p>
-<h3 id="编译器与解释器区别"><a href="#编译器与解释器区别" class="headerlink" title="编译器与解释器区别"></a>编译器与解释器区别</h3><p><code>编译器</code> 不是低级语言唯一的实现方法，另一种方法是使用<code>解释器</code>。</p>
-<ul>
-<li>解释器： 实时地将代码解释为相应的机器语言，然后一行行运行。</li>
-<li>编译器： 先将整个程序全部翻译成机器语言，然后再运行。</li>
-</ul>
-<blockquote>
-<p>当编程语言变得很抽象时，就可完全脱离硬件，但是问题是太抽象的话，能解决的问题太少。</p>
-</blockquote>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="依赖模块car-py"><a href="#依赖模块car-py" class="headerlink" title="依赖模块car.py"></a>依赖模块<code>car.py</code></h4><pre><code>&quot;&quot;&quot;一个可用于表示汽车的类&quot;&quot;&quot;
+#父类
+class Car():
+    &quot;&quot;&quot;一次模拟汽车的简单尝试&quot;&quot;&quot;
+    ...
 
+#提取出的单独类，并将其实例作为子类的一个属性值
+class Battery():
+    &quot;&quot;&quot;一次模拟电动汽车电瓶的简单尝试&quot;&quot;&quot;
+    def __init__(self, battery_size=60):
+        &quot;&quot;&quot;初始化电瓶的属性&quot;&quot;&quot;
+        self.battery_size = battery_size
+
+    def describe_battery(self):
+        &quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;
+        print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)
+
+    def get_range(self):
+        &quot;&quot;&quot;打印一条描述电瓶续航里程的消息&quot;&quot;&quot;
+        if self.battery_size == 70:
+            range = 240
+        elif self.battery_size == 85:
+            range = 270
+        message = &quot;This car can go approximately &quot; + str(range)
+        message += &quot; miles on a full charge.&quot;
+        print(message)
+
+#子类        
+class ElectricCar(Car):
+    &quot;&quot;&quot;模拟电动汽车的独特之处&quot;&quot;&quot;
+    def __init__(self, make, model, year):
+        &quot;&quot;&quot;
+        初始化父类的属性，再初始化电动汽车特有的属性
+        &quot;&quot;&quot;
+        super().__init__(make, model, year)
+        #将Battery类的实例作为属性值
+        self.battery = Battery()
+</code></pre><h4 id="执行my-electric-car-py中的代码"><a href="#执行my-electric-car-py中的代码" class="headerlink" title="执行my_electric_car.py中的代码"></a>执行<code>my_electric_car.py</code>中的代码</h4><pre><code>from car import ElectricCar
+
+#实例化电动汽车
+my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+print(my_tesla.get_descriptive_name())
+my_tesla.battery.describe_battery()
+
+#调用方法get_range()
+my_tesla.battery.get_range()
+</code></pre><h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p>前面运行正常，就是<code>get_range()</code>方法调用出错</p>
+<pre><code>2016 Tesla Model S
+This car has a 60-kWh battery.
+UnboundLocalError: local variable &apos;range&apos; referenced before assignment
+</code></pre><blockquote>
+<p>错误意思：在定义前就调用；即是range的作用域出了问题；<br> 观察<code>Battery</code>类可以发现变量<code>battery_size</code>的默认值给的是60；而对于<code>get_range()</code>方法中的if判断条件，<code>battery_size</code>的值不满足任何条件；因而变量<code>range</code>并没有得到实例化（即没有被声明），后面的<code>message</code>调用它就会出错。</p>
+</blockquote>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>在方法内，if条件外声明变量range。例如：</p>
+<pre><code>def get_range(self):
+&quot;&quot;&quot;打印一条描述电瓶续航里程的消息&quot;&quot;&quot;
+
+#解决办法：在if条件外声明变量range
+range = 220
+
+# 当两个if条件都没有满足时，后面调用range会报错；因为它没有被声明
+if self.battery_size == 70:
+    range = 240
+elif self.battery_size == 85:
+    range = 270
+
+message = &quot;This car can go approximately &quot; + str(range)
+message += &quot; miles on a full charge.&quot;
+print(message)
+</code></pre>
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018-03-25/" title= 表达自己的需求 >
-                    <div class="nextTitle">表达自己的需求</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018-01-19/" title= 黑客与画家 >
-                    <div class="prevTitle">黑客与画家</div>
+                <a href= "/2018-08-28/" title= IOPub data rate exceeded >
+                    <div class="prevTitle">IOPub data rate exceeded</div>
                 </a>
             
         </li>
@@ -538,7 +572,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#低级语言"><span class="toc-number">1.</span> <span class="toc-text">低级语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么叫机器语言"><span class="toc-number">1.1.</span> <span class="toc-text">什么叫机器语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么叫汇编语言"><span class="toc-number">1.2.</span> <span class="toc-text">什么叫汇编语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么使用低级语言"><span class="toc-number">1.3.</span> <span class="toc-text">为什么使用低级语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缓存区溢出攻击"><span class="toc-number">1.4.</span> <span class="toc-text">缓存区溢出攻击</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级语言-与低级语言的关系"><span class="toc-number">2.</span> <span class="toc-text">高级语言,与低级语言的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译器与解释器区别"><span class="toc-number">3.</span> <span class="toc-text">编译器与解释器区别</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">1.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#依赖模块car-py"><span class="toc-number">1.1.</span> <span class="toc-text">依赖模块car.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行my-electric-car-py中的代码"><span class="toc-number">1.2.</span> <span class="toc-text">执行my_electric_car.py中的代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行结果"><span class="toc-number">2.</span> <span class="toc-text">运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决办法"><span class="toc-number">3.</span> <span class="toc-text">解决办法</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
