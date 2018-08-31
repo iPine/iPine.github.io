@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-08-28T04:10:05.006Z</updated>
+  <updated>2018-08-31T11:17:51.265Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IOPub data rate exceeded</title>
+    <link href="http://ipine.github.io/2018-08-28/"/>
+    <id>http://ipine.github.io/2018-08-28/</id>
+    <published>2018-08-28T04:18:00.000Z</published>
+    <updated>2018-08-31T11:17:51.265Z</updated>
+    
+    <content type="html"><![CDATA[<p>仍然是在爬区块链数据的过程中遇到的问题。加载爬取的<code>blockdata.json</code>数据文件时,<code>Jupyter notebook</code>显示不出来还报错：</p><blockquote><p>IOPub data rate exceeded</p></blockquote><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>Jupyter botebook 内存设置的问题，调整过后即可正常显示。</p><h3 id="如何设置"><a href="#如何设置" class="headerlink" title="如何设置"></a>如何设置</h3><ul><li>打开<code>anaconda prompt</code>命令窗口</li><li>在该命令窗口运行： <code>jupyter notebook --generate-config</code></li><li>可以看见一个路径，找到该路径下的配置文件， 从中找到<code>iopub_data_rate_limit</code></li><li>将它的值调大（后面可以多填几个0），去掉注释</li><li>重启jupyter notebook就可以正常显示</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;仍然是在爬区块链数据的过程中遇到的问题。加载爬取的&lt;code&gt;blockdata.json&lt;/code&gt;数据文件时,&lt;code&gt;Jupyter notebook&lt;/code&gt;显示不出来还报错：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;IOPub data rate exce
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://ipine.github.io/categories/tool/"/>
+    
+    
+      <category term="Jupyter nootebook" scheme="http://ipine.github.io/tags/Jupyter-nootebook/"/>
+    
+  </entry>
   
   <entry>
     <title>json读取数据出错</title>
@@ -529,31 +556,6 @@
       <category term="tool" scheme="http://ipine.github.io/tags/tool/"/>
     
       <category term="paper" scheme="http://ipine.github.io/tags/paper/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>表达自己的需求</title>
-    <link href="http://ipine.github.io/2018-03-25/"/>
-    <id>http://ipine.github.io/2018-03-25/</id>
-    <published>2018-03-25T09:06:00.000Z</published>
-    <updated>2018-08-28T04:07:43.792Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="《人性的弱点》"><a href="#《人性的弱点》" class="headerlink" title="《人性的弱点》"></a><em>《人性的弱点》</em></h3><p>&emsp;&emsp;我们要学会表达真实的自己，遇到不开心的事要主动跟朋友说；为难的工作要主动跟领导说；碍于情面不敢说出口的拒绝要勇敢说出来，只有这样，我们才能与他人建立真实的关系，交到真心的朋友。不然我们永远只能孤身一人扮演“热心肠好人”。<br>&emsp;&emsp;我们要在说话与行动前，多想想自己的需求，要问自己：“我这样说自己会快乐吗？”“我这么做自己会幸福吗？”<br>在我们以往的人生中，把太多注意力放在了别人身上，现在我们要重新聚焦于自己，爱自己、关心自己，为此</p><blockquote><p>我们必须建立一个个原则，要有原则地拒绝和坚持，而不是无底线地迎合和付出。</p></blockquote><p>&emsp;&emsp;只有这样，我们才能让别人看到自己的底线，清楚自己的原则，才能从人情世故中获得真正的解脱。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;《人性的弱点》&quot;&gt;&lt;a href=&quot;#《人性的弱点》&quot; class=&quot;headerlink&quot; title=&quot;《人性的弱点》&quot;&gt;&lt;/a&gt;&lt;em&gt;《人性的弱点》&lt;/em&gt;&lt;/h3&gt;&lt;p&gt;&amp;emsp;&amp;emsp;我们要学会表达真实的自己，遇到不开心的事要主动跟朋友说；为
-      
-    
-    </summary>
-    
-      <category term="read" scheme="http://ipine.github.io/categories/read/"/>
-    
-    
-      <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
     
   </entry>
   
