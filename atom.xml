@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-08-31T11:39:27.496Z</updated>
+  <updated>2018-09-13T13:22:36.686Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django入门练习的两个错误</title>
+    <link href="http://ipine.github.io/2018-09-12/"/>
+    <id>http://ipine.github.io/2018-09-12/</id>
+    <published>2018-09-12T12:18:00.000Z</published>
+    <updated>2018-09-13T13:22:36.686Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>&#39;learning_logs&#39; is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p><h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示’Topics’数据的网页时，先按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p><p>三步流程走完，一切工作就绪，运行，报错了。<br>错误如下：<br>图</p><p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>父模板代码如下：</p><pre><code>&lt;p&gt;&lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;&lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;&lt;/p&gt;&lt;!-- 插入的块标签 content ，是一个占位符，其中包含的信息将由子模板指定。 --&gt;{% block content %}{% endblock content %}</code></pre><h3 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h3><p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p><p>图</p><blockquote><p>说明不是这里的问题</p></blockquote><p>2 . 定位到<code>urls.py</code>文件，打开项目文件下的<code>urls.py</code>文件；发现有两个版本的<code>urlpatterns</code>列表.</p><h4 id="旧版本，url式的："><a href="#旧版本，url式的：" class="headerlink" title="旧版本，url式的："></a>旧版本，url式的：</h4><pre><code>from django.conf.urls import url, include#根据书上的代码写的urlpatterns = [    url(r&apos;^admin/&apos;,admin.site.urls),    url(r&apos;&apos;,include(&apos;learning_logs.urls&apos;)),]</code></pre><h4 id="新版本，path式的："><a href="#新版本，path式的：" class="headerlink" title="新版本，path式的："></a>新版本，path式的：</h4><pre><code>from django.urls import include, pathurlpatterns = [    path(&apos;admin/&apos;, admin.site.urls),    path(&apos;&apos;,include(&apos;learning_logs.urls&apos;,namespace=&apos;learning_logs&apos;)),]</code></pre><blockquote><p>我将path式的注释掉了，用的是url式的。这在今天创建新网页之前，运行都是正常的。</p></blockquote><h3 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h3><p>首先想到：将url式注释掉，尝试path式，看能否运行正常；结果，又报另一个错误：(</p><blockquote><p>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</p></blockquote><p>理解下意思，大致就是：应该在include模块中设置app_name属性，或者传递一个包含模式列表和app_name的2元组<br>又百度一番，知道了<code>include</code>模块需包含两个参数，前一个为2元组，后一个为<code>namespace</code>；于是将代码修改成这样：</p><pre><code>from django.urls import include, pathurlpatterns = [    path(&apos;admin/&apos;, admin.site.urls),    path(&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;),namespace=&apos;learning_logs&apos;)),    ]</code></pre><blockquote><p>OK!运行正常</p></blockquote><p>网上搜索一番，发现新旧版本的区别在于是否显示声明<code>namespace</code>的值，在旧版本url式中<code>namespace</code>是注册了的，而新版本未注册。<br>用url式的代码如下：</p><pre><code>from django.conf.urls import url, includeurlpatterns = [    url(r&apos;^admin/&apos;,admin.site.urls),    url(r&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;))),]</code></pre><blockquote><p>Include只需包含一个参数arg：2元组；namespace不需要显示声明。</p></blockquote><p>到此，问题解决。 完：）</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&lt;code&gt;&amp;#39;learning_logs&amp;#39; is not a registered namespace&lt;/code&gt;和&lt;code&gt;ImproperlyConfigured: 
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="python" scheme="http://ipine.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>UnboundLocalError</title>
@@ -122,9 +147,9 @@
       <category term="life" scheme="http://ipine.github.io/categories/life/"/>
     
     
-      <category term="essay" scheme="http://ipine.github.io/tags/essay/"/>
-    
       <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
+    
+      <category term="essay" scheme="http://ipine.github.io/tags/essay/"/>
     
       <category term="teleplay" scheme="http://ipine.github.io/tags/teleplay/"/>
     
@@ -531,31 +556,6 @@
       <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
     
       <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>论文摘要写作思路实践</title>
-    <link href="http://ipine.github.io/2018-04-23/"/>
-    <id>http://ipine.github.io/2018-04-23/</id>
-    <published>2018-04-23T11:09:00.000Z</published>
-    <updated>2018-08-28T04:07:56.191Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>第一篇论文是一篇评估论文，在最后改稿阶段，重写了摘要。导师说摘要写得太平淡，读起来像流水账，没有达到发表的标准。<br>正好我那几天读了一篇教人如何写摘要的文章，其中说到摘要写作是有结构可遵循的。于是利用这个机会，就把看到的写作结构拿来实践一番。</p><hr><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><blockquote><p> • 第一句：介绍论文的主题<br> • 第二句：总结以前的工作<br> • 第三句：指出目前的研究有哪些不足之处（没能解决的问题）<br>   前4句介绍想法<br> • 第五句：详细说明研究，解释如何工作的，并讨论你应用它的各种方法<br> • 第六句：总结出为什么你的研究很重要</p></blockquote><h4 id="具体如下："><a href="#具体如下：" class="headerlink" title="具体如下："></a>具体如下：</h4><p>  1 . 引入。思考文章的主题是什么？用一种读者能理解的方式来表达。</p><p>  2 .陈述研究的问题。关键的研究问题是什么？同样，用一个句子表达。第一句话介绍了整个主题，所以现在可以在这个问题上继续讨论，集中在那个主题中的一个关键问题上。</p><p>  3 .用一句话总结为什么至今还没有人能充分的回答/解决你要研究的问题。<br>记住，关键是不要列举人们尝试失败的各种方式，重点是要去说明有一种方法是其他人都没有尝试过的，而这正是你的研究所做的事情。</p><p>  4 .用一句话来解释如何解决这个研究问题的。你在你的研究中采用了什么创新的方法？</p><p>  5 .再一句话说明，你是如何来根据你的想法来实施并完成这项研究的。你是通过科学的实验吗？还是构建了一个软件？或是进行案例研究？这句可能是整个摘要最长的句子。</p><p>  6 .结尾句子，重点放在研究的主要影响是什么？为什么其他人要关心你的研究呢？他们能做什么来进一步研究你的工作。</p><h3 id="我的实践"><a href="#我的实践" class="headerlink" title="我的实践"></a>我的实践</h3><h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p><code>1</code><strong>Fuzzy clustering</strong> assigns a probability of membership for a datum to a cluster, which veritably reflects real-world clustering scenarios but significantly increases the complexity of understanding fuzzy clusters. <code>2</code><strong>Many studies</strong> have demonstrated that visualization techniques for multi-dimensional data are beneficial to understand fuzzy clusters. <code>3</code>However, no empirical evidence exists on the effectiveness and efficiency of these visualization techniques <strong>in solving analytical tasks featured by fuzzy clustering</strong>. <code>4</code><strong>In this paper</strong>, we conduct a controlled experiment to evaluate the ability of fuzzy cluster analysis to use four multi-dimensional visualization techniques, namely, parallel coordinate plot, scatterplot matrix, principal component analysis, and Radviz. <code>5</code><strong>First</strong>, we deﬁne the analytical tasks and their representative questions specific to fuzzy cluster analysis. <strong>Then</strong>, we design objective questionnaires to compare the accuracy, time, and satisfaction in using the four techniques to solve the questions. <strong>We also</strong> design subjective questionnaires to collect the experience of volunteers with the four techniques in terms of ease of use, informativeness, and helpfulness. <code>6</code> With a complete experiment process and a detailed result analysis, we test against four hypotheses that are formulated on the basis of our experience, and <strong>provide instructive guidance</strong> for analysts in selecting appropriate and efficient visualization techniques to analyze fuzzy clusters.</p><hr><p>这个摘要基本达到了上面提到的6句话结构，除了第5部分，因为不能用一句话写完，因而用了连词衔接几句话。</p><p><em>PS: 这是论文摘要的最终版本。中途经历了很多次修改，自己改，导师也改，才写出不像流水账的感觉：）</em></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;原因&quot;&gt;&lt;a href=&quot;#原因&quot; class=&quot;headerlink&quot; title=&quot;原因&quot;&gt;&lt;/a&gt;原因&lt;/h3&gt;&lt;p&gt;第一篇论文是一篇评估论文，在最后改稿阶段，重写了摘要。导师说摘要写得太平淡，读起来像流水账，没有达到发表的标准。&lt;br&gt;正好我那几天读了一篇
-      
-    
-    </summary>
-    
-      <category term="method" scheme="http://ipine.github.io/categories/method/"/>
-    
-    
-      <category term="paper" scheme="http://ipine.github.io/tags/paper/"/>
     
   </entry>
   
