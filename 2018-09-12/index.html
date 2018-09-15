@@ -364,19 +364,20 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>&#39;learning_logs&#39; is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p>
-<h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示’Topics’数据的网页时，先按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p>
-<p>三步流程走完，一切工作就绪，运行，报错了。<br>错误如下：<br>图</p>
+<h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示<code>Topics</code>数据的网页时，按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照三步标准流程走完：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p>
+<p>一切工作就绪，运行，报错了。<br>错误如下：</p>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-13/64291775.jpg" alt="ERROR"></p>
 <p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>父模板代码如下：</p>
 <pre><code>&lt;p&gt;
-&lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;
-&lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;
+  &lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;
+  &lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;
 &lt;/p&gt;
 &lt;!-- 插入的块标签 content ，是一个占位符，其中包含的信息将由子模板指定。 --&gt;
 {% block content %}{% endblock content %}
 </code></pre><h3 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h3><p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p>
-<p>图</p>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-13/57959414.jpg" alt="settings.py"></p>
 <blockquote>
-<p>说明不是这里的问题</p>
+<p>不是这里的问题</p>
 </blockquote>
 <p>2 . 定位到<code>urls.py</code>文件，打开项目文件下的<code>urls.py</code>文件；发现有两个版本的<code>urlpatterns</code>列表.</p>
 <h4 id="旧版本，url式的："><a href="#旧版本，url式的：" class="headerlink" title="旧版本，url式的："></a>旧版本，url式的：</h4><pre><code>from django.conf.urls import url, include
@@ -386,7 +387,10 @@ urlpatterns = [
     url(r&apos;^admin/&apos;,admin.site.urls),
     url(r&apos;&apos;,include(&apos;learning_logs.urls&apos;)),
 ]
-</code></pre><h4 id="新版本，path式的："><a href="#新版本，path式的：" class="headerlink" title="新版本，path式的："></a>新版本，path式的：</h4><pre><code>from django.urls import include, path
+</code></pre><blockquote>
+<p>出现新旧版本，原因在于安装的Django的版本，书中的是1.8；而我装的2.1</p>
+</blockquote>
+<h4 id="新版本，path式的："><a href="#新版本，path式的：" class="headerlink" title="新版本，path式的："></a>新版本，path式的：</h4><pre><code>from django.urls import include, path
 
 urlpatterns = [
     path(&apos;admin/&apos;, admin.site.urls),
@@ -407,7 +411,7 @@ urlpatterns = [
     path(&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;),namespace=&apos;learning_logs&apos;)),    
 ]
 </code></pre><blockquote>
-<p>OK!运行正常</p>
+<p>OK! 运行正常</p>
 </blockquote>
 <p>网上搜索一番，发现新旧版本的区别在于是否显示声明<code>namespace</code>的值，在旧版本url式中<code>namespace</code>是注册了的，而新版本未注册。<br>用url式的代码如下：</p>
 <pre><code>from django.conf.urls import url, include
@@ -425,6 +429,11 @@ urlpatterns = [
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018-09-15/" title= Use Seaborn to Create Animated Graph >
+                    <div class="nextTitle">Use Seaborn to Create Animated Graph</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -943,7 +952,30 @@ top:50vh;
     
     
     
-    <div class="total-archive"> Total : 30 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 31 </div>
     
     <div class="post-archive">
     
@@ -952,6 +984,11 @@ top:50vh;
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/15</span><a class="archive-post-title" href= "/2018-09-15/" >Use Seaborn to Create Animated Graph</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1135,35 +1172,35 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+    
         <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
     
         <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
     
-        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
-    
         <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
-    
-        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
         <span class="sidebar-tag-name" data-tags="javascript"><span class="iconfont-archer">&#xe606;</span>javascript</span>
     
         <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
     
+        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
+    
         <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
         <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
+    
         <span class="sidebar-tag-name" data-tags="Jupyter nootebook"><span class="iconfont-archer">&#xe606;</span>Jupyter nootebook</span>
     
-        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+        <span class="sidebar-tag-name" data-tags="teleplay"><span class="iconfont-archer">&#xe606;</span>teleplay</span>
     
         <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
     
         <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
-    
-        <span class="sidebar-tag-name" data-tags="teleplay"><span class="iconfont-archer">&#xe606;</span>teleplay</span>
-    
-        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1198,21 +1235,21 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
+        <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
+    
         <span class="sidebar-category-name" data-categories="read"><span class="iconfont-archer">&#xe60a;</span>read</span>
     
         <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
-    
-        <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
     
         <span class="sidebar-category-name" data-categories="method"><span class="iconfont-archer">&#xe60a;</span>method</span>
     
         <span class="sidebar-category-name" data-categories="technique"><span class="iconfont-archer">&#xe60a;</span>technique</span>
     
+        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
+    
         <span class="sidebar-category-name" data-categories="technique-summary"><span class="iconfont-archer">&#xe60a;</span>technique-summary</span>
     
         <span class="sidebar-category-name" data-categories="tool"><span class="iconfont-archer">&#xe60a;</span>tool</span>
-    
-        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-09-13T13:22:36.686Z</updated>
+  <updated>2018-09-15T09:00:57.134Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -17,13 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Use Seaborn to Create Animated Graph</title>
+    <link href="http://ipine.github.io/2018-09-15/"/>
+    <id>http://ipine.github.io/2018-09-15/</id>
+    <published>2018-09-15T08:18:00.000Z</published>
+    <updated>2018-09-15T09:00:57.134Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天看到一篇很好的文章，教我们如何在Python中创建动画图。很具有实践性，于是跟着码了一遍代码。</p><p><a href="https://mp.weixin.qq.com/s?__biz=MzI0NzE3NTAzOA==&amp;mid=2652119133&amp;idx=1&amp;sn=ee31498b7d1fd1a8089d8803e1ea2398&amp;chksm=f254824cc5230b5ae5b62fe8e07910f6fe38a249b5ed94d059434e82269a531a732f49598c97&amp;mpshare=1&amp;scene=1&amp;srcid=0914qnQYtDfRybOt3WkgREec#rd" target="_blank" rel="noopener">附上文章链接</a></p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这过程中遇到两个问题：<br>1 . 用<code>pip install ffmpeg</code>安装了FFmpeg之后，仍然报错<br>2 . 解决第一个问题后,又报<code>AttributeError:Seaborn Lineplot Module Object Has No Attribute &#39;Lineplot&#39;</code></p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><p>在Windows上安装FFmpeg需要设置环境变量。</p><h4 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h4><p>从<a href="https://ffmpeg.zeranoe.com/builds/" target="_blank" rel="noopener">这里</a>下载FFmpeg包<code>ffmpeg-20180913-1b98bfb-win64-static</code>到本地，解压后，重命名文件夹为<code>FFmpeg</code>。复制或者剪切修改好的文件夹到<code>C</code>盘。</p><h4 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h4><p>接下来在命令行中启用FFmpeg。右键单击<code>此电脑</code>，选择<code>属性</code>，找到<code>高级系统设置</code>，进去。点击<code>环境变量</code>，可以看到两个设置变量的框，在上面的<code>xxx的用户变量</code>框里，找到<code>Path</code>,选择新增，将<code>C:\FFmpeg\bin</code>添加进去，点击<code>确定</code>。</p><h4 id="步骤三"><a href="#步骤三" class="headerlink" title="步骤三"></a>步骤三</h4><p>测试FFmpeg是否安装成功。快捷方式<code>win+R</code>，输入<code>cmd</code>进入命令控制窗口。键入<code>ffmpeg -version</code>，回车，若出现一系列关于FFmpeg的信息，说明设置成功。</p><h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>对于Seaborn包没有属性<code>Lineplot</code>问题，我首先百度了下，几乎都是建议先确认自己的Python环境是否正确，是否安装了需要用的包。于是我分别执行命令<code>pip install matplotlib</code>和<code>pip install seaborn</code>后，再重新导入这些模块到代码中，运行仍然报错。</p><p>一番折腾后，发现是seaborn包版本问题。<code>Linplot</code>在0.9版本下的seaborn环境中才可以，因而需要对seaborn包进行升级，运行命令<code>pip install seaborn==0.9.0</code>之后，再次运行代码，可以正常看到动画。</p><h2 id="注"><a href="#注" class="headerlink" title="注"></a>注</h2><p>1 . 原文中使用的代码在读取excel文件的时候使用了已废弃的<code>sheetname</code>参数，正确应该修改为<code>sheet_name</code><br>2 . 若使用的是jupyter notebook，确保在代码首行加入了<code>%matplotlib notebook</code>，它提供了一些交互性，可能会很慢，因为渲染由服务器端完成。虽然我加了，但是在jupyter notebook中没有看到正常的动画效果(原因未知)。程序运行没有问题，在本地生成了一个视频，可以正常显示动画图。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天看到一篇很好的文章，教我们如何在Python中创建动画图。很具有实践性，于是跟着码了一遍代码。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MzI0NzE3NTAzOA==&amp;amp;mid=2652119133&amp;am
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="python" scheme="http://ipine.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Django入门练习的两个错误</title>
     <link href="http://ipine.github.io/2018-09-12/"/>
     <id>http://ipine.github.io/2018-09-12/</id>
     <published>2018-09-12T12:18:00.000Z</published>
-    <updated>2018-09-13T13:22:36.686Z</updated>
+    <updated>2018-09-13T13:32:32.297Z</updated>
     
-    <content type="html"><![CDATA[<p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>&#39;learning_logs&#39; is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p><h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示’Topics’数据的网页时，先按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p><p>三步流程走完，一切工作就绪，运行，报错了。<br>错误如下：<br>图</p><p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>父模板代码如下：</p><pre><code>&lt;p&gt;&lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;&lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;&lt;/p&gt;&lt;!-- 插入的块标签 content ，是一个占位符，其中包含的信息将由子模板指定。 --&gt;{% block content %}{% endblock content %}</code></pre><h3 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h3><p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p><p>图</p><blockquote><p>说明不是这里的问题</p></blockquote><p>2 . 定位到<code>urls.py</code>文件，打开项目文件下的<code>urls.py</code>文件；发现有两个版本的<code>urlpatterns</code>列表.</p><h4 id="旧版本，url式的："><a href="#旧版本，url式的：" class="headerlink" title="旧版本，url式的："></a>旧版本，url式的：</h4><pre><code>from django.conf.urls import url, include#根据书上的代码写的urlpatterns = [    url(r&apos;^admin/&apos;,admin.site.urls),    url(r&apos;&apos;,include(&apos;learning_logs.urls&apos;)),]</code></pre><h4 id="新版本，path式的："><a href="#新版本，path式的：" class="headerlink" title="新版本，path式的："></a>新版本，path式的：</h4><pre><code>from django.urls import include, pathurlpatterns = [    path(&apos;admin/&apos;, admin.site.urls),    path(&apos;&apos;,include(&apos;learning_logs.urls&apos;,namespace=&apos;learning_logs&apos;)),]</code></pre><blockquote><p>我将path式的注释掉了，用的是url式的。这在今天创建新网页之前，运行都是正常的。</p></blockquote><h3 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h3><p>首先想到：将url式注释掉，尝试path式，看能否运行正常；结果，又报另一个错误：(</p><blockquote><p>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</p></blockquote><p>理解下意思，大致就是：应该在include模块中设置app_name属性，或者传递一个包含模式列表和app_name的2元组<br>又百度一番，知道了<code>include</code>模块需包含两个参数，前一个为2元组，后一个为<code>namespace</code>；于是将代码修改成这样：</p><pre><code>from django.urls import include, pathurlpatterns = [    path(&apos;admin/&apos;, admin.site.urls),    path(&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;),namespace=&apos;learning_logs&apos;)),    ]</code></pre><blockquote><p>OK!运行正常</p></blockquote><p>网上搜索一番，发现新旧版本的区别在于是否显示声明<code>namespace</code>的值，在旧版本url式中<code>namespace</code>是注册了的，而新版本未注册。<br>用url式的代码如下：</p><pre><code>from django.conf.urls import url, includeurlpatterns = [    url(r&apos;^admin/&apos;,admin.site.urls),    url(r&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;))),]</code></pre><blockquote><p>Include只需包含一个参数arg：2元组；namespace不需要显示声明。</p></blockquote><p>到此，问题解决。 完：）</p>]]></content>
+    <content type="html"><![CDATA[<p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>&#39;learning_logs&#39; is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p><h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示<code>Topics</code>数据的网页时，按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照三步标准流程走完：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p><p>一切工作就绪，运行，报错了。<br>错误如下：</p><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-13/64291775.jpg" alt="ERROR"></p><p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>父模板代码如下：</p><pre><code>&lt;p&gt;  &lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;  &lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;&lt;/p&gt;&lt;!-- 插入的块标签 content ，是一个占位符，其中包含的信息将由子模板指定。 --&gt;{% block content %}{% endblock content %}</code></pre><h3 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h3><p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-13/57959414.jpg" alt="settings.py"></p><blockquote><p>不是这里的问题</p></blockquote><p>2 . 定位到<code>urls.py</code>文件，打开项目文件下的<code>urls.py</code>文件；发现有两个版本的<code>urlpatterns</code>列表.</p><h4 id="旧版本，url式的："><a href="#旧版本，url式的：" class="headerlink" title="旧版本，url式的："></a>旧版本，url式的：</h4><pre><code>from django.conf.urls import url, include#根据书上的代码写的urlpatterns = [    url(r&apos;^admin/&apos;,admin.site.urls),    url(r&apos;&apos;,include(&apos;learning_logs.urls&apos;)),]</code></pre><blockquote><p>出现新旧版本，原因在于安装的Django的版本，书中的是1.8；而我装的2.1</p></blockquote><h4 id="新版本，path式的："><a href="#新版本，path式的：" class="headerlink" title="新版本，path式的："></a>新版本，path式的：</h4><pre><code>from django.urls import include, pathurlpatterns = [    path(&apos;admin/&apos;, admin.site.urls),    path(&apos;&apos;,include(&apos;learning_logs.urls&apos;,namespace=&apos;learning_logs&apos;)),]</code></pre><blockquote><p>我将path式的注释掉了，用的是url式的。这在今天创建新网页之前，运行都是正常的。</p></blockquote><h3 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h3><p>首先想到：将url式注释掉，尝试path式，看能否运行正常；结果，又报另一个错误：(</p><blockquote><p>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</p></blockquote><p>理解下意思，大致就是：应该在include模块中设置app_name属性，或者传递一个包含模式列表和app_name的2元组<br>又百度一番，知道了<code>include</code>模块需包含两个参数，前一个为2元组，后一个为<code>namespace</code>；于是将代码修改成这样：</p><pre><code>from django.urls import include, pathurlpatterns = [    path(&apos;admin/&apos;, admin.site.urls),    path(&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;),namespace=&apos;learning_logs&apos;)),    ]</code></pre><blockquote><p>OK! 运行正常</p></blockquote><p>网上搜索一番，发现新旧版本的区别在于是否显示声明<code>namespace</code>的值，在旧版本url式中<code>namespace</code>是注册了的，而新版本未注册。<br>用url式的代码如下：</p><pre><code>from django.conf.urls import url, includeurlpatterns = [    url(r&apos;^admin/&apos;,admin.site.urls),    url(r&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;))),]</code></pre><blockquote><p>Include只需包含一个参数arg：2元组；namespace不需要显示声明。</p></blockquote><p>到此，问题解决。 完：）</p>]]></content>
     
     <summary type="html">
     
@@ -519,33 +545,6 @@
       
       
         &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Build a tower like this:&lt;br&gt;    &lt;img src=&quot;http://p8ay1ez22.bkt
-      
-    
-    </summary>
-    
-      <category term="technique" scheme="http://ipine.github.io/categories/technique/"/>
-    
-    
-      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
-    
-      <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>统计数组中元素出现的次数</title>
-    <link href="http://ipine.github.io/2018-04-26/"/>
-    <id>http://ipine.github.io/2018-04-26/</id>
-    <published>2018-04-26T05:50:00.000Z</published>
-    <updated>2018-08-28T04:08:04.147Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-6/88042726.jpg" alt="题目描述"></p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function deleteNth(arr,n){  // ...  var re = [];  var arr1 = {};  for(i=0; i&lt;arr.length; i++){    !arr1[arr[i]] ? arr1[arr[i]] = 1 : arr1[arr[i]] += 1;    if(arr1[arr[i]] &lt;= n)      re.push(arr[i]);  }  return re;}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function deleteNth(arr,x){    var obj = {};    return arr.filter(function(number){        obj[number] = obj[number] ? obj[number] + 1 : 1        return obj[number] &lt;= x    });}</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><p>定义统计数组中每个元素出现的次数的变量应该是个对象：<code>var arr1 = {}</code>; 而不是一个数组 var arr1 = []; （这样每个元素对应一个出现次数，之后就可检索出，出现某个次数的元素）</p></li><li><p>给一个数组(var re = [];)赋值：不是var re = [0];而是应该用<code>.push()</code>方法，<code>re.push(arr[i])</code>;</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://p8ay1ez22.bkt.clouddn.com/18-5-6/88042726.jpg
       
     
     </summary>
