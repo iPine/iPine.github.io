@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-09-15T09:00:57.134Z</updated>
+  <updated>2018-09-27T02:23:10.880Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -17,20 +17,47 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>论文：多维数据可视化理解模糊聚类的评估</title>
+    <link href="http://ipine.github.io/2018-09-26/"/>
+    <id>http://ipine.github.io/2018-09-26/</id>
+    <published>2018-09-27T13:59:00.000Z</published>
+    <updated>2018-09-27T02:23:10.880Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Acceptted-by-IEEE-VIS-2018"><a href="#Acceptted-by-IEEE-VIS-2018" class="headerlink" title="Acceptted by IEEE VIS 2018"></a><a href="http://ieeevis.org/year/2018/info/papers" target="_blank" rel="noopener">Acceptted by IEEE VIS 2018</a></h3><h4 id="Title-Evaluating-Multi-Dimensional-Visualizations-for-Understanding-Fuzzy-Clusters"><a href="#Title-Evaluating-Multi-Dimensional-Visualizations-for-Understanding-Fuzzy-Clusters" class="headerlink" title="Title: Evaluating Multi-Dimensional Visualizations for Understanding Fuzzy Clusters"></a>Title: Evaluating Multi-Dimensional Visualizations for Understanding Fuzzy Clusters</h4><ul><li><a href="https://ieeexplore.ieee.org/abstract/document/8440829" target="_blank" rel="noopener">Paper</a></li><li><a href="https://vimeo.com/289787891" target="_blank" rel="noopener">Video</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Acceptted-by-IEEE-VIS-2018&quot;&gt;&lt;a href=&quot;#Acceptted-by-IEEE-VIS-2018&quot; class=&quot;headerlink&quot; title=&quot;Acceptted by IEEE VIS 2018&quot;&gt;&lt;/a&gt;&lt;a href=
+      
+    
+    </summary>
+    
+      <category term="可视化论文" scheme="http://ipine.github.io/categories/%E5%8F%AF%E8%A7%86%E5%8C%96%E8%AE%BA%E6%96%87/"/>
+    
+    
+      <category term="paper" scheme="http://ipine.github.io/tags/paper/"/>
+    
+      <category term="presentation" scheme="http://ipine.github.io/tags/presentation/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Use Seaborn to Create Animated Graph</title>
     <link href="http://ipine.github.io/2018-09-15/"/>
     <id>http://ipine.github.io/2018-09-15/</id>
     <published>2018-09-15T08:18:00.000Z</published>
-    <updated>2018-09-15T09:00:57.134Z</updated>
+    <updated>2018-09-15T09:09:17.927Z</updated>
     
-    <content type="html"><![CDATA[<p>今天看到一篇很好的文章，教我们如何在Python中创建动画图。很具有实践性，于是跟着码了一遍代码。</p><p><a href="https://mp.weixin.qq.com/s?__biz=MzI0NzE3NTAzOA==&amp;mid=2652119133&amp;idx=1&amp;sn=ee31498b7d1fd1a8089d8803e1ea2398&amp;chksm=f254824cc5230b5ae5b62fe8e07910f6fe38a249b5ed94d059434e82269a531a732f49598c97&amp;mpshare=1&amp;scene=1&amp;srcid=0914qnQYtDfRybOt3WkgREec#rd" target="_blank" rel="noopener">附上文章链接</a></p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这过程中遇到两个问题：<br>1 . 用<code>pip install ffmpeg</code>安装了FFmpeg之后，仍然报错<br>2 . 解决第一个问题后,又报<code>AttributeError:Seaborn Lineplot Module Object Has No Attribute &#39;Lineplot&#39;</code></p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><p>在Windows上安装FFmpeg需要设置环境变量。</p><h4 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h4><p>从<a href="https://ffmpeg.zeranoe.com/builds/" target="_blank" rel="noopener">这里</a>下载FFmpeg包<code>ffmpeg-20180913-1b98bfb-win64-static</code>到本地，解压后，重命名文件夹为<code>FFmpeg</code>。复制或者剪切修改好的文件夹到<code>C</code>盘。</p><h4 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h4><p>接下来在命令行中启用FFmpeg。右键单击<code>此电脑</code>，选择<code>属性</code>，找到<code>高级系统设置</code>，进去。点击<code>环境变量</code>，可以看到两个设置变量的框，在上面的<code>xxx的用户变量</code>框里，找到<code>Path</code>,选择新增，将<code>C:\FFmpeg\bin</code>添加进去，点击<code>确定</code>。</p><h4 id="步骤三"><a href="#步骤三" class="headerlink" title="步骤三"></a>步骤三</h4><p>测试FFmpeg是否安装成功。快捷方式<code>win+R</code>，输入<code>cmd</code>进入命令控制窗口。键入<code>ffmpeg -version</code>，回车，若出现一系列关于FFmpeg的信息，说明设置成功。</p><h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>对于Seaborn包没有属性<code>Lineplot</code>问题，我首先百度了下，几乎都是建议先确认自己的Python环境是否正确，是否安装了需要用的包。于是我分别执行命令<code>pip install matplotlib</code>和<code>pip install seaborn</code>后，再重新导入这些模块到代码中，运行仍然报错。</p><p>一番折腾后，发现是seaborn包版本问题。<code>Linplot</code>在0.9版本下的seaborn环境中才可以，因而需要对seaborn包进行升级，运行命令<code>pip install seaborn==0.9.0</code>之后，再次运行代码，可以正常看到动画。</p><h2 id="注"><a href="#注" class="headerlink" title="注"></a>注</h2><p>1 . 原文中使用的代码在读取excel文件的时候使用了已废弃的<code>sheetname</code>参数，正确应该修改为<code>sheet_name</code><br>2 . 若使用的是jupyter notebook，确保在代码首行加入了<code>%matplotlib notebook</code>，它提供了一些交互性，可能会很慢，因为渲染由服务器端完成。虽然我加了，但是在jupyter notebook中没有看到正常的动画效果(原因未知)。程序运行没有问题，在本地生成了一个视频，可以正常显示动画图。</p>]]></content>
+    <content type="html"><![CDATA[<p>今天看到一篇很好的文章，教我们如何在Python中创建动画图。很具有实践性，于是跟着码了一遍代码。</p><p><a href="https://towardsdatascience.com/how-to-create-animated-graphs-in-python-bb619cc2dec1" target="_blank" rel="noopener">附上文章链接</a></p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这过程中遇到两个问题：<br>1 . 用<code>pip install ffmpeg</code>安装了FFmpeg之后，仍然不能正常运行<br>2 . 解决第一个问题后,又报<code>AttributeError:Seaborn Lineplot Module Object Has No Attribute &#39;Lineplot&#39;</code></p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><p>在Windows上安装FFmpeg需要设置环境变量。</p><h4 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h4><p>从<a href="https://ffmpeg.zeranoe.com/builds/" target="_blank" rel="noopener">这里</a>下载FFmpeg包，<code>ffmpeg-20180913-1b98bfb-win64-static</code>到本地，解压后，重命名文件夹为<code>FFmpeg</code>。复制或者剪切修改好的文件夹到<code>C</code>盘。</p><h4 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h4><p>接下来在命令行中启用FFmpeg。右键单击<code>此电脑</code>，选择<code>属性</code>，找到<code>高级系统设置</code>，进去。点击<code>环境变量</code>，可以看到两个设置变量的框，在上面的<code>xxx的用户变量</code>框里，找到<code>Path</code>,选择新增，将<code>C:\FFmpeg\bin</code>添加进去，点击<code>确定</code>。</p><h4 id="步骤三"><a href="#步骤三" class="headerlink" title="步骤三"></a>步骤三</h4><p>测试FFmpeg是否安装成功。快捷方式<code>win+R</code>，输入<code>cmd</code>进入命令控制窗口。键入<code>ffmpeg -version</code>，回车，若出现一系列关于FFmpeg的信息，说明设置成功。</p><h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>对于Seaborn包没有属性<code>Lineplot</code>问题，我首先百度了下，几乎都是建议先确认自己的Python环境是否正确，是否安装了需要用的包。于是我分别执行命令<code>pip install matplotlib</code>和<code>pip install seaborn</code>后，再重新导入这些模块到代码中，运行仍然报错。</p><p>一番折腾后，发现是seaborn包版本问题。<code>Linplot</code>在0.9版本下的seaborn环境中才可以，因而需要对seaborn包进行升级，运行命令<code>pip install seaborn==0.9.0</code>之后，再次运行代码，不报错了。</p><h2 id="注"><a href="#注" class="headerlink" title="注"></a>注</h2><p>1 . 原文中使用的代码在读取excel文件的时候使用了已废弃的<code>sheetname</code>参数，正确应该修改为<code>sheet_name</code><br>2 . 若使用的是jupyter notebook，确保在代码首行加入了<code>%matplotlib notebook</code>。<code>%matplotlib notebook</code>提供了一些交互性，可能会很慢，因为渲染由服务器端完成。<br>然鹅，我加了后，在jupyter notebook中并没有看到正常的动画效果(原因未知)。程序运行是没有问题的，在本地生成了一个视频，可以正常显示动画图。</p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;今天看到一篇很好的文章，教我们如何在Python中创建动画图。很具有实践性，于是跟着码了一遍代码。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MzI0NzE3NTAzOA==&amp;amp;mid=2652119133&amp;am
+&lt;p&gt;&lt;a href=&quot;https://towardsdatascience.com/how-to-create-animated-graphs-in-python-
       
     
     </summary>
@@ -518,33 +545,6 @@
       
       
         &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Write a function which will take an array of strings and retur
-      
-    
-    </summary>
-    
-      <category term="technique" scheme="http://ipine.github.io/categories/technique/"/>
-    
-    
-      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
-    
-      <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BuildTower</title>
-    <link href="http://ipine.github.io/2018-04-27/"/>
-    <id>http://ipine.github.io/2018-04-27/</id>
-    <published>2018-04-27T06:49:00.000Z</published>
-    <updated>2018-08-28T04:08:10.177Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Build a tower like this:<br>    <img src="http://p8ay1ez22.bkt.clouddn.com/18-5-6/66768733.jpg" alt="题目描述"></p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function towerBuilder(nFloors) {  // build here  var arr = [];  for(var i=0; i&lt;=nFloors-1; i++){    var stars = i*2+1;    var space = nFloors-1-i;    arr.push(&quot; &quot;.repeat(space) + &quot;*&quot;.repeat(stars) + &quot; &quot;.repeat(space));  }  return arr;  }</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><p>分别计算出空格个数和星星个数，将这些字符连接起来成串，放入字符串数组中。</p><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li>如何生成重复字符？ <code>&quot;字符&quot;.repeat(n)</code> 方法</li><li>如何将字符放入数组: 每次单考虑字符串数组中的一个元素，每个元素都是一串字符，用<code>+</code>连接形成字符串（元素），再使用<code>arr.push()</code> 方法将每个元素依次放入数组。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Build a tower like this:&lt;br&gt;    &lt;img src=&quot;http://p8ay1ez22.bkt
       
     
     </summary>
