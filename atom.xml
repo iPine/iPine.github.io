@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-09-27T02:27:47.384Z</updated>
+  <updated>2018-09-28T12:13:22.741Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>算法复杂度分析</title>
+    <link href="http://ipine.github.io/2018-09-28/"/>
+    <id>http://ipine.github.io/2018-09-28/</id>
+    <published>2018-09-28T11:09:00.000Z</published>
+    <updated>2018-09-28T12:13:22.741Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>执行效率</code>是算法优劣的度量指标，而执行效率又是通过时间、空间复杂度分析。</p><h3 id="为什么需要复杂度分析？"><a href="#为什么需要复杂度分析？" class="headerlink" title="为什么需要复杂度分析？"></a>为什么需要复杂度分析？</h3><p>将代码跑一遍，通过统计、监控，就能得到算法执行时间和占用的内存大小。—–这叫事后统计法<br>存在局限性：<br>1 . 测试结果依赖于测试环境<br>2 . 测试结果受测试数据的规模影响</p><blockquote><p>如何能不用具体的测试数据，就可以粗略估计算法的执行效率呢？</p></blockquote><h3 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h3><ul><li><p>首先看个栗子：</p><pre><code>int cal(int n){   int sum = 0;   int i = 1;   for (; i &lt;= n; ++i) {     sum = sum + i;   }   return sum;}</code></pre></li></ul><h4 id="CPU角度分析"><a href="#CPU角度分析" class="headerlink" title="CPU角度分析"></a>CPU角度分析</h4><p>这段代码每一行都执行着操作：<code>读数据-运算-写数据</code>。<br>每行代码对应的CPU执行个数和执行时间不同，但假设每行代码执行时间为 <code>unit_time</code>。<br>那么上面一段代码的执行时间应为： <code>(2n+2) * unit_time</code></p><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><blockquote><p>所有代码的执行时间 T(n) 与每行代码的执行次数成正比。</p></blockquote><ul><li><p>按照这个思路分析下面一段代码的执行时间T(n)</p><pre><code>1 int cal(int n) {2   int sum = 0;3   int i = 1;4   int j = 1;5   for (; i &lt;= n; ++i) {6     j = 1;7     for (; j &lt;= n; ++j) {8       sum = sum +  i * j;9     }10   }11 }</code></pre></li></ul><h4 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h4><p>对于2,3,4行，执行每行需要1个unit_time；执行5,6行需要n个unit_time；执行7,8行需要<code>n * n</code>个unit_time<br>总的执行时间为  <code>T(n) = (2n * n + 2n + 3)*unit_time</code></p><h4 id="规律总结"><a href="#规律总结" class="headerlink" title="规律总结"></a>规律总结</h4><p>通过以上两段代码的执行时间推导，得到规律：</p><blockquote><p>所有代码的执行时间 T(n) 与每行代码的执行次数 n 成正比。</p></blockquote><h4 id="公式表示"><a href="#公式表示" class="headerlink" title="公式表示"></a>公式表示</h4><blockquote><p>T(n) = O(f(n))<br>  其中，T(n)表示代码执行时间；n 表示数据规模的大小；f(n) 表示每行代码执行的次数总和； O 表示代码的执行时间 T(n) 与 f(n) 表达式成正比。</p></blockquote><p>那么以上两个例子的大O表示应为：</p><blockquote><p>T(n) = O(2n + 2)   —–&gt; T(n) = O(n)<br>  T(n) = O(2n * n + 2n + 3)   —–&gt; T(n) = O(n * n)</p></blockquote><p><strong>注：公式中的低阶、常量、系数三部分并不决定增长趋势，因而可以忽略。</strong></p><blockquote><p>大O时间复杂度实际上并不具体表示代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势。<br>因而，也叫作渐进时间复杂度，简称时间复杂度。</p></blockquote><h3 id="如何分析时间复杂度"><a href="#如何分析时间复杂度" class="headerlink" title="如何分析时间复杂度"></a>如何分析时间复杂度</h3><h4 id="1、只关注循环执行次数最多的一段代码"><a href="#1、只关注循环执行次数最多的一段代码" class="headerlink" title="1、只关注循环执行次数最多的一段代码"></a>1、只关注循环执行次数最多的一段代码</h4><h4 id="2、加法法则"><a href="#2、加法法则" class="headerlink" title="2、加法法则"></a>2、加法法则</h4><p>总复杂度等于量级最大的那段代码的复杂度</p><ul><li><p>举个栗子：分析下面这段代码的时间复杂度</p><pre><code>int cal(int n) {   int sum_1 = 0;   int p = 1;   for (; p &lt; 100; ++p) {     sum_1 = sum_1 + p;   }   int sum_2 = 0;   int q = 1;   for (; q &lt; n; ++q) {     sum_2 = sum_2 + q;   }   int sum_3 = 0;   int i = 1;   int j = 1;   for (; i &lt;= n; ++i) {     j = 1;     for (; j &lt;= n; ++j) {       sum_3 = sum_3 +  i * j;     }   }   return sum_1 + sum_2 + sum_3;}</code></pre></li></ul><h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>代码是要分别求sum_1、sum_2、sum_3。那么算时间复杂度就分别求每一部分的时间复杂度，再放在一起，取量级最大的那个作为整段代码的时间复杂度。</p><ul><li>sum_1处：执行100次，与n无关；是常量执行时间</li></ul><blockquote><p>注：即使循环100000次，只要是一个已知数，与n无关，那么就是一个常量执行时间。<br>  因为时间复杂度表示的是一个算法执行效率与数据规模增长的变化趋势，所以不管常量的执行时间多大，都可以忽略。因为其本身对增长趋势没有影响。</p></blockquote><ul><li>sum_2处：<code>O(n)</code></li><li>sum_3处：<code>O(n*n)</code><br>根据方法2，整段代码的时间复杂度就等于 <code>O(n*n)</code></li></ul><h5 id="将规律抽象成公式"><a href="#将规律抽象成公式" class="headerlink" title="将规律抽象成公式"></a>将规律抽象成公式</h5><blockquote><p>若 T1(n)=O(f(n))，T2(n)=O(g(n))；<br>那么 T(n)=T1(n)+T2(n) = max(O(f(n)), O(g(n))) = O(max(f(n), g(n))).</p></blockquote><h4 id="3、乘法法则"><a href="#3、乘法法则" class="headerlink" title="3、乘法法则"></a>3、乘法法则</h4><p>嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</p><h5 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h5><blockquote><p>若 <code>T1(n)=O(f(n))，T2(n)=O(g(n))</code>；<br>那么  <code>T(n)=T1(n)*T2(n) = O(f(n))*O(g(n)) = O(f(n)*g(n))</code>.</p></blockquote><h4 id="几种常见时间复杂度实例分析"><a href="#几种常见时间复杂度实例分析" class="headerlink" title="几种常见时间复杂度实例分析"></a>几种常见时间复杂度实例分析</h4><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-28/46917205.jpg" alt="常见复杂度实例"></p><blockquote><p>注 <code>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n*n)</code></p></blockquote><p>以上罗列的复杂度量级，可以粗略分为两类：多项式量级、非多项式量级（指数阶和阶乘阶）</p><blockquote><p>将时间复杂度为非多项式量级的算法问题叫作NP问题。当数据规模增大时，非多项式时间复杂度的算法效率非常低。</p></blockquote><h5 id="重点关注常见的多项式时间复杂度"><a href="#重点关注常见的多项式时间复杂度" class="headerlink" title="重点关注常见的多项式时间复杂度"></a>重点关注常见的多项式时间复杂度</h5><p>1 . <code>O(1)</code><br>明确：O(1)是常量级时间复杂度的一种表示方法，并不是指只执行了一行代码。<br>一般情况下，只要算法中不存在循环语句、递归语句，即使有成千上万行的代码，其时间复杂度也是Ο(1)。</p><p>2 . <code>O(logn)</code>、<code>O(nlogn)</code><br>最难分析的一种时间复杂度<br>最常见的例子：</p><pre><code>1 i=1;2 while (i &lt;= n)  {3   i = i * 2;  //i = i * 3;4 }</code></pre><p>分析：变量i从1开始取，每循环一次就乘以2。变量i的取值就是一个等比数列： 2的x次方为n，求解x为多少。<code>x=logn</code>(以2为底)<br>若循环体内的代码改成 <code>i = i * 3</code>;那么时间复杂度为<code>O(logn)</code>(以3为底)</p><p>我们把所有对数阶的时间复杂度都记为<code>O(logn)</code><br>因为：<code>log3n</code> 就等于 <code>log32 * log2n</code>，所以 <code>O(log3n) = O(C * log2n)</code>，其中 <code>C=log32</code> 是一个常量。<br>基于我们前面的一个理论：在采用大 O 标记复杂度的时候，可以忽略系数，即 <code>O(C*f(n)) = O(f(n))</code>。</p><blockquote><p>如果一段代码的时间复杂度是 O(logn)，我们循环执行 n 遍，时间复杂度就是 O(nlogn) 。</p></blockquote><p><strong>O(nlogn) 也是一种非常常见的算法时间复杂度。比如，归并排序、快速排序的时间复杂度都是 O(nlogn)。</strong></p><p>3 . <code>O(m+n)</code>、<code>O(m*n)</code><br>代码的时间复杂度由两个数据的规模来决定。无法评估m和n谁的量级更大，所以在表示复杂度时，就不能简单利用加法法则，而忽略掉其中一个。<br>针对这种情况，原来的加法法则应改为 <code>T1(m) + T2(n) = O(f(m) + g(n))</code>；乘法法则继续有效 <code>T1(m)*T2(n) = O(f(m) * f(n))</code>。</p><h3 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h3><p>渐进空间复杂度，表示算法的存储空间与数据规模之间的增长关系。<br>我们常见的空间复杂度就是 <code>O(1)、 O(n)、 O(n*n )</code>，像 <code>O(logn)、 O(nlogn)</code> 这样的对数阶复杂度平时都用不到。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;执行效率&lt;/code&gt;是算法优劣的度量指标，而执行效率又是通过时间、空间复杂度分析。&lt;/p&gt;
+&lt;h3 id=&quot;为什么需要复杂度分析？&quot;&gt;&lt;a href=&quot;#为什么需要复杂度分析？&quot; class=&quot;headerlink&quot; title=&quot;为什么需要复杂度分析？&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="data_structure" scheme="http://ipine.github.io/tags/data-structure/"/>
+    
+      <category term="algorithm" scheme="http://ipine.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
     <title>论文：基于模糊聚类评估多维数据可视化技术</title>
     <link href="http://ipine.github.io/2018-09-26/"/>
     <id>http://ipine.github.io/2018-09-26/</id>
-    <published>2018-09-27T13:59:00.000Z</published>
-    <updated>2018-09-27T02:27:47.384Z</updated>
+    <published>2018-09-26T13:59:00.000Z</published>
+    <updated>2018-09-28T11:09:17.262Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Acceptted-by-IEEE-VIS-2018"><a href="#Acceptted-by-IEEE-VIS-2018" class="headerlink" title="Acceptted by IEEE VIS 2018"></a><a href="http://ieeevis.org/year/2018/info/papers" target="_blank" rel="noopener">Acceptted by IEEE VIS 2018</a></h3><h4 id="Title-Evaluating-Multi-Dimensional-Visualizations-for-Understanding-Fuzzy-Clusters"><a href="#Title-Evaluating-Multi-Dimensional-Visualizations-for-Understanding-Fuzzy-Clusters" class="headerlink" title="Title: Evaluating Multi-Dimensional Visualizations for Understanding Fuzzy Clusters"></a>Title: Evaluating Multi-Dimensional Visualizations for Understanding Fuzzy Clusters</h4><ul><li><a href="https://ieeexplore.ieee.org/abstract/document/8440829" target="_blank" rel="noopener">Paper</a></li><li><a href="https://vimeo.com/289787891" target="_blank" rel="noopener">Video</a></li></ul>]]></content>
     
@@ -200,9 +228,9 @@
       <category term="life" scheme="http://ipine.github.io/categories/life/"/>
     
     
-      <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
-    
       <category term="essay" scheme="http://ipine.github.io/tags/essay/"/>
+    
+      <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
     
       <category term="teleplay" scheme="http://ipine.github.io/tags/teleplay/"/>
     
@@ -518,33 +546,6 @@
       
       
         &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Sudoku Background：&lt;br&gt;Sudoku is a game played on a 9x9 grid. T
-      
-    
-    </summary>
-    
-      <category term="technique" scheme="http://ipine.github.io/categories/technique/"/>
-    
-    
-      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
-    
-      <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Directions Reduction</title>
-    <link href="http://ipine.github.io/2018-04-28/"/>
-    <id>http://ipine.github.io/2018-04-28/</id>
-    <published>2018-04-28T13:33:00.000Z</published>
-    <updated>2018-08-28T04:08:18.428Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out).<br>If everything cancels out, return an empty array (stay in place);</p><p>For example:</p><blockquote><p>dirReduc([“NORTH”, “SOUTH”, “SOUTH”, “EAST”, “WEST”, “NORTH”, “WEST”]) =&gt; [“WEST”]<br>dirReduc([“NORTH”, “SOUTH”, “SOUTH”, “EAST”, “WEST”, “NORTH”]) =&gt; []</p></blockquote><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function dirReduc(arr){  // ...  for(i=0; i&lt;arr.length; i++){    if(arr[i] == &quot;NORTH&quot;){      arr[i] = 1;    }else if(arr[i] == &quot;SOUTH&quot;){      arr[i] = -1;    }else if(arr[i] == &quot;EAST&quot;){      arr[i] = 2;    }else if(arr[i] == &quot;WEST&quot;){      arr[i] = -2;    }  }//   console.log(arr);  for(i=0; i&lt;arr.length; i++){        if(arr[i] + arr[i+1] == 0){        arr.splice(i,2);        i -=2;        continue;      }   }  for(i=0; i&lt;arr.length; i++){    if(arr[i] == 1){      arr[i] = &quot;NORTH&quot;;    }else if(arr[i] == -1){      arr[i] = &quot;SOUTH&quot;;    }else if(arr[i] == 2){      arr[i] = &quot;EAST&quot;;    }else if(arr[i] == -2){      arr[i] = &quot;WEST&quot;;    }  }  return arr;}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function dirReduc(arr) { var str = arr.join(&apos;&apos;), pattern = /NORTHSOUTH|EASTWEST|SOUTHNORTH|WESTEAST/;  while (pattern.test(str))   str = str.replace(pattern,&apos;&apos;); return str.match(/(NORTH|SOUTH|EAST|WEST)/g)||[]; }</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><p>如何考虑重复判断数组arr里是否还有符合要求的字符对？<br>解决办法：下标i回到0，跳出当前循环，又从第一个元素开始判断剩余数组中的内容，重复这个过程，直到没有符合条件的元素</p></li><li><p>删除的数组的某一项用：<code>splice(index,len,[item])</code><br><em>注：该方法会改变原始数组</em><br>splice有3个参数，它也可以用来替换/删除/添加数组内某一个或者几个值<br><code>index</code>:数组开始下标（要删除的元素的下标）<br><code>len</code>: 替换/删除的长度<br><code>item</code>:替换的值，删除操作的话 item为空</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;Write a function which will take an array of strings and retur
       
     
     </summary>
