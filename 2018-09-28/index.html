@@ -485,11 +485,17 @@ height:50vh;
 <p><strong>O(nlogn) 也是一种非常常见的算法时间复杂度。比如，归并排序、快速排序的时间复杂度都是 O(nlogn)。</strong></p>
 <p>3 . <code>O(m+n)</code>、<code>O(m*n)</code><br>代码的时间复杂度由两个数据的规模来决定。无法评估m和n谁的量级更大，所以在表示复杂度时，就不能简单利用加法法则，而忽略掉其中一个。<br>针对这种情况，原来的加法法则应改为 <code>T1(m) + T2(n) = O(f(m) + g(n))</code>；乘法法则继续有效 <code>T1(m)*T2(n) = O(f(m) * f(n))</code>。</p>
 <h3 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h3><p>渐进空间复杂度，表示算法的存储空间与数据规模之间的增长关系。<br>我们常见的空间复杂度就是 <code>O(1)、 O(n)、 O(n*n )</code>，像 <code>O(logn)、 O(nlogn)</code> 这样的对数阶复杂度平时都用不到。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-29/66748631.jpg" alt="常见复杂度函数变化"></p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018-09-29/" title= 算法复杂度分析 >
+                    <div class="nextTitle">算法复杂度分析</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -621,7 +627,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么需要复杂度分析？"><span class="toc-number">1.</span> <span class="toc-text">为什么需要复杂度分析？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大O复杂度表示法"><span class="toc-number">2.</span> <span class="toc-text">大O复杂度表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CPU角度分析"><span class="toc-number">2.1.</span> <span class="toc-text">CPU角度分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">2.2.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析过程"><span class="toc-number">2.3.</span> <span class="toc-text">分析过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规律总结"><span class="toc-number">2.4.</span> <span class="toc-text">规律总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#公式表示"><span class="toc-number">2.5.</span> <span class="toc-text">公式表示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何分析时间复杂度"><span class="toc-number">3.</span> <span class="toc-text">如何分析时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、只关注循环执行次数最多的一段代码"><span class="toc-number">3.1.</span> <span class="toc-text">1、只关注循环执行次数最多的一段代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、加法法则"><span class="toc-number">3.2.</span> <span class="toc-text">2、加法法则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分析"><span class="toc-number">3.2.1.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#将规律抽象成公式"><span class="toc-number">3.2.2.</span> <span class="toc-text">将规律抽象成公式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、乘法法则"><span class="toc-number">3.3.</span> <span class="toc-text">3、乘法法则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#公式"><span class="toc-number">3.3.1.</span> <span class="toc-text">公式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#几种常见时间复杂度实例分析"><span class="toc-number">3.4.</span> <span class="toc-text">几种常见时间复杂度实例分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#重点关注常见的多项式时间复杂度"><span class="toc-number">3.4.1.</span> <span class="toc-text">重点关注常见的多项式时间复杂度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空间复杂度分析"><span class="toc-number">4.</span> <span class="toc-text">空间复杂度分析</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么需要复杂度分析？"><span class="toc-number">1.</span> <span class="toc-text">为什么需要复杂度分析？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大O复杂度表示法"><span class="toc-number">2.</span> <span class="toc-text">大O复杂度表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CPU角度分析"><span class="toc-number">2.1.</span> <span class="toc-text">CPU角度分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">2.2.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析过程"><span class="toc-number">2.3.</span> <span class="toc-text">分析过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规律总结"><span class="toc-number">2.4.</span> <span class="toc-text">规律总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#公式表示"><span class="toc-number">2.5.</span> <span class="toc-text">公式表示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何分析时间复杂度"><span class="toc-number">3.</span> <span class="toc-text">如何分析时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、只关注循环执行次数最多的一段代码"><span class="toc-number">3.1.</span> <span class="toc-text">1、只关注循环执行次数最多的一段代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、加法法则"><span class="toc-number">3.2.</span> <span class="toc-text">2、加法法则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分析"><span class="toc-number">3.2.1.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#将规律抽象成公式"><span class="toc-number">3.2.2.</span> <span class="toc-text">将规律抽象成公式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、乘法法则"><span class="toc-number">3.3.</span> <span class="toc-text">3、乘法法则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#公式"><span class="toc-number">3.3.1.</span> <span class="toc-text">公式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#几种常见时间复杂度实例分析"><span class="toc-number">3.4.</span> <span class="toc-text">几种常见时间复杂度实例分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#重点关注常见的多项式时间复杂度"><span class="toc-number">3.4.1.</span> <span class="toc-text">重点关注常见的多项式时间复杂度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空间复杂度分析"><span class="toc-number">4.</span> <span class="toc-text">空间复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1042,8 +1048,7 @@ top:50vh;
     
     
     
-    
-    <div class="total-archive"> Total : 33 </div>
+    <div class="total-archive"> Total : 34 </div>
     
     <div class="post-archive">
     
@@ -1052,6 +1057,11 @@ top:50vh;
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2018-09-29/" >算法复杂度分析</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1250,11 +1260,11 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
-    
         <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
     
         <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
+    
+        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
     
         <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
