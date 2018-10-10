@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>lf94me</title>
+    <title>数组 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -185,12 +187,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >iPine&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">数组</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>iPine's Blog.</a>
 </header>
@@ -204,24 +217,69 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/door-bg.webp)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            数组
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "data_structure">data_structure</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "algorithm">algorithm</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/10/09</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -305,116 +363,108 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="数组定义"><a href="#数组定义" class="headerlink" title="数组定义"></a>数组定义</h3><p>一组<code>线性表</code>数据结构。它用一组<code>连续的内存空间</code>，来存储一组具有<code>相同类型的数据</code>。</p>
+<h4 id="关键词解释"><a href="#关键词解释" class="headerlink" title="关键词解释"></a>关键词解释</h4><ul>
+<li><p><strong>线性表</strong>：每个线性表上的数据最多只有前和后两个方向。<br>除了<code>数组</code>，<code>链表</code>、<code>队列</code>、<code>栈</code>都是线性表结构</p>
+<p>联想到<strong>非线性表</strong>：数据之间并不是简单的前后关系。<br>如，<code>二叉树</code>、<code>堆</code>、<code>图</code>等</p>
+</li>
+<li><p><strong>连续的内存空间和相同类型的数据</strong><br>正因为有了这两个限制，才使得数组有了<code>随机访问</code>的特性；<br>也正是因为这两个限制，使得<code>数组的删除、插入操作效率很低</code>。</p>
+</li>
+</ul>
+<h3 id="如何实现根据下标随机访问数组元素？"><a href="#如何实现根据下标随机访问数组元素？" class="headerlink" title="如何实现根据下标随机访问数组元素？"></a>如何实现根据下标随机访问数组元素？</h3><p>计算机会给每个内存单元分配一个地址，再通过地址来访问内存中的数据。<br>而计算机通过寻址公式来计算元素存储的内存地址：</p>
+<pre><code>//a[i]的地址就是从首地址偏移i*data_type_size的位置
+a[i] = base_address + i * data_type_size
+</code></pre><blockquote>
+<p>base_address: 内存块的首地址<br>  data_type_size：数中每个元素的大小；根据存储的数据类型而定，如int型，该值为4</p>
+</blockquote>
+<h3 id="为什么数组要从0开始编号，而不是从1开始呢？"><a href="#为什么数组要从0开始编号，而不是从1开始呢？" class="headerlink" title="为什么数组要从0开始编号，而不是从1开始呢？"></a>为什么数组要从0开始编号，而不是从1开始呢？</h3><p> 若数组从1开始计数，那么上面的公式就变成</p>
+<pre><code>a[i] = base_address + (i-1) * data_type_size
+</code></pre><blockquote>
+<p>修改后，每次随机访问数组元素都多了一次减法运算，对于CPU就多了一次减法指令。</p>
+</blockquote>
+<h3 id="两个操作"><a href="#两个操作" class="headerlink" title="两个操作"></a>两个操作</h3><h4 id="数组的插入操作"><a href="#数组的插入操作" class="headerlink" title="数组的插入操作"></a>数组的插入操作</h4><ul>
+<li>效率低的原因：将某个数据插入到数组中的第<code>i</code>个位置。为了给新来的元素腾出这个位置，需要移动后面的<code>i~n</code>个元素，复杂度为<code>O(n)</code>;</li>
+<li>改进方法：当数组是无序的，简单的方法就是将原来第<code>i</code>个位置上的元素放到数组最后，然后将新来的元素放到第<code>i</code>个位置。复杂度为<code>O(1)</code>;</li>
+</ul>
+<h4 id="数组的删除操作"><a href="#数组的删除操作" class="headerlink" title="数组的删除操作"></a>数组的删除操作</h4><p>与插入操作类似，若删除第<code>i</code>个位置的元素，需要搬移后面的<code>i~n</code>个元素，才能保证内存的连续性。</p>
+<ul>
+<li>复杂度：若删除开头元素，最坏复杂度为<code>O(n)</code>；若删除数组末尾元素，最好复杂度为<code>O(1)</code>；平均复杂度为<code>O(n)</code>。</li>
+<li>改进方法：<strong>不要求数组中数据的连续性</strong>，就可将多次删除操作集中在一起执行。<br>每次删除元素时，并不真正搬移元素，而是记录下数据已被删除。当数组没有更多空间存储数据时，再执行一次真正的删除操作（做数据元素的搬移工作）</li>
+</ul>
+<h3 id="数组的访问越界问题"><a href="#数组的访问越界问题" class="headerlink" title="数组的访问越界问题"></a>数组的访问越界问题</h3><p>分析以下一段代码：</p>
+<pre><code>int main(int argc, char* argv[]){
+    int i = 0;
+    int arr[3] = {0};
+    for(; i&lt;=3; i++){
+        arr[i] = 0;
+        printf(&quot;hello world\n&quot;);
+    }
+    return 0;
+}
+</code></pre><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>不是只打印三行“hello world”；而是无限打印</p>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>数组大小为3，<code>a[0]，a[1]，a[2]</code>，而我们的代码 for 循环的结束条件错写为了<code>i&lt;=3</code> 而非 <code>i&lt;3</code>，所以当 <code>i=3</code> 时，数组 <code>a[3]</code> 访问越界。<br>根据我们前面讲的数组寻址公式，<code>a[3]</code> 也会被定位到某块不属于数组的内存地址上，而这个地址正好是存储变量 <code>i</code> 的内存地址，那么 <code>a[3]=0</code> 就相当于 <code>i=0</code>，所以就会导致代码无限循环。</p>
+<blockquote>
+<p>注：例子中死循环的问题跟编译器分配内存和字节对齐有关。数组3个元素，加上一个变量i。4个整数刚好能满足8字节对齐，所以i的地址恰好跟在a[2]后面，导致死循环。如果数组本身有4个元素，则这里不会出现死循环。因为编译器64位操作系统下，默认会进行8字节对齐，变量i的地址就不会紧跟在数组后面了。</p>
+</blockquote>
+<h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><p>1 . 常会问的一个面试题：数组和链表的区别？<br>正确表述：链表适合插入、删除操作，时间复杂度为<code>O(1)</code>；数组适合随机访问数组元素(而不应该说查找)，根据下标随机访问的时间复杂度为<code>O(1)</code>。<br>明确的点：数组是适合查找，但查找的时间复杂度不为<code>O(1)</code>。即便是<strong>排好序的数组，用二分查找，时间复杂度也是O(nlogn)</strong>。</p>
+<p>2 . 数组越界在 C 语言中是一种未决行为，并没有规定数组访问越界时编译器应该如何处理。因为，访问数组的本质就是访问一段连续内存，只要数组通过偏移计算得到的内存地址是可用的，那么程序就可能不会报任何错误。<br>在这种情况下，一般都会出现莫名其妙的逻辑错误，就像上面举的那个例子，debug的难度非常的大。而且，很多计算机病毒也正是利用到了代码中的数组越界可以访问非法地址的漏洞，来攻击系统，所以写代码的时候一定要警惕数组越界。</p>
+<p>3 . 二维、多维数组如何寻址？<br>行优先</p>
+<pre><code>int a[d1][d2][d3];
+int *p0 = &amp;a[0][0][0];
+int *p = &amp;a[i][j][k];
+int idx = i * (d2*d3) + j * d3 + k
+ASSERT( p0 + idx == p);
+</code></pre>
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018-10-10/" title= 链表 >
+                    <div class="nextTitle">链表</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018-09-29/" title= 算法复杂度分析 >
+                    <div class="prevTitle">算法复杂度分析</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC8zNTc1NC8xMjI5MA>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
     
     
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018-09-15/" >
-                
-                    <span>Use Seaborn to Create Animated Graph</span>
-            </a>
-            <div class="abstract-content">
-                Windows环境下安装FFmpeg和Seaborn属性错误
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/15</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "python">python</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018-09-12/" >
-                
-                    <span>Django入门练习的两个错误</span>
-            </a>
-            <div class="abstract-content">
-                Include模块传参问题和命名空间未注册问题的解决方案
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/12</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "python">python</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018-08-30/" >
-                
-                    <span>UnboundLocalError</span>
-            </a>
-            <div class="abstract-content">
-                变量引用错误
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/29</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "python">python</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018-08-27/" >
-                
-                    <span>json读取数据出错</span>
-            </a>
-            <div class="abstract-content">
-                json读取数据出错的解决办法
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/27</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "python">python</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "json">json</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -491,6 +541,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组定义"><span class="toc-number">1.</span> <span class="toc-text">数组定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关键词解释"><span class="toc-number">1.1.</span> <span class="toc-text">关键词解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现根据下标随机访问数组元素？"><span class="toc-number">2.</span> <span class="toc-text">如何实现根据下标随机访问数组元素？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么数组要从0开始编号，而不是从1开始呢？"><span class="toc-number">3.</span> <span class="toc-text">为什么数组要从0开始编号，而不是从1开始呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两个操作"><span class="toc-number">4.</span> <span class="toc-text">两个操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数组的插入操作"><span class="toc-number">4.1.</span> <span class="toc-text">数组的插入操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组的删除操作"><span class="toc-number">4.2.</span> <span class="toc-text">数组的删除操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组的访问越界问题"><span class="toc-number">5.</span> <span class="toc-text">数组的访问越界问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#问题"><span class="toc-number">5.1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原因"><span class="toc-number">5.2.</span> <span class="toc-text">原因</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">6.</span> <span class="toc-text">Key</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1281,6 +1349,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>

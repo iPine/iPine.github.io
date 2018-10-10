@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-09-29T05:04:07.533Z</updated>
+  <updated>2018-10-10T12:12:23.359Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>链表</title>
+    <link href="http://ipine.github.io/2018-10-10/"/>
+    <id>http://ipine.github.io/2018-10-10/</id>
+    <published>2018-10-10T03:58:00.000Z</published>
+    <updated>2018-10-10T12:12:23.359Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="如何用链表实现LRU缓存淘汰算法？"><a href="#如何用链表实现LRU缓存淘汰算法？" class="headerlink" title="如何用链表实现LRU缓存淘汰算法？"></a>如何用链表实现LRU缓存淘汰算法？</h2><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><ul><li>缓存定义：一种高效数据读取性能的技术，比如常见的<strong>CPU缓存</strong>、<strong>数据库缓存</strong>、<strong>浏览器缓存</strong>等。缓存在计算机软件、硬件开发中应用都很广。</li><li>缓存特点：大小有限，被用满时，需要清理一部分数据，而哪些数据应该被清理哪些应该被保留，由<code>缓存淘汰策略</code>决定。</li></ul><h3 id="缓存淘汰策略"><a href="#缓存淘汰策略" class="headerlink" title="缓存淘汰策略"></a>缓存淘汰策略</h3><p>常见的缓存淘汰策略有：<code>FIFO（First in,First out）先进先出策略</code>、<code>LFU（Least Frequently Used）最少使用策略</code>、<code>LRU（Least Recently Used）最近最少使用策略</code>。</p><h3 id="三种链表"><a href="#三种链表" class="headerlink" title="三种链表"></a>三种链表</h3><p>链表通过指针将一组零散的内存块串联在一起。其中内存块叫做链表的<strong>结点</strong>，记录结点地址的叫做<strong>指针</strong>。链表的第一个结点叫头结点，最后一个结点叫尾结点。</p><h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><p>单链表的“尾结点”，它的指针并不指向下一个结点，而是指向一个空地址<code>NULL</code></p><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-10-10/56355664.jpg" alt="单链表"></p><p>单链表插入和删除操作，复杂度为O(1)<br><img src="http://p8ay1ez22.bkt.clouddn.com/18-10-10/93241850.jpg" alt="操作"></p><h4 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h4><p>一种特殊的单链表，与单链表的区别就在于尾结点，其尾结点指向链表的头结点<br><img src="http://p8ay1ez22.bkt.clouddn.com/18-10-10/66826587.jpg" alt="循环链表"></p><p>相比于单链表，循环链表的优势在于从链尾到链头很方便。著名的<code>约瑟夫问题</code>，就适合这种数据结构。</p><h4 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h4><p>单链表只有一个方向，结点只有一个后继指针next指向后面的节点。双向链表有两个方向，一个<code>后继指针next</code>和一个<code>前驱指针pre</code>。<br><img src="http://p8ay1ez22.bkt.clouddn.com/18-10-10/80665346.jpg" alt="双向链表"></p><p>双向链表在某些情况下的插入、删除操作比单链表更高效。<br>例如删除操作，从链表中删除一个数据，有两种情况：</p><ul><li>删除链表中值等于某个给定值的结点</li><li>删除给定指针指向的结点</li></ul><p>对于第一种情况，无论单链表还是双向链表，为了查找到值等于给定值的结点，都需要从头结点开始一个一个依次遍历对比，直到找到值等于给定值的结点，然后再将其删除。<br>尽管单纯的删除操作时间复杂度是 <code>O(1)</code>，但遍历查找的时间是主要的耗时点，对应的时间复杂度为 <code>O(n)</code>。根据时间复杂度分析中的加法法则，删除值等于给定值的结点对应的链表操作的总时间复杂度为 <code>O(n)</code>。</p><p>对于第二种情况，已经找到了要删除的结点，但是删除某个结点 <code>q</code> 需要知道其前驱结点，而单链表并不支持直接获取前驱结点。这种情况下<strong>单链表</strong>删除操作需要 <code>O(n)</code> 的时间复杂度，而<strong>双向链表</strong>只需要 <code>O(1)</code> 的时间复杂度。</p><p>以上的情况涉及到一个<code>空间换时间</code>的设计思想：双向链表更费内存，但仍比单链表应用更广泛。</p><blockquote><p>缓存实际上就是利用了空间换时间的设计思想。<br> 如果我们把数据存储在硬盘上，会比较节省内存，但每次查找数据都要询问一次硬盘，会比较慢。<br> 但如果我们通过缓存技术，事先将数据加载在内存中，虽然会比较耗费内存空间，但是每次数据查询的速度就大大提高了。</p></blockquote><p>若内存空间充足，如果更加追求代码的执行速度，就选择空间复杂度相对较高，时间复杂度相对较低的算法和数据结构，例如，缓存技术。<br>若内存比较紧缺，比如代码跑在手机或者单片机上，这时，就要反过来用时间换空间。</p><h3 id="数组与链表对比"><a href="#数组与链表对比" class="headerlink" title="数组与链表对比"></a>数组与链表对比</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>删除、插入：<code>链表O(1)</code>、<code>数组O(n)</code></p><p>随机访问操作：<code>链表O(n)</code>、<code>数组(1)</code></p><h4 id="缓存支持"><a href="#缓存支持" class="headerlink" title="缓存支持"></a>缓存支持</h4><p>数组在实现上使用的是连续的内存空间，可以借助 CPU 的缓存机制，预读数组中的数据，所以访问效率更高。</p><p>链表在内存中并不是连续存储，所以对 CPU 缓存不友好，没办法有效预读。</p><h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><p>CPU在从内存读取数据的时候，会先把读取到的数据加载到CPU的缓存中。而CPU每次从内存读取数据并不是只读取要访问的地址，而是读取一个数据块，并保存到CPU缓存中，然后下次访问内存数据的时候就会先从CPU缓存开始查找，如果找到就不需要再从内存中取。<br>这样就实现了比内存访问速度更快的机制，也是CPU缓存存在的意义：<strong>为了弥补内存访问速度过慢与CPU执行速度快之间的差异</strong>。<br>对于数组来说，存储空间是连续的，所以在加载某个下标的时候可以把以后的几个下标元素也加载到CPU缓存这样执行速度会快于存储空间不连续的链表存储。</p><h4 id="灵活性"><a href="#灵活性" class="headerlink" title="灵活性"></a>灵活性</h4><p>数组大小固定，一经声明就要占用整块连续内存空间。如果声明的数组过大，系统可能没有足够的连续内存空间分配给它，导致<code>内存不足（out of memory）</code>。如果声明的数组过小，则可能出现不够用的情况。这时只能再申请一个更大的内存空间，把原数组拷贝进去，非常费时。</p><p>链表本身没有大小的限制，天然地支持动态扩容。</p><h2 id="链表实现LRU缓存淘汰策略的思路"><a href="#链表实现LRU缓存淘汰策略的思路" class="headerlink" title="链表实现LRU缓存淘汰策略的思路"></a>链表实现LRU缓存淘汰策略的思路</h2><p>维护一个有序单链表，越靠近链表尾部的结点是越早被访问过的。当有新的数据被访问时，从链表头开始顺序遍历链表。—-缓存访问的时间复杂度为<code>O(n)</code></p><h3 id="过程："><a href="#过程：" class="headerlink" title="过程："></a>过程：</h3><p>1 . 当访问的数据存储在缓存的链表中时，遍历得到数据对应的结点，将其从原位置删除，再将其插入到链表表头；<br>2 . 当访问的数据未出现在缓存的链表中时<br>    1）若缓存有空闲，将该数据直接插入到链表表头。<br>    2）若缓存被占满，则将链表尾部的数据删除，再将新数据插入到链表表头。</p><h3 id="优化：使用散列表，记录每个数据的位置，将缓存访问的时间复杂度降到-O-1-。"><a href="#优化：使用散列表，记录每个数据的位置，将缓存访问的时间复杂度降到-O-1-。" class="headerlink" title="优化：使用散列表，记录每个数据的位置，将缓存访问的时间复杂度降到 O(1)。"></a>优化：使用散列表，记录每个数据的位置，将缓存访问的时间复杂度降到 O(1)。</h3><h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><h3 id="如何用数组实现LRU缓存淘汰策略？"><a href="#如何用数组实现LRU缓存淘汰策略？" class="headerlink" title="如何用数组实现LRU缓存淘汰策略？"></a>如何用数组实现LRU缓存淘汰策略？</h3><p>方式一：首位置保存最新访问数据，末尾位置优先清理<br>当访问的数据未存在于缓存的数组中时<br>    1）缓存有空闲，将数据插入数组第一个元素位置，数组所有元素需要向后移动1个位置，新数据插入数组第一个元素位置，时间复杂度为O(n)；<br>    2）缓存无空闲，清理数组末尾位置的元素，数组所有元素需要向后移动1个位置，新数据插入数组第一个元素位置，时间复杂度为O(n)；<br>当访问的数据存在于缓存的数组中时，查找到数据，将其从原位置删除，并将其插入数组的第一个位置，此时亦需移动数组元素，时间复杂度为O(n)。</p><p>方式二：首位置优先清理，末尾位置保存最新访问数据<br>当访问的数据未存在于缓存的数组中时<br>    1）缓存有空闲，直接将数据添加进数组作为当前最后一个元素，时间复杂度为O(1)；<br>    2）缓存无空闲，清理数组首位置的元素，数组所有元素向前移动1个位置， 将新元素插入数组，时间复杂度为O(n)；<br>当访问的数据存在于缓存的数组中时，查找到数据，将其从原位置删除，并将其插入当前数组最后一个元素的位置，此时亦需移动数组元素，时间复杂度为O(n)。</p><h4 id="优化：清理的时候可以考虑一次性清理一定数量，从而降低清理次数，提高性能。"><a href="#优化：清理的时候可以考虑一次性清理一定数量，从而降低清理次数，提高性能。" class="headerlink" title="优化：清理的时候可以考虑一次性清理一定数量，从而降低清理次数，提高性能。"></a>优化：清理的时候可以考虑一次性清理一定数量，从而降低清理次数，提高性能。</h4><h3 id="如何通过单链表实现“判断某个字符串是否为回文字符串”？"><a href="#如何通过单链表实现“判断某个字符串是否为回文字符串”？" class="headerlink" title="如何通过单链表实现“判断某个字符串是否为回文字符串”？"></a>如何通过单链表实现“判断某个字符串是否为回文字符串”？</h3><p>比如 “123454321”<br>1 . 前提：字符串以单个字符的形式存储在单链表中。<br>2 . 遍历链表，判断字符个数是否为奇数，若为偶数，则不是。<br>3 . 将链表中的字符倒序存储一份在另一个链表中。<br>4 . 同步遍历2个链表，比较对应的字符是否相等，若相等，则是回文字符串，否则，不是。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;如何用链表实现LRU缓存淘汰算法？&quot;&gt;&lt;a href=&quot;#如何用链表实现LRU缓存淘汰算法？&quot; class=&quot;headerlink&quot; title=&quot;如何用链表实现LRU缓存淘汰算法？&quot;&gt;&lt;/a&gt;如何用链表实现LRU缓存淘汰算法？&lt;/h2&gt;&lt;h3 id=&quot;缓存&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="data_structure" scheme="http://ipine.github.io/tags/data-structure/"/>
+    
+      <category term="algorithm" scheme="http://ipine.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数组</title>
+    <link href="http://ipine.github.io/2018-10-09/"/>
+    <id>http://ipine.github.io/2018-10-09/</id>
+    <published>2018-10-09T11:24:00.000Z</published>
+    <updated>2018-10-10T11:29:57.047Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="数组定义"><a href="#数组定义" class="headerlink" title="数组定义"></a>数组定义</h3><p>一组<code>线性表</code>数据结构。它用一组<code>连续的内存空间</code>，来存储一组具有<code>相同类型的数据</code>。</p><h4 id="关键词解释"><a href="#关键词解释" class="headerlink" title="关键词解释"></a>关键词解释</h4><ul><li><p><strong>线性表</strong>：每个线性表上的数据最多只有前和后两个方向。<br>除了<code>数组</code>，<code>链表</code>、<code>队列</code>、<code>栈</code>都是线性表结构</p><p>联想到<strong>非线性表</strong>：数据之间并不是简单的前后关系。<br>如，<code>二叉树</code>、<code>堆</code>、<code>图</code>等</p></li><li><p><strong>连续的内存空间和相同类型的数据</strong><br>正因为有了这两个限制，才使得数组有了<code>随机访问</code>的特性；<br>也正是因为这两个限制，使得<code>数组的删除、插入操作效率很低</code>。</p></li></ul><h3 id="如何实现根据下标随机访问数组元素？"><a href="#如何实现根据下标随机访问数组元素？" class="headerlink" title="如何实现根据下标随机访问数组元素？"></a>如何实现根据下标随机访问数组元素？</h3><p>计算机会给每个内存单元分配一个地址，再通过地址来访问内存中的数据。<br>而计算机通过寻址公式来计算元素存储的内存地址：</p><pre><code>//a[i]的地址就是从首地址偏移i*data_type_size的位置a[i] = base_address + i * data_type_size</code></pre><blockquote><p>base_address: 内存块的首地址<br>  data_type_size：数中每个元素的大小；根据存储的数据类型而定，如int型，该值为4</p></blockquote><h3 id="为什么数组要从0开始编号，而不是从1开始呢？"><a href="#为什么数组要从0开始编号，而不是从1开始呢？" class="headerlink" title="为什么数组要从0开始编号，而不是从1开始呢？"></a>为什么数组要从0开始编号，而不是从1开始呢？</h3><p> 若数组从1开始计数，那么上面的公式就变成</p><pre><code>a[i] = base_address + (i-1) * data_type_size</code></pre><blockquote><p>修改后，每次随机访问数组元素都多了一次减法运算，对于CPU就多了一次减法指令。</p></blockquote><h3 id="两个操作"><a href="#两个操作" class="headerlink" title="两个操作"></a>两个操作</h3><h4 id="数组的插入操作"><a href="#数组的插入操作" class="headerlink" title="数组的插入操作"></a>数组的插入操作</h4><ul><li>效率低的原因：将某个数据插入到数组中的第<code>i</code>个位置。为了给新来的元素腾出这个位置，需要移动后面的<code>i~n</code>个元素，复杂度为<code>O(n)</code>;</li><li>改进方法：当数组是无序的，简单的方法就是将原来第<code>i</code>个位置上的元素放到数组最后，然后将新来的元素放到第<code>i</code>个位置。复杂度为<code>O(1)</code>;</li></ul><h4 id="数组的删除操作"><a href="#数组的删除操作" class="headerlink" title="数组的删除操作"></a>数组的删除操作</h4><p>与插入操作类似，若删除第<code>i</code>个位置的元素，需要搬移后面的<code>i~n</code>个元素，才能保证内存的连续性。</p><ul><li>复杂度：若删除开头元素，最坏复杂度为<code>O(n)</code>；若删除数组末尾元素，最好复杂度为<code>O(1)</code>；平均复杂度为<code>O(n)</code>。</li><li>改进方法：<strong>不要求数组中数据的连续性</strong>，就可将多次删除操作集中在一起执行。<br>每次删除元素时，并不真正搬移元素，而是记录下数据已被删除。当数组没有更多空间存储数据时，再执行一次真正的删除操作（做数据元素的搬移工作）</li></ul><h3 id="数组的访问越界问题"><a href="#数组的访问越界问题" class="headerlink" title="数组的访问越界问题"></a>数组的访问越界问题</h3><p>分析以下一段代码：</p><pre><code>int main(int argc, char* argv[]){    int i = 0;    int arr[3] = {0};    for(; i&lt;=3; i++){        arr[i] = 0;        printf(&quot;hello world\n&quot;);    }    return 0;}</code></pre><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>不是只打印三行“hello world”；而是无限打印</p><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>数组大小为3，<code>a[0]，a[1]，a[2]</code>，而我们的代码 for 循环的结束条件错写为了<code>i&lt;=3</code> 而非 <code>i&lt;3</code>，所以当 <code>i=3</code> 时，数组 <code>a[3]</code> 访问越界。<br>根据我们前面讲的数组寻址公式，<code>a[3]</code> 也会被定位到某块不属于数组的内存地址上，而这个地址正好是存储变量 <code>i</code> 的内存地址，那么 <code>a[3]=0</code> 就相当于 <code>i=0</code>，所以就会导致代码无限循环。</p><blockquote><p>注：例子中死循环的问题跟编译器分配内存和字节对齐有关。数组3个元素，加上一个变量i。4个整数刚好能满足8字节对齐，所以i的地址恰好跟在a[2]后面，导致死循环。如果数组本身有4个元素，则这里不会出现死循环。因为编译器64位操作系统下，默认会进行8字节对齐，变量i的地址就不会紧跟在数组后面了。</p></blockquote><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><p>1 . 常会问的一个面试题：数组和链表的区别？<br>正确表述：链表适合插入、删除操作，时间复杂度为<code>O(1)</code>；数组适合随机访问数组元素(而不应该说查找)，根据下标随机访问的时间复杂度为<code>O(1)</code>。<br>明确的点：数组是适合查找，但查找的时间复杂度不为<code>O(1)</code>。即便是<strong>排好序的数组，用二分查找，时间复杂度也是O(nlogn)</strong>。</p><p>2 . 数组越界在 C 语言中是一种未决行为，并没有规定数组访问越界时编译器应该如何处理。因为，访问数组的本质就是访问一段连续内存，只要数组通过偏移计算得到的内存地址是可用的，那么程序就可能不会报任何错误。<br>在这种情况下，一般都会出现莫名其妙的逻辑错误，就像上面举的那个例子，debug的难度非常的大。而且，很多计算机病毒也正是利用到了代码中的数组越界可以访问非法地址的漏洞，来攻击系统，所以写代码的时候一定要警惕数组越界。</p><p>3 . 二维、多维数组如何寻址？<br>行优先</p><pre><code>int a[d1][d2][d3];int *p0 = &amp;a[0][0][0];int *p = &amp;a[i][j][k];int idx = i * (d2*d3) + j * d3 + kASSERT( p0 + idx == p);</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;数组定义&quot;&gt;&lt;a href=&quot;#数组定义&quot; class=&quot;headerlink&quot; title=&quot;数组定义&quot;&gt;&lt;/a&gt;数组定义&lt;/h3&gt;&lt;p&gt;一组&lt;code&gt;线性表&lt;/code&gt;数据结构。它用一组&lt;code&gt;连续的内存空间&lt;/code&gt;，来存储一组具有&lt;code&gt;相
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="data_structure" scheme="http://ipine.github.io/tags/data-structure/"/>
+    
+      <category term="algorithm" scheme="http://ipine.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>算法复杂度分析</title>
@@ -257,9 +311,9 @@ int find
       <category term="life" scheme="http://ipine.github.io/categories/life/"/>
     
     
-      <category term="essay" scheme="http://ipine.github.io/tags/essay/"/>
-    
       <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
+    
+      <category term="essay" scheme="http://ipine.github.io/tags/essay/"/>
     
       <category term="teleplay" scheme="http://ipine.github.io/tags/teleplay/"/>
     
@@ -494,60 +548,6 @@ int find
       
       
         &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;We need to sum big numbers and we require your help.&lt;br&gt;Write 
-      
-    
-    </summary>
-    
-      <category term="technique" scheme="http://ipine.github.io/categories/technique/"/>
-    
-    
-      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
-    
-      <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Find the missing term in an Arithmetic Progression</title>
-    <link href="http://ipine.github.io/2018-05-02/"/>
-    <id>http://ipine.github.io/2018-05-02/</id>
-    <published>2018-05-02T05:42:00.000Z</published>
-    <updated>2018-08-28T04:08:54.084Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an Arithmetic Progression. There is however one hitch: exactly one term from the original series is missing from the set of numbers which have been given to you. The rest of the given series is the same as the original AP. Find the missing term.<br>You have to write the function findMissing(list), list will always be at least 3 numbers. The missing term will never be the first or last one.</p><p>Example :<br>findMissing([1,3,5,9,11]) == 7</p><blockquote><p>PS: This is a sample question of the facebook engineer challenge on interviewstreet. I found it quite fun to solve on paper using math, derive the algo that way.</p></blockquote><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>var findMissing = function (list) {   var len = list.length;  var x = Math.abs((list[1]-list[0])) &lt; Math.abs((list[len-1]-list[len-2])) ? Math.abs((list[1]-list[0])):Math.abs((list[len-1]-list[len-2]));  console.log(x);  for(i=0; i&lt;len; i++){    if(list[len-1] &gt; list[0]){      if(list.indexOf(list[i]+x) == -1)      return list[i]+x;    }else if(list[len-1] &lt; list[0]){      if(list.indexOf(list[i]-x) == -1)      return list[i]-x;    }  }}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>var findMissing = function (list) {     var step = (list[list.length - 1] - list[0]) / (list.length);     return list.filter(function(val, index) { return val !== (list[0] + index * step); })[0] - step; }</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><p>关键点1要找到等差值，利用题目中给的信息：第一个和最后一个数不会缺失；将这两个数分别与它们的后一个和前一个数相减，小的那个差就是等差值；</p></li><li><p>关键点2要注意数列中可能有负数，按照关键点1求等差值的做法，则求解的时候要取绝对值；且需要判断数列是递增还是递减；</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;An Arithmetic Progression is defined as one in which there is 
-      
-    
-    </summary>
-    
-      <category term="technique" scheme="http://ipine.github.io/categories/technique/"/>
-    
-    
-      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
-    
-      <category term="codewars" scheme="http://ipine.github.io/tags/codewars/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Range Extraction</title>
-    <link href="http://ipine.github.io/2018-05-01/"/>
-    <id>http://ipine.github.io/2018-05-01/</id>
-    <published>2018-05-01T05:30:00.000Z</published>
-    <updated>2018-08-28T04:08:49.626Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>A format for expressing an ordered list of integers is to use a comma separated list of either<br>• individual integers<br>• or a range of integers denoted by the starting integer separated from the end integer in the range by a dash, ‘-‘. The range includes all integers in the interval including both endpoints. It is not considered a range unless it spans at least 3 numbers. For example (“12, 13, 15-17”)<br>Complete the solution so that it takes a list of integers in increasing order and returns a correctly formatted string in the range format.</p><p>Example:<br>solution([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]);<br>// returns “-6,-3-1,3-5,7-11,14,15,17-20”</p><h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function solution(list){ // TODO: complete solution  var str = [];  for (i = 0; i &lt; list.length; i++) {    if ((list[i]+1) !== list[i+1]) {//完全没有连续的情况      str += list[i].toString() + &apos;,&apos;;    } else if ((list[i]+1) === list[i+1] &amp;&amp; (list[i+1]+1) === list[i+2] &amp;&amp; (list[i-1]+1) !== list[i]) {//有2个及其以上连续的情况      str += list[i].toString() + &apos;-&apos;;    } else if (str[str.length-1] === &apos;-&apos; &amp;&amp; (list[i]+1) !== list[i+1]) {//判断是否是range的最后一个元素      str += list[i].toString() + &apos;,&apos;;    } else if ((list[i]-1) === list[i-1] &amp;&amp; (list[i]+1) === list[i+1]) {      //属于range中的元素    } else if ((list[i]-1) === list[i-1] &amp;&amp; (list[i-1]-1) === list[i-2]) {//只有2个连续的情况      str += list[i].toString() + &apos;,&apos;;    } else {//新range开头      str += list[i].toString() + &apos;,&apos;;    }  }   return str.slice(0, -1);//去掉最后的逗号}</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function solution(list){ for(var i = 0; i &lt; list.length; i++){  var j = i;  while(list[j] - list[j+1] == -1)   j++;  if(j != i &amp;&amp; j-i&gt;1)  list.splice(i, j-i+1, list[i] +&apos;-&apos;+list[j]);  } return list.join();}</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul><li><p><code>.slice()</code> 方法可返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。（含头不含尾）</p><blockquote><p>语法：arrayObject.slice(start,end)</p></blockquote></li><li><p>用到了<code>.splice()</code>方法，替换数组中的内容。</p><blockquote><p>参数包含:（起始下标，替换长度，替换内容）</p></blockquote></li><li><p><code>i</code>记录range开始位置，<code>j</code>记录range结束位置。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;A format for expressing an ordered list of integers is to use 
       
     
     </summary>
