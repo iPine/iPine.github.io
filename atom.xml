@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-10-16T05:24:05.670Z</updated>
+  <updated>2018-10-17T13:37:33.382Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>队列</title>
+    <link href="http://ipine.github.io/2018-10-16/"/>
+    <id>http://ipine.github.io/2018-10-16/</id>
+    <published>2018-10-16T11:58:00.000Z</published>
+    <updated>2018-10-17T13:37:33.382Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>CPU资源有限，任务的处理速度与线程个数并不是线性正相关。过多的线程会导致CPU频繁切换，处理性能下降。<br>当我们向固定大小的线程池中请求一个线程时，如果线程池中没有空闲资源了，这个时候线程池如何处理这个请求？是拒绝请求还是排队请求？各种处理策略又是怎么实现的呢？<br>这就需要用到<code>队列</code>这个数据结构</p><h3 id="如何理解队列"><a href="#如何理解队列" class="headerlink" title="如何理解队列"></a>如何理解<code>队列</code></h3><p>理解成，排队购票，排在前面的先买，排在后面的后买。即<code>先进者先出</code>（FIFO）。<br>队列跟栈非常相似，支持的操作也有限，最基本的也是两个：<strong>入队和出队，一端出队，另一端入队</strong>；所以队列也是一种操作受限的<code>线性表</code>数据结构。</p><h3 id="顺序队列和链式队列"><a href="#顺序队列和链式队列" class="headerlink" title="顺序队列和链式队列"></a>顺序队列和链式队列</h3><p>用数组实现的队列叫作顺序队列，用链表实现的队列叫作链式队列。</p><h4 id="顺序队列"><a href="#顺序队列" class="headerlink" title="顺序队列"></a>顺序队列</h4><p>不理想的设计：<br>1 . 若使用顺序表的尾端插入实现<code>enqueue</code>操作，根据队列性质，出队操作应该在表的首端进行。为了维护顺序表的完整性（表元素在表前端连续存放），出队操作取出当时的首元素后，就需要把表中其余元素全部前移，这样就会是一个 <code>O(n)</code> 时间的操作。<br>2 . 反过来：从尾端出队是 <code>O(1)</code> 操作，但从首端入队就是 <code>O(n)</code> 时间操作，这种设计也不理想。<br>3 . 另一种是在队首元素出队后表中的元素不前移，但记住新队头位置。如果队列中没有空闲了，只需要在入队时，再集中触发一次数据的搬移操作。</p><h4 id="链式队列"><a href="#链式队列" class="headerlink" title="链式队列"></a>链式队列</h4><p>最简单的单链表只支持首端 <code>O(1)</code> 的操作，在另一端操作需要 <code>O(n)</code> 时间。不适合作为队列的实现基础。<br>考虑<code>带表尾指针</code>的单链表，它支持 <code>O(1)</code> 时间的尾端插入操作；再加上表首端的高效访问和删除，基于单链表实现队列就很容易。</p><h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><pre><code>class LNode:    def __init__(self, elem, next_=None):        self.data = elem        self.next = next_class QueueUnderflow(ValueError):    passclass LQueue:    def __init__(self):        self._head = None        self._rear = None    def is_empty(self):        return self._head is None    def peek(self):        &quot;&quot;&quot;查看队列最早元素，不删除&quot;&quot;&quot;        if self._head is None: #是空队列            raise QueueUnderflow(&apos;in peek of Queue&apos;)        else:            return self._head.data    def dequeue(self):        &quot;&quot;&quot;删除队列头结点，并返回这个结点里的数据&quot;&quot;&quot;        if self._head == None:            raise QueueUnderflow(&quot;in dequeue&quot;)        e = self._head.data        self._head = self._head.next        return e    def enqueue(self, elem):        if self._head is None:#空表            self._head = LNode(elem, self._head)            self._rear = self._head        else:            self._rear.next = LNode(elem)            self._rear = self._rear.next</code></pre><h3 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h3><p>一个具体的实现示例：基于Python的list实现顺序表示的循环队列。<br>考虑定义一个可以自定扩充存储结构的队列类。</p><blockquote><p>注：不能直接利用list的自动存储扩充机制。两个原因：<br> 1 . 队列元素的存储方式与list元素的默认存储方式不一致；list元素总在其存储器的最前面一段，而队列的元素可能是表里的任意一段，有时还分为头尾两段。<br> 2 . list没有提供检测元素存储区容量的机制，队列操作中无法判断系统何时扩容。</p></blockquote><h5 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h5><pre><code>class SQueue():    def __init__(self, init_len = 8):        self._len = init_len       #存储区长度        self._elems = [0] *init_len #元素存储        self._head = 0              #表头元素下标        self._num = 0               #元素个数    def is_empty(self):        return self._num == 0    def peek(self):        if self._num is None: #是空队列            raise QueueUnderflow(&apos;in peek of SQueue&apos;)        return self._elems[self._head]    def dequeue(self):        if self._num == 0:            raise QueueUnderflow(&apos;in dequeue of SQueue&apos;)        e = self._elems[self._head]        self._head = (self._head+1)%self._len        self._num -= 1        return e    def enqueue(self,e):        if self._num == self._len: #队满时            self._extend()        self._elems[(self._head+self._num)%self._len] = e        self._num += 1    def _extend(self):        old_len = self._len        self._len *= 2        new_elems = [0]*self._len #扩大元素存储区        for i in range(old_len):  #将原有元素搬迁到新表里（最前面的位置）            new_elems[i] = self._elems[(self._head+1)%old_len]        self._elems, self._head = new_elems, 0  </code></pre><p><strong>注解</strong></p><p>1 . 队列对象的4个属性，<code>_elems</code>，<code>_head</code>，<code>_num</code>，<code>_len</code>的作用分别是：<strong>存放队列元素</strong>，<strong>记录队列首元素所在位置的下标</strong>，<strong>记录表中元素个数</strong>，<strong>记录当存储区的有效容量（便于换存储表）</strong>。<br>2 . 在<code>_num = _len</code> 的情况下（队满）出现入队操作，就扩大存储区；队空就是 <code>_num == 0</code>。<br>3 . 队列里的元素总保存在<code>_elems</code>里，从<code>_head</code>开始的连续位置中。<br>4 . 新入队的元素存入在 <code>(_head + _num)%len</code> 算出的位置；若需要把元素存入下标<code>_len</code>的位置时，改为在<code>下标0位置</code>存入。<br>5 . 在<code>_extend</code>函数中新元素尚未入队，但<code>_extend</code>在enqueue返回后，enqueue的最后两句语句将正常完成这个工作。</p><h3 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h3><p>阻塞队列其实就是在队列基础上增加了阻塞操作。简单来说，就是在队列为空的时候，从队头取数据会被阻塞。因为此时还没有数据可取，直到队列中有了数据才能返回；如果队列已经满了，那么插入数据的操作就会被阻塞，直到队列中有空闲位置后再插入数据，然后再返回。</p><blockquote><p>注：可以用阻塞队列实现一个“生产者-消费者模型”。基于阻塞队列，可以通过协调“生产者”和“消费者”的个数，来提高数据的处理效率。</p></blockquote><h3 id="并发队列"><a href="#并发队列" class="headerlink" title="并发队列"></a>并发队列</h3><p>在多线程情况下，会有多个线程同时操作队列，这个时候就会存在线程安全问题。<br>要实现一个线程安全的队列就需要<code>并发队列</code>。<br>最简单直接的实现方式是直接在 <code>enqueue()</code>、<code>dequeue()</code> 方法上加锁，但是锁粒度大并发度会比较低，同一时刻仅允许一个存或者取操作。</p><h3 id="解答引言"><a href="#解答引言" class="headerlink" title="解答引言"></a>解答引言</h3><p>一般有两种处理策略。</p><ul><li>第一种是非阻塞的处理方式，直接拒绝任务请求；</li><li>另一种是阻塞的处理方式，将请求排队，等到有空闲线程时，取出排队的请求继续处理。</li></ul><p><strong>那如何存储排队的请求呢？</strong><br>公平地处理每个排队的请求，先进者先服务，所以队列这种数据结构很适合来存储排队请求。</p><p>队列有基于链表和基于数组这两种实现方式。<strong>两种实现方式对于排队请求又有什么区别呢？</strong></p><h4 id="基于链表的实现方式"><a href="#基于链表的实现方式" class="headerlink" title="基于链表的实现方式"></a>基于链表的实现方式</h4><p>可以实现一个支持无限排队的<code>无界队列（unbounded queue）</code>，但是可能会导致过多的请求排队等待，请求处理的响应时间过长。<br>所以，针对响应时间比较敏感的系统，基于链表实现的无限排队的线程池是不合适的。</p><h4 id="基于数组的实现方式"><a href="#基于数组的实现方式" class="headerlink" title="基于数组的实现方式"></a>基于数组的实现方式</h4><p>可以实现的是<code>有界队列（bounded queue）</code>，队列的大小有限，所以线程池中排队的请求超过队列大小时，接下来的请求就会被拒绝，这种方式对响应时间敏感的系统来说，就相对更加合理。<br>这时，设置一个合理的队列大小，就非常重要。队列太大导致等待的请求太多，队列太小会导致无法充分利用系统资源、发挥最大性能。</p><blockquote><p>注：对于大部分资源有限的场景，当没有空闲资源时，基本上都可以通过<code>队列</code>这种数据结构来实现请求排队。</p></blockquote><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>队列的其他应用<br>1 . 文件打印<br>2 . 万维网服务器<br>3 . Windows系统和消息队列<br>4 . 离散事件系统模拟</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h3&gt;&lt;p&gt;CPU资源有限，任务的处理速度与线程个数并不是线性正相关。过多的线程会导致CPU频繁切换，处理性能下降。&lt;br&gt;当我们向固定大小的线程池中请
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="data_structure" scheme="http://ipine.github.io/tags/data-structure/"/>
+    
+      <category term="algorithm" scheme="http://ipine.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>栈</title>
@@ -532,34 +559,6 @@ int find
       <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
     
       <category term="paper" scheme="http://ipine.github.io/tags/paper/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Flex布局</title>
-    <link href="http://ipine.github.io/2018-05-13/"/>
-    <id>http://ipine.github.io/2018-05-13/</id>
-    <published>2018-05-13T12:59:00.000Z</published>
-    <updated>2018-08-28T04:09:12.806Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。</p><h3 id="网页布局"><a href="#网页布局" class="headerlink" title="网页布局"></a>网页布局</h3><p>区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖<code>display</code>属性+<code>position</code>属性+<code>float</code>属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。</p><p>Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局<code>（display:flex）</code>，行内元素也可以使用<code>（display:inline-flex）</code>。</p><blockquote><p>注意：设为Flex布局以后，子元素的float,clear,和vertical-align属性将失去作用。</p></blockquote><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</p><h4 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h4><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-19/84888199.jpg" alt="容器"></p><p>每个属性对应的含义是：</p><p> • 项目排列方向；可取四个值： <code>row | row-reverse | column | column-reverse</code><br> • 项目是否换行，怎么换；可取三个值： <code>nowrap | wrap | wrap-reverse</code><br> • 前2个属性的简写; 取值： <code>&lt;flex-direction&gt; || &lt;flex-wrap&gt;</code><br> • 项目在主轴上的对齐方式，与主轴的方向有关；可取五个值： <code>flex-start | flex-end | center | space-between | space-around</code><br> • 项目在交叉轴上的对齐方式,与交叉轴的方向有关；可取五个值： <code>flex-start | flex-end | center | baseline | stretch</code><br> • 多根轴线的对齐方式，若项目只有一根轴线，该属性不起作用；可取六个值： <code>flex-start | flex-end | center | space-between | space-around | stretch</code></p><h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-19/10672781.jpg" alt="项目"></p><p>每个属性对应的含义是：</p><p> • 项目排列顺序，值越小，排列越靠前；默认为0<br> • 有多余空间时，项目是否放大；默认为0，不放大<br> • 空间不够时，项目是否缩小；默认为1，缩小<br> • 分配多余空间之前，项目占据的主轴空间；默认为auto,即原本大小<br> • <code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>属性的简写（优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值），常用的两个快捷值： <code>auto(1 1 auto)和none(0 0 auto)</code><br> • 允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性；默认值为auto</p><h3 id="我的布局"><a href="#我的布局" class="headerlink" title="我的布局"></a>我的布局</h3><h4 id="HTML结构"><a href="#HTML结构" class="headerlink" title="HTML结构"></a>HTML结构</h4><p> 1 . 包含所有区块的大div -&gt;.d3layout（容器）；<br> 2 . 大div里包含3个次大div -&gt;.block-row（既是容器又是项目）；<br> 3 . 每个次大div里包含5个或者2个小div -&gt; .block/.block_0（项目）；</p><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-19/19741905.jpg" alt="HTML结构"></p><h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><h5 id="第一层的大div"><a href="#第一层的大div" class="headerlink" title="第一层的大div"></a>第一层的大div</h5><pre><code>.d3layout{    width: 935px;    margin: 20px 0;    height: 740px;/*flex布局容器*/    display: flex;    flex-flow: row wrap;    justify-content: flex-start;    align-items: flex-start;    align-content: space-around;}</code></pre><h5 id="第二层的次大div"><a href="#第二层的次大div" class="headerlink" title="第二层的次大div"></a>第二层的次大div</h5><pre><code>.rowTop,.rowMiddle,.rowBottom{    height: 202px;    width: 935px;/*flex布局项目*/    flex: auto; /*（1，1，auto）*//*flex布局容器*/    display: flex;    flex-flow: row wrap;    justify-content: space-between;    align-items: center;}</code></pre><h5 id="第三层的小div"><a href="#第三层的小div" class="headerlink" title="第三层的小div"></a>第三层的小div</h5><pre><code>.block_0{    width: 703px;    height: 180px;  /*flex布局项目*/     flex: 0 1 auto;}.block{    width: 145px;    height: 180px;/*flex布局项目*/    flex: 0 1 auto;}</code></pre><h4 id="布局效果"><a href="#布局效果" class="headerlink" title="布局效果"></a>布局效果</h4><p>黑色为大div；红色为次大div；灰色为小div</p><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-5-19/86157629.jpg" alt="效果图"></p><p>最终在实践过程中，又添了一层，灰色小div.block里还包括上下两个div，仍然用的flex布局。</p><p>注：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?^%$" target="_blank" rel="noopener">基本概念参考来源</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。&lt;/p&gt;
-&lt;h3 id=&quot;网页布局&quot;&gt;&lt;a href=&quot;#网页布局&quot; class=&quot;headerlink&quot; title=&quot;网页布局&quot;&gt;&lt;/a&gt;网页布局&lt;/h3&gt;&lt;p&gt;区块图展示部分刚开
-      
-    
-    </summary>
-    
-      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
-    
-    
-      <category term="javascript" scheme="http://ipine.github.io/tags/javascript/"/>
-    
-      <category term="css" scheme="http://ipine.github.io/tags/css/"/>
     
   </entry>
   
