@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>lf94me</title>
+    <title>递归 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -185,12 +187,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >iPine&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">递归</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>iPine's Blog.</a>
 </header>
@@ -204,24 +217,69 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/door-bg.webp)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            递归
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "data_structure">data_structure</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "algorithm">algorithm</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/10/29</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -305,36 +363,97 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>很多APP都有推荐用户注册返佣金或奖励的功能。在这个功能中，用户A推荐用户B来注册，用户B又推荐用户C来注册。那么用户C的<code>最终推荐人</code>就为A，用户B的<code>最终推荐人</code>也为A，用户A没有最终推荐人。在数据库表中，可以记录两行数据，其中<code>user_id</code>表示用户ID，<code>referrer_id</code>表示推荐人ID。<br>那么，问题是，给定一个用户ID，如何查找这个用户的<code>最终推荐人</code>？<br>应用到的思想就是递归</p>
+<h3 id="如何理解递归"><a href="#如何理解递归" class="headerlink" title="如何理解递归"></a>如何理解<strong>递归</strong></h3><p>很多数据结构和算法的实现都要用到递归，比如<strong>DFS深度优先搜索</strong>、<strong>前中后序二叉树遍历</strong>等。</p>
+<p>一个生活中的例子，在电影院由于太黑，你看不清自己在第几排，但是又想知道，怎么办呢？问前一排的人，他的排数+1就是你的排数。但是前一排的人也看不清自己在第几排，他又通过问自己的前一排，就这样一直传递问下去，直到第一排的人说我是第一排，于是又一排一排把数字传回来。<br>这样一个过程就是递归求解问题的分解过程，去的过程叫<code>递</code>，回来的过程叫<code>归</code>。基本上，所有的递归问题都可以用递推公式来表示。</p>
+<pre><code>f(n) = f(n-1) + 1, 其中，f(1) = 1
+</code></pre><h3 id="什么样的问题能用递归来解决？"><a href="#什么样的问题能用递归来解决？" class="headerlink" title="什么样的问题能用递归来解决？"></a>什么样的问题能用递归来解决？</h3><p>同时满足以下三个条件，就可用递归来解决。</p>
+<ul>
+<li><p>一个问题的解可以分解为几个子问题的解。<br>子问题是指数据规模更小的问题<br>想知道你“自己在哪一排”，可以分解为“前一排的人在哪一排”这个子问题</p>
+</li>
+<li><p>这个问题与分解之后的子问题，除了数据规模不同，求解思路完全一样。<br>你求解“自己在哪一排”，与前面一排求解“自己在哪一排”的思路是相同的。</p>
+</li>
+<li><p>存在递归终止条件<br>问题分解为子问题，子问题再一层层分解下去，但是不能无限循环，必须有终止条件。<br>电影院第一排的人知道自己在哪一排，即<code>f(1) = 1</code>,这就是递归终止条件。</p>
+</li>
+</ul>
+<h3 id="编写递归代码"><a href="#编写递归代码" class="headerlink" title="编写递归代码"></a>编写递归代码</h3><p><strong>关键点：写出递归公式，找到终止条件。</strong></p>
+<h4 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a>栗子</h4><p>假设有n个台阶，每次可以跨1个台阶或者2个台阶，那么请问走完这n个台阶，共有多少种走法？</p>
+<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>可以根据第一步的走法把所有走法分为两类，第一类是，第一步走1个台阶；第二类是，第一步走2个台阶。<br>所以，<code>n</code>个台阶的走法就等于，先走1阶后，<code>n-1</code>个台阶的走法，加上，先走2阶后，<code>n-2</code>个台阶的走法。<br>公式表示为：</p>
+<pre><code>f(n) = f(n-1) + f(n-2)
+</code></pre><p>有了递推公式还不够，再分析终止条件：当有1个台阶时，就只有一个走法，所以<code>f(1) = 1</code>。用小规模数试验一下，该终止条件是否合理，当<code>n=2</code>时，<code>f(2) = f(1) + f(0)</code>。发现<code>f(2)</code>没法求解，因为没给<code>f(0)</code>的值。可以给定<code>f(0) = 0</code>，表示走0个台阶有1种走法，但这不符合常识，因而可以直接给定<code>f(2) = 2</code>，表示走2个台阶有2种走法，要么一步1个台阶走，要么一次跨2个台阶。<br>这样再试验<code>f(3) = f(2) + f(1)</code>，可以得出结果并正确。所以，递归终止条件就为<code>f(1)= 1, f(2) = 2</code>。<br>最终公式</p>
+<pre><code>f(1)= 1
+f(2) = 2
+f(n) = f(n-1) + f(n-2)
+</code></pre><h5 id="递归代码"><a href="#递归代码" class="headerlink" title="递归代码"></a>递归代码</h5><pre><code>def climbStairs(self,n):
+    if n==1:
+        return 1
+    elif n==2:
+        return 2
+    else:
+        return self.climbStairs(n-1) + self.climbStairs(n-2)
+</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><p>对于递归代码，试图想清楚整个递和归过程的做法，实际上是进入了一个思维误区。很多时候，理解起来比较吃力，主要原因就是自己给自己制造了这种理解障碍。</p>
+<p><strong>正确的思维方式</strong>应该是:<br>如果一个问题 A 可以分解为若干子问题 B、C、D，就假设子问题 B、C、D 已经解决，在此基础上思考如何解决问题 A。而且，只需要思考问题 A 与子问题 B、C、D 两层之间的关系即可，不需要一层一层往下思考子问题与子子问题，子子问题与子子子问题之间的关系。屏蔽掉递归细节，这样子理解起来就简单多了。<br>因此，编写递归代码的关键是，只要遇到递归，就把它抽象成一个递推公式，不用想一层层的调用关系，不要试图用人脑去分解递归的每个步骤。</p>
+<h3 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h3><p>1 . 递归代码要警惕堆栈溢出。函数调用会使用栈来保存临时变量。每调用一个函数，都会将临时变量封装为栈帧压入内存栈，等函数执行完成返回时，才出栈。系统栈或者虚拟机栈空间一般都不大。如果递归求解的数据规模很大，调用层次很深，一直压入栈，就会有堆栈溢出的风险。</p>
+<p><strong>解决思路</strong>：可以通过在代码中限制递归调用的最大深度的方式来解决这个问题。递归调用超过一定深度（比如 1000）之后，我们就不继续往下再递归了，直接返回报错。</p>
+<p>2 . 递归代码要警惕重复计算。刚刚的例子中，就存在这个问题，比如要计算<code>f(5)</code>，就需要计算<code>f(4)</code>和<code>f(3)</code>，而计算<code>f(4)</code>，需要计算<code>f(3)</code>和<code>f(2)</code>，这个过程中<strong>f(3)就被计算了多次</strong>。</p>
+<p><strong>解决思路</strong>：通过一个数据结构（散列表）来保存已经求解过的f(i)。当递归调用到f(i)时，先查找这个值是否已经求解。若是，则直接从散列表中取值返回，避免重复计算。</p>
+<h4 id="修改栗子中的代码"><a href="#修改栗子中的代码" class="headerlink" title="修改栗子中的代码"></a>修改栗子中的代码</h4><pre><code>def climbStairs(self,n):
+    hash_list = [0,1,2]
+    if n==1:
+        return hash_list[1]
+    elif n==2:
+        return hash_list[2]
+    else:
+        for i in range(3, n+1):
+            hash_list.append(hash_list[i-1] + hash_list[i-2])
+        return  hash_list[n]
+</code></pre><p>3 . 时间和空间成本很高。在时间效率上，递归代码里多了很多函数调用，当这些函数调用的数量较大时，就会积聚成一个可观的时间成本。在空间复杂度上，因为递归调用一次就会在内存栈中保存一次现场数据，所以在分析递归代码空间复杂度时，需要额外考虑这部分的开销，比如前面的电影院递归代码，空间复杂度并不是 <code>O(1)</code>，而是 <code>O(n)</code>。</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018-10-16/" title= 队列 >
+                    <div class="prevTitle">队列</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC8zNTc1NC8xMjI5MA>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
     
     
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018-01-17/" >
-                
-                    <span>反思</span>
-            </a>
-            <div class="abstract-content">
-                学姐日常汇报工作时被导师咆哮之后，发生了什么？
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/17</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "essay">essay</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -411,6 +530,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用场景"><span class="toc-number">1.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何理解递归"><span class="toc-number">2.</span> <span class="toc-text">如何理解递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么样的问题能用递归来解决？"><span class="toc-number">3.</span> <span class="toc-text">什么样的问题能用递归来解决？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写递归代码"><span class="toc-number">4.</span> <span class="toc-text">编写递归代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#栗子"><span class="toc-number">4.1.</span> <span class="toc-text">栗子</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分析"><span class="toc-number">4.1.1.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#递归代码"><span class="toc-number">4.1.2.</span> <span class="toc-text">递归代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Key"><span class="toc-number">5.</span> <span class="toc-text">Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意问题"><span class="toc-number">6.</span> <span class="toc-text">注意问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改栗子中的代码"><span class="toc-number">6.1.</span> <span class="toc-text">修改栗子中的代码</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1257,6 +1394,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
