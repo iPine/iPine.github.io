@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>Django入门练习的两个错误 · lf94me</title>
+    <title>排序 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -201,7 +201,7 @@
                 <a href="/" >iPine&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Django入门练习的两个错误</a>
+                <a href="#" class="post-name">排序</a>
             </div>
     </div>
     
@@ -226,14 +226,14 @@ height:50vh;
     
     <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.webp)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/door-bg.webp)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Django入门练习的两个错误
+            排序
             <!-- 404 -->
             
         </h1>
@@ -251,13 +251,15 @@ height:50vh;
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "python">python</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "data_structure">data_structure</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "algorithm">algorithm</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/09/12</span>
+                <span class="post-intro-time">2018/10/30</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -363,84 +365,97 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>&#39;learning_logs&#39; is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p>
-<h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示<code>Topics</code>数据的网页时，按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照三步标准流程走完：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p>
-<p>一切工作就绪，运行，报错了。<br>错误如下：</p>
-<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-13/64291775.jpg" alt="ERROR"></p>
-<p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>父模板代码如下：</p>
-<pre><code>&lt;p&gt;
-  &lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;
-  &lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;
-&lt;/p&gt;
-&lt;!-- 插入的块标签 content ，是一个占位符，其中包含的信息将由子模板指定。 --&gt;
-{% block content %}{% endblock content %}
-</code></pre><h3 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h3><p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p>
-<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-13/57959414.jpg" alt="settings.py"></p>
+        <h3 id="问题思考"><a href="#问题思考" class="headerlink" title="问题思考"></a>问题思考</h3><p>插入排序和冒泡排序的时间复杂度相同，都是O(n^2)，在实际软件开发里，为什么更倾向于使用插入排序算法而不是冒泡排序算法呢？</p>
+<h3 id="如何分析一个排序算法"><a href="#如何分析一个排序算法" class="headerlink" title="如何分析一个排序算法"></a>如何分析一个<strong>排序算法</strong></h3><h4 id="排序算法的执行效率"><a href="#排序算法的执行效率" class="headerlink" title="排序算法的执行效率"></a>排序算法的执行效率</h4><p>1 . 最好情况、最坏情况、平均情况时间复杂度<br>分析排序算法的时间复杂度是，要分别给出最好情况、最坏情况、平均情况下的时间复杂度。除此之外，还要说出最好、最坏时间复杂度对应的要排序的原始数据长什么样。</p>
+<p>2 . 时间复杂度的系数、常数、低阶<br>尽管表示时间复杂度时，忽略了系数、常数、低阶。但实际软件开发中，排序的数据可能是10个、100个、1000个这样的小规模数据，因而对于同一阶时间复杂度的排序算法，在比较时，应该把系数、常数和低阶考虑进来。</p>
+<p>3 . 比较次数和交换（移动）次数<br>基于比较的排序算法在执行过程中，会涉及到两种操作，一种是比较元素大小，另一种是元素交换或移动。</p>
+<h4 id="排序算法的内存消耗"><a href="#排序算法的内存消耗" class="headerlink" title="排序算法的内存消耗"></a>排序算法的内存消耗</h4><p>内存消耗可以通过空间复杂度来衡量。针对排序算法的空间复杂度，引入一个新概念，<code>原地排序（Sorted in place）</code>。原地排序算法，就是特指空间复杂度是<code>O(1)</code>的排序算法。</p>
 <blockquote>
-<p>不是这里的问题</p>
+<p>插入排序、冒泡排序、选择排序都是原地排序算法。</p>
 </blockquote>
-<p>2 . 定位到<code>urls.py</code>文件，打开项目文件下的<code>urls.py</code>文件；发现有两个版本的<code>urlpatterns</code>列表.</p>
-<h4 id="旧版本，url式的："><a href="#旧版本，url式的：" class="headerlink" title="旧版本，url式的："></a>旧版本，url式的：</h4><pre><code>from django.conf.urls import url, include
-
-#根据书上的代码写的
-urlpatterns = [
-    url(r&apos;^admin/&apos;,admin.site.urls),
-    url(r&apos;&apos;,include(&apos;learning_logs.urls&apos;)),
-]
-</code></pre><blockquote>
-<p>出现新旧版本，原因在于安装的Django的版本，书中的是1.8；而我装的2.1</p>
-</blockquote>
-<h4 id="新版本，path式的："><a href="#新版本，path式的：" class="headerlink" title="新版本，path式的："></a>新版本，path式的：</h4><pre><code>from django.urls import include, path
-
-urlpatterns = [
-    path(&apos;admin/&apos;, admin.site.urls),
-    path(&apos;&apos;,include(&apos;learning_logs.urls&apos;,namespace=&apos;learning_logs&apos;)),
-]
-</code></pre><blockquote>
-<p>我将path式的注释掉了，用的是url式的。这在今天创建新网页之前，运行都是正常的。</p>
-</blockquote>
-<h3 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h3><p>首先想到：将url式注释掉，尝试path式，看能否运行正常；结果，又报另一个错误：(</p>
+<h4 id="排序算法的稳定性"><a href="#排序算法的稳定性" class="headerlink" title="排序算法的稳定性"></a>排序算法的稳定性</h4><p>稳定性指：如果待排序的序列中存在值相等的元素，经过排序后，相等元素之间原有的先后顺序不变。<br>相等元素之间原有的先后顺序没有变，这种排序算法叫作<strong>稳定的排序算法</strong>；否则，叫作<strong>不稳定的排序算法</strong>。</p>
+<h5 id="为什么要考察排序算法的稳定性？"><a href="#为什么要考察排序算法的稳定性？" class="headerlink" title="为什么要考察排序算法的稳定性？"></a>为什么要考察排序算法的稳定性？</h5><p><strong>场景举栗</strong><br>比如说，我们现在要给电商交易系统中的“订单”排序。订单有两个属性，一个是下单时间，另一个是订单金额。<br>如果我们现在有 10 万条订单数据，我们希望按照金额从小到大对订单数据排序。对于金额相同的订单，我们希望按照下单时间从早到晚有序。对于这样一个排序需求，我们怎么来做呢？</p>
+<p><strong>思路分析</strong></p>
+<ul>
+<li>最先想到的方法是：先按照金额对订单数据进行排序，然后，再遍历排序之后的订单数据，对于每个金额相同的小区间再按照下单时间排序。这种排序思路理解起来不难，但是实现起来会很复杂。</li>
+<li><p>更好的方法是：借助稳定排序算法。先按照下单时间给订单排序，注意是按照下单时间，不是金额。排序完成之后，再用稳定排序算法，按照订单金额重新排序。两遍排序之后，得到的订单数据就是按照金额从小到大排序，金额相同的订单按照下单时间从早到晚排序的。</p>
+</li>
+<li><p>原因：稳定排序算法可以保持金额相同的两个对象，在排序之后的前后顺序不变。第一次排序之后，所有的订单按照下单时间从早到晚有序了。在第二次排序中，因为用的是稳定的排序算法，所以经过第二次排序之后，相同金额的订单仍然保持下单时间从早到晚有序。</p>
+</li>
+</ul>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><h4 id="排序过程"><a href="#排序过程" class="headerlink" title="排序过程"></a>排序过程</h4><p>冒泡排序只会操作相邻的两个数据。每次冒泡操作都会对相邻的两个元素进行比较，看是否满足大小关系要求。如果不满足就让它俩互换。一次冒泡会让至少一个元素移动到它应该在的位置，重复 <code>n</code> 次，就完成了 <code>n</code> 个数据的排序工作。</p>
+<h4 id="优化过程"><a href="#优化过程" class="headerlink" title="优化过程"></a>优化过程</h4><p>当某次冒泡操作已经没有数据交换时，说明已经达到完全有序，就不用再继续执行后续的冒泡操作。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>def bubble_sort(lt):
+    length = len(lt)
+    flag = False
+    for i in range(0,length):
+        for j in range(i+1,length):
+            if lt[i] &gt; lt[j]:                
+                lt[i], lt[j] = lt[j], lt[i] #数据交换
+                flag = True
+        if not flag:
+            break
+    return lt
+</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>1 . 冒泡排序只涉及相邻数据的交换操作，只需常量级的临时空间，空间复杂度为<code>O(1)</code>，所以是一个<strong>原地排序算法</strong>。<br>2 . 冒泡排序中只有交换才改变两个元素的前后顺序。为了保证其稳定性，当相邻元素相等时，不做交换，那么相同大小的数据在排序前后不会改变顺序。所以冒泡排序是<strong>稳定</strong>的排序算法。<br>3 . 最好情况下，排序数据已经是有序的，只进行一次冒泡操作，所以时间复杂度是<code>O(n)</code>；最坏情况是，排序的数据刚好是倒序排列的，需要进行n次冒泡操作，所以时间复杂度为<code>O(n^2)</code>；<br>平均时间复杂度，采用一种不严格的方法，通过<strong>有序度</strong>和<strong>逆序度</strong>两个概念来分析。</p>
 <blockquote>
-<p>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</p>
+<p>有序度：数组中具有有序关系的元素对的个数。（默认，从小到大是有序的）</p>
 </blockquote>
-<p>理解下意思，大致就是：应该在include模块中设置app_name属性，或者传递一个包含模式列表和app_name的2元组<br>又百度一番，知道了<code>include</code>模块需包含两个参数，前一个为2元组，后一个为<code>namespace</code>；于是将代码修改成这样：</p>
-<pre><code>from django.urls import include, path
-
-urlpatterns = [
-    path(&apos;admin/&apos;, admin.site.urls),
-    path(&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;),namespace=&apos;learning_logs&apos;)),    
-]
-</code></pre><blockquote>
-<p>OK! 运行正常</p>
+<p>例：2,4,3,5这组数据的有序度为：5，分别是<code>(2,4),(2,3),(2,5),(4,5),(3,5)</code>；同理，对于一个倒序排列的数组，有序度为0；对于一个完全有序的数组，比如2,3,4,5，有序度就是<code>n*(n-1)/2</code>，也就是6。把这种完全有序的数组的有序度叫作<strong>满有序度</strong>。<br><strong>逆有序度</strong>：其定义跟有序度正好相反。</p>
+<blockquote>
+<p>逆有序度 = 满有序度 - 有序度 </p>
 </blockquote>
-<p>网上搜索一番，发现新旧版本的区别在于是否显示声明<code>namespace</code>的值，在旧版本url式中<code>namespace</code>是注册了的，而新版本未注册。<br>用url式的代码如下：</p>
-<pre><code>from django.conf.urls import url, include
-
-urlpatterns = [
-    url(r&apos;^admin/&apos;,admin.site.urls),
-    url(r&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;))),
-]
-</code></pre><blockquote>
-<p>Include只需包含一个参数arg：2元组；namespace不需要显示声明。</p>
+<p>排序的过程就是一种增加有序度，减少逆序度的过程，最后达到满有序度，说明排序完成。<br>冒泡排序中，包含两个操作，比较和交换。每交换一次，有序度就加1。不管算法怎么改进，交换次数总是确定的，即为逆序度，也就是等于<code>n*(n-1)/2 - 初始有序度</code>。对于2,4,3,5这组数据来说，6-5=1，只需进行1次交换操作。</p>
+<h4 id="那么对于包含n个数据的数组进行冒泡排序，平均交换次数是多少呢？"><a href="#那么对于包含n个数据的数组进行冒泡排序，平均交换次数是多少呢？" class="headerlink" title="那么对于包含n个数据的数组进行冒泡排序，平均交换次数是多少呢？"></a>那么对于包含n个数据的数组进行冒泡排序，平均交换次数是多少呢？</h4><ul>
+<li><strong>最坏情况</strong>：初始有序度为<strong>0</strong>，需要进行<code>n*(n-1)/2</code>次交换</li>
+<li><strong>最好情况</strong>：初始有序度为 <code>n*(n-1)/2</code>，需要进行<strong>0</strong>次交换</li>
+<li><strong>平均情况</strong>：取一个中间值 <code>n*(n-1)/4</code>，来表示初始有序度既不是很高也不是很低的平均情况。换句话说，平均情况下，需要 <code>n*(n-1)/4</code> 次交换操作，比较操作肯定比交换操作更多，而时间复杂度的上限是 <code>O(n^2)</code>，所以平均情况下的时间复杂度就是 <code>O(n^2)</code>。</li>
+</ul>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>对于一个原本有序的数组，往里面加一个新数据后，如何继续保持数据的有序呢？很简单，只需要遍历数组，找到数据应该插入的位置将其插入即可。</p>
+<blockquote>
+<p>插入排序就是借助这个思想来实现排序的。</p>
 </blockquote>
-<p>到此，问题解决。 完：）</p>
+<h4 id="排序过程-1"><a href="#排序过程-1" class="headerlink" title="排序过程"></a>排序过程</h4><p>首先，将数组中的数据分为两个区间，已排序区间和未排序区间。初始已排序区间只有一个元素，就是数组的第一个元素。插入算法的核心思想是取未排序区间中的元素，在已排序区间中找到合适的插入位置将其插入，并保证已排序区间数据一直有序。重复这个过程，直到未排序区间中元素为空，算法结束。</p>
+<h4 id="两种操作"><a href="#两种操作" class="headerlink" title="两种操作"></a>两种操作</h4><p>一种是元素的比较，另一种是元素的移动。对于不同的查找插入点方法（从头到尾，从尾到头），元素的比较次数是有区别的。但<strong>对于一个给定的初始序列，移动操作的次数总是固定的，即为逆序度</strong>。（为什么<code>移动次数=逆序度</code>，可以拿个实例画一个图，很容易明白）</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><pre><code>def insertion_sort(lt):
+    length = len(lt)
+    for i in range(1, length):
+        value = lt[i]
+        for j in range(i-1,-1,-1):
+            if lt[j] &gt; value:
+                lt[j+1] = lt[j] #数据移动
+            else:
+                break #位置确定
+        lt[j+1] = value  #插入数据
+    return lt
+</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>1 . 插入排序算法的运行并不需要额外的存储空间，空间复杂度为 <code>O(1)</code>，所以是一个<strong>原地排序算法</strong>。<br>2 . 插入排序中，对于值相同的元素，可以选择将后面出现的元素，插入到前面出现元素后面，保持原有前后顺序不变。所以插入排序是<strong>稳定</strong>的排序算法。<br>3 . 时间复杂度分析。</p>
+<ul>
+<li><strong>最好情况</strong>：数据已经有序，不需要搬移任何数据。如果从尾到头在有序数组里查找插入位置，每次只需比较一个数据就能确定插入位置。时间复杂度为 <code>O(n)</code>；</li>
+<li><strong>最坏情况</strong>：数组是倒序的，每次插入都相当于在数组的第一个位置插入新数据，所有需要移动大量数据。时间复杂度为 <code>O(n^2)</code>；</li>
+<li><strong>平均情况</strong>：在数组中插入一个数据的平均时间复杂度为 <code>O(n)</code>，对于插入排序来说，每次插入操作就相当于在数组中插入一个数据，循环执行 <code>n</code> 次插入操作。所以平均时间复杂度为 <code>O(n^2)</code>。</li>
+</ul>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>思路与插入排序类似，也分已排序区间和未排序区间。但是选择排序<strong>每次会从未排序区间中找到最小的元素，将其放到已排序区间末尾</strong>。最开始没有已排好的区间，找到数组中最小元素，将其与第一个元素交换，然后再执行以上过程。</p>
+<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><pre><code>def selection_sort(lt):
+    length = len(lt)
+    for i in range(0,length-1):
+        smallest_index = i
+        for j in range(i+1, length):
+            if lt[j] &lt; lt[smallest_index]:
+                lt[j], lt[smallest_index] = lt[smallest_index], lt[j]
+    return lt
+</code></pre><h4 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h4><p>1 . 选择排序空间复杂度为O(1)，是一种<strong>原地排序算法</strong>。<br>2 . 时间复杂度分析。最好情况、最坏情况和平均时间复杂度都为 <code>O(n^2)</code>。<br>3 . 选择排序是一种<strong>不稳定</strong>的排序算法。因为其每次都要找剩余未排序元素中的最小值，并和前面的元素交换位置，这样就破坏了稳定性。也因为此，相比于冒泡排序和插入排序，选择排序没那么好。</p>
+<h3 id="解答开篇"><a href="#解答开篇" class="headerlink" title="解答开篇"></a>解答开篇</h3><p>冒泡排序和插入排序的时间复杂度都是 <code>O(n2)</code>，都是原地排序算法，为什么插入排序要比冒泡排序更受欢迎呢？<br>前面说过，冒泡排序不管怎么优化，元素交换的次数是一个固定值，是原始数据的逆序度。插入排序是同样的，不管怎么优化，元素移动的次数也等于原始数据的逆序度。<br>但是，从代码实现上来看，<strong>冒泡排序的数据交换要比插入排序的数据移动更复杂</strong>，冒泡排序需要 3 个赋值操作，而插入排序只需要 1 个。所以在对相同数组进行排序时，冒泡排序的运行时间理论上要长于插入排序。</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018-09-15/" title= Use Seaborn to Create Animated Graph >
-                    <div class="nextTitle">Use Seaborn to Create Animated Graph</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018-08-30/" title= UnboundLocalError >
-                    <div class="prevTitle">UnboundLocalError</div>
+                <a href= "/2018-10-29/" title= 递归 >
+                    <div class="prevTitle">递归</div>
                 </a>
             
         </li>
@@ -565,7 +580,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一个错误来源"><span class="toc-number">1.</span> <span class="toc-text">第一个错误来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排查问题"><span class="toc-number">2.</span> <span class="toc-text">排查问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#旧版本，url式的："><span class="toc-number">2.1.</span> <span class="toc-text">旧版本，url式的：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#新版本，path式的："><span class="toc-number">2.2.</span> <span class="toc-text">新版本，path式的：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#错误解决"><span class="toc-number">3.</span> <span class="toc-text">错误解决</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题思考"><span class="toc-number">1.</span> <span class="toc-text">问题思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何分析一个排序算法"><span class="toc-number">2.</span> <span class="toc-text">如何分析一个排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#排序算法的执行效率"><span class="toc-number">2.1.</span> <span class="toc-text">排序算法的执行效率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#排序算法的内存消耗"><span class="toc-number">2.2.</span> <span class="toc-text">排序算法的内存消耗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#排序算法的稳定性"><span class="toc-number">2.3.</span> <span class="toc-text">排序算法的稳定性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#为什么要考察排序算法的稳定性？"><span class="toc-number">2.3.1.</span> <span class="toc-text">为什么要考察排序算法的稳定性？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序"><span class="toc-number">3.</span> <span class="toc-text">冒泡排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#排序过程"><span class="toc-number">3.1.</span> <span class="toc-text">排序过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优化过程"><span class="toc-number">3.2.</span> <span class="toc-text">优化过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析"><span class="toc-number">3.4.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#那么对于包含n个数据的数组进行冒泡排序，平均交换次数是多少呢？"><span class="toc-number">3.5.</span> <span class="toc-text">那么对于包含n个数据的数组进行冒泡排序，平均交换次数是多少呢？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入排序"><span class="toc-number">4.</span> <span class="toc-text">插入排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#排序过程-1"><span class="toc-number">4.1.</span> <span class="toc-text">排序过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#两种操作"><span class="toc-number">4.2.</span> <span class="toc-text">两种操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-1"><span class="toc-number">4.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析-1"><span class="toc-number">4.4.</span> <span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择排序"><span class="toc-number">5.</span> <span class="toc-text">选择排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-2"><span class="toc-number">5.1.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析-2"><span class="toc-number">5.2.</span> <span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解答开篇"><span class="toc-number">6.</span> <span class="toc-text">解答开篇</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
