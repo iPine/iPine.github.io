@@ -10,7 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <meta name="description" content="Hello, it's me.">
-    <title>算法复杂度分析 · lf94me</title>
+    <title>排序 · lf94me</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -201,7 +201,7 @@
                 <a href="/" >iPine&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">算法复杂度分析</a>
+                <a href="#" class="post-name">排序</a>
             </div>
     </div>
     
@@ -233,7 +233,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            算法复杂度分析
+            排序
             <!-- 404 -->
             
         </h1>
@@ -259,7 +259,7 @@ height:50vh;
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/09/28</span>
+                <span class="post-intro-time">2018/11/02</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -365,144 +365,103 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p><code>执行效率</code>是算法优劣的度量指标，而执行效率又是通过时间、空间复杂度分析。</p>
-<h3 id="为什么需要复杂度分析？"><a href="#为什么需要复杂度分析？" class="headerlink" title="为什么需要复杂度分析？"></a>为什么需要复杂度分析？</h3><p>将代码跑一遍，通过统计、监控，就能得到算法执行时间和占用的内存大小。—–这叫事后统计法<br>存在局限性：<br>1 . 测试结果依赖于测试环境<br>2 . 测试结果受测试数据的规模影响</p>
+        <p>之前说的，冒泡排序、插入排序、选择排序三种算法的时间复杂度都是<code>O(n^2)</code>，很高，适用于小规模数据的排序。<br>而，<code>归并排序</code>和<code>快速排序</code>，适用于大规模的数据排序，更为常用。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>归并排序和快速排序都用到了分治思想，借助这个思想可以解决非排序问题。</p>
 <blockquote>
-<p>如何能不用具体的测试数据，就可以粗略估计算法的执行效率呢？</p>
+<p>如何在O(n)的时间复杂度内查找一个无序数组中的第K大元素？</p>
 </blockquote>
-<h3 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h3><ul>
-<li><p>首先看个栗子：</p>
-<pre><code>int cal(int n){
-   int sum = 0;
-   int i = 1;
-   for (; i &lt;= n; ++i) {
-     sum = sum + i;
-   }
-   return sum;
-}
-</code></pre></li>
-</ul>
-<h4 id="CPU角度分析"><a href="#CPU角度分析" class="headerlink" title="CPU角度分析"></a>CPU角度分析</h4><p>这段代码每一行都执行着操作：<code>读数据-运算-写数据</code>。<br>每行代码对应的CPU执行个数和执行时间不同，但假设每行代码执行时间为 <code>unit_time</code>。<br>那么上面一段代码的执行时间应为： <code>(2n+2) * unit_time</code></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><blockquote>
-<p>所有代码的执行时间 T(n) 与每行代码的执行次数成正比。</p>
-</blockquote>
-<ul>
-<li><p>按照这个思路分析下面一段代码的执行时间T(n)</p>
-<pre><code>1 int cal(int n) {
-2   int sum = 0;
-3   int i = 1;
-4   int j = 1;
-5   for (; i &lt;= n; ++i) {
-6     j = 1;
-7     for (; j &lt;= n; ++j) {
-8       sum = sum +  i * j;
-9     }
-10   }
-11 }
-</code></pre></li>
-</ul>
-<h4 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h4><p>对于2,3,4行，执行每行需要1个unit_time；执行5,6行需要n个unit_time；执行7,8行需要<code>n * n</code>个unit_time<br>总的执行时间为  <code>T(n) = (2n * n + 2n + 3)*unit_time</code></p>
-<h4 id="规律总结"><a href="#规律总结" class="headerlink" title="规律总结"></a>规律总结</h4><p>通过以上两段代码的执行时间推导，得到规律：</p>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><h4 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h4><p>对于要排序的数组，先把数组从中间分成前后两部分，然后对前后两部分分别排序，再将排好序的两部分合并在一起。<br>归并排序用到的就是分治思想，顾名思义，就是分而治之，将大问题分解为小的子问题来解决。</p>
 <blockquote>
-<p>所有代码的执行时间 T(n) 与每行代码的执行次数 n 成正比。</p>
+<p>分治思想跟递归很向。分治算法一般都用递归来实现的。分治是一种解决问题的处理思想，递归是一种编程技巧。</p>
 </blockquote>
-<h4 id="公式表示"><a href="#公式表示" class="headerlink" title="公式表示"></a>公式表示</h4><blockquote>
-<p>T(n) = O(f(n))<br>  其中，T(n)表示代码执行时间；n 表示数据规模的大小；f(n) 表示每行代码执行的次数总和； O 表示代码的执行时间 T(n) 与 f(n) 表达式成正比。</p>
-</blockquote>
-<p>那么以上两个例子的大O表示应为：</p>
-<blockquote>
-<p>T(n) = O(2n + 2)   —–&gt; T(n) = O(n)<br>  T(n) = O(2n * n + 2n + 3)   —–&gt; T(n) = O(n * n)</p>
-</blockquote>
-<p><strong>注：公式中的低阶、常量、系数三部分并不决定增长趋势，因而可以忽略。</strong></p>
-<blockquote>
-<p>大O时间复杂度实际上并不具体表示代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势。<br>因而，也叫作渐进时间复杂度，简称时间复杂度。</p>
-</blockquote>
-<h3 id="如何分析时间复杂度"><a href="#如何分析时间复杂度" class="headerlink" title="如何分析时间复杂度"></a>如何分析时间复杂度</h3><h4 id="1、只关注循环执行次数最多的一段代码"><a href="#1、只关注循环执行次数最多的一段代码" class="headerlink" title="1、只关注循环执行次数最多的一段代码"></a>1、只关注循环执行次数最多的一段代码</h4><h4 id="2、加法法则"><a href="#2、加法法则" class="headerlink" title="2、加法法则"></a>2、加法法则</h4><p>总复杂度等于量级最大的那段代码的复杂度</p>
-<ul>
-<li><p>举个栗子：分析下面这段代码的时间复杂度</p>
-<pre><code>int cal(int n) {
-   int sum_1 = 0;
-   int p = 1;
-   for (; p &lt; 100; ++p) {
-     sum_1 = sum_1 + p;
-   }
-   int sum_2 = 0;
-   int q = 1;
-   for (; q &lt; n; ++q) {
-     sum_2 = sum_2 + q;
-   }
-   int sum_3 = 0;
-   int i = 1;
-   int j = 1;
-   for (; i &lt;= n; ++i) {
-     j = 1;
-     for (; j &lt;= n; ++j) {
-       sum_3 = sum_3 +  i * j;
-     }
-   }
-   return sum_1 + sum_2 + sum_3;
-}
-</code></pre></li>
-</ul>
-<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>代码是要分别求sum_1、sum_2、sum_3。那么算时间复杂度就分别求每一部分的时间复杂度，再放在一起，取量级最大的那个作为整段代码的时间复杂度。</p>
-<ul>
-<li>sum_1处：执行100次，与n无关；是常量执行时间</li>
-</ul>
-<blockquote>
-<p>注：即使循环100000次，只要是一个已知数，与n无关，那么就是一个常量执行时间。<br>  因为时间复杂度表示的是一个算法执行效率与数据规模增长的变化趋势，所以不管常量的执行时间多大，都可以忽略。因为其本身对增长趋势没有影响。</p>
-</blockquote>
-<ul>
-<li>sum_2处：<code>O(n)</code></li>
-<li>sum_3处：<code>O(n*n)</code><br>根据方法2，整段代码的时间复杂度就等于 <code>O(n*n)</code></li>
-</ul>
-<h5 id="将规律抽象成公式"><a href="#将规律抽象成公式" class="headerlink" title="将规律抽象成公式"></a>将规律抽象成公式</h5><blockquote>
-<p>若 T1(n)=O(f(n))，T2(n)=O(g(n))；<br>那么 T(n)=T1(n)+T2(n) = max(O(f(n)), O(g(n))) = O(max(f(n), g(n))).</p>
-</blockquote>
-<h4 id="3、乘法法则"><a href="#3、乘法法则" class="headerlink" title="3、乘法法则"></a>3、乘法法则</h4><p>嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</p>
-<h5 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h5><blockquote>
-<p>若 <code>T1(n)=O(f(n))，T2(n)=O(g(n))</code>；<br>那么  <code>T(n)=T1(n)*T2(n) = O(f(n))*O(g(n)) = O(f(n)*g(n))</code>.</p>
-</blockquote>
-<h4 id="几种常见时间复杂度实例分析"><a href="#几种常见时间复杂度实例分析" class="headerlink" title="几种常见时间复杂度实例分析"></a>几种常见时间复杂度实例分析</h4><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-28/46917205.jpg" alt="常见复杂度实例"></p>
-<blockquote>
-<p>注 <code>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n*n)</code></p>
-</blockquote>
-<p>以上罗列的复杂度量级，可以粗略分为两类：多项式量级、非多项式量级（指数阶和阶乘阶）</p>
-<blockquote>
-<p>将时间复杂度为非多项式量级的算法问题叫作NP问题。当数据规模增大时，非多项式时间复杂度的算法效率非常低。</p>
-</blockquote>
-<h5 id="重点关注常见的多项式时间复杂度"><a href="#重点关注常见的多项式时间复杂度" class="headerlink" title="重点关注常见的多项式时间复杂度"></a>重点关注常见的多项式时间复杂度</h5><p>1 . <code>O(1)</code><br>明确：O(1)是常量级时间复杂度的一种表示方法，并不是指只执行了一行代码。<br>一般情况下，只要算法中不存在循环语句、递归语句，即使有成千上万行的代码，其时间复杂度也是Ο(1)。</p>
-<p>2 . <code>O(logn)</code>、<code>O(nlogn)</code><br>最难分析的一种时间复杂度<br>最常见的例子：</p>
-<pre><code>1 i=1;
-2 while (i &lt;= n)  {
-3   i = i * 2;
-  //i = i * 3;
-4 }
-</code></pre><p>分析：变量i从1开始取，每循环一次就乘以2。变量i的取值就是一个等比数列： 2的x次方为n，求解x为多少。<code>x=logn</code>(以2为底)<br>若循环体内的代码改成 <code>i = i * 3</code>;那么时间复杂度为<code>O(logn)</code>(以3为底)</p>
-<p>我们把所有对数阶的时间复杂度都记为<code>O(logn)</code><br>因为：<code>log3n</code> 就等于 <code>log32 * log2n</code>，所以 <code>O(log3n) = O(C * log2n)</code>，其中 <code>C=log32</code> 是一个常量。<br>基于我们前面的一个理论：在采用大 O 标记复杂度的时候，可以忽略系数，即 <code>O(C*f(n)) = O(f(n))</code>。</p>
-<blockquote>
-<p>如果一段代码的时间复杂度是 O(logn)，我们循环执行 n 遍，时间复杂度就是 O(nlogn) 。</p>
-</blockquote>
-<p><strong>O(nlogn) 也是一种非常常见的算法时间复杂度。比如，归并排序、快速排序的时间复杂度都是 O(nlogn)。</strong></p>
-<p>3 . <code>O(m+n)</code>、<code>O(m*n)</code><br>代码的时间复杂度由两个数据的规模来决定。无法评估m和n谁的量级更大，所以在表示复杂度时，就不能简单利用加法法则，而忽略掉其中一个。<br>针对这种情况，原来的加法法则应改为 <code>T1(m) + T2(n) = O(f(m) + g(n))</code>；乘法法则继续有效 <code>T1(m)*T2(n) = O(f(m) * f(n))</code>。</p>
-<h3 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h3><p>渐进空间复杂度，表示算法的存储空间与数据规模之间的增长关系。<br>我们常见的空间复杂度就是 <code>O(1)、 O(n)、 O(n*n )</code>，像 <code>O(logn)、 O(nlogn)</code> 这样的对数阶复杂度平时都用不到。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-29/66748631.jpg" alt="常见复杂度函数变化"></p>
+<h4 id="如何用递归代码实现归并排序？"><a href="#如何用递归代码实现归并排序？" class="headerlink" title="如何用递归代码实现归并排序？"></a>如何用递归代码实现归并排序？</h4><p>先写出归并排序的递推公式</p>
+<pre><code>递推公式：
+merge_sort(p...q) = merge(merge_sort(p...r), merge_sort(r+1...q)) #r = (p+q)/2,即数组的中间位置
+
+终止条件：
+p &gt;= q #不用再继续分解的时候
+</code></pre><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>def merge_sort(lt):
+    if len(lt) &lt;= 1:
+        return lt
+    middle = len(lt)/2
+    left = merge_sort(lt[:middle])
+    right = merge_sort(lt[middle:])
+    return merge(left, right)
+
+def merge(arr1, arr2):
+    arr_result = []
+    while len(arr1)&gt;0 and len(arr2)&gt;0:
+        if arr1[0] &lt;= arr2[0]:
+            arr_result.append(arr1.pop(0))
+        else:
+            arr_result.append(arr2.pop(0))
+    #while循环结束，说明有个条件不满足，即有个数组已经没有数据元素了，此时将另一个数组的数据加入到结果数组中
+    arr_result += arr1
+    arr_result += arr2
+    return arr_result
+</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>1 . 归并排序是否是稳定排序算法？关键看<code>merge()</code>函数，即两个有序子数组合并成最终结果数组的那部分代码。在合并过程中，如果<code>arr1[p...r]</code>和<code>arr2[r+1...q]</code>之间有相同元素，那么可以先把<code>arr1[p...r]</code>中的元素放入最终结果数组。这样就保证了值相同的元素，在合并前后的先后顺序不变。所以，归并排序是<strong>稳定的</strong>排序算法。<br>2 . 时间复杂度分析。归并排序涉及递归，时间复杂度该如何分析？<br><strong>递归适用场景</strong>：一个问题A可以分解为多个子问题B、C，求解A就就分解为求解B、C。问题B、C解决后，在把这个问题的结果合成A的结果。<br>若定义求解问题A的时间为<code>T(A)</code>，求解问题B、C的时间分别为<code>T(B)</code>和<code>T(C)</code>，则有一个递推关系</p>
+<pre><code>T(A) = T(B) + T(C) + K    其中K为两个子问题B、C的结果合成问题A的结果所花费时间
+</code></pre><p>套用这个公式来分析归并排序的时间复杂度：<br>假设对 <code>n</code> 个元素进行归并排序需要的时间是 <code>T(n)</code>，那分解成两个子数组排序的时间都是 <code>T(n/2)</code>。<code>merge()</code> 函数合并两个有序子数组的时间复杂度是 <code>O(n)</code>。所以，套用前面的公式，归并排序的时间复杂度的计算公式就是：</p>
+<pre><code>T(1) = C;  n=1 时，只需要常量级的执行时间
+T(n) = T(n/2) *2 + n;  n&gt;1 
+</code></pre><p>进一步分解可知道：</p>
+<pre><code>T(n) = 2*T(n/2) + n
+     = 2*(2*T(n/4) + n/2) + n = 4*T(n/4) + 2*n
+     = 4*(2*T(n/8) + n/4) + 2*n = 8*T(n/8) + 3*n
+     = 8*(2*T(n/16) + n/8) + 3*n = 16*T(n/16) + 4*n
+     ......
+     = 2^k * T(n/2^k) + k * n
+     ......
+
+即 T(n) = 2^k * T(n/2^k) + k * n, 当 T(n/2^k) = 1 时，k = log2^n
+则  T(n) = 2^log2^n + log2^n * n = Cn + n*log2^n
+</code></pre><p>用大O标记法表示，<code>T(n) = O(nlogn)</code></p>
+<p>归并排序的<strong>执行效率与要排序的原始数组的有序程度无关</strong>，所以其时间复杂度是非常稳定的，不管是最好情况、最坏情况，还是平均情况，时间复杂度都是 <code>O(nlogn)</code>。</p>
+<p>3 . 空间复杂度分析。归并排序的时间复杂度在任何情况下都是 <code>O(nlogn)</code>，看起来非常优秀，但是它并没有像快排那样应用广泛，其原因就是因为它有一个致命<code>弱点</code>，归并排序<strong>不是原地排序算法</strong>。主要原因在于<code>merge()</code>函数，需要借助额外的存储空间。</p>
+<p>分析递归代码的空间复杂度并不能像时间复杂度那样累加。尽管每次合并操作都需要申请额外的内存空间，但在合并完成之后，临时开辟的内存空间就被释放掉了。在任意时刻，CPU 只会有一个函数在执行，也就只会有一个临时的内存空间在使用。临时内存空间最大也不会超过 n 个数据的大小，所以空间复杂度是 <code>O(n)</code>。</p>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><h4 id="核心思想-1"><a href="#核心思想-1" class="headerlink" title="核心思想"></a>核心思想</h4><p>如果要排序数组中下标从 <code>p</code> 到 <code>q</code> 之间的一组数据，我们选择 <code>p</code> 到 <code>q</code> 之间的任意一个数据作为 <code>pivot（分区点）</code>（可选择末尾数字）。</p>
+<p>遍历 <code>p</code> 到 <code>q</code> 之间的数据，将小于 <code>pivot</code> 的放到左边，将大于 <code>pivot</code> 的放到右边，将 <code>pivot</code> 放到中间。经过这一步骤之后，数组 <code>p</code> 到 <code>q</code> 之间的数据就被分成了三个部分，前面 <code>p</code> 到 <code>r-1</code> 之间都是小于 <code>pivot</code> 的，中间是 <code>pivot</code>，后面的 <code>r+1</code> 到 <code>q</code> 之间是大于 <code>pivot</code> 的。<br>其中一次排序步骤如下：</p>
+<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-11-2/64232703.jpg" alt="快排"></p>
+<p>递归排序下标从 <code>p</code> 到 <code>r-1</code> 之间的数据和下标从 <code>r+1</code> 到 <code>r</code> 之间的数据，直到区间缩小为 1，就说明所有的数据都有序了。</p>
+<pre><code>递推公式
+quick_sort(p...q) = quick_sort(p...r-1) + quick_sort(r+1...q)
+终止条件
+p &gt;= q
+</code></pre><h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><p>partition() 函数不需要额外的内存空间，保证快排是<strong>原地排序算法</strong>。</p>
+<pre><code>def quick_sort(lt, lindex, rindex):
+    if lindex &lt; rindex:
+        pivot = partition(lt, lindex, rindex)
+        quick_sort(lt, lindex, pivot)
+        quick_sort(lt, pivot+1, rindex)
+    else:
+        return
+
+
+def partition(lt, lindex, rindex):
+    i = lindex - 1
+    for j in range(lindex, rindex):
+        if lt[j] &lt;= lt[rindex]: #最后一个数据为pivot
+            i += 1
+            lt[i],lt[j] = lt[j], lt[i]
+    lt[i+1], lt[rindex] = lt[rindex], lt[i+1] #将分区点交换到数组中间位置
+    return i
+</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>1 . 快速排序是<strong>原地排序算法</strong>，即空间复杂度为O(1)。但在分区的过程涉及交换操作，如果数组中有两个相同的元素，在经过一次分区操作后，元素的相对先后顺序会改变。所以，快排<strong>不是一个稳定的排序算法</strong>。<br>2 . 时间复杂度分析。快排也是基于递归思想，前面的递归公式在这里仍适用。如果每次分区操作，都能正好把数组分成大小接近相等的两个小区间，那快排的时间复杂度递推求解公式跟归并是相同的。所以，快排的时间复杂度也是 <code>O(nlogn)</code>。但是，公式成立的前提是每次分区操作，选择的 <code>pivot</code> 都很合适，正好能将大区间对等地一分为二。但实际上这种情况是很难实现的。如果以最后一个元素作为<code>pivot</code>，需要进行大约 <code>n</code> 次分区操作，才能完成快排的整个过程。每次分区平均要扫描大约 <code>n/2</code> 个元素，这种情况下，快排的时间复杂度就从 <code>O(nlogn)</code> 退化成了 <code>O(n^2)</code>。<br>以上两种情况分别对应于<strong>最好情况</strong>和<strong>最坏情况</strong>，在大部分情况下快排的时间复杂度都可以做到 <code>O(nlogn)</code>，只有在极端情况下，才会退化到 <code>O(n^2)</code>。而且，有方法将这个极端情况的概率降到很低。</p>
+<h3 id="快速排序和归并排序的区别"><a href="#快速排序和归并排序的区别" class="headerlink" title="快速排序和归并排序的区别"></a>快速排序和归并排序的区别</h3><p>快排和归并都用到分治思想，地推公式和递归代码也相似，它们的<strong>区别</strong>在于：归并排序的处理过程是<strong>由下到上</strong>的，先处理子问题，然后再合并；而快排正好相反，它的处理过程是<strong>由上到下</strong>的，先分区，再处理子问题。<br>归并排序虽然是<code>稳定的</code>、时间复杂度为 <code>O(nlogn)</code> 的排序算法，但是它是<code>非原地排序算法</code>，主要原因是合并函数无法在原地执行。快速排序通过设计巧妙的原地分区函数，可以实现<code>原地排序</code>，解决了归并排序占用太多内存的问题。</p>
+<h3 id="解答开篇"><a href="#解答开篇" class="headerlink" title="解答开篇"></a>解答开篇</h3><p>利用分区思想，在<code>O(n)</code>时间复杂度时间内求无序数组中的第 <code>K</code> 大元素。<br>选择数组<code>arr[0,n-1]</code>的最后一个元素作为<code>pivot</code>，对数组<code>arr[0,n-1]</code>原地分区，数组分成三部分，<code>arr[0...p-1], arr[p], arr[p+1...n-1]</code>。如果 <code>p+1=K</code>，那 <code>arr[p]</code> 就是要求解的元素；如果 <code>K&gt;p+1</code>, 说明第 <code>K</code> 大元素出现在 <code>arr[p+1…n-1]</code> 区间，再按照上面的思路递归地在 <code>arr[p+1…n-1]</code> 这个区间内查找。同理，如果 <code>K&lt;p+1</code>，那就在 <code>arr[0…p-1]</code> 区间查找。</p>
+<h4 id="为什么上述解决思路的时间复杂度是-O-n-？"><a href="#为什么上述解决思路的时间复杂度是-O-n-？" class="headerlink" title="为什么上述解决思路的时间复杂度是 O(n)？"></a>为什么上述解决思路的时间复杂度是 O(n)？</h4><p>第一次分区查找，需要对大小为 <code>n</code> 的数组执行分区操作，需要遍历 <code>n</code> 个元素。第二次分区查找，只需要对大小为 <code>n/2</code> 的数组执行分区操作，需要遍历 <code>n/2</code> 个元素。依次类推，分区遍历元素的个数分别为、<code>n/2、n/4、n/8、n/16.……</code> 直到区间缩小为 1。<br>把每次分区遍历的元素个数加起来，就是：<code>n+n/2+n/4+n/8+…+1</code> 。这是一个等比数列求和，最后的和等于 <code>2n-1</code>。所以，上述解决思路的时间复杂度就为 <code>O(n)</code>。</p>
+<h4 id="另一种思路"><a href="#另一种思路" class="headerlink" title="另一种思路"></a>另一种思路</h4><p>每次取数组中的最小值，将其移动到数组的最前面，然后在剩下的数组中继续找最小值，以此类推，执行 <code>K</code> 次，找到的数据就是第 <code>K</code> 大元素。<br>思路是对的，但时间复杂度就不是 <code>O(n)</code> 了，而是 <strong><code>O(K * n)</code></strong>。当 <code>K</code> 是比较小的常量时，比如 1、2，那最好时间复杂度确实是 <code>O(n)</code>；但当 <code>K</code> 等于 <code>n/2</code> 或者 <code>n</code> 时，这种最坏情况下的时间复杂度就是 <code>O(n^2)</code> 了。</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018-09-29/" title= 算法复杂度分析 >
-                    <div class="nextTitle">算法复杂度分析</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018-09-26/" title= 发表的论文 >
-                    <div class="prevTitle">发表的论文</div>
+                <a href= "/2018-10-30/" title= 排序 >
+                    <div class="prevTitle">排序</div>
                 </a>
             
         </li>
@@ -627,7 +586,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么需要复杂度分析？"><span class="toc-number">1.</span> <span class="toc-text">为什么需要复杂度分析？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大O复杂度表示法"><span class="toc-number">2.</span> <span class="toc-text">大O复杂度表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CPU角度分析"><span class="toc-number">2.1.</span> <span class="toc-text">CPU角度分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">2.2.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析过程"><span class="toc-number">2.3.</span> <span class="toc-text">分析过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规律总结"><span class="toc-number">2.4.</span> <span class="toc-text">规律总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#公式表示"><span class="toc-number">2.5.</span> <span class="toc-text">公式表示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何分析时间复杂度"><span class="toc-number">3.</span> <span class="toc-text">如何分析时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、只关注循环执行次数最多的一段代码"><span class="toc-number">3.1.</span> <span class="toc-text">1、只关注循环执行次数最多的一段代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、加法法则"><span class="toc-number">3.2.</span> <span class="toc-text">2、加法法则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分析"><span class="toc-number">3.2.1.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#将规律抽象成公式"><span class="toc-number">3.2.2.</span> <span class="toc-text">将规律抽象成公式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、乘法法则"><span class="toc-number">3.3.</span> <span class="toc-text">3、乘法法则</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#公式"><span class="toc-number">3.3.1.</span> <span class="toc-text">公式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#几种常见时间复杂度实例分析"><span class="toc-number">3.4.</span> <span class="toc-text">几种常见时间复杂度实例分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#重点关注常见的多项式时间复杂度"><span class="toc-number">3.4.1.</span> <span class="toc-text">重点关注常见的多项式时间复杂度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空间复杂度分析"><span class="toc-number">4.</span> <span class="toc-text">空间复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题"><span class="toc-number">1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#归并排序"><span class="toc-number">2.</span> <span class="toc-text">归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思想"><span class="toc-number">2.1.</span> <span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何用递归代码实现归并排序？"><span class="toc-number">2.2.</span> <span class="toc-text">如何用递归代码实现归并排序？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码"><span class="toc-number">2.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析"><span class="toc-number">2.4.</span> <span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序"><span class="toc-number">3.</span> <span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思想-1"><span class="toc-number">3.1.</span> <span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-1"><span class="toc-number">3.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析-1"><span class="toc-number">3.3.</span> <span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序和归并排序的区别"><span class="toc-number">4.</span> <span class="toc-text">快速排序和归并排序的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解答开篇"><span class="toc-number">5.</span> <span class="toc-text">解答开篇</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么上述解决思路的时间复杂度是-O-n-？"><span class="toc-number">5.1.</span> <span class="toc-text">为什么上述解决思路的时间复杂度是 O(n)？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#另一种思路"><span class="toc-number">5.2.</span> <span class="toc-text">另一种思路</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

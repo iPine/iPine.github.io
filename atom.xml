@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
-  <updated>2018-10-31T12:38:55.642Z</updated>
+  <updated>2018-11-02T08:58:05.915Z</updated>
   <id>http://ipine.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>排序</title>
+    <link href="http://ipine.github.io/2018-11-02/"/>
+    <id>http://ipine.github.io/2018-11-02/</id>
+    <published>2018-11-02T08:35:00.000Z</published>
+    <updated>2018-11-02T08:58:05.915Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前说的，冒泡排序、插入排序、选择排序三种算法的时间复杂度都是<code>O(n^2)</code>，很高，适用于小规模数据的排序。<br>而，<code>归并排序</code>和<code>快速排序</code>，适用于大规模的数据排序，更为常用。</p><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>归并排序和快速排序都用到了分治思想，借助这个思想可以解决非排序问题。</p><blockquote><p>如何在O(n)的时间复杂度内查找一个无序数组中的第K大元素？</p></blockquote><h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><h4 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h4><p>对于要排序的数组，先把数组从中间分成前后两部分，然后对前后两部分分别排序，再将排好序的两部分合并在一起。<br>归并排序用到的就是分治思想，顾名思义，就是分而治之，将大问题分解为小的子问题来解决。</p><blockquote><p>分治思想跟递归很向。分治算法一般都用递归来实现的。分治是一种解决问题的处理思想，递归是一种编程技巧。</p></blockquote><h4 id="如何用递归代码实现归并排序？"><a href="#如何用递归代码实现归并排序？" class="headerlink" title="如何用递归代码实现归并排序？"></a>如何用递归代码实现归并排序？</h4><p>先写出归并排序的递推公式</p><pre><code>递推公式：merge_sort(p...q) = merge(merge_sort(p...r), merge_sort(r+1...q)) #r = (p+q)/2,即数组的中间位置终止条件：p &gt;= q #不用再继续分解的时候</code></pre><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>def merge_sort(lt):    if len(lt) &lt;= 1:        return lt    middle = len(lt)/2    left = merge_sort(lt[:middle])    right = merge_sort(lt[middle:])    return merge(left, right)def merge(arr1, arr2):    arr_result = []    while len(arr1)&gt;0 and len(arr2)&gt;0:        if arr1[0] &lt;= arr2[0]:            arr_result.append(arr1.pop(0))        else:            arr_result.append(arr2.pop(0))    #while循环结束，说明有个条件不满足，即有个数组已经没有数据元素了，此时将另一个数组的数据加入到结果数组中    arr_result += arr1    arr_result += arr2    return arr_result</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>1 . 归并排序是否是稳定排序算法？关键看<code>merge()</code>函数，即两个有序子数组合并成最终结果数组的那部分代码。在合并过程中，如果<code>arr1[p...r]</code>和<code>arr2[r+1...q]</code>之间有相同元素，那么可以先把<code>arr1[p...r]</code>中的元素放入最终结果数组。这样就保证了值相同的元素，在合并前后的先后顺序不变。所以，归并排序是<strong>稳定的</strong>排序算法。<br>2 . 时间复杂度分析。归并排序涉及递归，时间复杂度该如何分析？<br><strong>递归适用场景</strong>：一个问题A可以分解为多个子问题B、C，求解A就就分解为求解B、C。问题B、C解决后，在把这个问题的结果合成A的结果。<br>若定义求解问题A的时间为<code>T(A)</code>，求解问题B、C的时间分别为<code>T(B)</code>和<code>T(C)</code>，则有一个递推关系</p><pre><code>T(A) = T(B) + T(C) + K    其中K为两个子问题B、C的结果合成问题A的结果所花费时间</code></pre><p>套用这个公式来分析归并排序的时间复杂度：<br>假设对 <code>n</code> 个元素进行归并排序需要的时间是 <code>T(n)</code>，那分解成两个子数组排序的时间都是 <code>T(n/2)</code>。<code>merge()</code> 函数合并两个有序子数组的时间复杂度是 <code>O(n)</code>。所以，套用前面的公式，归并排序的时间复杂度的计算公式就是：</p><pre><code>T(1) = C;  n=1 时，只需要常量级的执行时间T(n) = T(n/2) *2 + n;  n&gt;1 </code></pre><p>进一步分解可知道：</p><pre><code>T(n) = 2*T(n/2) + n     = 2*(2*T(n/4) + n/2) + n = 4*T(n/4) + 2*n     = 4*(2*T(n/8) + n/4) + 2*n = 8*T(n/8) + 3*n     = 8*(2*T(n/16) + n/8) + 3*n = 16*T(n/16) + 4*n     ......     = 2^k * T(n/2^k) + k * n     ......即 T(n) = 2^k * T(n/2^k) + k * n, 当 T(n/2^k) = 1 时，k = log2^n则  T(n) = 2^log2^n + log2^n * n = Cn + n*log2^n</code></pre><p>用大O标记法表示，<code>T(n) = O(nlogn)</code></p><p>归并排序的<strong>执行效率与要排序的原始数组的有序程度无关</strong>，所以其时间复杂度是非常稳定的，不管是最好情况、最坏情况，还是平均情况，时间复杂度都是 <code>O(nlogn)</code>。</p><p>3 . 空间复杂度分析。归并排序的时间复杂度在任何情况下都是 <code>O(nlogn)</code>，看起来非常优秀，但是它并没有像快排那样应用广泛，其原因就是因为它有一个致命<code>弱点</code>，归并排序<strong>不是原地排序算法</strong>。主要原因在于<code>merge()</code>函数，需要借助额外的存储空间。</p><p>分析递归代码的空间复杂度并不能像时间复杂度那样累加。尽管每次合并操作都需要申请额外的内存空间，但在合并完成之后，临时开辟的内存空间就被释放掉了。在任意时刻，CPU 只会有一个函数在执行，也就只会有一个临时的内存空间在使用。临时内存空间最大也不会超过 n 个数据的大小，所以空间复杂度是 <code>O(n)</code>。</p><h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><h4 id="核心思想-1"><a href="#核心思想-1" class="headerlink" title="核心思想"></a>核心思想</h4><p>如果要排序数组中下标从 <code>p</code> 到 <code>q</code> 之间的一组数据，我们选择 <code>p</code> 到 <code>q</code> 之间的任意一个数据作为 <code>pivot（分区点）</code>（可选择末尾数字）。</p><p>遍历 <code>p</code> 到 <code>q</code> 之间的数据，将小于 <code>pivot</code> 的放到左边，将大于 <code>pivot</code> 的放到右边，将 <code>pivot</code> 放到中间。经过这一步骤之后，数组 <code>p</code> 到 <code>q</code> 之间的数据就被分成了三个部分，前面 <code>p</code> 到 <code>r-1</code> 之间都是小于 <code>pivot</code> 的，中间是 <code>pivot</code>，后面的 <code>r+1</code> 到 <code>q</code> 之间是大于 <code>pivot</code> 的。<br>其中一次排序步骤如下：</p><p><img src="http://p8ay1ez22.bkt.clouddn.com/18-11-2/64232703.jpg" alt="快排"></p><p>递归排序下标从 <code>p</code> 到 <code>r-1</code> 之间的数据和下标从 <code>r+1</code> 到 <code>r</code> 之间的数据，直到区间缩小为 1，就说明所有的数据都有序了。</p><pre><code>递推公式quick_sort(p...q) = quick_sort(p...r-1) + quick_sort(r+1...q)终止条件p &gt;= q</code></pre><h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><p>partition() 函数不需要额外的内存空间，保证快排是<strong>原地排序算法</strong>。</p><pre><code>def quick_sort(lt, lindex, rindex):    if lindex &lt; rindex:        pivot = partition(lt, lindex, rindex)        quick_sort(lt, lindex, pivot)        quick_sort(lt, pivot+1, rindex)    else:        returndef partition(lt, lindex, rindex):    i = lindex - 1    for j in range(lindex, rindex):        if lt[j] &lt;= lt[rindex]: #最后一个数据为pivot            i += 1            lt[i],lt[j] = lt[j], lt[i]    lt[i+1], lt[rindex] = lt[rindex], lt[i+1] #将分区点交换到数组中间位置    return i</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><p>1 . 快速排序是<strong>原地排序算法</strong>，即空间复杂度为O(1)。但在分区的过程涉及交换操作，如果数组中有两个相同的元素，在经过一次分区操作后，元素的相对先后顺序会改变。所以，快排<strong>不是一个稳定的排序算法</strong>。<br>2 . 时间复杂度分析。快排也是基于递归思想，前面的递归公式在这里仍适用。如果每次分区操作，都能正好把数组分成大小接近相等的两个小区间，那快排的时间复杂度递推求解公式跟归并是相同的。所以，快排的时间复杂度也是 <code>O(nlogn)</code>。但是，公式成立的前提是每次分区操作，选择的 <code>pivot</code> 都很合适，正好能将大区间对等地一分为二。但实际上这种情况是很难实现的。如果以最后一个元素作为<code>pivot</code>，需要进行大约 <code>n</code> 次分区操作，才能完成快排的整个过程。每次分区平均要扫描大约 <code>n/2</code> 个元素，这种情况下，快排的时间复杂度就从 <code>O(nlogn)</code> 退化成了 <code>O(n^2)</code>。<br>以上两种情况分别对应于<strong>最好情况</strong>和<strong>最坏情况</strong>，在大部分情况下快排的时间复杂度都可以做到 <code>O(nlogn)</code>，只有在极端情况下，才会退化到 <code>O(n^2)</code>。而且，有方法将这个极端情况的概率降到很低。</p><h3 id="快速排序和归并排序的区别"><a href="#快速排序和归并排序的区别" class="headerlink" title="快速排序和归并排序的区别"></a>快速排序和归并排序的区别</h3><p>快排和归并都用到分治思想，地推公式和递归代码也相似，它们的<strong>区别</strong>在于：归并排序的处理过程是<strong>由下到上</strong>的，先处理子问题，然后再合并；而快排正好相反，它的处理过程是<strong>由上到下</strong>的，先分区，再处理子问题。<br>归并排序虽然是<code>稳定的</code>、时间复杂度为 <code>O(nlogn)</code> 的排序算法，但是它是<code>非原地排序算法</code>，主要原因是合并函数无法在原地执行。快速排序通过设计巧妙的原地分区函数，可以实现<code>原地排序</code>，解决了归并排序占用太多内存的问题。</p><h3 id="解答开篇"><a href="#解答开篇" class="headerlink" title="解答开篇"></a>解答开篇</h3><p>利用分区思想，在<code>O(n)</code>时间复杂度时间内求无序数组中的第 <code>K</code> 大元素。<br>选择数组<code>arr[0,n-1]</code>的最后一个元素作为<code>pivot</code>，对数组<code>arr[0,n-1]</code>原地分区，数组分成三部分，<code>arr[0...p-1], arr[p], arr[p+1...n-1]</code>。如果 <code>p+1=K</code>，那 <code>arr[p]</code> 就是要求解的元素；如果 <code>K&gt;p+1</code>, 说明第 <code>K</code> 大元素出现在 <code>arr[p+1…n-1]</code> 区间，再按照上面的思路递归地在 <code>arr[p+1…n-1]</code> 这个区间内查找。同理，如果 <code>K&lt;p+1</code>，那就在 <code>arr[0…p-1]</code> 区间查找。</p><h4 id="为什么上述解决思路的时间复杂度是-O-n-？"><a href="#为什么上述解决思路的时间复杂度是-O-n-？" class="headerlink" title="为什么上述解决思路的时间复杂度是 O(n)？"></a>为什么上述解决思路的时间复杂度是 O(n)？</h4><p>第一次分区查找，需要对大小为 <code>n</code> 的数组执行分区操作，需要遍历 <code>n</code> 个元素。第二次分区查找，只需要对大小为 <code>n/2</code> 的数组执行分区操作，需要遍历 <code>n/2</code> 个元素。依次类推，分区遍历元素的个数分别为、<code>n/2、n/4、n/8、n/16.……</code> 直到区间缩小为 1。<br>把每次分区遍历的元素个数加起来，就是：<code>n+n/2+n/4+n/8+…+1</code> 。这是一个等比数列求和，最后的和等于 <code>2n-1</code>。所以，上述解决思路的时间复杂度就为 <code>O(n)</code>。</p><h4 id="另一种思路"><a href="#另一种思路" class="headerlink" title="另一种思路"></a>另一种思路</h4><p>每次取数组中的最小值，将其移动到数组的最前面，然后在剩下的数组中继续找最小值，以此类推，执行 <code>K</code> 次，找到的数据就是第 <code>K</code> 大元素。<br>思路是对的，但时间复杂度就不是 <code>O(n)</code> 了，而是 <strong><code>O(K * n)</code></strong>。当 <code>K</code> 是比较小的常量时，比如 1、2，那最好时间复杂度确实是 <code>O(n)</code>；但当 <code>K</code> 等于 <code>n/2</code> 或者 <code>n</code> 时，这种最坏情况下的时间复杂度就是 <code>O(n^2)</code> 了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;之前说的，冒泡排序、插入排序、选择排序三种算法的时间复杂度都是&lt;code&gt;O(n^2)&lt;/code&gt;，很高，适用于小规模数据的排序。&lt;br&gt;而，&lt;code&gt;归并排序&lt;/code&gt;和&lt;code&gt;快速排序&lt;/code&gt;，适用于大规模的数据排序，更为常用。&lt;/p&gt;
+&lt;h3 id=
+      
+    
+    </summary>
+    
+      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
+    
+    
+      <category term="data_structure" scheme="http://ipine.github.io/tags/data-structure/"/>
+    
+      <category term="algorithm" scheme="http://ipine.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>排序</title>
@@ -269,7 +297,7 @@ int find
     <link href="http://ipine.github.io/2018-09-26/"/>
     <id>http://ipine.github.io/2018-09-26/</id>
     <published>2018-09-26T13:59:00.000Z</published>
-    <updated>2018-10-31T12:57:08.355Z</updated>
+    <updated>2018-10-31T12:58:58.144Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Title-Evaluating-Multi-Dimensional-Visualizations-for-Understanding-Fuzzy-Clusters"><a href="#Title-Evaluating-Multi-Dimensional-Visualizations-for-Understanding-Fuzzy-Clusters" class="headerlink" title="Title: Evaluating Multi-Dimensional Visualizations for Understanding Fuzzy Clusters"></a>Title: Evaluating Multi-Dimensional Visualizations for Understanding Fuzzy Clusters</h3><h3 id="Acceptted-by-IEEE-VIS-2018"><a href="#Acceptted-by-IEEE-VIS-2018" class="headerlink" title="Acceptted by IEEE VIS 2018"></a><a href="http://ieeevis.org/year/2018/info/papers" target="_blank" rel="noopener">Acceptted by IEEE VIS 2018</a></h3><ul><li><a href="https://ieeexplore.ieee.org/abstract/document/8440829" target="_blank" rel="noopener">Paper</a></li><li><a href="https://vimeo.com/289787891" target="_blank" rel="noopener">Video</a></li><li><a href="https://1drv.ms/p/s!AlEzTfE0kEurhnFiiCJzRCRrTy0H" target="_blank" rel="noopener">Talk-PPT</a></li></ul>]]></content>
     
@@ -531,33 +559,6 @@ int find
     
     
       <category term="reading notes" scheme="http://ipine.github.io/tags/reading-notes/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>判断一个数是否是2的幂</title>
-    <link href="http://ipine.github.io/2018-05-30/"/>
-    <id>http://ipine.github.io/2018-05-30/</id>
-    <published>2018-05-30T13:59:00.000Z</published>
-    <updated>2018-08-28T04:09:35.299Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="最近在看《技术之瞳》，编程语言部分有一个笔试题目"><a href="#最近在看《技术之瞳》，编程语言部分有一个笔试题目" class="headerlink" title=" 最近在看《技术之瞳》，编程语言部分有一个笔试题目"></a> 最近在看《技术之瞳》，编程语言部分有一个笔试题目</h2><h3 id="Q：请填写一个表达式，用于判断一个数是否是2的幂？"><a href="#Q：请填写一个表达式，用于判断一个数是否是2的幂？" class="headerlink" title="Q：请填写一个表达式，用于判断一个数是否是2的幂？"></a>Q：请填写一个表达式，用于判断一个数是否是2的幂？</h3><h3 id="A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。"><a href="#A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。" class="headerlink" title="A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。"></a>A：首先要考虑数的正负，其次判断是否为2的幂，最好的办法是利用位运算技巧。</h3><pre><code>n&gt;0? (n&amp;(n-1))==0:false</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><h4 id="将2的幂次方写成二进制形式后，很容易就会发现有一个特点："><a href="#将2的幂次方写成二进制形式后，很容易就会发现有一个特点：" class="headerlink" title="将2的幂次方写成二进制形式后，很容易就会发现有一个特点："></a>将2的幂次方写成二进制形式后，很容易就会发现有一个特点：</h4><blockquote><p>二进制中只有一个1，并且1后面跟了n个0。如果将这个数减去1后会发现，那个1会变为0，而原来的n个0会变为1。</p></blockquote><h4 id="举栗子说明"><a href="#举栗子说明" class="headerlink" title="举栗子说明"></a>举栗子说明</h4><pre><code>十进制   二进制 2        10 4        100 8        1000 16       10000 ...       ... 2-1      01 4-1      011 8-1      0111 16-1     01111</code></pre><blockquote><p>因此将原来的数与其减去1后的数字进行<code>&amp;</code>运算,为零，则原来的数是2的幂。</p></blockquote><h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><ul><li><code>&amp;</code> 按位与运算符：两位同时为1，结果才为1，否则为0。</li></ul><h4 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 清零；想让某个数清零，则另找一个数（原数为1的位置，新数为0），两个数作与运算。<br> 2 . 取一个数中的某些位；若想取低字节位，则可和8个1作与运算。<br> 3 . 保留指定位；若23，即10111，想保留左起的2,3,5位，则可和01101（13）作与运算。</p><ul><li><code>|</code> 按位或运算符：两位中有一个为1，结果就为1。</li></ul><h4 id="作用：-1"><a href="#作用：-1" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 按位或运算常用来对一个数据的某些位定值为1；若想使18，即10010的低4位改为1，则只需和13（1101）进行按位或运算即可。</p><ul><li><code>^</code> 异或运算符：两位值不同，结果为1，否则为0。</li></ul><h4 id="作用：-2"><a href="#作用：-2" class="headerlink" title="作用："></a>作用：</h4><p> 1 . 交换两个值，不用临时变量；</p><h5 id="举栗子说明-1"><a href="#举栗子说明-1" class="headerlink" title="举栗子说明"></a>举栗子说明</h5><pre><code>a=3 (011), b=5 (101);      a=a^b;                  b=a^b;               b=a^b;        </code></pre><h5 id="另一种方式"><a href="#另一种方式" class="headerlink" title="另一种方式"></a>另一种方式</h5><pre><code>a=a+b; b=a-b;a=a-b;</code></pre><ul><li><code>~</code> 取反运算符：将0变1，1变0；用于求整数的二进制反码。</li></ul><ul><li><code>&lt;&lt;</code> 左移运算符：各二进制位全部左移若干位，左边丢弃，右边补0。</li></ul><ul><li><code>&gt;&gt;</code> 右移运算符：各二进制位全部右移若干位，正数左补0，负数左补1，右边丢弃。</li></ul><ul><li>两个不同长度的数据进行位运算时，系统会将二者按右端对齐，然后进行位运算。短的那个数据如果是负数，左边补1，否则补0。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;最近在看《技术之瞳》，编程语言部分有一个笔试题目&quot;&gt;&lt;a href=&quot;#最近在看《技术之瞳》，编程语言部分有一个笔试题目&quot; class=&quot;headerlink&quot; title=&quot; 最近在看《技术之瞳》，编程语言部分有一个笔试题目&quot;&gt;&lt;/a&gt; 最近在看《技术之瞳》，编
-      
-    
-    </summary>
-    
-      <category term="technique summary" scheme="http://ipine.github.io/categories/technique-summary/"/>
-    
-    
-      <category term="面试题" scheme="http://ipine.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    
-      <category term="code" scheme="http://ipine.github.io/tags/code/"/>
     
   </entry>
   
