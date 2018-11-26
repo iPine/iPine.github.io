@@ -366,7 +366,7 @@ height:50vh;
         <p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>&#39;learning_logs&#39; is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p>
 <h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示<code>Topics</code>数据的网页时，按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照三步标准流程走完：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p>
 <p>一切工作就绪，运行，报错了。<br>错误如下：</p>
-<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-13/64291775.jpg" alt="ERROR"></p>
+<p><img src="//ipineimg.lijundong.com/18-9-13/64291775.jpg" alt="ERROR"></p>
 <p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>父模板代码如下：</p>
 <pre><code>&lt;p&gt;
   &lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;
@@ -375,7 +375,7 @@ height:50vh;
 &lt;!-- 插入的块标签 content ，是一个占位符，其中包含的信息将由子模板指定。 --&gt;
 {% block content %}{% endblock content %}
 </code></pre><h3 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h3><p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p>
-<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-13/57959414.jpg" alt="settings.py"></p>
+<p><img src="//ipineimg.lijundong.com/18-9-13/57959414.jpg" alt="settings.py"></p>
 <blockquote>
 <p>不是这里的问题</p>
 </blockquote>
@@ -1231,62 +1231,7 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 48 </div>
+    <div class="total-archive"> Total : 49 </div>
     
     <div class="post-archive">
     
@@ -1295,6 +1240,11 @@ top:50vh;
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/26</span><a class="archive-post-title" href= "/2018-11-26/" >探索气温趋势</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1604,6 +1554,8 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
     
+        <span class="sidebar-tag-name" data-tags="data_analysis"><span class="iconfont-archer">&#xe606;</span>data_analysis</span>
+    
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
@@ -1647,13 +1599,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="technique"><span class="iconfont-archer">&#xe60a;</span>technique</span>
     
-        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
-    
         <span class="sidebar-category-name" data-categories="technique-summary"><span class="iconfont-archer">&#xe60a;</span>technique-summary</span>
+    
+        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
     
         <span class="sidebar-category-name" data-categories="tool"><span class="iconfont-archer">&#xe60a;</span>tool</span>
     
         <span class="sidebar-category-name" data-categories="可视化论文"><span class="iconfont-archer">&#xe60a;</span>可视化论文</span>
+    
+        <span class="sidebar-category-name" data-categories="project"><span class="iconfont-archer">&#xe60a;</span>project</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

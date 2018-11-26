@@ -406,7 +406,7 @@ int find(int[] array, int n, int x) {
 <h3 id="如何分析平均情况时间复杂度"><a href="#如何分析平均情况时间复杂度" class="headerlink" title="如何分析平均情况时间复杂度"></a>如何分析平均情况时间复杂度</h3><p>以上面的例子为例：查找x在数组中的位置，有<code>n+1</code>种情况，在数组<code>0~n-1</code>的位置上和不在数组中。<br>将每种情况下，查找需要遍历的元素个数相加，再除以n+1种情况，就可得到需要遍历的元素个数的平均值<br><code>(1+2+3+...+n+n)/n+1 = n (n+3) /2(n+1)</code><br>省略掉系数、低阶、常量后得到平均时间复杂度为<code>O(n)</code></p>
 <h4 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h4><p>在以上的n+1种情况中，未考虑x在每种情况下出现的概率。<br>现在假设，x在数组中与x不在数组中的概率各为<code>1/2</code>；<br>要查找的x出现在<code>0~n-1</code>这n个位置的可能性是相同的，即<code>1/n</code>；<br>那么，要查找的x出现在<code>0~n-1</code>中任意位置的概率为 <code>1/2*1/n = 1/(2n)</code></p>
 <p>将每种情况发生的概率考虑进去后，平均时间复杂度计算过程变成：</p>
-<p><img src="http://p8ay1ez22.bkt.clouddn.com/18-9-29/51560357.jpg" alt="平均时间复杂度"></p>
+<p><img src="//ipineimg.lijundong.com/18-9-29/51560357.jpg" alt="平均时间复杂度"></p>
 <p>这个值就是概率论中的加权平均值，也叫作期望值。因而平均时间复杂度的全称为<strong>加权平均时间复杂度</strong>或<strong>期望时间复杂度</strong>。</p>
 <blockquote>
 <p>注：很多时候，我们只使用一个复杂度就可以满足要求。只有同一块代码在不同情况下，时间复杂度有量级的差距，才会使用以上3种复杂度的表示法来区分。</p>
@@ -1252,62 +1252,7 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 48 </div>
+    <div class="total-archive"> Total : 49 </div>
     
     <div class="post-archive">
     
@@ -1316,6 +1261,11 @@ top:50vh;
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/26</span><a class="archive-post-title" href= "/2018-11-26/" >探索气温趋势</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1625,6 +1575,8 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
     
+        <span class="sidebar-tag-name" data-tags="data_analysis"><span class="iconfont-archer">&#xe606;</span>data_analysis</span>
+    
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
@@ -1668,13 +1620,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="technique"><span class="iconfont-archer">&#xe60a;</span>technique</span>
     
-        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
-    
         <span class="sidebar-category-name" data-categories="technique-summary"><span class="iconfont-archer">&#xe60a;</span>technique-summary</span>
+    
+        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
     
         <span class="sidebar-category-name" data-categories="tool"><span class="iconfont-archer">&#xe60a;</span>tool</span>
     
         <span class="sidebar-category-name" data-categories="可视化论文"><span class="iconfont-archer">&#xe60a;</span>可视化论文</span>
+    
+        <span class="sidebar-category-name" data-categories="project"><span class="iconfont-archer">&#xe60a;</span>project</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

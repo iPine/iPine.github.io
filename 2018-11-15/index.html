@@ -372,7 +372,7 @@ height:50vh;
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>为什么 <a href="http://www.runoob.com/redis/redis-intro.html" target="_blank" rel="noopener">Redis</a> 会选择用跳表来实现有序集合？</p>
 <h3 id="如何理解跳表"><a href="#如何理解跳表" class="headerlink" title="如何理解跳表"></a>如何理解跳表</h3><p>对于单链表，即便表中存储的数据是有序的，要在其中查找某个数据，也只能从头到尾遍历链表。查找的时间复杂度也很高，<code>O(n)</code>。</p>
 <p>如何提高这个查找效率呢？<br>就是通过给链表建立<code>索引</code>，每两个结点提取一个结点到上一级，<strong>抽出来那一级叫作索引或索引层</strong>。上一级索引结点的有个 <code>down</code> 指针，指向下一级结点。</p>
-<p>如图所示：<br><img src="http://p8ay1ez22.bkt.clouddn.com/18-11-15/98683883.jpg" alt="建立索引"></p>
+<p>如图所示：<br><img src="//ipineimg.lijundong.com/18-11-15/98683883.jpg" alt="建立索引"></p>
 <p>加一层索引之后，查找一个结点需要遍历的结点个数减少了，即效率得到提高。不断地往上建立索引，查找效率的提升就会很多。</p>
 <blockquote>
 <p>这种链表加多级索引的结构，就是跳表。</p>
@@ -383,7 +383,7 @@ height:50vh;
 <p>i 的值在这里为3</p>
 </blockquote>
 <p><strong>原因</strong>：假设要查找的数据是 <code>x</code>，在第 <code>k</code> 级索引中，当遍历到 <code>y</code> 结点之后，发现 <code>x</code> 大于 <code>y</code>，小于后面的结点 <code>z</code>，所以就通过 <code>y</code> 的 <code>down</code> 指针，从第 <code>k</code> 级索引下降到第 <code>k-1</code> 级索引。在第 <code>k-1</code> 级索引中，<code>y</code> 和 <code>z</code> 之间只有 <strong>3 个结点（包含 y 和 z）</strong>，所以，在 <code>K-1</code> 级索引中最多只需要遍历 3 个结点，依次类推，每一级索引都最多只需要遍历 3 个结点。</p>
-<p>如图所示：<br><img src="http://p8ay1ez22.bkt.clouddn.com/18-11-15/37428961.jpg" alt="时间复杂度"></p>
+<p>如图所示：<br><img src="//ipineimg.lijundong.com/18-11-15/37428961.jpg" alt="时间复杂度"></p>
 <p>以上，跳表中查询任意数据的时间复杂度为 <code>O(logn)</code>。这个时间复杂度跟二分查找是一样的，但却是以<strong>空间换时间</strong>为代价。</p>
 <h3 id="跳表的空间复杂度分析"><a href="#跳表的空间复杂度分析" class="headerlink" title="跳表的空间复杂度分析"></a>跳表的空间复杂度分析</h3><p>与纯粹的单链表相比，跳表需要存储多级索引，肯定需要消耗更多的存储空间。<br>假设原始链表大小为 <code>n</code>，那第一级索引大约有 <code>n/2</code> 个结点，第二级索引大约有 <code>n/4</code> 个结点，以此类推，每上升一级就减少一半，直到剩下 <code>2</code> 个结点。如果我们把每层索引的结点数写出来，就是一个等比数列。</p>
 <p>原始链表大小为 <code>n</code> ,<strong>每2个结点抽取1个为索引</strong>，每层索引的结点数：</p>
@@ -1227,62 +1227,7 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 48 </div>
+    <div class="total-archive"> Total : 49 </div>
     
     <div class="post-archive">
     
@@ -1291,6 +1236,11 @@ top:50vh;
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/26</span><a class="archive-post-title" href= "/2018-11-26/" >探索气温趋势</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1600,6 +1550,8 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
     
+        <span class="sidebar-tag-name" data-tags="data_analysis"><span class="iconfont-archer">&#xe606;</span>data_analysis</span>
+    
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
@@ -1643,13 +1595,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="technique"><span class="iconfont-archer">&#xe60a;</span>technique</span>
     
-        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
-    
         <span class="sidebar-category-name" data-categories="technique-summary"><span class="iconfont-archer">&#xe60a;</span>technique-summary</span>
+    
+        <span class="sidebar-category-name" data-categories="可视化论文-summary"><span class="iconfont-archer">&#xe60a;</span>可视化论文-summary</span>
     
         <span class="sidebar-category-name" data-categories="tool"><span class="iconfont-archer">&#xe60a;</span>tool</span>
     
         <span class="sidebar-category-name" data-categories="可视化论文"><span class="iconfont-archer">&#xe60a;</span>可视化论文</span>
+    
+        <span class="sidebar-category-name" data-categories="project"><span class="iconfont-archer">&#xe60a;</span>project</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
