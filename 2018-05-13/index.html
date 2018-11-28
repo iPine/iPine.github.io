@@ -372,14 +372,14 @@ height:50vh;
 <p>注意：设为Flex布局以后，子元素的float,clear,和vertical-align属性将失去作用。</p>
 </blockquote>
 <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</p>
-<h4 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h4><p><img src="//ipineimg.lijundong.com/18-5-19/84888199.jpg" alt="容器"></p>
+<h4 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h4><p><img src="http://ipineimg.lijundong.com/18-5-19/84888199.jpg" alt="容器"></p>
 <p>每个属性对应的含义是：</p>
 <p> • 项目排列方向；可取四个值： <code>row | row-reverse | column | column-reverse</code><br> • 项目是否换行，怎么换；可取三个值： <code>nowrap | wrap | wrap-reverse</code><br> • 前2个属性的简写; 取值： <code>&lt;flex-direction&gt; || &lt;flex-wrap&gt;</code><br> • 项目在主轴上的对齐方式，与主轴的方向有关；可取五个值： <code>flex-start | flex-end | center | space-between | space-around</code><br> • 项目在交叉轴上的对齐方式,与交叉轴的方向有关；可取五个值： <code>flex-start | flex-end | center | baseline | stretch</code><br> • 多根轴线的对齐方式，若项目只有一根轴线，该属性不起作用；可取六个值： <code>flex-start | flex-end | center | space-between | space-around | stretch</code></p>
-<h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><p><img src="//ipineimg.lijundong.com/18-5-19/10672781.jpg" alt="项目"></p>
+<h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><p><img src="http://ipineimg.lijundong.com/18-5-19/10672781.jpg" alt="项目"></p>
 <p>每个属性对应的含义是：</p>
 <p> • 项目排列顺序，值越小，排列越靠前；默认为0<br> • 有多余空间时，项目是否放大；默认为0，不放大<br> • 空间不够时，项目是否缩小；默认为1，缩小<br> • 分配多余空间之前，项目占据的主轴空间；默认为auto,即原本大小<br> • <code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>属性的简写（优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值），常用的两个快捷值： <code>auto(1 1 auto)和none(0 0 auto)</code><br> • 允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性；默认值为auto</p>
 <h3 id="我的布局"><a href="#我的布局" class="headerlink" title="我的布局"></a>我的布局</h3><h4 id="HTML结构"><a href="#HTML结构" class="headerlink" title="HTML结构"></a>HTML结构</h4><p> 1 . 包含所有区块的大div -&gt;.d3layout（容器）；<br> 2 . 大div里包含3个次大div -&gt;.block-row（既是容器又是项目）；<br> 3 . 每个次大div里包含5个或者2个小div -&gt; .block/.block_0（项目）；</p>
-<p><img src="//ipineimg.lijundong.com/18-5-19/19741905.jpg" alt="HTML结构"></p>
+<p><img src="http://ipineimg.lijundong.com/18-5-19/19741905.jpg" alt="HTML结构"></p>
 <h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><h5 id="第一层的大div"><a href="#第一层的大div" class="headerlink" title="第一层的大div"></a>第一层的大div</h5><pre><code>.d3layout{
     width: 935px;
     margin: 20px 0;
@@ -417,7 +417,7 @@ height:50vh;
     flex: 0 1 auto;
 }
 </code></pre><h4 id="布局效果"><a href="#布局效果" class="headerlink" title="布局效果"></a>布局效果</h4><p>黑色为大div；红色为次大div；灰色为小div</p>
-<p><img src="//ipineimg.lijundong.com/18-5-19/86157629.jpg" alt="效果图"></p>
+<p><img src="http://ipineimg.lijundong.com/18-5-19/86157629.jpg" alt="效果图"></p>
 <p>最终在实践过程中，又添了一层，灰色小div.block里还包括上下两个div，仍然用的flex布局。</p>
 <p>注：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?^%$" target="_blank" rel="noopener">基本概念参考来源</a></p>
 
@@ -574,56 +574,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -1570,9 +1520,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
     
+        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+    
         <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
     
-        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
         <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
     
@@ -1580,25 +1532,23 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
     
-        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
+        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
         <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
     
         <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
     
-        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="teleplay"><span class="iconfont-archer">&#xe606;</span>teleplay</span>
     
-        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
-    
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
         <span class="sidebar-tag-name" data-tags="Jupyter nootebook"><span class="iconfont-archer">&#xe606;</span>Jupyter nootebook</span>
     
         <span class="sidebar-tag-name" data-tags="presentation"><span class="iconfont-archer">&#xe606;</span>presentation</span>
-    
-        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
         <span class="sidebar-tag-name" data-tags="data_structure"><span class="iconfont-archer">&#xe606;</span>data_structure</span>
     
@@ -1641,9 +1591,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="read"><span class="iconfont-archer">&#xe60a;</span>read</span>
     
-        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
-    
         <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
+    
+        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
     
         <span class="sidebar-category-name" data-categories="method"><span class="iconfont-archer">&#xe60a;</span>method</span>
     

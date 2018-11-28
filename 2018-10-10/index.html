@@ -372,11 +372,11 @@ height:50vh;
 <h3 id="缓存淘汰策略"><a href="#缓存淘汰策略" class="headerlink" title="缓存淘汰策略"></a>缓存淘汰策略</h3><p>常见的缓存淘汰策略有：<code>FIFO（First in,First out）先进先出策略</code>、<code>LFU（Least Frequently Used）最少使用策略</code>、<code>LRU（Least Recently Used）最近最少使用策略</code>。</p>
 <h3 id="三种链表"><a href="#三种链表" class="headerlink" title="三种链表"></a>三种链表</h3><p>链表通过指针将一组零散的内存块串联在一起。其中内存块叫做链表的<strong>结点</strong>，记录结点地址的叫做<strong>指针</strong>。链表的第一个结点叫头结点，最后一个结点叫尾结点。</p>
 <h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><p>单链表的“尾结点”，它的指针并不指向下一个结点，而是指向一个空地址<code>NULL</code></p>
-<p><img src="//ipineimg.lijundong.com/18-10-10/56355664.jpg" alt="单链表"></p>
-<p>单链表插入和删除操作，复杂度为O(1)<br><img src="//ipineimg.lijundong.com/18-10-10/93241850.jpg" alt="操作"></p>
-<h4 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h4><p>一种特殊的单链表，与单链表的区别就在于尾结点，其尾结点指向链表的头结点<br><img src="//ipineimg.lijundong.com/18-10-10/66826587.jpg" alt="循环链表"></p>
+<p><img src="http://ipineimg.lijundong.com/18-10-10/56355664.jpg" alt="单链表"></p>
+<p>单链表插入和删除操作，复杂度为O(1)<br><img src="http://ipineimg.lijundong.com/18-10-10/93241850.jpg" alt="操作"></p>
+<h4 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h4><p>一种特殊的单链表，与单链表的区别就在于尾结点，其尾结点指向链表的头结点<br><img src="http://ipineimg.lijundong.com/18-10-10/66826587.jpg" alt="循环链表"></p>
 <p>相比于单链表，循环链表的优势在于从链尾到链头很方便。著名的<code>约瑟夫问题</code>，就适合这种数据结构。</p>
-<h4 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h4><p>单链表只有一个方向，结点只有一个后继指针next指向后面的节点。双向链表有两个方向，一个<code>后继指针next</code>和一个<code>前驱指针pre</code>。<br><img src="//ipineimg.lijundong.com/18-10-10/80665346.jpg" alt="双向链表"></p>
+<h4 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h4><p>单链表只有一个方向，结点只有一个后继指针next指向后面的节点。双向链表有两个方向，一个<code>后继指针next</code>和一个<code>前驱指针pre</code>。<br><img src="http://ipineimg.lijundong.com/18-10-10/80665346.jpg" alt="双向链表"></p>
 <p>双向链表在某些情况下的插入、删除操作比单链表更高效。<br>例如删除操作，从链表中删除一个数据，有两种情况：</p>
 <ul>
 <li>删除链表中值等于某个给定值的结点</li>
@@ -555,56 +555,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -1551,9 +1501,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
     
+        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+    
         <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
     
-        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
         <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
     
@@ -1561,25 +1513,23 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
     
-        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
+        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
         <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
     
         <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
     
-        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="teleplay"><span class="iconfont-archer">&#xe606;</span>teleplay</span>
     
-        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
-    
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
         <span class="sidebar-tag-name" data-tags="Jupyter nootebook"><span class="iconfont-archer">&#xe606;</span>Jupyter nootebook</span>
     
         <span class="sidebar-tag-name" data-tags="presentation"><span class="iconfont-archer">&#xe606;</span>presentation</span>
-    
-        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
         <span class="sidebar-tag-name" data-tags="data_structure"><span class="iconfont-archer">&#xe606;</span>data_structure</span>
     
@@ -1622,9 +1572,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="read"><span class="iconfont-archer">&#xe60a;</span>read</span>
     
-        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
-    
         <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
+    
+        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
     
         <span class="sidebar-category-name" data-categories="method"><span class="iconfont-archer">&#xe60a;</span>method</span>
     

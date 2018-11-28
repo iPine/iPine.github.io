@@ -421,7 +421,7 @@ T(n) = T(n/2) *2 + n;  n&gt;1
 <p>分析递归代码的空间复杂度并不能像时间复杂度那样累加。尽管每次合并操作都需要申请额外的内存空间，但在合并完成之后，临时开辟的内存空间就被释放掉了。在任意时刻，CPU 只会有一个函数在执行，也就只会有一个临时的内存空间在使用。临时内存空间最大也不会超过 n 个数据的大小，所以空间复杂度是 <code>O(n)</code>。</p>
 <h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><h4 id="核心思想-1"><a href="#核心思想-1" class="headerlink" title="核心思想"></a>核心思想</h4><p>如果要排序数组中下标从 <code>p</code> 到 <code>q</code> 之间的一组数据，我们选择 <code>p</code> 到 <code>q</code> 之间的任意一个数据作为 <code>pivot（分区点）</code>（可选择末尾数字）。</p>
 <p>遍历 <code>p</code> 到 <code>q</code> 之间的数据，将小于 <code>pivot</code> 的放到左边，将大于 <code>pivot</code> 的放到右边，将 <code>pivot</code> 放到中间。经过这一步骤之后，数组 <code>p</code> 到 <code>q</code> 之间的数据就被分成了三个部分，前面 <code>p</code> 到 <code>r-1</code> 之间都是小于 <code>pivot</code> 的，中间是 <code>pivot</code>，后面的 <code>r+1</code> 到 <code>q</code> 之间是大于 <code>pivot</code> 的。<br>其中一次排序步骤如下：</p>
-<p><img src="//ipineimg.lijundong.com/18-11-2/64232703.jpg" alt="快排"></p>
+<p><img src="http://ipineimg.lijundong.com/18-11-2/64232703.jpg" alt="快排"></p>
 <p>递归排序下标从 <code>p</code> 到 <code>r-1</code> 之间的数据和下标从 <code>r+1</code> 到 <code>r</code> 之间的数据，直到区间缩小为 1，就说明所有的数据都有序了。</p>
 <pre><code>递推公式
 quick_sort(p...q) = quick_sort(p...r-1) + quick_sort(r+1...q)
@@ -604,56 +604,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -1600,9 +1550,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
     
+        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+    
         <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
     
-        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
         <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
     
@@ -1610,25 +1562,23 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
     
-        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
+        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
         <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
     
         <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
     
-        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="teleplay"><span class="iconfont-archer">&#xe606;</span>teleplay</span>
     
-        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
-    
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
         <span class="sidebar-tag-name" data-tags="Jupyter nootebook"><span class="iconfont-archer">&#xe606;</span>Jupyter nootebook</span>
     
         <span class="sidebar-tag-name" data-tags="presentation"><span class="iconfont-archer">&#xe606;</span>presentation</span>
-    
-        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
         <span class="sidebar-tag-name" data-tags="data_structure"><span class="iconfont-archer">&#xe606;</span>data_structure</span>
     
@@ -1671,9 +1621,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="read"><span class="iconfont-archer">&#xe60a;</span>read</span>
     
-        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
-    
         <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
+    
+        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
     
         <span class="sidebar-category-name" data-categories="method"><span class="iconfont-archer">&#xe60a;</span>method</span>
     

@@ -418,7 +418,7 @@ height:50vh;
 <h3 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h3><h4 id="在函数调用中的应用"><a href="#在函数调用中的应用" class="headerlink" title="在函数调用中的应用"></a>在函数调用中的应用</h4><p>操作系统给每个线程分配了一块独立的内存空间，这块内存被组织成“栈”这种结构, 用来存储函数调用时的临时变量。每进入一个函数，就会将临时变量作为一个栈帧入栈，当被调用函数执行完成，返回之后，将这个函数对应的栈帧出栈。</p>
 <h4 id="栈在表达式求值中的应用"><a href="#栈在表达式求值中的应用" class="headerlink" title="栈在表达式求值中的应用"></a>栈在表达式求值中的应用</h4><p>实现一个表达式求值的功能，编译器就是通过两个栈来实现的。<br>其中一个保存操作数的栈，另一个是保存运算符的栈。<br>从左向右遍历表达式，当遇到数字，就直接压入操作数栈；当遇到运算符，就与运算符栈的栈顶元素进行比较。<br>如果当前运算符优先级高，就将当前运算符压入栈；如果运算符栈顶元素优先级高，就从运算符栈中取栈顶运算符，从操作数栈的栈顶取 2 个操作数，然后进行计算，再把计算完的结果压入操作数栈，继续比较。</p>
 <h5 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a>栗子</h5><p><code>3+5*8-6</code>表达式的计算过程如下：</p>
-<p><img src="//ipineimg.lijundong.com/18-10-16/98172578.jpg" alt="表达式"></p>
+<p><img src="http://ipineimg.lijundong.com/18-10-16/98172578.jpg" alt="表达式"></p>
 <h4 id="栈在括号匹配中的应用"><a href="#栈在括号匹配中的应用" class="headerlink" title="栈在括号匹配中的应用"></a>栈在括号匹配中的应用</h4><p>假设表达式中只包含三种括号，<code>圆括号 ()</code>、<code>方括号 []</code> 和<code>花括号{}</code>，并且它们可以任意嵌套。比如，<code>{[{}]}</code>或 <code>[{()}([])]</code> 等都为合法格式，而<code>{[}()]</code> 或 <code>[({)]</code> 为不合法的格式。</p>
 <h5 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h5><p>给定一个包含三种括号的表达式字符串，如何检查它是否合法呢？</p>
 <h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><p>用栈来保存未匹配的左括号，从左到右依次扫描字符串。当扫描到左括号时，则将其压入栈中；当扫描到右括号时，从栈顶取出一个左括号。如果能够匹配，比如<code>(</code>跟<code>)</code>匹配，<code>[</code>跟<code>]</code>匹配，<code>{</code>跟<code>}</code>匹配，则继续扫描剩下的字符串。如果扫描的过程中，遇到不能配对的右括号，或者栈中没有数据，则说明为非法格式。<br>当所有的括号都扫描完成之后，如果栈为空，则说明字符串为合法格式；否则，说明有未匹配的左括号，为非法格式。</p>
@@ -614,56 +614,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -1610,9 +1560,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="reading notes"><span class="iconfont-archer">&#xe606;</span>reading notes</span>
     
+        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+    
         <span class="sidebar-tag-name" data-tags="essay"><span class="iconfont-archer">&#xe606;</span>essay</span>
     
-        <span class="sidebar-tag-name" data-tags="movie"><span class="iconfont-archer">&#xe606;</span>movie</span>
+        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
     
         <span class="sidebar-tag-name" data-tags="paper"><span class="iconfont-archer">&#xe606;</span>paper</span>
     
@@ -1620,25 +1572,23 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="codewars"><span class="iconfont-archer">&#xe606;</span>codewars</span>
     
-        <span class="sidebar-tag-name" data-tags="tool"><span class="iconfont-archer">&#xe606;</span>tool</span>
+        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
     
         <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
     
         <span class="sidebar-tag-name" data-tags="code"><span class="iconfont-archer">&#xe606;</span>code</span>
     
-        <span class="sidebar-tag-name" data-tags="css"><span class="iconfont-archer">&#xe606;</span>css</span>
+        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
     
         <span class="sidebar-tag-name" data-tags="teleplay"><span class="iconfont-archer">&#xe606;</span>teleplay</span>
     
-        <span class="sidebar-tag-name" data-tags="排序算法"><span class="iconfont-archer">&#xe606;</span>排序算法</span>
-    
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
         <span class="sidebar-tag-name" data-tags="Jupyter nootebook"><span class="iconfont-archer">&#xe606;</span>Jupyter nootebook</span>
     
         <span class="sidebar-tag-name" data-tags="presentation"><span class="iconfont-archer">&#xe606;</span>presentation</span>
-    
-        <span class="sidebar-tag-name" data-tags="json"><span class="iconfont-archer">&#xe606;</span>json</span>
     
         <span class="sidebar-tag-name" data-tags="data_structure"><span class="iconfont-archer">&#xe606;</span>data_structure</span>
     
@@ -1681,9 +1631,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="read"><span class="iconfont-archer">&#xe60a;</span>read</span>
     
-        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
-    
         <span class="sidebar-category-name" data-categories="life"><span class="iconfont-archer">&#xe60a;</span>life</span>
+    
+        <span class="sidebar-category-name" data-categories="work"><span class="iconfont-archer">&#xe60a;</span>work</span>
     
         <span class="sidebar-category-name" data-categories="method"><span class="iconfont-archer">&#xe60a;</span>method</span>
     
