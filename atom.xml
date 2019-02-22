@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>iPine&#39;s Notes</title>
+  <title>iPine&#39;s Blog</title>
   
-  
+  <subtitle>看似无意义的事，竟是有意义的</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ipine.github.io/"/>
