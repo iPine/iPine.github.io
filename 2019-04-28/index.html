@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="data_analysis," />
 
 
 
@@ -77,21 +77,18 @@
 
 
 
-<meta name="description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&amp;#39;learning_logs&amp;#39; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported">
-<meta name="keywords" content="python">
+<meta name="description" content="目前的状态我是一名计算机专业的在读研究生，研究方向是数据可视化，可视分析。从实验室以及研究方向来看，周边大部分同学选择了前端开发，少部分也有做后台的。而我个人并不是特别愿意去做前端开发，我想做数据分析，数据挖掘相关的工作。目前，正是找实习的时候，但是我找数据分析的岗并不顺利，迟迟没有拿到实习offer，而周围那些找前端开发的同学早已盆满钵满。说不羡慕那是假的，但是能怎么样呢？路是自己选的，再哭也得">
+<meta name="keywords" content="data_analysis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django入门练习的两个错误">
-<meta property="og:url" content="http://ipine.github.io/2018-09-12/index.html">
+<meta property="og:title" content="实习碰壁之后-正式入坑数据分析">
+<meta property="og:url" content="http://ipine.github.io/2019-04-28/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&amp;#39;learning_logs&amp;#39; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported">
+<meta property="og:description" content="目前的状态我是一名计算机专业的在读研究生，研究方向是数据可视化，可视分析。从实验室以及研究方向来看，周边大部分同学选择了前端开发，少部分也有做后台的。而我个人并不是特别愿意去做前端开发，我想做数据分析，数据挖掘相关的工作。目前，正是找实习的时候，但是我找数据分析的岗并不顺利，迟迟没有拿到实习offer，而周围那些找前端开发的同学早已盆满钵满。说不羡慕那是假的，但是能怎么样呢？路是自己选的，再哭也得">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ipineimg.lijundong.com/18-9-13/64291775.jpg">
-<meta property="og:image" content="http://ipineimg.lijundong.com/18-9-13/57959414.jpg">
-<meta property="og:updated_time" content="2019-02-22T11:27:33.466Z">
+<meta property="og:updated_time" content="2019-05-04T13:46:05.791Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django入门练习的两个错误">
-<meta name="twitter:description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&amp;#39;learning_logs&amp;#39; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported">
-<meta name="twitter:image" content="http://ipineimg.lijundong.com/18-9-13/64291775.jpg">
+<meta name="twitter:title" content="实习碰壁之后-正式入坑数据分析">
+<meta name="twitter:description" content="目前的状态我是一名计算机专业的在读研究生，研究方向是数据可视化，可视分析。从实验室以及研究方向来看，周边大部分同学选择了前端开发，少部分也有做后台的。而我个人并不是特别愿意去做前端开发，我想做数据分析，数据挖掘相关的工作。目前，正是找实习的时候，但是我找数据分析的岗并不顺利，迟迟没有拿到实习offer，而周围那些找前端开发的同学早已盆满钵满。说不羡慕那是假的，但是能怎么样呢？路是自己选的，再哭也得">
 
 
 
@@ -121,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://ipine.github.io/2018-09-12/"/>
+  <link rel="canonical" href="http://ipine.github.io/2019-04-28/"/>
 
 
 
 
 
-  <title>Django入门练习的两个错误 | iPine's Blog</title>
+  <title>实习碰壁之后-正式入坑数据分析 | iPine's Blog</title>
   
 
 
@@ -298,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2018-09-12/">
+    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2019-04-28/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iPine">
@@ -315,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Django入门练习的两个错误</h1>
+          <h1 class="post-title" itemprop="name headline">实习碰壁之后-正式入坑数据分析</h1>
         
 
         <div class="post-meta">
@@ -327,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-12T20:18:00+08:00">
-                2018-09-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-04T21:36:35+08:00">
+                2019-05-04
               </time>
             
 
@@ -387,67 +384,34 @@
       
 
       
-        <p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>&#39;learning_logs&#39; is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p>
-<h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示<code>Topics</code>数据的网页时，按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照三步标准流程走完：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p>
-<p>一切工作就绪，运行，报错了。<br>错误如下：</p>
-<p><img src="http://ipineimg.lijundong.com/18-9-13/64291775.jpg" alt="ERROR"></p>
-<p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>父模板代码如下：</p>
-<pre><code>&lt;p&gt;
-  &lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;
-  &lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;
-&lt;/p&gt;
-&lt;!-- 插入的块标签 content ，是一个占位符，其中包含的信息将由子模板指定。 --&gt;
-{% block content %}{% endblock content %}
-</code></pre><h3 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h3><p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p>
-<p><img src="http://ipineimg.lijundong.com/18-9-13/57959414.jpg" alt="settings.py"></p>
-<blockquote>
-<p>不是这里的问题</p>
-</blockquote>
-<p>2 . 定位到<code>urls.py</code>文件，打开项目文件下的<code>urls.py</code>文件；发现有两个版本的<code>urlpatterns</code>列表.</p>
-<h4 id="旧版本，url式的："><a href="#旧版本，url式的：" class="headerlink" title="旧版本，url式的："></a>旧版本，url式的：</h4><pre><code>from django.conf.urls import url, include
-
-#根据书上的代码写的
-urlpatterns = [
-    url(r&apos;^admin/&apos;,admin.site.urls),
-    url(r&apos;&apos;,include(&apos;learning_logs.urls&apos;)),
-]
-</code></pre><blockquote>
-<p>出现新旧版本，原因在于安装的Django的版本，书中的是1.8；而我装的2.1</p>
-</blockquote>
-<h4 id="新版本，path式的："><a href="#新版本，path式的：" class="headerlink" title="新版本，path式的："></a>新版本，path式的：</h4><pre><code>from django.urls import include, path
-
-urlpatterns = [
-    path(&apos;admin/&apos;, admin.site.urls),
-    path(&apos;&apos;,include(&apos;learning_logs.urls&apos;,namespace=&apos;learning_logs&apos;)),
-]
-</code></pre><blockquote>
-<p>我将path式的注释掉了，用的是url式的。这在今天创建新网页之前，运行都是正常的。</p>
-</blockquote>
-<h3 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h3><p>首先想到：将url式注释掉，尝试path式，看能否运行正常；结果，又报另一个错误：(</p>
-<blockquote>
-<p>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</p>
-</blockquote>
-<p>理解下意思，大致就是：应该在include模块中设置app_name属性，或者传递一个包含模式列表和app_name的2元组<br>又百度一番，知道了<code>include</code>模块需包含两个参数，前一个为2元组，后一个为<code>namespace</code>；于是将代码修改成这样：</p>
-<pre><code>from django.urls import include, path
-
-urlpatterns = [
-    path(&apos;admin/&apos;, admin.site.urls),
-    path(&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;),namespace=&apos;learning_logs&apos;)),    
-]
-</code></pre><blockquote>
-<p>OK! 运行正常</p>
-</blockquote>
-<p>网上搜索一番，发现新旧版本的区别在于是否显示声明<code>namespace</code>的值，在旧版本url式中<code>namespace</code>是注册了的，而新版本未注册。<br>用url式的代码如下：</p>
-<pre><code>from django.conf.urls import url, include
-
-urlpatterns = [
-    url(r&apos;^admin/&apos;,admin.site.urls),
-    url(r&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;))),
-]
-</code></pre><blockquote>
-<p>Include只需包含一个参数arg：2元组；namespace不需要显示声明。</p>
-</blockquote>
-<p>到此，问题解决。 完：）</p>
+        <h3 id="目前的状态"><a href="#目前的状态" class="headerlink" title="目前的状态"></a>目前的状态</h3><p>我是一名计算机专业的在读研究生，研究方向是数据可视化，可视分析。从实验室以及研究方向来看，周边大部分同学选择了前端开发，少部分也有做后台的。而我个人并不是特别愿意去做前端开发，我想做数据分析，数据挖掘相关的工作。目前，正是找实习的时候，但是我找数据分析的岗并不顺利，迟迟没有拿到实习offer，而周围那些找前端开发的同学早已盆满钵满。说不羡慕那是假的，但是能怎么样呢？路是自己选的，再哭也得走下去呀！有句话说，要做难且正确的事，我想我现在是在这条路上。<br>早在一年前就定了数据分析这个方向，但是自己平时学习就是看一些书籍，没有数据挖掘相关的实践项目，苦于没有带路人，也不知道岗位的具体要求。找实习的时候才发现，不同公司对数据分析、挖掘岗的要求都不一样，但大部分都要求对业务有了解，对挖掘算法熟悉，做过相关项目；所以尽管我投了很多简历，但是都石沉大海，我也像一个无头苍蝇，摸不到门道，到处碰壁。我之前做科研项目，写JavaScript比较多，后来自学数据分析课程，学习了Python，SQL和基本算法的知识，算是入门了数据分析。但是我想多做一些实践项目，更深入地学习某一个细分行业的数据分析和挖掘流程，为秋招求职助力。</p>
+<h3 id="未来想从事的具体行业"><a href="#未来想从事的具体行业" class="headerlink" title="未来想从事的具体行业"></a>未来想从事的具体行业</h3><p>入门之后，选择一个方向，深入学习研究才可能成功，这跟做科研是一个道理。我在反思自己为什么找实习不顺时，发现一点就是自己的专业技能不够突出，前端会一点，数据分析刚入门，学习太过宽泛而都不够精专。公司更想招聘的一定是某一技能方面的“专家”，而不是什么都懂一点，什么都做不了的员工。所以有了这两个月找实习的经历，我意识到自己不能再这样一边焦虑未来，一边漫无目的地学习，更好的方式就是找到自己感兴趣的具体行业，然后实践。 虽然做过一个关于区块链加密货币交易数据的科研项目，但是我对金融行业的背景和业务知识知之甚少，没有系统学习过。与金融行业相比，互联网+电商行业的实践更为容易，我也有兴趣。所以，刚开始想从互联网+电商行业的数据分析、数据挖掘实践入手。从本科到研究生都是计算机专业的学生，读研期间学习的是数据分析流程中必不可少的一环—数据可视化，所以对自己从事这个方向的工作还是有信心的，不足的地方仍然是对行业的背景知识和业务知识了解不深入，这方面现在可以慢慢接触，在工作中积攒更多经验。</p>
+<h3 id="如何更近距离接触相关行业"><a href="#如何更近距离接触相关行业" class="headerlink" title="如何更近距离接触相关行业"></a>如何更近距离接触相关行业</h3><p>找到兴趣行业，如何迈出了解行业的第一步呢？<br>其实最简单的方式，就是去找一个这个行业的数据集，自己尝试着去探索数据。我从阿里天池下载了一个数据集，是<a href="https://tianchi.aliyun.com/dataset/dataDetail?dataId=45" target="_blank" rel="noopener">用户在淘宝和天猫上购买婴儿用品的数据集</a>，该数据包含两个文件，分别是淘宝会员历史婴儿用品交易样本数据文件，和婴儿信息样本数据文件。历史婴儿用品交易样本数据文件包含29971条数据，有以下7个字段：</p>
+<pre><code>* user_id: 用户id
+* auction_id: 购买行为编号
+* cat_id: 商品种类ID
+* cat1: 商品属于哪个类别
+* property: 商品属性
+* buy_mount: 购买数量
+</code></pre><p>婴儿信息样本数据文件，包含953条，有以下3个字段：</p>
+<pre><code>* user_id:用户id
+* birthday:出生日期
+* gender:性别（0 男性；1 女性）
+</code></pre><p>官方提供的典型分析主题包括：</p>
+<ol>
+<li>根据父母的购买行为预测孩子的年龄；</li>
+<li>根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品。</li>
+</ol>
+<p>在之后的文章中我会对这个数据集进行分析和探索。</p>
+<h3 id="学习规划"><a href="#学习规划" class="headerlink" title="学习规划"></a>学习规划</h3><p>有了目标，自然少不了学习规划。有计划地学习，每完成一个阶段任务，都能获得一些学习成就感，激励自己继续向前。计划如下：</p>
+<ul>
+<li>复习及巩固Python语言知识</li>
+<li>使用Python的NumPy和Pandas包进行数据分析练习</li>
+<li>机器学习算法相关的实践</li>
+<li>学习如何撰写Python数据可视化和分析报告</li>
+<li>推论统计相关的实践</li>
+<li>完善简历，丰富项目经验，不定期</li>
+</ul>
 
       
     </div>
@@ -476,7 +440,7 @@ urlpatterns = [
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/data-analysis/" rel="tag"># data_analysis</a>
           
         </div>
       
@@ -489,8 +453,8 @@ urlpatterns = [
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018-08-30/" rel="next" title="UnboundLocalError">
-                <i class="fa fa-chevron-left"></i> UnboundLocalError
+              <a href="/2019-05-04/" rel="next" title="易忘易忽略的Python入门知识点">
+                <i class="fa fa-chevron-left"></i> 易忘易忽略的Python入门知识点
               </a>
             
           </div>
@@ -498,10 +462,6 @@ urlpatterns = [
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018-09-15/" rel="prev" title="Use Seaborn to Create Animated Graph">
-                Use Seaborn to Create Animated Graph <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -672,7 +632,7 @@ urlpatterns = [
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个错误来源"><span class="nav-text">第一个错误来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排查问题"><span class="nav-text">排查问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#旧版本，url式的："><span class="nav-text">旧版本，url式的：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新版本，path式的："><span class="nav-text">新版本，path式的：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误解决"><span class="nav-text">错误解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目前的状态"><span class="nav-text">目前的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未来想从事的具体行业"><span class="nav-text">未来想从事的具体行业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何更近距离接触相关行业"><span class="nav-text">如何更近距离接触相关行业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习规划"><span class="nav-text">学习规划</span></a></li></ol></div>
             
 
           </div>
