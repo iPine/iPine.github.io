@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="python,data_analysis," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。 目录简介提出问题理解数据数据清洗探索性数据分析（建立指标模型与可视化）结论/交流   简介数据集的简介数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  PatientId：病人I">
+<meta name="keywords" content="python,data_analysis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="探索性数据分析基本流程">
+<meta property="og:url" content="http://ipine.github.io/2019-05-14/index.html">
+<meta property="og:site_name" content="iPine&#39;s Blog">
+<meta property="og:description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。 目录简介提出问题理解数据数据清洗探索性数据分析（建立指标模型与可视化）结论/交流   简介数据集的简介数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  PatientId：病人I">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ipineimg.lijundong.com/output_19_0.png">
+<meta property="og:image" content="http://ipineimg.lijundong.com/output_22_1.png">
+<meta property="og:image" content="http://ipineimg.lijundong.com/output_26_0.png">
+<meta property="og:image" content="http://ipineimg.lijundong.com/output_30_0.png">
+<meta property="og:image" content="http://ipineimg.lijundong.com/output_45_0.png">
+<meta property="og:image" content="http://ipineimg.lijundong.com/output_48_0.png">
+<meta property="og:image" content="http://ipineimg.lijundong.com/output_51_0.png">
+<meta property="og:image" content="http://ipineimg.lijundong.com/output_54_0.png">
+<meta property="og:updated_time" content="2019-05-14T11:57:24.924Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="探索性数据分析基本流程">
+<meta name="twitter:description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。 目录简介提出问题理解数据数据清洗探索性数据分析（建立指标模型与可视化）结论/交流   简介数据集的简介数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  PatientId：病人I">
+<meta name="twitter:image" content="http://ipineimg.lijundong.com/output_19_0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ipine.github.io/2019-05-14/"/>
+
+
+
+
+
+  <title>探索性数据分析基本流程 | iPine's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">iPine's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">看似无意义的事，竟是有意义的</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2019-05-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iPine">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iPine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">探索性数据分析基本流程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-14T17:36:25+08:00">
+                2019-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technique-summary/" itemprop="url" rel="index">
+                    <span itemprop="name">technique summary</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以分析数据集<code>未前往就诊的预约挂号</code>为例，总结一下探索性数据分析的基本流程。</p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul><br><li><a href="#intro">简介</a></li><br><li><a href="#wenti">提出问题</a></li><br><li><a href="#lijie">理解数据</a></li><br><li><a href="#qingxi">数据清洗</a></li><br><li><a href="#eda">探索性数据分析（建立指标模型与可视化）</a></li><br><li><a href="#conclusions">结论/交流</a></li><br></ul>
+
+<p><a id="intro"></a></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h4 id="数据集的简介"><a href="#数据集的简介" class="headerlink" title="数据集的简介"></a>数据集的简介</h4><p><a href="https://www.kaggle.com/joniarroba/noshowappointments" target="_blank" rel="noopener">数据来源kaggle</a>，<code>未前往就诊的挂号预约</code>指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：</p>
+<ul>
+<li>PatientId：病人ID，</li>
+<li>AppointmentID：预约流水号ID，</li>
+<li>Gender：预约者的性别，</li>
+<li>ScheduledDay：作出预约的具体时间，</li>
+<li>AppointmentDay：预约的就诊日期，</li>
+<li>Age：病人年龄，</li>
+<li>Neighbourhood：医院所在位置，</li>
+<li>Scholarship：是否参加巴西福利项目 <a href="https://en.wikipedia.org/wiki/Bolsa_Fam%C3%ADlia" target="_blank" rel="noopener">Bolsa Família</a> </li>
+<li>Hipertension： 是否是高血压，</li>
+<li>Diabetes：是否是糖尿病，</li>
+<li>Alcoholism：是否是酗酒，</li>
+<li>Handcap：是否是残障，</li>
+<li>SMS_received：病人是否收到短信通知，</li>
+<li>No-show：<code>no</code>表示病人如约就诊，<code>yes</code>表示病人没有前往就诊。</li>
+</ul>
+<p><a id="wenti"></a></p>
+<h3 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h3><p>数据分析的目标就是解决问题，提出感兴趣的或是以业务为导向的问题。一般是两种情况：要么获取一批数据，然后根据它提问；要么先提问，然后根据问题收集数据。<br>这里提的问题如下：</p>
+<ul>
+<li>病人的年龄是如何分布的？哪个年龄段的病人更多？</li>
+<li>未按约去就诊的病人有多少？占多大的比例？</li>
+<li>人们一般会预约在一周的哪一天就诊？</li>
+<li>一天中的哪个时段，预约的人最多？</li>
+<li>一般会提前几天预约挂号，即病人等待就诊的时长是多久？</li>
+<li>哪些重要因素会影响病人是否如约去就诊？例如，年龄，性别，是否参加福利项目，一周中的哪天就诊等。</li>
+</ul>
+<p><a id="lijie"></a></p>
+<h3 id="理解数据"><a href="#理解数据" class="headerlink" title="理解数据"></a>理解数据</h3><p>理解数据背景，每个字段的实际含义。主要包括：导入数据和查看数据基本信息，比如，一些描述统计信息。</p>
+<h4 id="导入必要的包和数据："><a href="#导入必要的包和数据：" class="headerlink" title="导入必要的包和数据："></a>导入必要的包和数据：</h4><pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+
+df = pd.read_csv(&apos;noshowappointments-kagglev2-may-2016.csv&apos;)
+</code></pre><h4 id="查看基本信息"><a href="#查看基本信息" class="headerlink" title="查看基本信息"></a>查看基本信息</h4><p>查看数据集中有哪些列</p>
+<pre><code>df.head()
+</code></pre><p>查看数据集是否有缺失值、重复值以及每列的数据类型。共14列，每列都是110527个值，不存在缺失值，也不存在重复值。</p>
+<pre><code>df.info()
+df.duplicated().sum()
+</code></pre><p>检查异常值，发现年龄的最小值有误。</p>
+<pre><code>df.describe()
+df.Age.describe()
+</code></pre><p>输出如下：</p>
+<pre><code>count    110527.000000
+mean         37.088874
+std          23.110205
+min          -1.000000
+25%          18.000000
+50%          37.000000
+75%          55.000000
+max         115.000000
+Name: Age, dtype: float64
+</code></pre><p><a id="qingxi"></a></p>
+<h3 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h3><p>这一步主要是评估数据来识别数据质量或结构中的问题，并通过修改、替换或删除数据来清理数据，以确保数据集具有最高质量和尽可能结构化。</p>
+<h4 id="1、将所有列名统一修改成小写并以下划线连接，便于操作。"><a href="#1、将所有列名统一修改成小写并以下划线连接，便于操作。" class="headerlink" title="1、将所有列名统一修改成小写并以下划线连接，便于操作。"></a>1、将所有列名统一修改成小写并以下划线连接，便于操作。</h4><pre><code>df.rename(columns=lambda x: x.strip().lower().replace(&apos;-&apos;,&apos;_&apos;), inplace=True )
+df.head(2)
+</code></pre><h4 id="2、删除与问题无关的列"><a href="#2、删除与问题无关的列" class="headerlink" title="2、删除与问题无关的列"></a>2、删除与问题无关的列</h4><p>要删除的列包括：</p>
+<ul>
+<li>PatientId：病人ID，</li>
+<li>neighbourhood: 医院位置</li>
+<li>Hipertension： 是否是高血压，</li>
+<li>Diabetes：是否是糖尿病，</li>
+<li>Alcoholism：是否是酗酒，</li>
+<li>Handcap：是否是残障，</li>
+<li>SMS_received：病人是否收到短信通知，</li>
+</ul>
+<pre><code>df.drop([&apos;patientid&apos;,&apos;hipertension&apos;,&apos;diabetes&apos;,&apos;alcoholism&apos;,&apos;handcap&apos;,&apos;sms_received&apos;,&apos;neighbourhood&apos;], axis=1, inplace= True)
+df.tail(2)
+</code></pre><h4 id="3、处理异常值。"><a href="#3、处理异常值。" class="headerlink" title="3、处理异常值。"></a>3、处理异常值。</h4><p>通过上面的观察发现<code>age</code>列的最小值为-1，最大值为115。最小值明显是错误值，而最大值不确定是否有误，但我觉得它可能是真实的，所以保留。</p>
+<pre><code>df = df[df[&apos;age&apos;] &gt; 0]
+df.age.describe()
+</code></pre><h4 id="4、对age列进行分段，并创建新的列-age-group"><a href="#4、对age列进行分段，并创建新的列-age-group" class="headerlink" title="4、对age列进行分段，并创建新的列 age_group"></a>4、对<code>age</code>列进行分段，并创建新的列 <code>age_group</code></h4><pre><code>bin_labels = [&apos;Teenager&apos;,&apos;Young&apos;,&apos;Middle&apos;,&apos;Old&apos;]
+bin_edges = [0,19,38,56,116]
+df[&apos;age_group&apos;] = pd.cut(df[&apos;age&apos;], bin_edges, labels=bin_labels) 
+df[&apos;age_group&apos;].isnull().sum()
+</code></pre><p><a id="eda"></a></p>
+<h3 id="探索性数据分析（建立指标模型与可视化）"><a href="#探索性数据分析（建立指标模型与可视化）" class="headerlink" title="探索性数据分析（建立指标模型与可视化）"></a>探索性数据分析（建立指标模型与可视化）</h3><p>执行EDA，可以探索并扩充数据，以最大限度地发挥自己数据分析、可视化和模型构建的潜力。<br>探索数据涉及在数据中查找模式，可视化数据中的关系，并对正在使用的数据建立直觉。<br>经过探索后，可以删除异常值，并从数据中创建更好的特征。</p>
+<h4 id="问题-1：病人的年龄是如何分布的？哪个年龄段的病人更多？"><a href="#问题-1：病人的年龄是如何分布的？哪个年龄段的病人更多？" class="headerlink" title="问题 1：病人的年龄是如何分布的？哪个年龄段的病人更多？"></a>问题 1：病人的年龄是如何分布的？哪个年龄段的病人更多？</h4><pre><code>plt.subplots(figsize=(6,4))
+df[&apos;age_group&apos;].value_counts().plot(kind=&apos;bar&apos;)
+plt.title(&apos;Age Distribution&apos;)
+plt.xlabel(&apos;Age&apos;)
+plt.ylabel(&apos;Frequence&apos;);
+</code></pre><p><img src="http://ipineimg.lijundong.com/output_19_0.png" alt="19"></p>
+<p>可以看到发出预约挂号的病人中，青年人最多，其次是中年人和青少年，老年人最少。</p>
+<h4 id="问题2：未按约去就诊的病人有多少？占多大的比例？"><a href="#问题2：未按约去就诊的病人有多少？占多大的比例？" class="headerlink" title="问题2：未按约去就诊的病人有多少？占多大的比例？"></a>问题2：未按约去就诊的病人有多少？占多大的比例？</h4><pre><code>x_vaule = df[&apos;no_show&apos;].value_counts()
+print(x_vaule)
+labels = &apos;Show up&apos;,&apos;No show&apos;
+explode = [0, 0.1]
+plt.subplots(figsize=(5,5))
+plt.axes(aspect=1)
+# 设置饼图样式，标签，突出显示，圆上文本格式，显示阴影，文本位置离圆心距离，起始角度，百分比的文本离圆心距离
+plt.pie(x=x_vaule, labels=labels,explode=explode,autopct=&apos;%.1f %%&apos;, shadow=True, labeldistance=1.1, startangle = 90,pctdistance = 0.6 )
+plt.title(&apos;The proportion of patients who did not go to the hospital as appointment &apos;);
+</code></pre><p><img src="http://ipineimg.lijundong.com/output_22_1.png" alt="22"></p>
+<p>通过统计函数可以得出未按约定到医院就诊的病人有21680人，观察饼图可以知道，该人数占据总预约人数的20.3%。</p>
+<h4 id="问题3：人们一般会预约在一周的哪一天就诊？"><a href="#问题3：人们一般会预约在一周的哪一天就诊？" class="headerlink" title="问题3：人们一般会预约在一周的哪一天就诊？"></a>问题3：人们一般会预约在一周的哪一天就诊？</h4><pre><code># 先将预约日期转换成日期类型，然后换成一周表示
+df[&apos;appointmentday&apos;] = pd.to_datetime(df[&apos;appointmentday&apos;], errors=&apos;coerce&apos;)
+df[&apos;appointment_weekday&apos;] =df[&apos;appointmentday&apos;].dt.weekday_name 
+
+plt.subplots(figsize=(8,5))
+plt.plot(df[&apos;appointment_weekday&apos;].value_counts().keys(),df[&apos;appointment_weekday&apos;].value_counts().values)
+plt.title(&apos;Appointment Day Distribution&apos;)
+plt.xlabel(&apos;Appointment Day&apos;)
+plt.ylabel(&apos;Frequence&apos;);
+</code></pre><p><img src="http://ipineimg.lijundong.com/output_26_0.png" alt="26"></p>
+<p>可以看到，人们更喜欢在星期三就诊，其次是星期二，星期四和星期五预约就诊的人相对少些，星期六的人最少。这里没有出现星期天，也许是因为星期天是休息日。</p>
+<h4 id="问题4：一天中的哪个时段，预约的人最多？"><a href="#问题4：一天中的哪个时段，预约的人最多？" class="headerlink" title="问题4：一天中的哪个时段，预约的人最多？"></a>问题4：一天中的哪个时段，预约的人最多？</h4><pre><code>#先将scheduleday处理成日期类型，然后提取小时
+df[&apos;scheduledday&apos;] = pd.to_datetime(df[&apos;scheduledday&apos;], errors=&apos;coerce&apos;)
+df[&apos;scheduledhour&apos;] = df[&apos;scheduledday&apos;].dt.hour
+# df[&apos;scheduledhour&apos;].describe()
+
+#将一天的时间分成三个时段，上午，下午，晚上
+bin_labels = [&apos;Morning&apos;,&apos;Afternoon&apos;,&apos;Night&apos;]
+bin_edges = [5,12,18,22]
+df[&apos;scheduledhour_cut&apos;] = pd.cut(df[&apos;scheduledhour&apos;], bin_edges, labels=bin_labels) 
+# df[&apos;scheduledhour_cut&apos;].isnull().sum()
+df[&apos;scheduledhour_cut&apos;].value_counts()
+
+plt.subplots(figsize=(6,4))
+df[&apos;scheduledhour_cut&apos;].value_counts().plot(kind=&apos;bar&apos;)
+plt.title(&apos;Scheduled Time Distribution&apos;)
+plt.xlabel(&apos;Scheduled Time&apos;)
+plt.ylabel(&apos;Frequence&apos;);
+</code></pre><p><img src="http://ipineimg.lijundong.com/output_30_0.png" alt="30"></p>
+<p>可以看到，绝大多数的病人选择在上午预约，一部分病人选择在下午预约，极少病人选择在晚上预约。一般下午6点以后，医院的医生可能已经下班了，预约成功的几率会下降。</p>
+<h4 id="问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？"><a href="#问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？" class="headerlink" title="问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？"></a>问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？</h4><pre><code>df[&apos;waittime&apos;] = df[&apos;appointmentday&apos;].dt.date - df[&apos;scheduledday&apos;].dt.date
+df[&apos;waittime&apos;].describe()
+</code></pre><p><code>等待时长</code>的统计信息如下：</p>
+<pre><code>count                     106987
+mean     10 days 04:00:04.710852
+std      15 days 06:19:27.050399
+min            -6 days +00:00:00
+25%              0 days 00:00:00
+50%              4 days 00:00:00
+75%             14 days 00:00:00
+max            179 days 00:00:00
+Name: waittime, dtype: object
+</code></pre><p>得到的<code>等待时长</code>出现了负数值，这些值应该是错误的。至于<code>等待时长</code>很大的数据，不确定是否是错误的。这里留下那些等待时长<code>大于等于0天</code>的数据。</p>
+<pre><code>df = df[df[&apos;appointmentday&apos;].dt.date &gt;= df[&apos;scheduledday&apos;].dt.date]
+df[&apos;waittime&apos;] = (df[&apos;appointmentday&apos;].dt.date - df[&apos;scheduledday&apos;].dt.date)
+df[&apos;waittime&apos;].describe()
+</code></pre><p>处理后的结果：</p>
+<pre><code>count                     106982
+mean     10 days 04:00:53.840833
+std      15 days 06:19:37.756884
+min              0 days 00:00:00
+25%              0 days 00:00:00
+50%              4 days 00:00:00
+75%             14 days 00:00:00
+max            179 days 00:00:00
+Name: waittime, dtype: object
+</code></pre><p>人们平均提前10天预约，大多数人提前一星期预约，等待时长最短是0天，即当天预约当天就诊，等待时长最久的是179天。</p>
+<h4 id="问题6：哪些重要因素会影响病人是否如约去就诊？"><a href="#问题6：哪些重要因素会影响病人是否如约去就诊？" class="headerlink" title="问题6：哪些重要因素会影响病人是否如约去就诊？"></a>问题6：哪些重要因素会影响病人是否如约去就诊？</h4><p>例如，年龄，性别，是否参加福利项目，一周中的就诊时间等</p>
+<p>计算去就诊和未去就诊的人数的比例函数</p>
+<pre><code>def cal_proportion(col_name):
+    &quot;&quot;&quot;按传入的列与no-show分组，统计不同类的数量，并计算各类的比例
+    &quot;&quot;&quot;
+    counts = df.groupby([&apos;no_show&apos;,col_name]).count()[&apos;appointmentid&apos;]
+    total = df.groupby([&apos;no_show&apos;]).count()[&apos;appointmentid&apos;]
+    no_show_proportions = counts[&apos;Yes&apos;] / total[&apos;Yes&apos;]
+    show_proportions = counts[&apos;No&apos;]/ total[&apos;No&apos;]
+    return no_show_proportions,show_proportions
+</code></pre><p>绘制图形函数</p>
+<pre><code>def double_bar(bar_data1,bar_data2,xlabels,xtick_label):
+    # 绘制条柱,先设置每个等级组的x坐标位置和每个条柱的宽度
+    ind = np.arange(len(bar_data1))
+    width = 0.35
+    red_bar = plt.bar(ind,bar_data1, width, color=&apos;r&apos;, alpha=0.7, label=&apos;No show&apos;)
+    blue_bar = plt.bar(ind+width, bar_data2, width, color=&apos;b&apos;,alpha=0.7, label=&apos;Show up&apos;)
+
+    # 标题和标签
+    plt.ylabel(&apos;Proportion&apos;)
+    plt.xlabel(xlabels)
+    plt.title(&apos;Proportion by &apos;+ xlabels + &apos; and No-Show&apos;)
+    locations = ind + width / 2  # x 坐标刻度位置
+    plt.xticks(locations, xtick_label)
+
+    # 图例
+    plt.legend()
+</code></pre><h5 id="6-1-不同年龄段的病人，如约去就诊的情况怎么样？"><a href="#6-1-不同年龄段的病人，如约去就诊的情况怎么样？" class="headerlink" title="6.1 不同年龄段的病人，如约去就诊的情况怎么样？"></a>6.1 不同年龄段的病人，如约去就诊的情况怎么样？</h5><p>计算各个年龄段，按约去就诊的比例和未按约去就诊的比例</p>
+<pre><code>no_show = cal_proportion(&apos;age_group&apos;)[0]
+show_up = cal_proportion(&apos;age_group&apos;)[1]
+xtick_label =  [&apos;Teenager&apos;, &apos;Young&apos;, &apos;Middle&apos;, &apos;Old&apos;]
+double_bar(no_show,show_up,&apos;Age Group&apos;,xtick_label)
+</code></pre><p><img src="http://ipineimg.lijundong.com/output_45_0.png" alt="45"></p>
+<p>通过上图可以看到，不同年龄段的病人如约去就诊的比例是不同的。年龄越高，去就诊的比例比未去就诊的比例就越高，而青少年和年轻人则是未去就诊的比例高于按约去就诊的比例。</p>
+<h5 id="6-2-不同性别的病人，如约去就诊的情况怎么样？"><a href="#6-2-不同性别的病人，如约去就诊的情况怎么样？" class="headerlink" title="6.2 不同性别的病人，如约去就诊的情况怎么样？"></a>6.2 不同性别的病人，如约去就诊的情况怎么样？</h5><pre><code>no_show = cal_proportion(&apos;gender&apos;)[0]
+show_up = cal_proportion(&apos;gender&apos;)[1]
+xtick_label = [&apos;Female&apos;, &apos;Male&apos;] 
+double_bar(no_show,show_up,&apos;Gender&apos;,xtick_label)
+</code></pre><p><img src="http://ipineimg.lijundong.com/output_48_0.png" alt="48"></p>
+<p>看起来，男女患者去医院就诊的概率相似。但在所有患者里，女性预约患者更多。</p>
+<h5 id="6-3-是否参加福利项目，影响患者如约去就诊吗？"><a href="#6-3-是否参加福利项目，影响患者如约去就诊吗？" class="headerlink" title="6.3 是否参加福利项目，影响患者如约去就诊吗？"></a>6.3 是否参加福利项目，影响患者如约去就诊吗？</h5><pre><code>no_show = cal_proportion(&apos;scholarship&apos;)[0]
+show_up = cal_proportion(&apos;scholarship&apos;)[1]
+xtick_label = [&apos;False&apos;, &apos;True&apos;]
+double_bar(no_show,show_up,&apos;Scholarship&apos;,xtick_label)
+</code></pre><p><img src="http://ipineimg.lijundong.com/output_51_0.png" alt="51"></p>
+<p>可以看到，未参加巴西福利项目的病人更倾向于按约就诊；而参加了巴西福利项目的病人按约就诊的比例低于未按约就诊的比例。还可以清楚地看到，绝大多数的病人并没有参加福利项目。</p>
+<h5 id="6-4-在一周的哪天就诊，是否会影响病人如约去就诊？"><a href="#6-4-在一周的哪天就诊，是否会影响病人如约去就诊？" class="headerlink" title="6.4 在一周的哪天就诊，是否会影响病人如约去就诊？"></a>6.4 在一周的哪天就诊，是否会影响病人如约去就诊？</h5><pre><code>no_show = cal_proportion(&apos;appointment_weekday&apos;)[0]
+show_up = cal_proportion(&apos;appointment_weekday&apos;)[1]
+xtick_label = [&apos;Friday&apos;, &apos;Monday&apos;, &apos;Saturday&apos;, &apos;Thursday&apos;, &apos;Tuesday&apos;, &apos;Wednesday&apos;]
+double_bar(no_show,show_up,&apos;Appointment Weekday&apos;,xtick_label)
+</code></pre><p><img src="http://ipineimg.lijundong.com/output_54_0.png" alt="54"></p>
+<p>除开星期六外，病人更喜欢在星期四、星期二和星期三如约去就诊；而约在星期五和星期一的病人，未去就诊的比例更高。同时也可以知道，更多的病人选择在星期二和星期三就诊。</p>
+<p><a id="conclusions"></a></p>
+<h3 id="结论-交流"><a href="#结论-交流" class="headerlink" title="结论/交流"></a>结论/交流</h3><p>得出结论这一步通常使用机器学习或推理性统计来完成，本文的重点是使用描述性统计得出结论。<br>与他人交流结果，要证明发现的见解。如果最终目标是构建系统，那么需要分享构建的结果，解释得出设计结论的方式，并报告该系统的性能。</p>
+<ul>
+<li>交流结果的方法有多种：报告、幻灯片、博客帖子、电子邮件、演示文稿，甚至对话。</li>
+<li>数据可视化在这个过程中可以发挥很大的价值。</li>
+</ul>
+<blockquote>
+<p><strong>实验结果</strong>：在所有这些病人中，女性病人和中老年病人更关注身体健康，年龄越大，更愿意按约去就诊。人们一般倾向于在星期二和星期三的上午去就诊，有的病人会提前很久就预约医生，而大多数的病人会在预约当天去就诊。病人的年龄、病人是否参加福利项目以及在一周的哪天去就医这几个因素会影响病人是否按约去医院就诊。</p>
+</blockquote>
+<blockquote>
+<p><strong>数据本身的局限性</strong>：数据中还提供了病人患的几种病，例如，高血压，酗酒，糖尿病等，还提供了医院的地理位置，病人是否患这些病和医院的位置可能也会影响他们能否按约去医院就诊。此外，病人等待的时间长短，可能也会影响他是否按约去就诊。目前，暂时未作这三方面的探究，只对目前感兴趣的问题做了分析。</p>
+</blockquote>
+<blockquote>
+<p><strong>探索方式局限性</strong>：此次探索分析使用的只是一些简单的统计计算和可视化分析。这样得出的结论只能是暂时的，还有进一步验证的需要（使用统计检验或者机器学习建模等）。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+    
+          <div>
+
+    <div style="text-align:center;color: #ccc;font-size:18px;">-------------完<i class="fa fa-paw"></i>-------------</div>
+
+</div>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/data-analysis/" rel="tag"># data_analysis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019-05-09/" rel="next" title="淘宝婴儿用品销售数据探索分析之遇到的问题">
+                <i class="fa fa-chevron-left"></i> 淘宝婴儿用品销售数据探索分析之遇到的问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTc1NC8xMjI5MA"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/me.jpg"
+                alt="iPine" />
+            
+              <p class="site-author-name" itemprop="name">iPine</p>
+              <p class="site-description motion-element" itemprop="description">Hello, it's me</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="//github.com/iPine" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="ipine365@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.lijundong.com/" title="Leeon Notes" target="_blank">Leeon Notes</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据集的简介"><span class="nav-text">数据集的简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提出问题"><span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解数据"><span class="nav-text">理解数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入必要的包和数据："><span class="nav-text">导入必要的包和数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看基本信息"><span class="nav-text">查看基本信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据清洗"><span class="nav-text">数据清洗</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、将所有列名统一修改成小写并以下划线连接，便于操作。"><span class="nav-text">1、将所有列名统一修改成小写并以下划线连接，便于操作。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、删除与问题无关的列"><span class="nav-text">2、删除与问题无关的列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、处理异常值。"><span class="nav-text">3、处理异常值。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、对age列进行分段，并创建新的列-age-group"><span class="nav-text">4、对age列进行分段，并创建新的列 age_group</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探索性数据分析（建立指标模型与可视化）"><span class="nav-text">探索性数据分析（建立指标模型与可视化）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题-1：病人的年龄是如何分布的？哪个年龄段的病人更多？"><span class="nav-text">问题 1：病人的年龄是如何分布的？哪个年龄段的病人更多？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题2：未按约去就诊的病人有多少？占多大的比例？"><span class="nav-text">问题2：未按约去就诊的病人有多少？占多大的比例？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题3：人们一般会预约在一周的哪一天就诊？"><span class="nav-text">问题3：人们一般会预约在一周的哪一天就诊？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题4：一天中的哪个时段，预约的人最多？"><span class="nav-text">问题4：一天中的哪个时段，预约的人最多？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？"><span class="nav-text">问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题6：哪些重要因素会影响病人是否如约去就诊？"><span class="nav-text">问题6：哪些重要因素会影响病人是否如约去就诊？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-不同年龄段的病人，如约去就诊的情况怎么样？"><span class="nav-text">6.1 不同年龄段的病人，如约去就诊的情况怎么样？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-不同性别的病人，如约去就诊的情况怎么样？"><span class="nav-text">6.2 不同性别的病人，如约去就诊的情况怎么样？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-3-是否参加福利项目，影响患者如约去就诊吗？"><span class="nav-text">6.3 是否参加福利项目，影响患者如约去就诊吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-4-在一周的哪天就诊，是否会影响病人如约去就诊？"><span class="nav-text">6.4 在一周的哪天就诊，是否会影响病人如约去就诊？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论-交流"><span class="nav-text">结论/交流</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iPine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
