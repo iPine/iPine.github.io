@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,18 +78,18 @@
 
 
 
-<meta name="description" content="做《Python编程：从入门到实践》一书中的练习时，运行一段代码，遇到了变量引用的错误：  UnboundLocalError: local variable ‘range’ referenced before assignment  代码依赖模块car.py&amp;quot;&amp;quot;&amp;quot;一个可用于表示汽车的类&amp;quot;&amp;quot;&amp;quot; #父类 class Car():     &amp;">
+<meta name="description" content="做《Python编程：从入门到实践》一书中的练习时，运行一段代码，遇到了变量引用的错误：  UnboundLocalError: local variable ‘range’ referenced before assignment   代码  依赖模块car.py &amp;quot;&amp;quot;&amp;quot;一个可用于表示汽车的类&amp;quot;&amp;quot;&amp;quot; #父类 class Car():">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UnboundLocalError">
 <meta property="og:url" content="http://ipine.github.io/2018-08-30/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="做《Python编程：从入门到实践》一书中的练习时，运行一段代码，遇到了变量引用的错误：  UnboundLocalError: local variable ‘range’ referenced before assignment  代码依赖模块car.py&amp;quot;&amp;quot;&amp;quot;一个可用于表示汽车的类&amp;quot;&amp;quot;&amp;quot; #父类 class Car():     &amp;">
+<meta property="og:description" content="做《Python编程：从入门到实践》一书中的练习时，运行一段代码，遇到了变量引用的错误：  UnboundLocalError: local variable ‘range’ referenced before assignment   代码  依赖模块car.py &amp;quot;&amp;quot;&amp;quot;一个可用于表示汽车的类&amp;quot;&amp;quot;&amp;quot; #父类 class Car():">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-22T11:27:32.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UnboundLocalError">
-<meta name="twitter:description" content="做《Python编程：从入门到实践》一书中的练习时，运行一段代码，遇到了变量引用的错误：  UnboundLocalError: local variable ‘range’ referenced before assignment  代码依赖模块car.py&amp;quot;&amp;quot;&amp;quot;一个可用于表示汽车的类&amp;quot;&amp;quot;&amp;quot; #父类 class Car():     &amp;">
+<meta name="twitter:description" content="做《Python编程：从入门到实践》一书中的练习时，运行一段代码，遇到了变量引用的错误：  UnboundLocalError: local variable ‘range’ referenced before assignment   代码  依赖模块car.py &amp;quot;&amp;quot;&amp;quot;一个可用于表示汽车的类&amp;quot;&amp;quot;&amp;quot; #父类 class Car():">
 
 
 
@@ -388,7 +389,9 @@
 <blockquote>
 <p>UnboundLocalError: local variable ‘range’ referenced before assignment</p>
 </blockquote>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="依赖模块car-py"><a href="#依赖模块car-py" class="headerlink" title="依赖模块car.py"></a>依赖模块<code>car.py</code></h4><pre><code>&quot;&quot;&quot;一个可用于表示汽车的类&quot;&quot;&quot;
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<h4 id="依赖模块carpy"><a class="markdownIt-Anchor" href="#依赖模块carpy"></a> 依赖模块<code>car.py</code></h4>
+<pre><code>&quot;&quot;&quot;一个可用于表示汽车的类&quot;&quot;&quot;
 #父类
 class Car():
     &quot;&quot;&quot;一次模拟汽车的简单尝试&quot;&quot;&quot;
@@ -400,11 +403,11 @@ class Battery():
     def __init__(self, battery_size=60):
         &quot;&quot;&quot;初始化电瓶的属性&quot;&quot;&quot;
         self.battery_size = battery_size
-
+        
     def describe_battery(self):
         &quot;&quot;&quot;打印一条描述电瓶容量的消息&quot;&quot;&quot;
         print(&quot;This car has a &quot; + str(self.battery_size) + &quot;-kWh battery.&quot;)
-
+        
     def get_range(self):
         &quot;&quot;&quot;打印一条描述电瓶续航里程的消息&quot;&quot;&quot;
         if self.battery_size == 70:
@@ -425,39 +428,46 @@ class ElectricCar(Car):
         super().__init__(make, model, year)
         #将Battery类的实例作为属性值
         self.battery = Battery()
-</code></pre><h4 id="执行my-electric-car-py中的代码"><a href="#执行my-electric-car-py中的代码" class="headerlink" title="执行my_electric_car.py中的代码"></a>执行<code>my_electric_car.py</code>中的代码</h4><pre><code>from car import ElectricCar
+</code></pre>
+<h4 id="执行my_electric_carpy中的代码"><a class="markdownIt-Anchor" href="#执行my_electric_carpy中的代码"></a> 执行<code>my_electric_car.py</code>中的代码</h4>
+<pre><code>from car import ElectricCar
 
 #实例化电动汽车
-my_tesla = ElectricCar(&apos;tesla&apos;, &apos;model s&apos;, 2016)
+my_tesla = ElectricCar('tesla', 'model s', 2016)
 print(my_tesla.get_descriptive_name())
 my_tesla.battery.describe_battery()
 
 #调用方法get_range()
 my_tesla.battery.get_range()
-</code></pre><h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p>前面运行正常，就是<code>get_range()</code>方法调用出错</p>
+</code></pre>
+<h3 id="运行结果"><a class="markdownIt-Anchor" href="#运行结果"></a> 运行结果</h3>
+<p>前面运行正常，就是<code>get_range()</code>方法调用出错</p>
 <pre><code>2016 Tesla Model S
 This car has a 60-kWh battery.
-UnboundLocalError: local variable &apos;range&apos; referenced before assignment
-</code></pre><blockquote>
-<p>错误意思：在定义前就调用；即是range的作用域出了问题；<br> 观察<code>Battery</code>类可以发现变量<code>battery_size</code>的默认值给的是60；而对于<code>get_range()</code>方法中的if判断条件，<code>battery_size</code>的值不满足任何条件；因而变量<code>range</code>并没有得到实例化（即没有被声明），后面的<code>message</code>调用它就会出错。</p>
-</blockquote>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>在方法内，if条件外声明变量range。例如：</p>
-<pre><code>def get_range(self):
-&quot;&quot;&quot;打印一条描述电瓶续航里程的消息&quot;&quot;&quot;
-
-#解决办法：在if条件外声明变量range
-range = 220
-
-# 当两个if条件都没有满足时，后面调用range会报错；因为它没有被声明
-if self.battery_size == 70:
-    range = 240
-elif self.battery_size == 85:
-    range = 270
-
-message = &quot;This car can go approximately &quot; + str(range)
-message += &quot; miles on a full charge.&quot;
-print(message)
+UnboundLocalError: local variable 'range' referenced before assignment
 </code></pre>
+<blockquote>
+<p>错误意思：在定义前就调用；即是range的作用域出了问题；<br>
+观察<code>Battery</code>类可以发现变量<code>battery_size</code>的默认值给的是60；而对于<code>get_range()</code>方法中的if判断条件，<code>battery_size</code>的值不满足任何条件；因而变量<code>range</code>并没有得到实例化（即没有被声明），后面的<code>message</code>调用它就会出错。</p>
+</blockquote>
+<h3 id="解决办法"><a class="markdownIt-Anchor" href="#解决办法"></a> 解决办法</h3>
+<p>在方法内，if条件外声明变量range。例如：</p>
+<pre><code>    def get_range(self):
+    &quot;&quot;&quot;打印一条描述电瓶续航里程的消息&quot;&quot;&quot;
+
+    #解决办法：在if条件外声明变量range
+    range = 220
+
+    # 当两个if条件都没有满足时，后面调用range会报错；因为它没有被声明
+    if self.battery_size == 70:
+        range = 240
+    elif self.battery_size == 85:
+        range = 270
+
+    message = &quot;This car can go approximately &quot; + str(range)
+    message += &quot; miles on a full charge.&quot;
+    print(message)</code></pre>
+
       
     </div>
     
@@ -596,7 +606,7 @@ print(message)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -681,7 +691,7 @@ print(message)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖模块car-py"><span class="nav-text">依赖模块car.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行my-electric-car-py中的代码"><span class="nav-text">执行my_electric_car.py中的代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行结果"><span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法"><span class="nav-text">解决办法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-text"> 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖模块carpy"><span class="nav-text"> 依赖模块car.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行my_electric_carpy中的代码"><span class="nav-text"> 执行my_electric_car.py中的代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行结果"><span class="nav-text"> 运行结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法"><span class="nav-text"> 解决办法</span></a></li></ol></div>
             
 
           </div>

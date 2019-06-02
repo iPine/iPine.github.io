@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,18 +78,18 @@
 
 
 
-<meta name="description" content="题目描述We need to sum big numbers and we require your help.Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.Exampleadd(“123”, “321">
+<meta name="description" content="题目描述 We need to sum big numbers and we require your help. Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string. Example add(“123”,">
 <meta name="keywords" content="javascript,codewars">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adding Big Numbers">
 <meta property="og:url" content="http://ipine.github.io/2018-05-06/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="题目描述We need to sum big numbers and we require your help.Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.Exampleadd(“123”, “321">
+<meta property="og:description" content="题目描述 We need to sum big numbers and we require your help. Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string. Example add(“123”,">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-22T11:27:14.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adding Big Numbers">
-<meta name="twitter:description" content="题目描述We need to sum big numbers and we require your help.Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.Exampleadd(“123”, “321">
+<meta name="twitter:description" content="题目描述 We need to sum big numbers and we require your help. Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string. Example add(“123”,">
 
 
 
@@ -384,16 +385,22 @@
       
 
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>We need to sum big numbers and we require your help.<br>Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.<br>Example<br>add(“123”, “321”); -&gt; “444”<br>add(“11”, “99”); -&gt; “110”</p>
+        <h3 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h3>
+<p>We need to sum big numbers and we require your help.<br>
+Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.<br>
+Example<br>
+add(“123”, “321”); -&gt; “444”<br>
+add(“11”, “99”); -&gt; “110”</p>
 <p>Notes</p>
 <ul>
-<li>The input numbers are big.</li>
+<li>The input numbers are big.</li>
 <li>The input is a string of only digits</li>
 <li>The numbers are positives</li>
 </ul>
-<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function add(a, b) {
-  var arra =a.split(&apos;&apos;);
-  var arrb =b.split(&apos;&apos;);
+<h3 id="我的代码"><a class="markdownIt-Anchor" href="#我的代码"></a> 我的代码</h3>
+<pre><code>function add(a, b) {
+  var arra =a.split('');
+  var arrb =b.split('');
   var len = a.length &gt; b.length?a.length:b.length;
   var result = [];
   var count = 0;
@@ -411,13 +418,15 @@
   }
   result.push(count);
  // console.log(result);
-  return result.reverse().join(&apos;&apos;).replace(/^0+/,&apos;&apos;);
+  return result.reverse().join('').replace(/^0+/,'');
 //   return Number(a) + Number(b); // Fix this!
 }
-</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function add (a, b) {
- var res = &apos;&apos;, c = 0 ;
- a = a.split(&apos;&apos;);
- b = b.split(&apos;&apos;);
+</code></pre>
+<h3 id="clever"><a class="markdownIt-Anchor" href="#clever"></a> Clever</h3>
+<pre><code>function add (a, b) {
+ var res = '', c = 0 ;
+ a = a.split('');
+ b = b.split('');
  while (a.length || b.length || c) { 
   c += ~~a.pop() + ~~b.pop();
   res = c % 10 + res;
@@ -425,7 +434,12 @@
  } 
  return res; 
 }
-</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><p>1 . 思路是将a和b的最后一位相加，如果相加的结果大于10，取个位数部分，进位值<code>count+1</code>；并将结果放入到数组中。<br>2 . 要一位一位相加，需要把a和b两个字符串转成字符串数组，用到<code>.split()</code>函数。<br>3 . 还要注意判断a串和b串哪个更长，最后循环完后需要将最后一次的进位值放入数组。<br>4 . 以上步骤得到的数组不是最终结果，还要先<code>翻转</code>，再将字符串数组<code>变成字符串</code>，最后用<code>.replace()</code>方法将首位的0去掉。</p>
+</code></pre>
+<h3 id="key"><a class="markdownIt-Anchor" href="#key"></a> Key</h3>
+<p>1 . 思路是将a和b的最后一位相加，如果相加的结果大于10，取个位数部分，进位值<code>count+1</code>；并将结果放入到数组中。<br>
+2 . 要一位一位相加，需要把a和b两个字符串转成字符串数组，用到<code>.split()</code>函数。<br>
+3 . 还要注意判断a串和b串哪个更长，最后循环完后需要将最后一次的进位值放入数组。<br>
+4 . 以上步骤得到的数组不是最终结果，还要先<code>翻转</code>，再将字符串数组<code>变成字符串</code>，最后用<code>.replace()</code>方法将首位的0去掉。</p>
 
       
     </div>
@@ -567,7 +581,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -652,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text">我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clever"><span class="nav-text">Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-text">Key</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text"> 我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clever"><span class="nav-text"> Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-text"> Key</span></a></li></ol></div>
             
 
           </div>

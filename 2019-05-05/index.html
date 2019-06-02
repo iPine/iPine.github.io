@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,18 +78,18 @@
 
 
 
-<meta name="description" content="迭代器与生成器迭代器迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。 迭代器，常用的两个方法iter()和next()； import os list1 = [1,2,3,4] myiter = iter(list1) # 生成迭代器对象 # for ele in">
+<meta name="description" content="迭代器与生成器  迭代器 迭代是Python最强大的功能之一，是访问集合元素的一种方式。 迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。 迭代器，常用的两个方法iter()和next()； import os list1 = [1,2,3,4] myiter = iter(list1) # 生成迭代器对象 # for e">
 <meta name="keywords" content="python,data_analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="易忘易忽略的Python入门知识点-续(一)">
 <meta property="og:url" content="http://ipine.github.io/2019-05-05/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="迭代器与生成器迭代器迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。 迭代器，常用的两个方法iter()和next()； import os list1 = [1,2,3,4] myiter = iter(list1) # 生成迭代器对象 # for ele in">
+<meta property="og:description" content="迭代器与生成器  迭代器 迭代是Python最强大的功能之一，是访问集合元素的一种方式。 迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。 迭代器，常用的两个方法iter()和next()； import os list1 = [1,2,3,4] myiter = iter(list1) # 生成迭代器对象 # for e">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-06T12:41:00.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="易忘易忽略的Python入门知识点-续(一)">
-<meta name="twitter:description" content="迭代器与生成器迭代器迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。 迭代器，常用的两个方法iter()和next()； import os list1 = [1,2,3,4] myiter = iter(list1) # 生成迭代器对象 # for ele in">
+<meta name="twitter:description" content="迭代器与生成器  迭代器 迭代是Python最强大的功能之一，是访问集合元素的一种方式。 迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。 迭代器，常用的两个方法iter()和next()； import os list1 = [1,2,3,4] myiter = iter(list1) # 生成迭代器对象 # for e">
 
 
 
@@ -384,7 +385,10 @@
       
 
       
-        <h4 id="迭代器与生成器"><a href="#迭代器与生成器" class="headerlink" title="迭代器与生成器"></a>迭代器与生成器</h4><h5 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h5><p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。<br>迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。</p>
+        <h4 id="迭代器与生成器"><a class="markdownIt-Anchor" href="#迭代器与生成器"></a> 迭代器与生成器</h4>
+<h5 id="迭代器"><a class="markdownIt-Anchor" href="#迭代器"></a> 迭代器</h5>
+<p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。<br>
+迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。</p>
 <p>迭代器，常用的两个方法<code>iter()</code>和<code>next()</code>；</p>
 <pre><code>import os
 list1 = [1,2,3,4]
@@ -396,24 +400,32 @@ while True:
         print(next(ele))
     except StopIteration:
         os._exit(1)
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>当抛出StopIteration异常时，调用模块<code>sys</code>的<code>exit()</code>方法，会出现 <em>SystemExit exception raised from sys.exit()</em>；解决方法是使用调用 os._exit() ,它直接退出，不会抛出异常。参数是进程返回的退出码。</p>
 </blockquote>
-<p><strong>应用栗子</strong>：如何将列表分隔成大小均匀的块？<br>一个方法是结合使用 <code>zip()</code>和 <code>iter()</code>函数：</p>
+<p><strong>应用栗子</strong>：如何将列表分隔成大小均匀的块？<br>
+一个方法是结合使用 <code>zip()</code>和 <code>iter()</code>函数：</p>
 <pre><code>x = [1,2,3,4,5,6,7,8,9]
 y = zip(*[iter(x)]*2)  # 2是表示每个块的大小
 list(y)   # [(1, 2), (3, 4), (5, 6), (7, 8)]
-</code></pre><p><strong>过程理解</strong>：</p>
+</code></pre>
+<p><strong>过程理解</strong>：</p>
 <ol>
 <li><code>iter()</code>是序列上的迭代器</li>
 <li><code>[iter(x)] * 2</code>生成一个包含2个listiterator对象的列表：每个列表迭代器都是x的一个迭代器。</li>
 <li>在将序列解压缩为参数之前传递给<code>zip()</code>函数的<code>*</code>，是为了将相同的迭代器传递给<code>zip()</code>函数4次，每次从迭代器中提取一个项。</li>
 </ol>
-<p><strong>具体步骤</strong>：<br>首先，会有2个列表迭代对象，就是原来相同的2个列表：[1,2,3,4,5,6,7,8,9]，[1,2,3,4,5,6,7,8,9]<br>然后， 第一次，<code>zip()</code>将按顺序接受列表中的一个元素，[1][2]</p>
+<p><strong>具体步骤</strong>：<br>
+首先，会有2个列表迭代对象，就是原来相同的2个列表：[1,2,3,4,5,6,7,8,9]，[1,2,3,4,5,6,7,8,9]<br>
+然后， 第一次，<code>zip()</code>将按顺序接受列表中的一个元素，[1][2]</p>
 <blockquote>
 <p>注意：迭代对象会保留迭代器中下一个元素的位置</p>
 </blockquote>
-<p>第二次，元素将被添加到刚刚创建的2个列表中，最终将得到：[1, 3], [2,4]<br>第三次，执行相同的过程，最终得到：[1, 3, 5], [2, 4, 6]<br>第四次，执行相同的过程，最终得到：[1, 3, 5, 7], [2, 4, 6, 8]<br>最后，zip 将这三个列表压缩在一起，得到：(1, 2), (3, 4), (5, 6), (7, 8)</p>
+<p>第二次，元素将被添加到刚刚创建的2个列表中，最终将得到：[1, 3], [2,4]<br>
+第三次，执行相同的过程，最终得到：[1, 3, 5], [2, 4, 6]<br>
+第四次，执行相同的过程，最终得到：[1, 3, 5, 7], [2, 4, 6, 8]<br>
+最后，zip 将这三个列表压缩在一起，得到：(1, 2), (3, 4), (5, 6), (7, 8)</p>
 <p>可以自己创建迭代器，将一个类作为一个迭代器，需要实现两个方法:</p>
 <pre><code>class MyNumbers:
     def __iter__(self):
@@ -430,7 +442,11 @@ myclass = MyNumbers()
 myiter = iter(myclass)
 for x in myiter:
     print(x)
-</code></pre><h5 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h5><p>在 Python 中，使用了 <code>yield</code>的函数被称为<code>生成器（generator）</code>。 生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。<br>在调用生成器运行的过程中，每次遇到 <code>yield</code>时函数会暂停并保存当前所有的运行信息，返回 <code>yield</code>的值, 并在下一次执行<code>next()</code>方法时从当前位置继续运行。<br>调用一个生成器函数，返回一个迭代器对象</p>
+</code></pre>
+<h5 id="生成器"><a class="markdownIt-Anchor" href="#生成器"></a> 生成器</h5>
+<p>在 Python 中，使用了 <code>yield</code>的函数被称为<code>生成器（generator）</code>。 生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。<br>
+在调用生成器运行的过程中，每次遇到 <code>yield</code>时函数会暂停并保存当前所有的运行信息，返回 <code>yield</code>的值, 并在下一次执行<code>next()</code>方法时从当前位置继续运行。<br>
+调用一个生成器函数，返回一个迭代器对象</p>
 <p><strong>应用栗子1</strong>：用yield实现斐波那契数列</p>
 <pre><code>import os
 def fibonacci(n):
@@ -445,18 +461,24 @@ def fibonacci(n):
 f = fibonacci(10)
 while True:
     try:
-        print(next(f), end=&apos; &apos;)
+        print(next(f), end=' ')
     except StopIteration:
         os._exit(1)
-</code></pre><p><strong>应用栗子2</strong>：用yield实现将列表分隔成大小均匀的块</p>
+</code></pre>
+<p><strong>应用栗子2</strong>：用yield实现将列表分隔成大小均匀的块</p>
 <pre><code>def chunks(list, chunkSize):
     for i in range(0, len(list), chunkSize):
         yield list[i:i + chunkSize]
-</code></pre><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>1 . 函数参数传递<br>在 python 中，类型属于对象，变量是没有类型的，例如：</p>
+</code></pre>
+<h4 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h4>
+<p>1 . 函数参数传递<br>
+在 python 中，类型属于对象，变量是没有类型的，例如：</p>
 <pre><code>a=[1,2,3]
 a=&quot;ipine&quot;
-</code></pre><p>以上代码中，[1,2,3] 是<code>List</code>类型，”ipine” 是 <code>String</code> 类型，而变量 a 是没有类型，它仅仅是一个 <strong>对象的引用（一个指针）</strong>，可以是指向 List 类型对象，也可以是指向 String 类型对象。</p>
-<p>再次提到 可变 VS 不可变对象<br>strings，tuples和numbers不可变；list，dict等可变</p>
+</code></pre>
+<p>以上代码中，[1,2,3] 是<code>List</code>类型，“ipine” 是 <code>String</code> 类型，而变量 a 是没有类型，它仅仅是一个 <strong>对象的引用（一个指针）</strong>，可以是指向 List 类型对象，也可以是指向 String 类型对象。</p>
+<p>再次提到 可变 VS 不可变对象<br>
+strings，tuples和numbers不可变；list，dict等可变</p>
 <ul>
 <li>不可变类型：变量赋值 <code>a=5</code> 后再赋值 <code>a=10</code>，这里实际是新生成一个 <code>int</code> 值对象 10，再让<code>a</code>指向它，而 5 被丢弃，不是改变<code>a</code>的值，相当于 <em>新生成了a</em>。</li>
 <li>可变类型：变量赋值 <code>la=[1,2,3,4]</code> 后再赋值 <code>la[2]=5</code> 则是将 list <code>la</code> 的第三个元素值更改，<em>本身la没有动，只是其内部的一部分值被修改了</em>。</li>
@@ -485,9 +507,16 @@ a=&quot;ipine&quot;
 
 f(1,2,3) #报错
 f(1,2, c=3) #正确
-</code></pre><p>3 . 匿名函数 <code>lambda</code>是一个表达式，不是一个代码块。它不能访问 自己参数列表之外或全局命名空间里的参数。<br>4 . 不带参数值的<code>return</code>语句返回的是<code>None</code>；如果函数没有使用 return 语句，则函数返回 <code>None</code>。<br>5 . 变量作用域<br>Python的作用域有4种，分别是：</p>
+</code></pre>
+<p>3 . 匿名函数 <code>lambda</code>是一个表达式，不是一个代码块。它不能访问 自己参数列表之外或全局命名空间里的参数。<br>
+4 . 不带参数值的<code>return</code>语句返回的是<code>None</code>；如果函数没有使用 return 语句，则函数返回 <code>None</code>。<br>
+5 . 变量作用域<br>
+Python的作用域有4种，分别是：</p>
 <blockquote>
-<p>L （Local） 局部作用域<br>E （Enclosing） 闭包函数外的函数中<br>G （Global） 全局作用域<br>B （Built-in） 内置作用域（内置函数所在模块的范围）</p>
+<p>L （Local） 局部作用域<br>
+E （Enclosing） 闭包函数外的函数中<br>
+G （Global） 全局作用域<br>
+B （Built-in） 内置作用域（内置函数所在模块的范围）</p>
 </blockquote>
 <p>查找的规则是：在局部找不到，去局部外的局部找（闭包），再找不到就全局找，最后再去内置找。</p>
 <pre><code>g_count = 0  # 全局作用域
@@ -495,13 +524,16 @@ def outer():
     o_count = 1  # 闭包函数外的函数中
     def inner():
         i_count = 2  # 局部作用域
-</code></pre><p>内置作用域是通过一个名为<code>builtins</code> 的标准模块来实现的, 必须导入这个文件才能够使用它。</p>
+</code></pre>
+<p>内置作用域是通过一个名为<code>builtins</code> 的标准模块来实现的, 必须导入这个文件才能够使用它。</p>
 <pre><code>import builtins
 print(dir(builtins))
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>模块、类、函数（包括lambda表达式）会引入新的作用域，其他代码块不会。</p>
 </blockquote>
-<p>6 . global和nonlocal关键字<br>当内部作用域想修改外部作用域的变量时，需要用global和nonlocal关键字。</p>
+<p>6 . global和nonlocal关键字<br>
+当内部作用域想修改外部作用域的变量时，需要用global和nonlocal关键字。</p>
 <p><code>global</code>关键字用于修改全局作用域的变量，例如：</p>
 <pre><code>num = 1 
 def fun1(): 
@@ -512,7 +544,8 @@ def fun1():
 
 fun1() 
 print(num) # 123，已经将全局变量的值修改了
-</code></pre><p><code>nonlocal</code>关键字用于修改嵌套（enclosing）作用域，例如：</p>
+</code></pre>
+<p><code>nonlocal</code>关键字用于修改嵌套（enclosing）作用域，例如：</p>
 <pre><code>def outer(): 
     num = 10 
     def inner(): 
@@ -523,42 +556,57 @@ print(num) # 123，已经将全局变量的值修改了
     print(num)  # 100
 
 outer()
-</code></pre><p>一种特殊情况，函数使用全局作用域的变量，如下一段代码：</p>
+</code></pre>
+<p>一种特殊情况，函数使用全局作用域的变量，如下一段代码：</p>
 <pre><code>a = 10
 def test():
     a = a + 1
     print(a)
 test(a)
-</code></pre><p>会抛出 <em>局部作用域引用错误</em>，因为test 函数中的<code>a</code> 使用的是局部变量，未定义，无法修改。<br>正确应该是：</p>
+</code></pre>
+<p>会抛出 <em>局部作用域引用错误</em>，因为test 函数中的<code>a</code> 使用的是局部变量，未定义，无法修改。<br>
+正确应该是：</p>
 <pre><code>a = 10
 def test(a):
     a = a + 1
     print(a)
 test(a) # 11
 print(a) # 10，传递参数类型是不可变类型，所以只是值传递
-</code></pre><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>1 . 列表的<code>clear()</code>方法，用于移除列表中的所有项，等于<code>del a[:]</code>。 使用 <code>del</code> 语句可以从一个列表中依索引而不是值来删除一个元素；也可以使用它传入<code>key</code>来删除字典元素。<br>2 . 可以用花括号<code>{}</code>创建集合。注意：如果要创建一个空集合，你必须用 <code>set()</code> 而不是<code>{}</code>；后者创建一个空的字典。集合的功能包括 <strong>成员关系检查</strong>和 <strong>消除重复元素</strong>。<br>3 . 选择正确的内置功能。<br>当遍历列表既要访问索引又要访问值时，使用<code>enumerate()</code>而不是<code>range()</code>进行迭代。<br>对于每个元素，<code>enumerate()</code>返回一个计数器和元素值。计数器默认为0，也是元素的索引。不想在0开始计数，只需使用可选的<code>start</code>参数来设置偏移量：</p>
+</code></pre>
+<h4 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h4>
+<p>1 . 列表的<code>clear()</code>方法，用于移除列表中的所有项，等于<code>del a[:]</code>。 使用 <code>del</code> 语句可以从一个列表中依索引而不是值来删除一个元素；也可以使用它传入<code>key</code>来删除字典元素。<br>
+2 . 可以用花括号<code>{}</code>创建集合。注意：如果要创建一个空集合，你必须用 <code>set()</code> 而不是<code>{}</code>；后者创建一个空的字典。集合的功能包括 <strong>成员关系检查</strong>和 <strong>消除重复元素</strong>。<br>
+3 . 选择正确的内置功能。<br>
+当遍历列表既要访问索引又要访问值时，使用<code>enumerate()</code>而不是<code>range()</code>进行迭代。<br>
+对于每个元素，<code>enumerate()</code>返回一个计数器和元素值。计数器默认为0，也是元素的索引。不想在0开始计数，只需使用可选的<code>start</code>参数来设置偏移量：</p>
 <pre><code>numbers = [45, 22, 14]
 for i, num in enumerate(numbers, start=52):
     print(i, num) 
-</code></pre><p>当遍历字典时，使用 <code>items()</code> 将关键字和对应的值同时解读出来：</p>
-<pre><code>knights = {&apos;gallahad&apos;: &apos;the pure&apos;, &apos;robin&apos;: &apos;the brave&apos;}
+</code></pre>
+<p>当遍历字典时，使用 <code>items()</code> 将关键字和对应的值同时解读出来：</p>
+<pre><code>knights = {'gallahad': 'the pure', 'robin': 'the brave'}
 for k, v in knights.items():
     print(k, v)
-</code></pre><p>同时遍历两个或更多的序列，使用 <code>zip()</code> 组合：</p>
-<pre><code>questions = [&apos;name&apos;, &apos;favorite color&apos;]
-answers = [&apos;ipine&apos;, &apos;red&apos;]
+</code></pre>
+<p>同时遍历两个或更多的序列，使用 <code>zip()</code> 组合：</p>
+<pre><code>questions = ['name', 'favorite color']
+answers = ['ipine', 'red']
 for q, a in zip(questions, answers):
-    print(f&apos;What is your {q}? It is {a}.&apos;)
-    # print(&apos;What is your {0}?  It is {1}.&apos;.format(q, a))
-</code></pre><p>按顺序遍历序列，使用 <code>sorted()</code>函数返回有序序列，不改变原序列：</p>
-<pre><code>basket = [&apos;apple&apos;, &apos;orange&apos;, &apos;apple&apos;, &apos;pear&apos;, &apos;orange&apos;, &apos;banana&apos;]
+    print(f'What is your {q}? It is {a}.')
+    # print('What is your {0}?  It is {1}.'.format(q, a))
+</code></pre>
+<p>按顺序遍历序列，使用 <code>sorted()</code>函数返回有序序列，不改变原序列：</p>
+<pre><code>basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
 for f in sorted(set(basket)):
     print(f)
 print(basket)
-</code></pre><p>反向遍历一个序列，首先指定序列，然后调用<code>reversed()</code>函数：</p>
+</code></pre>
+<p>反向遍历一个序列，首先指定序列，然后调用<code>reversed()</code>函数：</p>
 <pre><code>for i in reversed(range(1, 10, 2)):
-    print(i,end=&apos; &apos;) # 9 7 5 3 1
-</code></pre><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.runoob.com/python3/python3-stdlib.html" target="_blank" rel="noopener">Python菜鸟教程</a></p>
+    print(i,end=' ') # 9 7 5 3 1
+</code></pre>
+<h4 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h4>
+<p><a href="https://www.runoob.com/python3/python3-stdlib.html" target="_blank" rel="noopener">Python菜鸟教程</a></p>
 
       
     </div>
@@ -700,7 +748,7 @@ print(basket)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -785,7 +833,7 @@ print(basket)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器与生成器"><span class="nav-text">迭代器与生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#迭代器"><span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生成器"><span class="nav-text">生成器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据结构"><span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器与生成器"><span class="nav-text"> 迭代器与生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#迭代器"><span class="nav-text"> 迭代器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生成器"><span class="nav-text"> 生成器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数"><span class="nav-text"> 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据结构"><span class="nav-text"> 数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-text"> 参考</span></a></li></ol></div>
             
 
           </div>

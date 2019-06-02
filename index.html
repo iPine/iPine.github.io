@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -294,6 +295,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2019-06-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iPine">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iPine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019-06-02/" itemprop="url">推论统计实践之验证斯特鲁普效应</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T20:20:27+08:00">
+                2019-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technique-summary/" itemprop="url" rel="index">
+                    <span itemprop="name">technique summary</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+           背景
+斯特鲁普效应是以美国心理学家约翰·里德利·斯特鲁普的名字命名的一种心理现象，在心理学中，该效应是对任务反应时间的干扰。当词的信息（词义）与写词色彩不一致时，便会出现心理紧张与自动反应之间的矛盾，于是造成参与者的反应时间延长。一个典型的例子–交互式斯特鲁普效应实验，可以很好地证明这种现象，这将
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019-06-02/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2019-05-24/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -387,7 +541,9 @@
       
         
           
-          一、分析背景与目的背景拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015
+           一、分析背景与目的
+ 背景
+拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -540,15 +696,15 @@
         
           
           之前对淘宝婴儿用品销售数据集做了基本的业务指标探索性分析。这里还是以这个数据集为例，进行后续的相关性探索。通过分析两个问题，熟悉机器学习算法建模流程。
-两个预测问题：
+ 两个预测问题：
+
 根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品；
 根据父母的购买行为预测孩子的年龄。
 
-分析流程：
+ 分析流程：
+
 提出问题
-理解数据
-
-
+理解
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -701,10 +857,19 @@
         
           
           以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。
-目录简介提出问题理解数据数据清洗探索性数据分析（建立指标模型与可视化）结论/交流
+ 目录
+
+简介
+提出问题
+理解数据
+数据清洗
+探索性数据分析（建立指标模型与可视化）
+结论/交流
 
 
-简介数据集的简介数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西
+ 简介
+ 数据集的简介
+数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -856,7 +1021,11 @@
       
         
           
-          在阿里天池下载的淘宝天猫婴儿用品销量数据集，数据的背景介绍可参见数据出处或者这里。在用Python对该数据进行初步业务指标分析后，我遇到了一些问题，这里做下总结。本文主要内容，包含以下两方面：1 . 在数据清洗过程，遇到了什么问题？有什么需要注意的？2 . 模型构建过程，即分析了哪些业务指标，需要注
+          在阿里天池下载的淘宝天猫婴儿用品销量数据集，数据的背景介绍可参见数据出处或者这里。
+在用Python对该数据进行初步业务指标分析后，我遇到了一些问题，这里做下总结。
+本文主要内容，包含以下两方面：
+1 . 在数据清洗过程，遇到了什么问题？有什么需要注意的？
+2 . 模型构建过程，即分析了哪些业务指标
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1008,7 +1177,10 @@
       
         
           
-          使用 NumPy 而不是列表的原因NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。在Python本身的列表中，保存的是对象的指针。比如，存一个简单数组[0,1,2]，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为list的元素在系统内存中是 分
+           使用 NumPy 而不是列表的原因
+NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。
+在Python本身的列表中，保存的是对象的指针。
+比如，存一个简单数组[0,1,2]，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为list的元素在系统内存
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1160,8 +1332,11 @@
       
         
           
-          模块与包模块模块是一个包含所有你定义的函数和变量的文件，其后缀名是.py。 可以被别的程序引入，以使用该模块中的函数等功能。这也是使用 python 标准库的方法。一个模块只会被导入一次，不管你执行了多少次import。
-Python的搜索路径，搜索路径是由一系列目录名组成的，Python解释器就依
+           模块与包
+ 模块
+模块是一个包含所有你定义的函数和变量的文件，其后缀名是.py。 可以被别的程序引入，以使用该模块中的函数等功能。这也是使用 python 标准库的方法。
+一个模块只会被导入一次，不管你执行了多少次import。
+Python的搜索路径，搜索路径是由一系列目录名组成的，Python
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1313,10 +1488,13 @@ Python的搜索路径，搜索路径是由一系列目录名组成的，Python�
       
         
           
-          迭代器与生成器迭代器迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。
+           迭代器与生成器
+ 迭代器
+迭代是Python最强大的功能之一，是访问集合元素的一种方式。
+迭代器是一个可以记住遍历位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束，它只能往前不会后退。
 迭代器，常用的两个方法iter()和next()；
 import os
-list1 = [1,
+list1 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1468,7 +1646,8 @@ list1 = [1,
       
         
           
-          目前的状态我是一名计算机专业的在读研究生，研究方向是数据可视化，可视分析。从实验室以及研究方向来看，周边大部分同学选择了前端开发，少部分也有做后台的。而我个人并不是特别愿意去做前端开发，我想做数据分析，数据挖掘相关的工作。目前，正是找实习的时候，但是我找数据分析的岗并不顺利，迟迟没有拿到实习offe
+           目前的状态
+我是一名计算机专业的在读研究生，研究方向是数据可视化，可视分析。从实验室以及研究方向来看，周边大部分同学选择了前端开发，少部分也有做后台的。而我个人并不是特别愿意去做前端开发，我想做数据分析，数据挖掘相关的工作。目前，正是找实习的时候，但是我找数据分析的岗并不顺利，迟迟没有拿到实习of
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1621,164 +1800,12 @@ list1 = [1,
         
           
           最近在复习Python的基础知识，发现一些易忽略和忘记的点，这里做一些总结。
-可改变 VS 不可改变不可改变的数据类型包括：数值、字符串和元组；而可改变的数据类型包括：列表、字典、集合。需要注意字典的key必须为不可变类型；集合虽然是可变的但是它要求包含的元素是不可变类型。不可变类型换一种更官方的说
+ 可改变 VS 不可改变
+不可改变的数据类型包括：数值、字符串和元组；而可改变的数据类型包括：列表、字典、集合。需要注意字典的key必须为不可变类型；集合虽然是可变的但是它要求包含的元素是不可变类型。不可变类型换一种更官方
           ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019-05-04/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2018-12-18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iPine">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iPine's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018-12-18/" itemprop="url">散列表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-18T19:30:10+08:00">
-                2018-12-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technique-summary/" itemprop="url" rel="index">
-                    <span itemprop="name">technique summary</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-散列表效率之前讲到散列表的查询效率并不能笼统地说成是 O(1) 。它跟散列函数、装载因子、散列冲突都有关系。在极端情况下，恶意攻击者，通过精心构造的数据，使得所有数据经过散列函数后，都散列到同一个槽里。若我们使用的是基于链表的冲突解决办法，那这个时候，散列表就会退化为链表，查询时间度也退化为 O(
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018-12-18/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1874,7 +1901,7 @@ list1 = [1,
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

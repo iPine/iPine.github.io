@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,13 +78,13 @@
 
 
 
-<meta name="description" content="最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。 网页布局区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖display属性+position属性+float属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。 Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局（display:fl">
+<meta name="description" content="最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。  网页布局 区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖display属性+position属性+float属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。 Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局（display:">
 <meta name="keywords" content="javascript,css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flex布局">
 <meta property="og:url" content="http://ipine.github.io/2018-05-13/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。 网页布局区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖display属性+position属性+float属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。 Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局（display:fl">
+<meta property="og:description" content="最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。  网页布局 区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖display属性+position属性+float属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。 Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局（display:">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-5-19/84888199.jpg">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-5-19/10672781.jpg">
@@ -92,7 +93,7 @@
 <meta property="og:updated_time" content="2019-02-22T11:27:17.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flex布局">
-<meta name="twitter:description" content="最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。 网页布局区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖display属性+position属性+float属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。 Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局（display:fl">
+<meta name="twitter:description" content="最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。  网页布局 区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖display属性+position属性+float属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。 Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局（display:">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/18-5-19/84888199.jpg">
 
 
@@ -390,21 +391,41 @@
 
       
         <p>最近在做一个关于区块链可视化的前端页面练习，尝试了flex布局，作个简单的summary。</p>
-<h3 id="网页布局"><a href="#网页布局" class="headerlink" title="网页布局"></a>网页布局</h3><p>区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖<code>display</code>属性+<code>position</code>属性+<code>float</code>属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。</p>
+<h3 id="网页布局"><a class="markdownIt-Anchor" href="#网页布局"></a> 网页布局</h3>
+<p>区块图展示部分刚开始使用的是布局的传统解决方案: 基于盒状模型，依赖<code>display</code>属性+<code>position</code>属性+<code>float</code>属性，后来发现Flex弹性布局更好用，垂直方向居中完全不是问题，盒子换行放置也很easy。</p>
 <p>Flex布局即是一种弹性布局。任何一个容器都可以指定为Flex布局<code>（display:flex）</code>，行内元素也可以使用<code>（display:inline-flex）</code>。</p>
 <blockquote>
 <p>注意：设为Flex布局以后，子元素的float,clear,和vertical-align属性将失去作用。</p>
 </blockquote>
-<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</p>
-<h4 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h4><p><img src="http://ipineimg.lijundong.com/18-5-19/84888199.jpg" alt="容器"></p>
+<h3 id="基本概念"><a class="markdownIt-Anchor" href="#基本概念"></a> 基本概念</h3>
+<p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称&quot;容器&quot;。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称&quot;项目&quot;。</p>
+<h4 id="容器的属性"><a class="markdownIt-Anchor" href="#容器的属性"></a> 容器的属性</h4>
+<p><img src="http://ipineimg.lijundong.com/18-5-19/84888199.jpg" alt="容器"></p>
 <p>每个属性对应的含义是：</p>
-<p> • 项目排列方向；可取四个值： <code>row | row-reverse | column | column-reverse</code><br> • 项目是否换行，怎么换；可取三个值： <code>nowrap | wrap | wrap-reverse</code><br> • 前2个属性的简写; 取值： <code>&lt;flex-direction&gt; || &lt;flex-wrap&gt;</code><br> • 项目在主轴上的对齐方式，与主轴的方向有关；可取五个值： <code>flex-start | flex-end | center | space-between | space-around</code><br> • 项目在交叉轴上的对齐方式,与交叉轴的方向有关；可取五个值： <code>flex-start | flex-end | center | baseline | stretch</code><br> • 多根轴线的对齐方式，若项目只有一根轴线，该属性不起作用；可取六个值： <code>flex-start | flex-end | center | space-between | space-around | stretch</code></p>
-<h4 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h4><p><img src="http://ipineimg.lijundong.com/18-5-19/10672781.jpg" alt="项目"></p>
+<p>• 项目排列方向；可取四个值： <code>row | row-reverse | column | column-reverse</code><br>
+• 项目是否换行，怎么换；可取三个值： <code>nowrap | wrap | wrap-reverse</code><br>
+• 前2个属性的简写; 取值： <code>&lt;flex-direction&gt; || &lt;flex-wrap&gt;</code><br>
+• 项目在主轴上的对齐方式，与主轴的方向有关；可取五个值： <code>flex-start | flex-end | center | space-between | space-around</code><br>
+• 项目在交叉轴上的对齐方式,与交叉轴的方向有关；可取五个值： <code>flex-start | flex-end | center | baseline | stretch</code><br>
+• 多根轴线的对齐方式，若项目只有一根轴线，该属性不起作用；可取六个值： <code>flex-start | flex-end | center | space-between | space-around | stretch</code></p>
+<h4 id="项目的属性"><a class="markdownIt-Anchor" href="#项目的属性"></a> 项目的属性</h4>
+<p><img src="http://ipineimg.lijundong.com/18-5-19/10672781.jpg" alt="项目"></p>
 <p>每个属性对应的含义是：</p>
-<p> • 项目排列顺序，值越小，排列越靠前；默认为0<br> • 有多余空间时，项目是否放大；默认为0，不放大<br> • 空间不够时，项目是否缩小；默认为1，缩小<br> • 分配多余空间之前，项目占据的主轴空间；默认为auto,即原本大小<br> • <code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>属性的简写（优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值），常用的两个快捷值： <code>auto(1 1 auto)和none(0 0 auto)</code><br> • 允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性；默认值为auto</p>
-<h3 id="我的布局"><a href="#我的布局" class="headerlink" title="我的布局"></a>我的布局</h3><h4 id="HTML结构"><a href="#HTML结构" class="headerlink" title="HTML结构"></a>HTML结构</h4><p> 1 . 包含所有区块的大div -&gt;.d3layout（容器）；<br> 2 . 大div里包含3个次大div -&gt;.block-row（既是容器又是项目）；<br> 3 . 每个次大div里包含5个或者2个小div -&gt; .block/.block_0（项目）；</p>
+<p>• 项目排列顺序，值越小，排列越靠前；默认为0<br>
+• 有多余空间时，项目是否放大；默认为0，不放大<br>
+• 空间不够时，项目是否缩小；默认为1，缩小<br>
+• 分配多余空间之前，项目占据的主轴空间；默认为auto,即原本大小<br>
+• <code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>属性的简写（优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值），常用的两个快捷值： <code>auto(1 1 auto)和none(0 0 auto)</code><br>
+• 允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性；默认值为auto</p>
+<h3 id="我的布局"><a class="markdownIt-Anchor" href="#我的布局"></a> 我的布局</h3>
+<h4 id="html结构"><a class="markdownIt-Anchor" href="#html结构"></a> HTML结构</h4>
+<p>1 . 包含所有区块的大div -&gt;.d3layout（容器）；<br>
+2 . 大div里包含3个次大div -&gt;.block-row（既是容器又是项目）；<br>
+3 . 每个次大div里包含5个或者2个小div -&gt; .block/.block_0（项目）；</p>
 <p><img src="http://ipineimg.lijundong.com/18-5-19/19741905.jpg" alt="HTML结构"></p>
-<h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><h5 id="第一层的大div"><a href="#第一层的大div" class="headerlink" title="第一层的大div"></a>第一层的大div</h5><pre><code>.d3layout{
+<h4 id="css"><a class="markdownIt-Anchor" href="#css"></a> CSS</h4>
+<h5 id="第一层的大div"><a class="markdownIt-Anchor" href="#第一层的大div"></a> 第一层的大div</h5>
+<pre><code>.d3layout{
     width: 935px;
     margin: 20px 0;
     height: 740px;
@@ -415,7 +436,9 @@
     align-items: flex-start;
     align-content: space-around;
 }
-</code></pre><h5 id="第二层的次大div"><a href="#第二层的次大div" class="headerlink" title="第二层的次大div"></a>第二层的次大div</h5><pre><code>.rowTop,.rowMiddle,.rowBottom{
+</code></pre>
+<h5 id="第二层的次大div"><a class="markdownIt-Anchor" href="#第二层的次大div"></a> 第二层的次大div</h5>
+<pre><code>.rowTop,.rowMiddle,.rowBottom{
     height: 202px;
     width: 935px;
 /*flex布局项目*/
@@ -427,7 +450,9 @@
     justify-content: space-between;
     align-items: center;
 }
-</code></pre><h5 id="第三层的小div"><a href="#第三层的小div" class="headerlink" title="第三层的小div"></a>第三层的小div</h5><pre><code>.block_0{
+</code></pre>
+<h5 id="第三层的小div"><a class="markdownIt-Anchor" href="#第三层的小div"></a> 第三层的小div</h5>
+<pre><code>.block_0{
     width: 703px;
     height: 180px;
   /*flex布局项目*/
@@ -440,10 +465,12 @@
 /*flex布局项目*/
     flex: 0 1 auto;
 }
-</code></pre><h4 id="布局效果"><a href="#布局效果" class="headerlink" title="布局效果"></a>布局效果</h4><p>黑色为大div；红色为次大div；灰色为小div</p>
+</code></pre>
+<h4 id="布局效果"><a class="markdownIt-Anchor" href="#布局效果"></a> 布局效果</h4>
+<p>黑色为大div；红色为次大div；灰色为小div</p>
 <p><img src="http://ipineimg.lijundong.com/18-5-19/86157629.jpg" alt="效果图"></p>
 <p>最终在实践过程中，又添了一层，灰色小div.block里还包括上下两个div，仍然用的flex布局。</p>
-<p>注：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?^%$" target="_blank" rel="noopener">基本概念参考来源</a></p>
+<p>注：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?%5E%25$" target="_blank" rel="noopener">基本概念参考来源</a></p>
 
       
     </div>
@@ -585,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#网页布局"><span class="nav-text">网页布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#容器的属性"><span class="nav-text">容器的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目的属性"><span class="nav-text">项目的属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的布局"><span class="nav-text">我的布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML结构"><span class="nav-text">HTML结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS"><span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一层的大div"><span class="nav-text">第一层的大div</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二层的次大div"><span class="nav-text">第二层的次大div</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三层的小div"><span class="nav-text">第三层的小div</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布局效果"><span class="nav-text">布局效果</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#网页布局"><span class="nav-text"> 网页布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-text"> 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#容器的属性"><span class="nav-text"> 容器的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目的属性"><span class="nav-text"> 项目的属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的布局"><span class="nav-text"> 我的布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#html结构"><span class="nav-text"> HTML结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#css"><span class="nav-text"> CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一层的大div"><span class="nav-text"> 第一层的大div</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二层的次大div"><span class="nav-text"> 第二层的次大div</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三层的小div"><span class="nav-text"> 第三层的小div</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布局效果"><span class="nav-text"> 布局效果</span></a></li></ol></li></ol></div>
             
 
           </div>

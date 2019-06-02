@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -66,7 +67,7 @@
 
 
 
-  <meta name="keywords" content="paper,tool," />
+  <meta name="keywords" content="tool,paper," />
 
 
 
@@ -77,13 +78,13 @@
 
 
 
-<meta name="description" content="入坑缘由在第一篇研究生投稿论文进入尾声之即，开始学习用Latex排版。在此之前，只会用word，别谈什么工具整理参考文献，一切全凭耐心，手动操作。 模板说明由于准备投稿的会议对排版格式有要求，所以在官网下了参考模板。 准备 (La)Tex编辑器：Texworks 格式要求说明/参考模板 一篇paper  启动编辑器我安装的是Tex Live套装，里面包含texworks。启动方法：  搜索应用程序">
-<meta name="keywords" content="paper,tool">
+<meta name="description" content="入坑缘由 在第一篇研究生投稿论文进入尾声之即，开始学习用Latex排版。在此之前，只会用word，别谈什么工具整理参考文献，一切全凭耐心，手动操作。  模板说明 由于准备投稿的会议对排版格式有要求，所以在官网下了参考模板。  准备  (La)Tex编辑器：Texworks 格式要求说明/参考模板 一篇paper   启动编辑器 我安装的是Tex Live套装，里面包含texworks。启动方法：">
+<meta name="keywords" content="tool,paper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文Latex排版-初入坑">
 <meta property="og:url" content="http://ipine.github.io/2018-03-27/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="入坑缘由在第一篇研究生投稿论文进入尾声之即，开始学习用Latex排版。在此之前，只会用word，别谈什么工具整理参考文献，一切全凭耐心，手动操作。 模板说明由于准备投稿的会议对排版格式有要求，所以在官网下了参考模板。 准备 (La)Tex编辑器：Texworks 格式要求说明/参考模板 一篇paper  启动编辑器我安装的是Tex Live套装，里面包含texworks。启动方法：  搜索应用程序">
+<meta property="og:description" content="入坑缘由 在第一篇研究生投稿论文进入尾声之即，开始学习用Latex排版。在此之前，只会用word，别谈什么工具整理参考文献，一切全凭耐心，手动操作。  模板说明 由于准备投稿的会议对排版格式有要求，所以在官网下了参考模板。  准备  (La)Tex编辑器：Texworks 格式要求说明/参考模板 一篇paper   启动编辑器 我安装的是Tex Live套装，里面包含texworks。启动方法：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/03/25/5ab7a0f41aa75.png">
 <meta property="og:image" content="https://i.loli.net/2018/03/26/5ab84d2582a35.png">
@@ -92,7 +93,7 @@
 <meta property="og:updated_time" content="2019-02-22T11:27:04.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文Latex排版-初入坑">
-<meta name="twitter:description" content="入坑缘由在第一篇研究生投稿论文进入尾声之即，开始学习用Latex排版。在此之前，只会用word，别谈什么工具整理参考文献，一切全凭耐心，手动操作。 模板说明由于准备投稿的会议对排版格式有要求，所以在官网下了参考模板。 准备 (La)Tex编辑器：Texworks 格式要求说明/参考模板 一篇paper  启动编辑器我安装的是Tex Live套装，里面包含texworks。启动方法：  搜索应用程序">
+<meta name="twitter:description" content="入坑缘由 在第一篇研究生投稿论文进入尾声之即，开始学习用Latex排版。在此之前，只会用word，别谈什么工具整理参考文献，一切全凭耐心，手动操作。  模板说明 由于准备投稿的会议对排版格式有要求，所以在官网下了参考模板。  准备  (La)Tex编辑器：Texworks 格式要求说明/参考模板 一篇paper   启动编辑器 我安装的是Tex Live套装，里面包含texworks。启动方法：">
 <meta name="twitter:image" content="https://i.loli.net/2018/03/25/5ab7a0f41aa75.png">
 
 
@@ -389,23 +390,35 @@
       
 
       
-        <h3 id="入坑缘由"><a href="#入坑缘由" class="headerlink" title="入坑缘由"></a><strong>入坑缘由</strong></h3><p>在第一篇研究生投稿论文进入尾声之即，开始学习用<strong>Latex</strong>排版。在此之前，只会用<em>word</em>，别谈什么工具整理参考文献，一切全凭耐心，手动操作。</p>
-<h3 id="模板说明"><a href="#模板说明" class="headerlink" title="模板说明"></a><strong>模板说明</strong></h3><p>由于准备投稿的会议对排版格式有要求，所以在<a href="http://junctionpublishing.org/vgtc/Tasks/camera.html" target="_blank" rel="noopener"><em>官网</em></a>下了参考模板。</p>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a><strong>准备</strong></h3><ul>
+        <h3 id="入坑缘由"><a class="markdownIt-Anchor" href="#入坑缘由"></a> <strong>入坑缘由</strong></h3>
+<p>在第一篇研究生投稿论文进入尾声之即，开始学习用<strong>Latex</strong>排版。在此之前，只会用<em>word</em>，别谈什么工具整理参考文献，一切全凭耐心，手动操作。</p>
+<h3 id="模板说明"><a class="markdownIt-Anchor" href="#模板说明"></a> <strong>模板说明</strong></h3>
+<p>由于准备投稿的会议对排版格式有要求，所以在<a href="http://junctionpublishing.org/vgtc/Tasks/camera.html" target="_blank" rel="noopener"><em>官网</em></a>下了参考模板。</p>
+<h3 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> <strong>准备</strong></h3>
+<ul>
 <li>(La)Tex编辑器：Texworks</li>
 <li>格式要求说明/参考模板</li>
 <li>一篇paper</li>
 </ul>
-<h3 id="启动编辑器"><a href="#启动编辑器" class="headerlink" title="启动编辑器"></a><strong>启动编辑器</strong></h3><p>我安装的是Tex Live套装，里面包含texworks。启动方法：</p>
+<h3 id="启动编辑器"><a class="markdownIt-Anchor" href="#启动编辑器"></a> <strong>启动编辑器</strong></h3>
+<p>我安装的是Tex Live套装，里面包含texworks。启动方法：</p>
 <blockquote>
-<p>搜索应用程序TeXworks 或者 启动命令窗口cmd，输入TeXworks回车<br>使用texworks的原因及具体的texworks界面介绍<a href="https://liam0205.me/2014/09/08/latex-introduction/" target="_blank" rel="noopener"><em>请参见这里</em></a>。</p>
+<p>搜索应用程序TeXworks 或者 启动命令窗口cmd，输入TeXworks回车<br>
+使用texworks的原因及具体的texworks界面介绍<a href="https://liam0205.me/2014/09/08/latex-introduction/" target="_blank" rel="noopener"><em>请参见这里</em></a>。</p>
 </blockquote>
 <p>几乎所有设置都保持默认，只需根据自己需求在工具栏选择排版工具。我主要用到的排版工具是 <em>pdfLaTeX</em> 和 <em>BibTeX</em>。</p>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a><strong>遇到的问题</strong></h3><p> 1 . 注释，引用，引号，斜体，加粗，换行，章节格式，Section简写，行内公式编辑等基本规则<br> 2 . 图片和表格如何引用，单栏和双栏图片如何设置<br> 3 . 表格绘制，版面占据调整，行距，居中怎么实现<br> 4 . 参考文献排版</p>
-<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a><strong>基本语法</strong></h4><p>章节和段落是 <code>\section{} , \subsection{} , \paragraph {}</code><br>有参考模板可以直接将内容替换成自己的，格式就会是预设效果。花括号里写上要使用该格式的内容。</p>
-<p>注释是<code>%</code>，引用<code>\cite{}</code>，加粗 <code>\textbf{}</code>，斜体 <code>\emph{}</code>，换行是双反斜杠 <code>\\</code>，引号包括前引号<code>~</code>和后引号 <code>&#39;&#39;</code>， 章节缩写，根据章节层级数不同而略有区别，例如：section3 ， 缩写引用格式为，<code>\sectionautorefname{}</code> ,花括号里写上具体章节数3 ，得到的最终效果为<code>Sect.3</code>。 再往下一级走，只需添加<code>sub</code>前缀。</p>
+<h3 id="遇到的问题"><a class="markdownIt-Anchor" href="#遇到的问题"></a> <strong>遇到的问题</strong></h3>
+<p>1 . 注释，引用，引号，斜体，加粗，换行，章节格式，Section简写，行内公式编辑等基本规则<br>
+2 . 图片和表格如何引用，单栏和双栏图片如何设置<br>
+3 . 表格绘制，版面占据调整，行距，居中怎么实现<br>
+4 . 参考文献排版</p>
+<h4 id="基本语法"><a class="markdownIt-Anchor" href="#基本语法"></a> <strong>基本语法</strong></h4>
+<p>章节和段落是 <code>\section{} , \subsection{} , \paragraph {}</code><br>
+有参考模板可以直接将内容替换成自己的，格式就会是预设效果。花括号里写上要使用该格式的内容。</p>
+<p>注释是<code>%</code>，引用<code>\cite{}</code>，加粗 <code>\textbf{}</code>，斜体 <code>\emph{}</code>，换行是双反斜杠 <code>\\</code>，引号包括前引号<code>~</code>和后引号 <code>''</code>， 章节缩写，根据章节层级数不同而略有区别，例如：section3 ， 缩写引用格式为，<code>\sectionautorefname{}</code> ,花括号里写上具体章节数3 ，得到的最终效果为<code>Sect.3</code>。 再往下一级走，只需添加<code>sub</code>前缀。</p>
 <p>此次论文只有行内公式，具体格式为双美元符内编辑公式<code>$...$</code>，至于公式符号及运算符号,可<a href="https://blog.csdn.net/ying_xu/article/details/51240291" target="_blank" rel="noopener"><em>参考整理</em></a>。</p>
-<h4 id="图片及表格引用，单双栏设置"><a href="#图片及表格引用，单双栏设置" class="headerlink" title="图片及表格引用，单双栏设置"></a><strong>图片及表格引用，单双栏设置</strong></h4><p>不用手动给图片和表格编号，使用<code>\aotoref{}</code>标签即可自动编号，花括号内填<code>label</code>内自己定义的名称。以一个图为例：</p>
+<h4 id="图片及表格引用单双栏设置"><a class="markdownIt-Anchor" href="#图片及表格引用单双栏设置"></a> <strong>图片及表格引用，单双栏设置</strong></h4>
+<p>不用手动给图片和表格编号，使用<code>\aotoref{}</code>标签即可自动编号，花括号内填<code>label</code>内自己定义的名称。以一个图为例：</p>
 <pre><code>\begin{figure*}[tb] %[tb]表示表格放置在页面上的位置，需要特别注意这里的*号，
 %若没有它，那么图片会浮在文字上方。添加`*`号，使后面width设置成文本宽度生效
 \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact) 水平居中设置
@@ -413,14 +426,17 @@
 \caption{} %这里写图题
  \label{fig:3} %这里自己定义，引用时用
 \end{figure*}
-</code></pre><p>width的宽度还可以为<code>\columnwidth</code>，即为单栏宽度。表格引用与图片类似。</p>
-<h4 id="表格绘制"><a href="#表格绘制" class="headerlink" title="表格绘制"></a><strong>表格绘制</strong></h4><p>目前尝试过的方式有两种：</p>
+</code></pre>
+<p>width的宽度还可以为<code>\columnwidth</code>，即为单栏宽度。表格引用与图片类似。</p>
+<h4 id="表格绘制"><a class="markdownIt-Anchor" href="#表格绘制"></a> <strong>表格绘制</strong></h4>
+<p>目前尝试过的方式有两种：</p>
 <ul>
 <li>手动写LaTeX语法</li>
 <li>线上生成LaTeX语法</li>
 <li>所见即所得方式</li>
 </ul>
-<p>对于手动方式绘制表格，即按照语法，在编辑框内添加。例如添加下图所示的一个三线表：<br><img src="https://i.loli.net/2018/03/25/5ab7a0f41aa75.png" alt="TIM截图20180325211429.png"></p>
+<p>对于手动方式绘制表格，即按照语法，在编辑框内添加。例如添加下图所示的一个三线表：<br>
+<img src="https://i.loli.net/2018/03/25/5ab7a0f41aa75.png" alt="TIM截图20180325211429.png"></p>
 <p>基本语法格式为：</p>
 <pre><code> \begin{table}[tb]
 \renewcommand\arraystretch{1.5} %控制行距
@@ -450,32 +466,49 @@ Pendigitsc\cite{F3} &amp; 2498 &amp; 63 &amp; 10  \\
 \end{tabu}%
 }
 \end{table}
-</code></pre><p>手动键入以上示例代码还能接受，当表格复杂时，手动绘制线条和控制跨行跨列就显得繁琐，也容易出错。于是有了第二种方式，线上生成LaTeX代码。使用的线上生成LaTeX表格的工具叫<em><a href="http://www.tablesgenerator.com/latex_tables#" target="_blank" rel="noopener">Tables Generator</a></em>，界面简洁，操作方式简单。粘贴或上传表格数据后，表格样式设计与excel操作类似，设计完成后，下方会自动生成LaTeX代码。然后将代码粘贴到相应排版内容处就OK了。</p>
+</code></pre>
+<p>手动键入以上示例代码还能接受，当表格复杂时，手动绘制线条和控制跨行跨列就显得繁琐，也容易出错。于是有了第二种方式，线上生成LaTeX代码。使用的线上生成LaTeX表格的工具叫*<a href="http://www.tablesgenerator.com/latex_tables#" target="_blank" rel="noopener">Tables Generator</a>*，界面简洁，操作方式简单。粘贴或上传表格数据后，表格样式设计与excel操作类似，设计完成后，下方会自动生成LaTeX代码。然后将代码粘贴到相应排版内容处就OK了。</p>
 <p>排版“大表格”时出现了一些问题：</p>
-<p> 1 . 占据双栏，表格太大（宽），页面放不下，且浮在文字上方，用<code>*</code>也解决不了问题；<br> 2 . 占据单栏，大表格变成了mini表格，整体缩小了一两倍；</p>
-<p><strong>解决办法：</strong> 在求助冬哥后，从他发给我的一篇帖子里找到灵感,问题在于一行文字太长没有换行 <img src="https://i.loli.net/2018/03/26/5ab84d2582a35.png" alt="TIM截图20180325214634.png"><br><a href="http://blog.163.com/chen_dawn/blog/static/1125063201318115613703" target="_blank" rel="noopener">原贴参见这里</a><br>强制换行之后，表格基本合格了，但仍然存在问题：</p>
+<p>1 . 占据双栏，表格太大（宽），页面放不下，且浮在文字上方，用<code>*</code>也解决不了问题；<br>
+2 . 占据单栏，大表格变成了mini表格，整体缩小了一两倍；</p>
+<p><strong>解决办法：</strong> 在求助冬哥后，从他发给我的一篇帖子里找到灵感,问题在于一行文字太长没有换行 <img src="https://i.loli.net/2018/03/26/5ab84d2582a35.png" alt="TIM截图20180325214634.png"><br>
+<a href="http://blog.163.com/chen_dawn/blog/static/1125063201318115613703" target="_blank" rel="noopener">原贴参见这里</a><br>
+强制换行之后，表格基本合格了，但仍然存在问题：</p>
 <ul>
 <li>按照模板预设的格式单元格内容应该垂直居中，实际效果没有；</li>
 <li>单元格太窄，显得字体很挤</li>
 </ul>
 <p>解决这两个问题的过程中，发现了一篇帖子，推“所见即所得”的插入表格法。于是有了下面第三种方式的尝试。主要步骤有3步：</p>
-<p>   1 . 用excel排版好表格，保存成.pdf格式<br>   2 . 用pdfcrop工具（LaTeX工具包内）将刚保存的PDF文件中图片边上的白色剪裁掉。方法如下：<br>将要剪裁的pdf文件与pdfcrop.exe放在同一个文件夹下；然后打开cmd命令行，通过cd进入所在的文件夹；<em>(快捷打开方式：删除当前目录路径，键入cmd，回车）</em> 最后输入<code>pdfcrop input.pdf output.pdf</code><br><code>input.pdf</code> 和 <code>output.pdf</code> 是输入和输出的pdf文件名，改为自己的文件名即可。点击回车之后，output.pdf就会出现在当前文件夹下。 </p>
-<ol start="3">
-<li><p>在latex中插入“表格”。具体而言，与插入图片的源码类似：</p>
-<p>  \begin{table}<br>  \centering<br>  \includegraphics[width=0.75 \textwidth]{output.pdf}<br>  \caption{Table Caption}<br>  \label{tab:tab-for-table}<br>  \end{table}</p>
-</li>
-</ol>
+<p>1 . 用excel排版好表格，保存成.pdf格式<br>
+2 . 用pdfcrop工具（LaTeX工具包内）将刚保存的PDF文件中图片边上的白色剪裁掉。方法如下：<br>
+将要剪裁的pdf文件与pdfcrop.exe放在同一个文件夹下；然后打开cmd命令行，通过cd进入所在的文件夹；<em>(快捷打开方式：删除当前目录路径，键入cmd，回车）</em> 最后输入<code>pdfcrop input.pdf output.pdf</code><br>
+<code>input.pdf</code> 和 <code>output.pdf</code> 是输入和输出的pdf文件名，改为自己的文件名即可。点击回车之后，output.pdf就会出现在当前文件夹下。<br>
+3. 在latex中插入“表格”。具体而言，与插入图片的源码类似：</p>
+<pre><code>    \begin{table}
+    \centering
+    \includegraphics[width=0.75 \textwidth]{output.pdf}
+    \caption{Table Caption}
+    \label{tab:tab-for-table}
+    \end{table}
+</code></pre>
 <p>采用第三种方式可以解决上面两个问题。但是排版出来的效果图不是很满意，绘制的线条从excel转成pdf时，样式发生了改变，线条看起来比较粗，跟预设效果不一致。</p>
 <p>最终找到了两个问题的解决办法：</p>
 <ul>
-<li>问题1，垂直居中问题主要出现在多行控制的单元格，于是在代码里改变了其所控制的行数，使其居中。后面的<code>{*}</code>控制宽度，*表示自适应<br><img src="https://i.loli.net/2018/03/25/5ab7b1174287d.png" alt="TIM截图20180325222351.png"></li>
-<li>问题2，可以给表格设置行距解决：<br><img src="https://i.loli.net/2018/03/25/5ab7b2f96e642.png" alt="TIM截图20180325223205.png"></li>
+<li>问题1，垂直居中问题主要出现在多行控制的单元格，于是在代码里改变了其所控制的行数，使其居中。后面的<code>{*}</code>控制宽度，*表示自适应<br>
+<img src="https://i.loli.net/2018/03/25/5ab7b1174287d.png" alt="TIM截图20180325222351.png"></li>
+<li>问题2，可以给表格设置行距解决：<br>
+<img src="https://i.loli.net/2018/03/25/5ab7b2f96e642.png" alt="TIM截图20180325223205.png"></li>
 </ul>
-<h4 id="参考文献排版"><a href="#参考文献排版" class="headerlink" title="参考文献排版"></a><strong>参考文献排版</strong></h4><ul>
+<h4 id="参考文献排版"><a class="markdownIt-Anchor" href="#参考文献排版"></a> <strong>参考文献排版</strong></h4>
+<ul>
 <li>参考文献涉及到<em>BibTeX</em>工具。</li>
 <li>操作流程及原理讲解<a href="https://zhuanlan.zhihu.com/p/25013341?refer=jeldor-latex" target="_blank" rel="noopener"><em>请参见这里</em></a></li>
 </ul>
-<p><strong>说明</strong><br> 1 . 根据不同要求，采用的文献引用格式不同，<code>\bibliographystyle{abbrv-doi}</code><br> 2 . 文献数据库名自己定义，<code>\bibliography{&lt;文献数据库名&gt;}</code><br> 3 . 文献数据库是一个<code>.bib</code>文件，里面的内容，可以使用在线工具<a href="https://search.crossref.org/?q=%20Advances%20in%20fuzzy%20clustering%20and%20its%20applications" target="_blank" rel="noopener"><em>Crossref</em></a> 生成<br> 4 . 参考文献生成的编译顺序：</p>
+<p><strong>说明</strong><br>
+1 . 根据不同要求，采用的文献引用格式不同，<code>\bibliographystyle{abbrv-doi}</code><br>
+2 . 文献数据库名自己定义，<code>\bibliography{&lt;文献数据库名&gt;}</code><br>
+3 . 文献数据库是一个<code>.bib</code>文件，里面的内容，可以使用在线工具<a href="https://search.crossref.org/?q=%20Advances%20in%20fuzzy%20clustering%20and%20its%20applications" target="_blank" rel="noopener"><em>Crossref</em></a> 生成<br>
+4 . 参考文献生成的编译顺序：</p>
 <blockquote>
 <p>pdfLaTeX -&gt; BibTeX -&gt; pdfLaTeX -&gt; pdfLaTeX</p>
 </blockquote>
@@ -507,9 +540,9 @@ Pendigitsc\cite{F3} &amp; 2498 &amp; 63 &amp; 10  \\
       
         <div class="post-tags">
           
-            <a href="/tags/paper/" rel="tag"># paper</a>
-          
             <a href="/tags/tool/" rel="tag"># tool</a>
+          
+            <a href="/tags/paper/" rel="tag"># paper</a>
           
         </div>
       
@@ -620,7 +653,7 @@ Pendigitsc\cite{F3} &amp; 2498 &amp; 63 &amp; 10  \\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -705,7 +738,7 @@ Pendigitsc\cite{F3} &amp; 2498 &amp; 63 &amp; 10  \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#入坑缘由"><span class="nav-text">入坑缘由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板说明"><span class="nav-text">模板说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动编辑器"><span class="nav-text">启动编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的问题"><span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本语法"><span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片及表格引用，单双栏设置"><span class="nav-text">图片及表格引用，单双栏设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表格绘制"><span class="nav-text">表格绘制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考文献排版"><span class="nav-text">参考文献排版</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#入坑缘由"><span class="nav-text"> 入坑缘由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板说明"><span class="nav-text"> 模板说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-text"> 准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动编辑器"><span class="nav-text"> 启动编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的问题"><span class="nav-text"> 遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本语法"><span class="nav-text"> 基本语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片及表格引用单双栏设置"><span class="nav-text"> 图片及表格引用，单双栏设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表格绘制"><span class="nav-text"> 表格绘制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考文献排版"><span class="nav-text"> 参考文献排版</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,18 +78,18 @@
 
 
 
-<meta name="description" content="题目描述An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an Ari">
+<meta name="description" content="题目描述 An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an A">
 <meta name="keywords" content="javascript,codewars">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Find the missing term in an Arithmetic Progression">
 <meta property="og:url" content="http://ipine.github.io/2018-05-02/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="题目描述An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an Ari">
+<meta property="og:description" content="题目描述 An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an A">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-22T11:27:13.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Find the missing term in an Arithmetic Progression">
-<meta name="twitter:description" content="题目描述An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an Ari">
+<meta name="twitter:description" content="题目描述 An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an A">
 
 
 
@@ -384,12 +385,16 @@
       
 
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an Arithmetic Progression. There is however one hitch: exactly one term from the original series is missing from the set of numbers which have been given to you. The rest of the given series is the same as the original AP. Find the missing term.<br>You have to write the function findMissing(list), list will always be at least 3 numbers. The missing term will never be the first or last one.</p>
-<p>Example :<br>findMissing([1,3,5,9,11]) == 7</p>
+        <h3 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h3>
+<p>An Arithmetic Progression is defined as one in which there is a constant difference between the consecutive terms of a given series of numbers. You are provided with consecutive elements of an Arithmetic Progression. There is however one hitch: exactly one term from the original series is missing from the set of numbers which have been given to you. The rest of the given series is the same as the original AP. Find the missing term.<br>
+You have to write the function findMissing(list), list will always be at least 3 numbers. The missing term will never be the first or last one.</p>
+<p>Example :<br>
+findMissing([1,3,5,9,11]) == 7</p>
 <blockquote>
 <p>PS: This is a sample question of the facebook engineer challenge on interviewstreet. I found it quite fun to solve on paper using math, derive the algo that way.</p>
 </blockquote>
-<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>var findMissing = function (list) { 
+<h3 id="我的代码"><a class="markdownIt-Anchor" href="#我的代码"></a> 我的代码</h3>
+<pre><code>var findMissing = function (list) { 
   var len = list.length;
   var x = Math.abs((list[1]-list[0])) &lt; Math.abs((list[len-1]-list[len-2])) ? Math.abs((list[1]-list[0])):Math.abs((list[len-1]-list[len-2]));
   console.log(x);
@@ -403,14 +408,20 @@
     }
   }
 }
-</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>var findMissing = function (list) { 
+</code></pre>
+<h3 id="clever"><a class="markdownIt-Anchor" href="#clever"></a> Clever</h3>
+<pre><code>var findMissing = function (list) { 
     var step = (list[list.length - 1] - list[0]) / (list.length); 
     return list.filter(function(val, index) { return val !== (list[0] + index * step); })[0] - step; 
 }
-</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
-<li><p>关键点1要找到等差值，利用题目中给的信息：第一个和最后一个数不会缺失；将这两个数分别与它们的后一个和前一个数相减，小的那个差就是等差值；</p>
+</code></pre>
+<h3 id="key"><a class="markdownIt-Anchor" href="#key"></a> Key</h3>
+<ul>
+<li>
+<p>关键点1要找到等差值，利用题目中给的信息：第一个和最后一个数不会缺失；将这两个数分别与它们的后一个和前一个数相减，小的那个差就是等差值；</p>
 </li>
-<li><p>关键点2要注意数列中可能有负数，按照关键点1求等差值的做法，则求解的时候要取绝对值；且需要判断数列是递增还是递减；</p>
+<li>
+<p>关键点2要注意数列中可能有负数，按照关键点1求等差值的做法，则求解的时候要取绝对值；且需要判断数列是递增还是递减；</p>
 </li>
 </ul>
 
@@ -554,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -639,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text">我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clever"><span class="nav-text">Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-text">Key</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text"> 我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clever"><span class="nav-text"> Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-text"> Key</span></a></li></ol></div>
             
 
           </div>

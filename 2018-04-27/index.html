@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,19 +78,19 @@
 
 
 
-<meta name="description" content="题目描述Build a tower like this:     我的代码function towerBuilder(nFloors) {   // build here   var arr = [];   for(var i=0; i&amp;lt;=nFloors-1; i++){     var stars = i*2+1;     var space = nFloors-1-i;     arr.">
+<meta name="description" content="题目描述 Build a tower like this:   我的代码 function towerBuilder(nFloors) {   // build here   var arr = [];   for(var i=0; i&amp;lt;=nFloors-1; i++){     var stars = i*2+1;     var space = nFloors-1-i;     arr">
 <meta name="keywords" content="javascript,codewars">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BuildTower">
 <meta property="og:url" content="http://ipine.github.io/2018-04-27/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="题目描述Build a tower like this:     我的代码function towerBuilder(nFloors) {   // build here   var arr = [];   for(var i=0; i&amp;lt;=nFloors-1; i++){     var stars = i*2+1;     var space = nFloors-1-i;     arr.">
+<meta property="og:description" content="题目描述 Build a tower like this:   我的代码 function towerBuilder(nFloors) {   // build here   var arr = [];   for(var i=0; i&amp;lt;=nFloors-1; i++){     var stars = i*2+1;     var space = nFloors-1-i;     arr">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-5-6/66768733.jpg">
 <meta property="og:updated_time" content="2019-02-22T11:27:08.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BuildTower">
-<meta name="twitter:description" content="题目描述Build a tower like this:     我的代码function towerBuilder(nFloors) {   // build here   var arr = [];   for(var i=0; i&amp;lt;=nFloors-1; i++){     var stars = i*2+1;     var space = nFloors-1-i;     arr.">
+<meta name="twitter:description" content="题目描述 Build a tower like this:   我的代码 function towerBuilder(nFloors) {   // build here   var arr = [];   for(var i=0; i&amp;lt;=nFloors-1; i++){     var stars = i*2+1;     var space = nFloors-1-i;     arr">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/18-5-6/66768733.jpg">
 
 
@@ -386,8 +387,11 @@
       
 
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Build a tower like this:<br>    <img src="http://ipineimg.lijundong.com/18-5-6/66768733.jpg" alt="题目描述"></p>
-<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function towerBuilder(nFloors) {
+        <h3 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h3>
+<p>Build a tower like this:<br>
+<img src="http://ipineimg.lijundong.com/18-5-6/66768733.jpg" alt="题目描述"></p>
+<h3 id="我的代码"><a class="markdownIt-Anchor" href="#我的代码"></a> 我的代码</h3>
+<pre><code>function towerBuilder(nFloors) {
   // build here
   var arr = [];
   for(var i=0; i&lt;=nFloors-1; i++){
@@ -397,8 +401,11 @@
   }
   return arr;  
 }
-</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><p>分别计算出空格个数和星星个数，将这些字符连接起来成串，放入字符串数组中。</p>
-<h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
+</code></pre>
+<h3 id="clever"><a class="markdownIt-Anchor" href="#clever"></a> Clever</h3>
+<p>分别计算出空格个数和星星个数，将这些字符连接起来成串，放入字符串数组中。</p>
+<h3 id="key"><a class="markdownIt-Anchor" href="#key"></a> Key</h3>
+<ul>
 <li>如何生成重复字符？ <code>&quot;字符&quot;.repeat(n)</code> 方法</li>
 <li>如何将字符放入数组: 每次单考虑字符串数组中的一个元素，每个元素都是一串字符，用<code>+</code>连接形成字符串（元素），再使用<code>arr.push()</code> 方法将每个元素依次放入数组。</li>
 </ul>
@@ -543,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -628,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text">我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clever"><span class="nav-text">Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-text">Key</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text"> 我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clever"><span class="nav-text"> Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-text"> Key</span></a></li></ol></div>
             
 
           </div>

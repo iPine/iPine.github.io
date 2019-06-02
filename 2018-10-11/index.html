@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,18 +78,18 @@
 
 
 
-<meta name="description" content="主要学习几个写链表代码的技巧 理解指针或引用的含义有些语言有指针概念，比如C语言；有些语言没有指针，取而代之的是引用，比如Java、Python。不管“指针”还是“引用”，都是一个意思，指存储所指对象的内存地址。  指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）的地址赋值给指针（引用）  示例：p—&amp;gt;next = q;  表示p节点的后继next指针存储了q">
+<meta name="description" content="主要学习几个写链表代码的技巧  理解指针或引用的含义 有些语言有指针概念，比如C语言；有些语言没有指针，取而代之的是引用，比如Java、Python。不管“指针”还是“引用”，都是一个意思，指存储所指对象的内存地址。  指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）的地址赋值给指针（引用）   示例： p—&amp;gt;next = q;   表示p节点的后继next指">
 <meta name="keywords" content="data_structure,algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="链表">
 <meta property="og:url" content="http://ipine.github.io/2018-10-11/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="主要学习几个写链表代码的技巧 理解指针或引用的含义有些语言有指针概念，比如C语言；有些语言没有指针，取而代之的是引用，比如Java、Python。不管“指针”还是“引用”，都是一个意思，指存储所指对象的内存地址。  指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）的地址赋值给指针（引用）  示例：p—&amp;gt;next = q;  表示p节点的后继next指针存储了q">
+<meta property="og:description" content="主要学习几个写链表代码的技巧  理解指针或引用的含义 有些语言有指针概念，比如C语言；有些语言没有指针，取而代之的是引用，比如Java、Python。不管“指针”还是“引用”，都是一个意思，指存储所指对象的内存地址。  指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）的地址赋值给指针（引用）   示例： p—&amp;gt;next = q;   表示p节点的后继next指">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-22T11:27:44.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="链表">
-<meta name="twitter:description" content="主要学习几个写链表代码的技巧 理解指针或引用的含义有些语言有指针概念，比如C语言；有些语言没有指针，取而代之的是引用，比如Java、Python。不管“指针”还是“引用”，都是一个意思，指存储所指对象的内存地址。  指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）的地址赋值给指针（引用）  示例：p—&amp;gt;next = q;  表示p节点的后继next指针存储了q">
+<meta name="twitter:description" content="主要学习几个写链表代码的技巧  理解指针或引用的含义 有些语言有指针概念，比如C语言；有些语言没有指针，取而代之的是引用，比如Java、Python。不管“指针”还是“引用”，都是一个意思，指存储所指对象的内存地址。  指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）的地址赋值给指针（引用）   示例： p—&amp;gt;next = q;   表示p节点的后继next指">
 
 
 
@@ -385,58 +386,85 @@
 
       
         <p>主要学习几个写链表代码的技巧</p>
-<h3 id="理解指针或引用的含义"><a href="#理解指针或引用的含义" class="headerlink" title="理解指针或引用的含义"></a>理解指针或引用的含义</h3><p>有些语言有<code>指针</code>概念，比如C语言；有些语言没有指针，取而代之的是<code>引用</code>，比如Java、Python。不管“指针”还是“引用”，都是一个意思，<code>指存储所指对象的内存地址</code>。</p>
+<h3 id="理解指针或引用的含义"><a class="markdownIt-Anchor" href="#理解指针或引用的含义"></a> 理解指针或引用的含义</h3>
+<p>有些语言有<code>指针</code>概念，比如C语言；有些语言没有指针，取而代之的是<code>引用</code>，比如Java、Python。不管“指针”还是“引用”，都是一个意思，<code>指存储所指对象的内存地址</code>。</p>
 <blockquote>
 <p>指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）的地址赋值给指针（引用）</p>
 </blockquote>
-<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><pre><code>p—&gt;next = q; 
-</code></pre><p>表示<code>p</code>节点的后继<code>next</code>指针存储了<code>q</code>节点的内存地址</p>
+<h4 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例：</h4>
+<pre><code>p—&gt;next = q; 
+</code></pre>
+<p>表示<code>p</code>节点的后继<code>next</code>指针存储了<code>q</code>节点的内存地址</p>
 <pre><code>p—&gt;next = p—&gt;next—&gt;next;
-</code></pre><p>表示<code>p</code>节点的后继<code>next</code>指针存储了<code>p</code>节点的下下个节点的内存地址。</p>
-<h3 id="警惕指针丢失和内存泄漏"><a href="#警惕指针丢失和内存泄漏" class="headerlink" title="警惕指针丢失和内存泄漏"></a>警惕指针丢失和内存泄漏</h3><h4 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h4><p>单链表的插入，希望在节点a和相邻节点b之间插入节点x，假设当前指针p指向节点a，则造成指针丢失和内存泄漏的代码：</p>
+</code></pre>
+<p>表示<code>p</code>节点的后继<code>next</code>指针存储了<code>p</code>节点的下下个节点的内存地址。</p>
+<h3 id="警惕指针丢失和内存泄漏"><a class="markdownIt-Anchor" href="#警惕指针丢失和内存泄漏"></a> 警惕指针丢失和内存泄漏</h3>
+<h4 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例：</h4>
+<p>单链表的插入，希望在节点a和相邻节点b之间插入节点x，假设当前指针p指向节点a，则造成指针丢失和内存泄漏的代码：</p>
 <pre><code>p-&gt;next = x;
 x-&gt;next = p-&gt;next
-</code></pre><p>导致将<code>x</code>自身赋值给了<code>x-&gt;next</code>，自己指向自己。</p>
+</code></pre>
+<p>导致将<code>x</code>自身赋值给了<code>x-&gt;next</code>，自己指向自己。</p>
 <blockquote>
 <p>对于有些语言来说，比如 C 语言，内存管理是由程序员负责的，如果没有手动释放结点对应的内存空间，就会产生内存泄露。</p>
 </blockquote>
-<p>所以，插入结点时，一定要注意操作的顺序。上面代码的正确写法是：<strong>两句代码顺序调换</strong>。<br>同理，删除链表时，也一定要手动释放内存空间，否则，也会出现内存泄漏问题。</p>
+<p>所以，插入结点时，一定要注意操作的顺序。上面代码的正确写法是：<strong>两句代码顺序调换</strong>。<br>
+同理，删除链表时，也一定要手动释放内存空间，否则，也会出现内存泄漏问题。</p>
 <blockquote>
 <p>Python语言不需手动释放，它的解释器的存储管理系统会自动回收不用的存储。</p>
 </blockquote>
-<h3 id="利用哨兵（头结点）简化实现难度"><a href="#利用哨兵（头结点）简化实现难度" class="headerlink" title="利用哨兵（头结点）简化实现难度"></a>利用哨兵（头结点）简化实现难度</h3><h4 id="哨兵含义："><a href="#哨兵含义：" class="headerlink" title="哨兵含义："></a><code>哨兵</code>含义：</h4><p>链表中的<code>哨兵</code>节点是解决边界问题的，不参与业务逻辑。如果我们引入<code>哨兵</code>节点，则不管链表是否为空，head指针都会指向这个“哨兵”节点。我们把这种有“哨兵”节点的链表称为<code>带头链表</code>，相反，没有<code>哨兵</code>节点的链表就称为不带头链表。</p>
-<h4 id="示例：-2"><a href="#示例：-2" class="headerlink" title="示例："></a>示例：</h4><h5 id="不带头结点时："><a href="#不带头结点时：" class="headerlink" title="不带头结点时："></a>不带头结点时：</h5><ul>
+<h3 id="利用哨兵头结点简化实现难度"><a class="markdownIt-Anchor" href="#利用哨兵头结点简化实现难度"></a> 利用哨兵（头结点）简化实现难度</h3>
+<h4 id="哨兵含义"><a class="markdownIt-Anchor" href="#哨兵含义"></a> <code>哨兵</code>含义：</h4>
+<p>链表中的<code>哨兵</code>节点是解决边界问题的，不参与业务逻辑。如果我们引入<code>哨兵</code>节点，则不管链表是否为空，head指针都会指向这个“哨兵”节点。我们把这种有“哨兵”节点的链表称为<code>带头链表</code>，相反，没有<code>哨兵</code>节点的链表就称为不带头链表。</p>
+<h4 id="示例-3"><a class="markdownIt-Anchor" href="#示例-3"></a> 示例：</h4>
+<h5 id="不带头结点时"><a class="markdownIt-Anchor" href="#不带头结点时"></a> 不带头结点时：</h5>
+<ul>
 <li>对于单链表的插入操作</li>
 </ul>
 <p>1 . 如果在p节点后插入一个新节点，只需2行代码即可搞定：</p>
 <pre><code>new_node—&gt;next = p—&gt;next;
 p—&gt;next = new_node;
-</code></pre><p>2 . 如果向空链表中插入一个新结点，则代码就不同：</p>
+</code></pre>
+<p>2 . 如果向空链表中插入一个新结点，则代码就不同：</p>
 <pre><code>if(head == null){
   head = new_node;
 }
-</code></pre><ul>
+</code></pre>
+<ul>
 <li>对于单链表的删除操作</li>
 </ul>
 <p>1 . 如果要删除节点p的后继节点，只需1行代码即可搞定：</p>
 <pre><code>p—&gt;next = p—&gt;next—&gt;next;
-</code></pre><p>2 . 如果删除的是链表的最后一个节点（链表中只剩下这个节点），则代码如下：</p>
+</code></pre>
+<p>2 . 如果删除的是链表的最后一个节点（链表中只剩下这个节点），则代码如下：</p>
 <pre><code>if(head—&gt;next == null){
   head = null;
 }
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>以上示例可以看出，不带头结点时，单链表的插入、删除操作，需要对插入第一个结点和删除最后一个结点作特殊处理。</p>
 </blockquote>
-<h5 id="带头结点时："><a href="#带头结点时：" class="headerlink" title="带头结点时："></a>带头结点时：</h5><p><code>哨兵</code>节点不存储数据，无论链表是否为空，<code>head</code>指针都会指向它，作为链表的头结点始终存在。<br>这样，插入第一个节点和插入其他节点，删除最后一个节点和删除其他节点都可以统一为相同的实现逻辑。</p>
-<h3 id="留意边界条件处理"><a href="#留意边界条件处理" class="headerlink" title="留意边界条件处理"></a>留意边界条件处理</h3><p>常用的检查链表代码是否正确的边界条件：<br>1 . 如果链表为空时，代码是否能正常工作？<br>2 . 如果链表只包含一个节点时，代码是否能正常工作？<br>3 . 如果链表只包含两个节点时，代码是否能正常工作？<br>4 . 代码逻辑在处理头尾节点时是否能正常工作？</p>
-<h3 id="举例画图，辅助思考"><a href="#举例画图，辅助思考" class="headerlink" title="举例画图，辅助思考"></a>举例画图，辅助思考</h3><p>对于稍微复杂的链表操作，可以找一个具体例子，将它画在纸上。比如，向单链表中插入一个数据，就画出链表插入前和插入后的情况。<br>对着图写代码，写完之后，也可举列子，照着代码走一遍，很容易发现代码中的Bug。</p>
-<h3 id="多写多练，没有捷径"><a href="#多写多练，没有捷径" class="headerlink" title="多写多练，没有捷径"></a>多写多练，没有捷径</h3><pre><code>精选的5个常见链表操作：（以及在LeetCode上对于的题目编号）
+<h5 id="带头结点时"><a class="markdownIt-Anchor" href="#带头结点时"></a> 带头结点时：</h5>
+<p><code>哨兵</code>节点不存储数据，无论链表是否为空，<code>head</code>指针都会指向它，作为链表的头结点始终存在。<br>
+这样，插入第一个节点和插入其他节点，删除最后一个节点和删除其他节点都可以统一为相同的实现逻辑。</p>
+<h3 id="留意边界条件处理"><a class="markdownIt-Anchor" href="#留意边界条件处理"></a> 留意边界条件处理</h3>
+<p>常用的检查链表代码是否正确的边界条件：<br>
+1 . 如果链表为空时，代码是否能正常工作？<br>
+2 . 如果链表只包含一个节点时，代码是否能正常工作？<br>
+3 . 如果链表只包含两个节点时，代码是否能正常工作？<br>
+4 . 代码逻辑在处理头尾节点时是否能正常工作？</p>
+<h3 id="举例画图辅助思考"><a class="markdownIt-Anchor" href="#举例画图辅助思考"></a> 举例画图，辅助思考</h3>
+<p>对于稍微复杂的链表操作，可以找一个具体例子，将它画在纸上。比如，向单链表中插入一个数据，就画出链表插入前和插入后的情况。<br>
+对着图写代码，写完之后，也可举列子，照着代码走一遍，很容易发现代码中的Bug。</p>
+<h3 id="多写多练没有捷径"><a class="markdownIt-Anchor" href="#多写多练没有捷径"></a> 多写多练，没有捷径</h3>
+<pre><code>精选的5个常见链表操作：（以及在LeetCode上对于的题目编号）
 1.单链表反转 ---- 206
 2.链表中环的检测 ---- 141
 3.两个有序链表合并 ---- 21
 4.删除链表倒数第n个节点 ---- 19
 5.求链表的中间节点 ---- 876
 </code></pre>
+
       
     </div>
     
@@ -577,7 +605,7 @@ p—&gt;next = new_node;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -662,7 +690,7 @@ p—&gt;next = new_node;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解指针或引用的含义"><span class="nav-text">理解指针或引用的含义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例："><span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#警惕指针丢失和内存泄漏"><span class="nav-text">警惕指针丢失和内存泄漏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例：-1"><span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用哨兵（头结点）简化实现难度"><span class="nav-text">利用哨兵（头结点）简化实现难度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#哨兵含义："><span class="nav-text">哨兵含义：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例：-2"><span class="nav-text">示例：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不带头结点时："><span class="nav-text">不带头结点时：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#带头结点时："><span class="nav-text">带头结点时：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#留意边界条件处理"><span class="nav-text">留意边界条件处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例画图，辅助思考"><span class="nav-text">举例画图，辅助思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多写多练，没有捷径"><span class="nav-text">多写多练，没有捷径</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解指针或引用的含义"><span class="nav-text"> 理解指针或引用的含义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-text"> 示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#警惕指针丢失和内存泄漏"><span class="nav-text"> 警惕指针丢失和内存泄漏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例-2"><span class="nav-text"> 示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用哨兵头结点简化实现难度"><span class="nav-text"> 利用哨兵（头结点）简化实现难度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#哨兵含义"><span class="nav-text"> 哨兵含义：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例-3"><span class="nav-text"> 示例：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不带头结点时"><span class="nav-text"> 不带头结点时：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#带头结点时"><span class="nav-text"> 带头结点时：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#留意边界条件处理"><span class="nav-text"> 留意边界条件处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例画图辅助思考"><span class="nav-text"> 举例画图，辅助思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多写多练没有捷径"><span class="nav-text"> 多写多练，没有捷径</span></a></li></ol></div>
             
 
           </div>

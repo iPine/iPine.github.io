@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,13 +78,13 @@
 
 
 
-<meta name="description" content="一、分析背景与目的背景拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015年2月5日，2年半左右的时间跨度。数据维度的详细介绍如下： 交易记录数据，包含7个字段：  user">
+<meta name="description" content="一、分析背景与目的  背景 拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015年2月5日，2年半左右的时间跨度。数据维度的详细介绍如下： 交易记录数据，包含7个字段：">
 <meta name="keywords" content="python,data_analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="淘宝婴儿用品销售数据分析之报告">
 <meta property="og:url" content="http://ipine.github.io/2019-05-24/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="一、分析背景与目的背景拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015年2月5日，2年半左右的时间跨度。数据维度的详细介绍如下： 交易记录数据，包含7个字段：  user">
+<meta property="og:description" content="一、分析背景与目的  背景 拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015年2月5日，2年半左右的时间跨度。数据维度的详细介绍如下： 交易记录数据，包含7个字段：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/%E6%95%B4%E4%BD%93%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF.png">
 <meta property="og:image" content="http://ipineimg.lijundong.com/1.png">
@@ -94,10 +95,10 @@
 <meta property="og:image" content="http://ipineimg.lijundong.com/4-2.png">
 <meta property="og:image" content="http://ipineimg.lijundong.com/5-1.png">
 <meta property="og:image" content="http://ipineimg.lijundong.com/5-2.png">
-<meta property="og:updated_time" content="2019-05-24T11:07:07.010Z">
+<meta property="og:updated_time" content="2019-05-24T11:51:07.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="淘宝婴儿用品销售数据分析之报告">
-<meta name="twitter:description" content="一、分析背景与目的背景拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015年2月5日，2年半左右的时间跨度。数据维度的详细介绍如下： 交易记录数据，包含7个字段：  user">
+<meta name="twitter:description" content="一、分析背景与目的  背景 拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015年2月5日，2年半左右的时间跨度。数据维度的详细介绍如下： 交易记录数据，包含7个字段：">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/%E6%95%B4%E4%BD%93%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF.png">
 
 
@@ -394,7 +395,9 @@
       
 
       
-        <h3 id="一、分析背景与目的"><a href="#一、分析背景与目的" class="headerlink" title="一、分析背景与目的"></a>一、分析背景与目的</h3><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015年2月5日，2年半左右的时间跨度。数据维度的详细介绍如下：</p>
+        <h3 id="一-分析背景与目的"><a class="markdownIt-Anchor" href="#一-分析背景与目的"></a> 一、分析背景与目的</h3>
+<h4 id="背景"><a class="markdownIt-Anchor" href="#背景"></a> 背景</h4>
+<p>拿到的数据是阿里天池里关于淘宝和天猫用户购买婴儿用品的真实数据，包括用户购买婴儿用品的交易记录以及婴儿的基本信息。原始的数据集应该有超过900万条，但目前只能采集到它的样本，其中交易记录数据包含29971条，婴儿信息数据包括953条。交易记录数据是从2012年7月2日-2015年2月5日，2年半左右的时间跨度。数据维度的详细介绍如下：</p>
 <p>交易记录数据，包含7个字段：</p>
 <ul>
 <li>user_id: 用户编号</li>
@@ -411,7 +414,8 @@
 <li>birthday：婴儿出生日期</li>
 <li>gender：婴儿性别（0 男性；1 女性）</li>
 </ul>
-<h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><p>目的是通过这个数据集，分析一些实际的业务问题。比如：</p>
+<h4 id="目的"><a class="markdownIt-Anchor" href="#目的"></a> 目的</h4>
+<p>目的是通过这个数据集，分析一些实际的业务问题。比如：</p>
 <ul>
 <li>最受用户欢迎的产品是哪些？</li>
 <li>一年中，用户更喜欢在什么月份购买商品？</li>
@@ -420,8 +424,16 @@
 <li>不同品牌的用户画像如何？…</li>
 </ul>
 <p>具体地，拟通过分析解决以下几个业务问题：</p>
-<p>1 . 最畅销的10个商品<br>2 . 总的月均购买次数，各个月的平均购买次数，不同年份的月均购买次数<br>3 . 每类商品的月均购买次数，月均销量<br>4 . 每类商品的月均销量趋势，月均购买次数趋势<br>5 . 每类商品的用户画像，具体表现为性别和年龄段的分布情况</p>
-<h3 id="二、分析思路与分析过程"><a href="#二、分析思路与分析过程" class="headerlink" title="二、分析思路与分析过程"></a>二、分析思路与分析过程</h3><h4 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h4><p>首先对数据集进行清洗，包括：</p>
+<ol>
+<li>最畅销的10个商品</li>
+<li>总的月均购买次数，各个月的平均购买次数，不同年份的月均购买次数</li>
+<li>每类商品的月均购买次数，月均销量</li>
+<li>每类商品的月均销量趋势，月均购买次数趋势</li>
+<li>每类商品的用户画像，具体表现为性别和年龄段的分布情况</li>
+</ol>
+<h3 id="二-分析思路与分析过程"><a class="markdownIt-Anchor" href="#二-分析思路与分析过程"></a> 二、分析思路与分析过程</h3>
+<h4 id="数据清洗"><a class="markdownIt-Anchor" href="#数据清洗"></a> 数据清洗</h4>
+<p>首先对数据集进行清洗，包括：</p>
 <ol>
 <li>选择子集，对于要分析的业务指标，不需要用到交易记录数据中的auction_id，property字段，选择将这两个字段删除。</li>
 <li>列名规范，为了便于查看和理解，将所有列名改为中文名。</li>
@@ -430,29 +442,53 @@
 <li>数据排序，为了便于查看时间跨度，分别按照销售时间和出生日期进行升序排序，并将排序后的索引值重新改为<code>0-N</code>的顺序。</li>
 <li>异常值处理， 查看婴儿性别字段，发现除了0（男），1（女）之外，还存在2的情况，这应该是用户不愿意透露婴儿的性别信息，这部分值只有26个，删除这部分数据后，将0和1分别替换成男和女。</li>
 </ol>
-<h4 id="总体分析思路"><a href="#总体分析思路" class="headerlink" title="总体分析思路"></a>总体分析思路</h4><p><img src="http://ipineimg.lijundong.com/%E6%95%B4%E4%BD%93%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF.png" alt="思路"></p>
-<h4 id="具体分析过程"><a href="#具体分析过程" class="headerlink" title="具体分析过程"></a>具体分析过程</h4><h5 id="指标一"><a href="#指标一" class="headerlink" title="指标一"></a>指标一</h5><ol>
+<h4 id="总体分析思路"><a class="markdownIt-Anchor" href="#总体分析思路"></a> 总体分析思路</h4>
+<p><img src="http://ipineimg.lijundong.com/%E6%95%B4%E4%BD%93%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF.png" alt="思路"></p>
+<h4 id="具体分析过程"><a class="markdownIt-Anchor" href="#具体分析过程"></a> 具体分析过程</h4>
+<h5 id="指标一"><a class="markdownIt-Anchor" href="#指标一"></a> 指标一</h5>
+<ol>
 <li>根据商品编号进行分组，统计不同商品的销量</li>
 <li>根据销量排序找出销量前10的商品</li>
 </ol>
-<p>按照分析思路计算并绘制柱状图，得到结果如下：<br><img src="http://ipineimg.lijundong.com/1.png" alt="1"></p>
+<p>按照分析思路计算并绘制柱状图，得到结果如下：<br>
+<img src="http://ipineimg.lijundong.com/1.png" alt="1"></p>
 <p>可以看到这段时间内销量第一的是商品编号为<code>50018831</code>的商品，其销量高达12657件；销量第二的商品<code>50011993</code>仅卖出3609件，两者差距非常大，前者是后者的3.5倍多。此外，除去销量第一的商品外，剩下的9个商品，销量差别不大，对这些商品商家可以多进行广告投放的营销活动。</p>
-<h5 id="指标二"><a href="#指标二" class="headerlink" title="指标二"></a>指标二</h5><p>指标二包含了三个小指标，以月为维度分析整体月均购买次数，各个月的平均购买次数，以及以年为维度分析月均购买次数；<br>整体月均购买次数，这个指标是一个值，指的是在2年半的时间跨度里平均每个月的购买次数。由总的消费次数除以总的月份数得到，在计算总消费次数时注意同一天内，同一个用户发生的所有消费都算作一次消费，所以需要根据用户编号和销售时间两个字段作去重处理。<br>由于整体月均购买次数只是一个具体的数字，不能反映出用户的购物习惯，为了分析用户更喜欢在哪些月份消费，进一步计算用户在不同月份的平均购买次数。计算方式为各个月的总购买次数除以月份出现的年份数，注意不同月份出现的年份数是不一样的，因为采集的数据是从2012年的7月到2015年的2月，所以有的月份出现了3次有的月份只出现了2次。<br>将整体月均购买次数、各月的平均购买次数可视化，结果如图所示：<br><img src="http://ipineimg.lijundong.com/2-1.png" alt="2-1"></p>
+<h5 id="指标二"><a class="markdownIt-Anchor" href="#指标二"></a> 指标二</h5>
+<p>指标二包含了三个小指标，以月为维度分析整体月均购买次数，各个月的平均购买次数，以及以年为维度分析月均购买次数；<br>
+整体月均购买次数，这个指标是一个值，指的是在2年半的时间跨度里平均每个月的购买次数。由总的消费次数除以总的月份数得到，在计算总消费次数时注意同一天内，同一个用户发生的所有消费都算作一次消费，所以需要根据用户编号和销售时间两个字段作去重处理。<br>
+由于整体月均购买次数只是一个具体的数字，不能反映出用户的购物习惯，为了分析用户更喜欢在哪些月份消费，进一步计算用户在不同月份的平均购买次数。计算方式为各个月的总购买次数除以月份出现的年份数，注意不同月份出现的年份数是不一样的，因为采集的数据是从2012年的7月到2015年的2月，所以有的月份出现了3次有的月份只出现了2次。<br>
+将整体月均购买次数、各月的平均购买次数可视化，结果如图所示：<br>
+<img src="http://ipineimg.lijundong.com/2-1.png" alt="2-1"></p>
 <p>发现在5、11、12这三个月的月均购买次数远超过整体月均购买次数，说明用户更喜爱在这三个时间段购买婴儿用品，那么商家在这些时段可备好货源，保持营销。2、7、8这三个月，用户的购买力度不强，商家可以着重在这些时段进行更多的产品推广或者促销活动。</p>
-<p>再通过以年为维度对比不同年份的月均购买次数，观察随着时间的推移，用户的购买力度的变化情况。计算方式为一年的总购买次数除以对应的月份数，得到结果如下：<br><img src="http://ipineimg.lijundong.com/2-2.png" alt="2-2"></p>
+<p>再通过以年为维度对比不同年份的月均购买次数，观察随着时间的推移，用户的购买力度的变化情况。计算方式为一年的总购买次数除以对应的月份数，得到结果如下：<br>
+<img src="http://ipineimg.lijundong.com/2-2.png" alt="2-2"></p>
 <p>2012年至2014年，月均购买次数呈上升趋势，2014年到达高峰，2015年又降下来。对于2014年的购买高峰，如果没有商家方的内部原因，那么也许是2014年婴儿出生率有提高，或者是其他外部影响因素。</p>
-<h5 id="指标三"><a href="#指标三" class="headerlink" title="指标三"></a>指标三</h5><p>接下来开始细分到每个商品种类，分析每个类别中商品的月均购买次数和商品的月均销量。各类商品的月均销量由各类商品的销售总量除以总的月份数得到，先按商品种类字段分组，求出各类别商品的销售总量，月份数在指标一中已计算，根据公式得到各类商品的月均销量；同理可计算各类商品的月均购买次数。<br>最终绘制成柱状图，进行对比分析：<br><img src="http://ipineimg.lijundong.com/3.png" alt="3"></p>
-<p>从上图中看到，总共6个商品种类，只有种类<code>122650008</code>它的销量和购买次数基本持平；剩下的5类都是销量大于购买次数，即用户购买时会一次买多件。购买次数最多的种类是<code>50008168</code>，销售数量最多的却是种类<code>28</code>，该种类的销量是其购买次数的4倍多，说明用户每次购买该种类的婴儿用品都会囤货。<br>此外，商品种类<code>50014815</code>也比较特别，购买次数排第3位，但是它的销量超过了购买次数最多的<code>50008168</code>。所以商品种类28和50014815是6种商品里最畅销的。</p>
-<p>对于那些购买次数多，但销量不是特别高的商品种类，说明用户粘性强，那么商家可以适当做一些广告，刺激用户的消费，提高总销量；<br>对于购买次数少，但是热销的商品种类，商家可进行引流和促销。<br>下面通过指标四来分析每类商品具体是在哪些月份更畅销。</p>
-<h5 id="指标四"><a href="#指标四" class="headerlink" title="指标四"></a>指标四</h5><p>为了进一步分析不同类的商品究竟在哪些月份更畅销，将每种商品种类在一年12个月中的月均购买次数和月均销量分别可视化出来。计算这两个小指标时，首先按商品种类和销售月份分组得到月总销量（月总购买次数），然后统计月总销量（月总购买次数）是由几个年份组成，最后计算月均销量（月均购买次数）。<br><img src="http://ipineimg.lijundong.com/4-1.png" alt="4-1"> <img src="http://ipineimg.lijundong.com/4-2.png" alt="4-2"></p>
-<p>从左边的图可以看到，商品种类<code>50008168（红色）</code>的月均购买次数最多，与指标三吻合；并且可以很清楚看到这个种类的商品在不同月份的平均购买次数波动很大，在2、7月是低谷，而在5、11月是高峰，远远多于其他种类；通过右边的图，发现这个这个种类的商品在9月份销量更高，对于购买次数处于高峰的5、11月销量反而不算多。其他5类商品的平均购买次数趋势相对平稳，低谷都出现在2月份，高峰都出现在11月份。</p>
-<p>从右边的图可以看到，所有种类的商品的销量低谷都在2月，与左图结果一致；商品种类<code>28（橙色）</code>是销量最多的，它分别在5、7、12月出现了销售高峰；而另一商品种类<code>50014815（紫色）</code>11月份的销量激增，这说明用户特别喜爱在双十一活动时对它进行囤货。其余3类商品，相对于平均购买次数，它们的平均销量趋势非常平稳。</p>
+<h5 id="指标三"><a class="markdownIt-Anchor" href="#指标三"></a> 指标三</h5>
+<p>接下来开始细分到每个商品种类，分析每个类别中商品的月均购买次数和商品的月均销量。各类商品的月均销量由各类商品的销售总量除以总的月份数得到，先按商品种类字段分组，求出各类别商品的销售总量，月份数在指标一中已计算，根据公式得到各类商品的月均销量；同理可计算各类商品的月均购买次数。<br>
+最终绘制成柱状图，进行对比分析：<br>
+<img src="http://ipineimg.lijundong.com/3.png" alt="3"></p>
+<p>从上图中看到，总共6个商品种类，只有种类<code>122650008</code>它的销量和购买次数基本持平；剩下的5类都是销量大于购买次数，即用户购买时会一次买多件。购买次数最多的种类是<code>50008168</code>，销售数量最多的却是种类<code>28</code>，该种类的销量是其购买次数的4倍多，说明用户每次购买该种类的婴儿用品都会囤货。<br>
+此外，商品种类<code>50014815</code>也比较特别，购买次数排第3位，但是它的销量超过了购买次数最多的<code>50008168</code>。所以商品种类<code>28</code>和<code>50014815</code>是6种商品里最畅销的。</p>
+<p>对于那些购买次数多，但销量不是特别高的商品种类，说明用户粘性强，那么商家可以适当做一些广告，刺激用户的消费，提高总销量；<br>
+对于购买次数少，但是热销的商品种类，商家可进行引流和促销。<br>
+下面通过指标四来分析每类商品具体是在哪些月份更畅销。</p>
+<h5 id="指标四"><a class="markdownIt-Anchor" href="#指标四"></a> 指标四</h5>
+<p>为了进一步分析不同类的商品究竟在哪些月份更畅销，将每种商品种类在一年12个月中的月均购买次数和月均销量分别可视化出来。计算这两个小指标时，首先按商品种类和销售月份分组得到月总销量（月总购买次数），然后统计月总销量（月总购买次数）是由几个年份组成，最后计算月均销量（月均购买次数）。</p>
+<p><img src="http://ipineimg.lijundong.com/4-1.png" alt="4-1"></p>
+<p>从这幅图可以看到，商品种类<code>50008168（红色）</code>的月均购买次数最多，与指标三吻合；并且可以很清楚看到这个种类的商品在不同月份的平均购买次数波动很大，在2、7月是低谷，而在5、11月是高峰，远远多于其他种类；观察下边的图，发现这个这个种类的商品在9月份销量更高，对于购买次数处于高峰的5、11月销量反而不算多。其他5类商品的平均购买次数趋势相对平稳，低谷都出现在2月份，高峰都出现在11月份。</p>
+<p><img src="http://ipineimg.lijundong.com/4-2.png" alt="4-2"></p>
+<p>从这幅图可以看到，所有种类的商品的销量低谷都在2月，与上图结果一致；商品种类<code>28（橙色）</code>是销量最多的，它分别在5、7、12月出现了销售高峰；而另一商品种类<code>50014815（紫色）</code>11月份的销量激增，这说明用户特别喜爱在双十一活动时对它进行囤货。其余3类商品，相对于平均购买次数，它们的平均销量趋势非常平稳。</p>
 <p>2月份一般都是春节期间，所以用户的消费欲望会有所减缓；对于不同种类商品，用户的囤货行为会出现在不同的月份，商家可以提前做好预估，并在高峰来临前做进一步的宣传；至于购买次数和购买量相对平缓的月份，商家可通过广告、红包福利等措施刺激用户消费。</p>
-<h5 id="指标五"><a href="#指标五" class="headerlink" title="指标五"></a>指标五</h5><p>最后对各类商品的用户画像进行分析。需要先将交易数据表和婴儿信息数据表合并，并且以婴儿信息数据表为主。先分析购买每类商品的婴儿性别分布情况，根据商品种类和性别字段对数据进行分组，统计每种商品的用户性别分布，计算每类商品的男女用户比例，最后可视化：<br><img src="http://ipineimg.lijundong.com/5-1.png" alt="5-1"></p>
+<h5 id="指标五"><a class="markdownIt-Anchor" href="#指标五"></a> 指标五</h5>
+<p>最后对各类商品的用户画像进行分析。需要先将交易数据表和婴儿信息数据表合并，并且以婴儿信息数据表为主。先分析购买每类商品的婴儿性别分布情况，根据商品种类和性别字段对数据进行分组，统计每种商品的用户性别分布，计算每类商品的男女用户比例，最后可视化：<br>
+<img src="http://ipineimg.lijundong.com/5-1.png" alt="5-1"></p>
 <p>除了商品种类<code>50022520</code>对女孩的销售比例高于男孩外，其余5类商品的用户对象都是男孩居多，尤其是种类<code>38</code>和<code>50014815</code>的商品，对男孩的销售比例占据了70%以上。</p>
-<p>再分析购买每类商品的婴儿年龄段分布情况。先计算婴儿的年龄，并将年龄分成<code>0岁、1岁、2岁、3岁、4岁、5岁、5岁以上</code>7个阶段，然后统计不同类商品在不同年龄段的销售情况，计算每类商品的用户年龄段比例，最后可视化：<br><img src="http://ipineimg.lijundong.com/5-2.png" alt="5-2"></p>
-<p>种类为<code>50022520（灰棕色）</code>的商品，其用户百分之80%以上都是0岁的婴儿，即还未出生，父母就为其购买了相关用品。种类为<code>50014815（紫色）</code>的商品，其用户大部分由0岁和1岁两个年龄段组成，占据百分之70%以上；种类<code>38（绿色）</code>的商品，其用户大部分由1岁和2岁两个年龄段组成，占据80%左右；种类<code>122650008（蓝色）</code>的商品，其用户除了1岁和2岁的，还有3岁的孩子。剩余两个种类的商品，都是随着孩子年龄增大，销售比例逐渐降低。<br>通过对不同种类商品的用户进行画像分析，进行精准营销。对不同年龄和不同性别的孩子，推销不同的商品种类。</p>
-<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>以上分析涉及了用户消费趋势分析、商品对比分析和用户画像分析。这些分析都是小数据量下的关于业务指标的描述性统计分析，目的是为精准营销。数据中未包含用户的行为类型，所以没有进行PV、DAU、留存与转化等网站运营指标的分析。利用用户购买的商品信息来预测用户年龄段，以及利用用户信息预测购买何种商品种类的分析，可以参见前一篇文章，这里不给出预测结果。本案例的目的是通过分析现实场景数据，锻炼业务思维，加强用Python处理数据和可视化的代码能力，在以后有更多业务经验后再做出更深入的分析。</p>
+<p>再分析购买每类商品的婴儿年龄段分布情况。先计算婴儿的年龄，并将年龄分成<code>0岁、1岁、2岁、3岁、4岁、5岁、5岁以上</code>7个阶段，然后统计不同类商品在不同年龄段的销售情况，计算每类商品的用户年龄段比例，最后可视化：<br>
+<img src="http://ipineimg.lijundong.com/5-2.png" alt="5-2"></p>
+<p>种类为<code>50022520（灰棕色）</code>的商品，其用户百分之80%以上都是0岁的婴儿，即还未出生，父母就为其购买了相关用品。种类为<code>50014815（紫色）</code>的商品，其用户大部分由0岁和1岁两个年龄段组成，占据百分之70%以上；种类<code>38（绿色）</code>的商品，其用户大部分由1岁和2岁两个年龄段组成，占据80%左右；种类<code>122650008（蓝色）</code>的商品，其用户除了1岁和2岁的，还有3岁的孩子。剩余两个种类的商品，都是随着孩子年龄增大，销售比例逐渐降低。<br>
+通过对不同种类商品的用户进行画像分析，进行精准营销。对不同年龄和不同性别的孩子，推销不同种类的商品。</p>
+<h3 id="四-总结"><a class="markdownIt-Anchor" href="#四-总结"></a> 四、总结</h3>
+<p>以上分析涉及了用户消费趋势分析、商品对比分析和用户画像分析。这些分析都是小数据量下的关于业务指标的描述性统计分析，目的是为精准营销。数据中未包含用户的行为类型，所以没有进行PV、DAU、留存与转化等网站运营指标的分析。利用用户购买的商品信息来预测用户年龄段，以及利用用户信息预测购买何种商品种类的分析，可以参见前一篇文章，这里不给出预测结果。本案例的目的是通过分析现实场景数据，锻炼业务思维，加强用Python处理数据和进行可视化的代码能力，在以后有更多业务经验后再做出更深入的分析。</p>
 
       
     </div>
@@ -505,6 +541,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019-06-02/" rel="prev" title="推论统计实践之验证斯特鲁普效应">
+                推论统计实践之验证斯特鲁普效应 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -590,7 +630,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -675,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、分析背景与目的"><span class="nav-text">一、分析背景与目的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目的"><span class="nav-text">目的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、分析思路与分析过程"><span class="nav-text">二、分析思路与分析过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据清洗"><span class="nav-text">数据清洗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总体分析思路"><span class="nav-text">总体分析思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体分析过程"><span class="nav-text">具体分析过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#指标一"><span class="nav-text">指标一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指标二"><span class="nav-text">指标二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指标三"><span class="nav-text">指标三</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指标四"><span class="nav-text">指标四</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指标五"><span class="nav-text">指标五</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、总结"><span class="nav-text">四、总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-分析背景与目的"><span class="nav-text"> 一、分析背景与目的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-text"> 背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目的"><span class="nav-text"> 目的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-分析思路与分析过程"><span class="nav-text"> 二、分析思路与分析过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据清洗"><span class="nav-text"> 数据清洗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总体分析思路"><span class="nav-text"> 总体分析思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体分析过程"><span class="nav-text"> 具体分析过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#指标一"><span class="nav-text"> 指标一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指标二"><span class="nav-text"> 指标二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指标三"><span class="nav-text"> 指标三</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指标四"><span class="nav-text"> 指标四</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指标五"><span class="nav-text"> 指标五</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-总结"><span class="nav-text"> 四、总结</span></a></li></ol></div>
             
 
           </div>

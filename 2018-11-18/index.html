@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,13 +78,13 @@
 
 
 
-<meta name="description" content="问题Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？ 散列表散列表叫Hash Table，即哈希表或者Hash表。散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。 举个栗子假如有89名选手参加学校运动会，为了方便记录成绩，每个选手胸前都会贴上自己的参赛号码。这89名">
+<meta name="description" content="问题 Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？  散列表 散列表叫Hash Table，即哈希表或者Hash表。散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。  举个栗子 假如有89名选手参加学校运动会，为了方便记录成绩，每个选手胸前都会贴上自己的参赛号">
 <meta name="keywords" content="data_structure,algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="散列表">
 <meta property="og:url" content="http://ipine.github.io/2018-11-18/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="问题Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？ 散列表散列表叫Hash Table，即哈希表或者Hash表。散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。 举个栗子假如有89名选手参加学校运动会，为了方便记录成绩，每个选手胸前都会贴上自己的参赛号码。这89名">
+<meta property="og:description" content="问题 Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？  散列表 散列表叫Hash Table，即哈希表或者Hash表。散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。  举个栗子 假如有89名选手参加学校运动会，为了方便记录成绩，每个选手胸前都会贴上自己的参赛号">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-11-18/16695191.jpg">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-11-18/23664537.jpg">
@@ -92,7 +93,7 @@
 <meta property="og:updated_time" content="2019-02-22T11:27:59.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="散列表">
-<meta name="twitter:description" content="问题Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？ 散列表散列表叫Hash Table，即哈希表或者Hash表。散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。 举个栗子假如有89名选手参加学校运动会，为了方便记录成绩，每个选手胸前都会贴上自己的参赛号码。这89名">
+<meta name="twitter:description" content="问题 Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？  散列表 散列表叫Hash Table，即哈希表或者Hash表。散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。  举个栗子 假如有89名选手参加学校运动会，为了方便记录成绩，每个选手胸前都会贴上自己的参赛号">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/18-11-18/16695191.jpg">
 
 
@@ -389,44 +390,84 @@
       
 
       
-        <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？</p>
-<h3 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h3><p>散列表叫<code>Hash Table</code>，即<code>哈希表</code>或者<code>Hash</code>表。散列表用的是<strong>数组支持按照下标随机访问数据的特性</strong>，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。</p>
-<h4 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h4><p>假如有89名选手参加学校运动会，为了方便记录成绩，每个选手胸前都会贴上自己的参赛号码。这89名选手的编号依次是1到89。现在需要编程实现，通过编号快速找到对应选手信息。</p>
-<p><strong>做法</strong>：将这89名选手的信息放在数组里，编号为1的选手，放在数组中下标为1的位置；编号为2的选手，放在数组中下标为2的位置。以此推类，编号为 <code>k</code> 的选手，放在数组中下标为 <code>k</code> 的位置。<br>当需要查询参赛编号为 <code>x</code> 的选手时，只需将下标为 <code>x</code> 的数组元素取出来就可以了，时间复杂为 <code>O(1)</code>。</p>
+        <h3 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题</h3>
+<p>Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？</p>
+<h3 id="散列表"><a class="markdownIt-Anchor" href="#散列表"></a> 散列表</h3>
+<p>散列表叫<code>Hash Table</code>，即<code>哈希表</code>或者<code>Hash</code>表。散列表用的是<strong>数组支持按照下标随机访问数据的特性</strong>，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。</p>
+<h4 id="举个栗子"><a class="markdownIt-Anchor" href="#举个栗子"></a> 举个栗子</h4>
+<p>假如有89名选手参加学校运动会，为了方便记录成绩，每个选手胸前都会贴上自己的参赛号码。这89名选手的编号依次是1到89。现在需要编程实现，通过编号快速找到对应选手信息。</p>
+<p><strong>做法</strong>：将这89名选手的信息放在数组里，编号为1的选手，放在数组中下标为1的位置；编号为2的选手，放在数组中下标为2的位置。以此推类，编号为 <code>k</code> 的选手，放在数组中下标为 <code>k</code> 的位置。<br>
+当需要查询参赛编号为 <code>x</code> 的选手时，只需将下标为 <code>x</code> 的数组元素取出来就可以了，时间复杂为 <code>O(1)</code>。</p>
 <p>这就是散列思想，其中，参赛选手的编号叫作<code>键（key）</code>或者<code>关键字</code>。把<strong>参赛编号转化为数组下标</strong>的映射方法就叫作<code>散列函数（哈希函数）</code>，散列函数计算得到的值就叫作<code>散列值（哈希值）</code>。</p>
-<p>散列表用的是<strong>数组支持按照下标随机访问</strong>，时间复杂度是 <code>O(1)</code> 的特性。<br>通过散列函数把元素的键值映射为下标，然后将数据存储在数组中对应下标的位置。<br>当按照键值查询元素时，用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据。</p>
-<h3 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h3><p>散列函数在散列表中起着非常关键的作用。将其定义成 <code>hash(key)</code>，其中 <code>key</code> 表示元素的键值，<code>hash(key)</code>的值表示经过散列函数计算得到的散列值。<br>上个例子中，编号就是数组下标，所以<code>hash(key)</code>就等于<code>key</code>。</p>
-<h4 id="散列函数设计的基本要求"><a href="#散列函数设计的基本要求" class="headerlink" title="散列函数设计的基本要求"></a>散列函数设计的基本要求</h4><p>1 . 散列函数计算得到的散列值是一个非负整数；<br>因为数组下标是从 0 开始的，所以散列函数生成的散列值也要是非负整数。</p>
-<p>2 . 如果 <code>key1 = key2</code> ，那 <code>hash(key1) == hash(key2)</code>；<br>相同的 <code>key</code>，经过散列函数得到的散列值也应该是相同的。</p>
-<p>3 . 如果 <code>key1 ≠ key2</code>，那 <code>hash(key1) ≠ hash(key2)</code>。<br>这个要求看起来合情合理，但是在真实的情况下，要想找到一个不同的 <code>key</code> 对应的散列值都不一样的散列函数，几乎是不可能的。即便像业界著名的<strong>MD5</strong>、<strong>SHA</strong>、<strong>CRC</strong>等哈希算法，也无法完全避免这种散列冲突。而且，因为<strong>数组的存储空间有限</strong>，也会加大散列冲突的概率。</p>
+<p>散列表用的是<strong>数组支持按照下标随机访问</strong>，时间复杂度是 <code>O(1)</code> 的特性。<br>
+通过散列函数把元素的键值映射为下标，然后将数据存储在数组中对应下标的位置。<br>
+当按照键值查询元素时，用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据。</p>
+<h3 id="散列函数"><a class="markdownIt-Anchor" href="#散列函数"></a> 散列函数</h3>
+<p>散列函数在散列表中起着非常关键的作用。将其定义成 <code>hash(key)</code>，其中 <code>key</code> 表示元素的键值，<code>hash(key)</code>的值表示经过散列函数计算得到的散列值。<br>
+上个例子中，编号就是数组下标，所以<code>hash(key)</code>就等于<code>key</code>。</p>
+<h4 id="散列函数设计的基本要求"><a class="markdownIt-Anchor" href="#散列函数设计的基本要求"></a> 散列函数设计的基本要求</h4>
+<p>1 . 散列函数计算得到的散列值是一个非负整数；<br>
+因为数组下标是从 0 开始的，所以散列函数生成的散列值也要是非负整数。</p>
+<p>2 . 如果 <code>key1 = key2</code> ，那 <code>hash(key1) == hash(key2)</code>；<br>
+相同的 <code>key</code>，经过散列函数得到的散列值也应该是相同的。</p>
+<p>3 . 如果 <code>key1 ≠ key2</code>，那 <code>hash(key1) ≠ hash(key2)</code>。<br>
+这个要求看起来合情合理，但是在真实的情况下，要想找到一个不同的 <code>key</code> 对应的散列值都不一样的散列函数，几乎是不可能的。即便像业界著名的<strong>MD5</strong>、<strong>SHA</strong>、<strong>CRC</strong>等哈希算法，也无法完全避免这种散列冲突。而且，因为<strong>数组的存储空间有限</strong>，也会加大散列冲突的概率。</p>
 <p>几乎无法找到一个完美的无冲突的散列函数，即便能找到，付出的时间成本、计算成本也是很大的，所以针对散列冲突问题，需要通过其他途径来解决。</p>
-<h3 id="散列冲突"><a href="#散列冲突" class="headerlink" title="散列冲突"></a>散列冲突</h3><p>常用的散列冲突解决方法有两类，<strong>开放寻址法（open addressing）</strong>和<strong>链表法（chaining）</strong>。</p>
-<h4 id="开放寻址法"><a href="#开放寻址法" class="headerlink" title="开放寻址法"></a>开放寻址法</h4><p>开放寻址法的核心思想是，如果出现了散列冲突，就重新探测一个空闲位置，将其插入。那如何重新探测新的位置呢？<br>一个比较简单的探测方法，<code>线性探测（Linear Probing）</code>。</p>
-<p>1 . 插入数据<br>当往散列表中插入数据时，如果某个数据经过散列函数散列之后，存储位置已经被占用了，那就从当前位置开始，依次往后查找，看是否有空闲位置，直到找到为止。</p>
-<p>例如下图所示：<br><img src="http://ipineimg.lijundong.com/18-11-18/16695191.jpg" alt="插入数据"></p>
+<h3 id="散列冲突"><a class="markdownIt-Anchor" href="#散列冲突"></a> 散列冲突</h3>
+<p>常用的散列冲突解决方法有两类，<strong>开放寻址法（open addressing）<strong>和</strong>链表法（chaining）</strong>。</p>
+<h4 id="开放寻址法"><a class="markdownIt-Anchor" href="#开放寻址法"></a> 开放寻址法</h4>
+<p>开放寻址法的核心思想是，如果出现了散列冲突，就重新探测一个空闲位置，将其插入。那如何重新探测新的位置呢？<br>
+一个比较简单的探测方法，<code>线性探测（Linear Probing）</code>。</p>
+<p>1 . 插入数据<br>
+当往散列表中插入数据时，如果某个数据经过散列函数散列之后，存储位置已经被占用了，那就从当前位置开始，依次往后查找，看是否有空闲位置，直到找到为止。</p>
+<p>例如下图所示：<br>
+<img src="http://ipineimg.lijundong.com/18-11-18/16695191.jpg" alt="插入数据"></p>
 <p>黄色的块表示空闲，橙色的块表示已被存储数据。从图中可以看出，散列表的大小为 10，在元素 <code>x</code> 插入散列表之前，已经 6 个元素插入到散列表中。 <code>x</code> 经过 <code>Hash</code> 算法之后，被散列到位置下标为 7 的位置，但是这个位置已经有数据了，所以就产生了冲突。于是就顺序地往后一个一个找，看有没有空闲的位置，遍历到尾部都没有找到空闲的位置，只好再从表头开始找，直到找到空闲位置 2，于是将其插入到这个位置。</p>
-<p>2 . 查找数据<br>在散列表中查找元素的过程有点儿类似插入过程。通过散列函数求出要查找元素的键值对应的散列值，然后比较数组中下标为散列值的元素和要查找的元素。如果相等，则说明就是要找的元素；否则就顺序往后依次查找。如果遍历到数组中的空闲位置，还没有找到，就说明要查找的元素并没有在散列表中。</p>
-<p>如下图所示：<br><img src="http://ipineimg.lijundong.com/18-11-18/23664537.jpg" alt="查找数据"></p>
-<p>3 . 删除数据<br>对于使用线性探测法解决冲突的散列表，删除操作稍微有些特别，不能单纯地把要删除的元素设置为空。</p>
-<p>在查找的时候，一旦通过线性探测方法，找到一个空闲位置，就可以认定散列表中不存在这个数据。<br>但是，如果这个空闲位置是后来删除的，就会导致原来的查找算法失效。本来存在的数据，会被认定为不存在。这个问题如何解决呢？</p>
-<p>如下图所示：<br><img src="http://ipineimg.lijundong.com/18-11-18/89685434.jpg" alt="删除数据"></p>
-<p>解决办法：<br>可以将删除的元素，特殊标记为 <code>deleted</code>。当线性探测查找的时候，遇到标记为 <code>deleted</code> 的空间，并不是停下来，而是继续往下探测。</p>
-<h5 id="线性探测法的问题"><a href="#线性探测法的问题" class="headerlink" title="线性探测法的问题"></a>线性探测法的问题</h5><p>当散列表中插入的数据越来越多时，散列冲突发生的可能性就会越来越大，空闲位置会越来越少，线性探测的时间就会越来越久。极端情况下，可能需要探测整个散列表，所以最坏情况下的时间复杂度为 <code>O(n)</code>。同理，在删除和查找时，也有可能会线性探测整张散列表，才能找到要查找或者删除的数据。</p>
-<p>对于开放寻址冲突解决方法，除了线性探测方法之外，还有另外两种比较经典的探测方法，<strong>二次探测（Quadratic probing）</strong>和<strong>双重散列（Double hashing）</strong>。</p>
+<p>2 . 查找数据<br>
+在散列表中查找元素的过程有点儿类似插入过程。通过散列函数求出要查找元素的键值对应的散列值，然后比较数组中下标为散列值的元素和要查找的元素。如果相等，则说明就是要找的元素；否则就顺序往后依次查找。如果遍历到数组中的空闲位置，还没有找到，就说明要查找的元素并没有在散列表中。</p>
+<p>如下图所示：<br>
+<img src="http://ipineimg.lijundong.com/18-11-18/23664537.jpg" alt="查找数据"></p>
+<p>3 . 删除数据<br>
+对于使用线性探测法解决冲突的散列表，删除操作稍微有些特别，不能单纯地把要删除的元素设置为空。</p>
+<p>在查找的时候，一旦通过线性探测方法，找到一个空闲位置，就可以认定散列表中不存在这个数据。<br>
+但是，如果这个空闲位置是后来删除的，就会导致原来的查找算法失效。本来存在的数据，会被认定为不存在。这个问题如何解决呢？</p>
+<p>如下图所示：<br>
+<img src="http://ipineimg.lijundong.com/18-11-18/89685434.jpg" alt="删除数据"></p>
+<p>解决办法：<br>
+可以将删除的元素，特殊标记为 <code>deleted</code>。当线性探测查找的时候，遇到标记为 <code>deleted</code> 的空间，并不是停下来，而是继续往下探测。</p>
+<h5 id="线性探测法的问题"><a class="markdownIt-Anchor" href="#线性探测法的问题"></a> 线性探测法的问题</h5>
+<p>当散列表中插入的数据越来越多时，散列冲突发生的可能性就会越来越大，空闲位置会越来越少，线性探测的时间就会越来越久。极端情况下，可能需要探测整个散列表，所以最坏情况下的时间复杂度为 <code>O(n)</code>。同理，在删除和查找时，也有可能会线性探测整张散列表，才能找到要查找或者删除的数据。</p>
+<p>对于开放寻址冲突解决方法，除了线性探测方法之外，还有另外两种比较经典的探测方法，<strong>二次探测（Quadratic probing）<strong>和</strong>双重散列（Double hashing）</strong>。</p>
 <p>二次探测，跟线性探测很像，线性探测每次探测的步长是 1，那它探测的下标序列就是<code>hash(key)+0，hash(key)+1，hash(key)+2</code>……而二次探测探测的步长就变成了原来的“二次方”，也就是说，它探测的下标序列就是 <code>hash(key)+0，hash(key)+1^2，hash(key)+2^2</code>……</p>
 <p>双重散列，意思就是不仅要使用一个散列函数。而是使用一组散列函数 <code>hash1(key)，hash2(key)，hash3(key)</code>……先用第一个散列函数，如果计算得到的存储位置已经被占用，再用第二个散列函数，依次类推，直到找到空闲的存储位置。</p>
-<p>为了尽可能保证散列表的操作效率，一般情况下，要尽可能保证散列表中有一定比例的空闲槽位。<br>用<strong>装载因子（load factor）</strong>来表示空位的多少。装载因子的计算公式是：</p>
+<p>为了尽可能保证散列表的操作效率，一般情况下，要尽可能保证散列表中有一定比例的空闲槽位。<br>
+用**装载因子（load factor）**来表示空位的多少。装载因子的计算公式是：</p>
 <pre><code>散列表的装载因子 = 填入表中的元素个数 / 散列表的长度
-</code></pre><p>装载因子越大，说明空闲位置越少，冲突越多，散列表的性能会下降。</p>
-<h4 id="链表法"><a href="#链表法" class="headerlink" title="链表法"></a>链表法</h4><p>链表法是一种更加常用的散列冲突解决办法，相比开放寻址法，它要简单很多。<br>在散列表中，每个<code>桶（bucket）</code>或者<code>槽（slot）</code>会对应一条链表，所有散列值相同的元素都放到相同槽位对应的链表中。</p>
-<p>如下图所示：<br><img src="http://ipineimg.lijundong.com/18-11-18/86009483.jpg" alt="链表法"></p>
-<p>当插入的时候，只需要通过散列函数计算出对应的散列槽位，将其插入到对应链表中即可，所以插入的时间复杂度是 <code>O(1)</code>。<br>当查找、删除一个元素时，同样通过散列函数计算出对应的槽，然后遍历链表查找或者删除。</p>
-<h5 id="查找或删除操作的时间复杂度"><a href="#查找或删除操作的时间复杂度" class="headerlink" title="查找或删除操作的时间复杂度"></a>查找或删除操作的时间复杂度</h5><p>两个操作的时间复杂度跟链表的长度 <code>k</code> 成正比，也就是 <code>O(k)</code>。<br>对于散列比较均匀的散列函数来说，理论上讲:</p>
+</code></pre>
+<p>装载因子越大，说明空闲位置越少，冲突越多，散列表的性能会下降。</p>
+<h4 id="链表法"><a class="markdownIt-Anchor" href="#链表法"></a> 链表法</h4>
+<p>链表法是一种更加常用的散列冲突解决办法，相比开放寻址法，它要简单很多。<br>
+在散列表中，每个<code>桶（bucket）</code>或者<code>槽（slot）</code>会对应一条链表，所有散列值相同的元素都放到相同槽位对应的链表中。</p>
+<p>如下图所示：<br>
+<img src="http://ipineimg.lijundong.com/18-11-18/86009483.jpg" alt="链表法"></p>
+<p>当插入的时候，只需要通过散列函数计算出对应的散列槽位，将其插入到对应链表中即可，所以插入的时间复杂度是 <code>O(1)</code>。<br>
+当查找、删除一个元素时，同样通过散列函数计算出对应的槽，然后遍历链表查找或者删除。</p>
+<h5 id="查找或删除操作的时间复杂度"><a class="markdownIt-Anchor" href="#查找或删除操作的时间复杂度"></a> 查找或删除操作的时间复杂度</h5>
+<p>两个操作的时间复杂度跟链表的长度 <code>k</code> 成正比，也就是 <code>O(k)</code>。<br>
+对于散列比较均匀的散列函数来说，理论上讲:</p>
 <pre><code>k=n/m，其中 n 表示散列中数据的个数，m 表示散列表中“槽”的个数。
-</code></pre><h3 id="解答开篇"><a href="#解答开篇" class="headerlink" title="解答开篇"></a>解答开篇</h3><p>Word 文档中单词拼写检查功能是如何实现的？<br>用散列表来存储整个英文单词词典。<br>常用的英文单词有 20 万个左右，假设单词的平均长度是 10 个字母，平均一个单词占用 10 个字节的内存空间，那 20 万英文单词大约占 2MB 的存储空间，就算放大 10 倍也就是 20MB。对于现在的计算机来说，这个大小完全可以放在内存里面。</p>
+</code></pre>
+<h3 id="解答开篇"><a class="markdownIt-Anchor" href="#解答开篇"></a> 解答开篇</h3>
+<p>Word 文档中单词拼写检查功能是如何实现的？<br>
+用散列表来存储整个英文单词词典。<br>
+常用的英文单词有 20 万个左右，假设单词的平均长度是 10 个字母，平均一个单词占用 10 个字节的内存空间，那 20 万英文单词大约占 2MB 的存储空间，就算放大 10 倍也就是 20MB。对于现在的计算机来说，这个大小完全可以放在内存里面。</p>
 <p>当用户输入某个英文单词时，拿用户输入的单词去散列表中查找。如果查到，则说明拼写正确；如果没有查到，则说明拼写可能有误，给予提示。借助散列表这种数据结构，就可以轻松实现快速判断是否存在拼写错误。</p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>1 . 假设有 10 万条 URL 访问日志，如何按照访问次数给 URL 排序？<br>遍历 10 万条数据，以 URL 为 <code>key</code>，数组的下标为 <code>hash(key)</code>得到的值，访问次数count为相应数组下标的内容，存入散列表，同时记录下访问次数count的最大值 K，时间复杂度 <code>O(N)</code>。<br>如果 K 不是很大，可以使用<strong>桶排序</strong>，时间复杂度 <code>O(N)</code>。如果 K 非常大（比如大于 10 万），就使用<strong>快速排序</strong>，复杂度 <code>O(NlogN)</code>。</p>
-<p>2 . 有两个字符串数组，每个数组大约有 10 万条字符串，如何快速找出两个数组中相同的字符串？<br>以第一个字符串数组构建散列表，<code>key</code> 为字符串，数组的下标为 <code>hash(key)</code>得到的值，出现次数count为相应数组下标的内容，时间复杂度为 <code>O(N)</code>。再遍历第二个字符串数组，以字符串为 <code>key</code> 在散列表中查找，找到散列值对应数组下标存储的count值，如果count大于零，说明存在相同字符串，时间复杂度为 <code>O(N)</code>。</p>
+<h3 id="思考"><a class="markdownIt-Anchor" href="#思考"></a> 思考</h3>
+<p>1 . 假设有 10 万条 URL 访问日志，如何按照访问次数给 URL 排序？<br>
+遍历 10 万条数据，以 URL 为 <code>key</code>，数组的下标为 <code>hash(key)</code>得到的值，访问次数count为相应数组下标的内容，存入散列表，同时记录下访问次数count的最大值 K，时间复杂度 <code>O(N)</code>。<br>
+如果 K 不是很大，可以使用<strong>桶排序</strong>，时间复杂度 <code>O(N)</code>。如果 K 非常大（比如大于 10 万），就使用<strong>快速排序</strong>，复杂度 <code>O(NlogN)</code>。</p>
+<p>2 . 有两个字符串数组，每个数组大约有 10 万条字符串，如何快速找出两个数组中相同的字符串？<br>
+以第一个字符串数组构建散列表，<code>key</code> 为字符串，数组的下标为 <code>hash(key)</code>得到的值，出现次数count为相应数组下标的内容，时间复杂度为 <code>O(N)</code>。再遍历第二个字符串数组，以字符串为 <code>key</code> 在散列表中查找，找到散列值对应数组下标存储的count值，如果count大于零，说明存在相同字符串，时间复杂度为 <code>O(N)</code>。</p>
 
       
     </div>
@@ -568,7 +609,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -653,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列表"><span class="nav-text">散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#举个栗子"><span class="nav-text">举个栗子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列函数"><span class="nav-text">散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#散列函数设计的基本要求"><span class="nav-text">散列函数设计的基本要求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列冲突"><span class="nav-text">散列冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开放寻址法"><span class="nav-text">开放寻址法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#线性探测法的问题"><span class="nav-text">线性探测法的问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链表法"><span class="nav-text">链表法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查找或删除操作的时间复杂度"><span class="nav-text">查找或删除操作的时间复杂度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解答开篇"><span class="nav-text">解答开篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-text">思考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-text"> 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列表"><span class="nav-text"> 散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#举个栗子"><span class="nav-text"> 举个栗子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列函数"><span class="nav-text"> 散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#散列函数设计的基本要求"><span class="nav-text"> 散列函数设计的基本要求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列冲突"><span class="nav-text"> 散列冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开放寻址法"><span class="nav-text"> 开放寻址法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#线性探测法的问题"><span class="nav-text"> 线性探测法的问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链表法"><span class="nav-text"> 链表法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查找或删除操作的时间复杂度"><span class="nav-text"> 查找或删除操作的时间复杂度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解答开篇"><span class="nav-text"> 解答开篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-text"> 思考</span></a></li></ol></div>
             
 
           </div>

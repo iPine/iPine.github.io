@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -294,6 +295,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2018-12-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iPine">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iPine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018-12-18/" itemprop="url">散列表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-18T19:30:10+08:00">
+                2018-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technique-summary/" itemprop="url" rel="index">
+                    <span itemprop="name">technique summary</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+ 散列表效率
+之前讲到散列表的查询效率并不能笼统地说成是 O(1) 。它跟散列函数、装载因子、散列冲突都有关系。在极端情况下，恶意攻击者，通过精心构造的数据，使得所有数据经过散列函数后，都散列到同一个槽里。若我们使用的是基于链表的冲突解决办法，那这个时候，散列表就会退化为链表，查询时间度也退化为 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018-12-18/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2018-11-26/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -390,11 +545,14 @@
           
 代码传送门，包括扩展了交互功能的改进版
 
-背景分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。
-数据获取从数据库中提取数据。通过Udacity提供的工作区，该工作区与数据库连接。
-方法一写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。
+ 背景
+分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。
+ 数据获取
+从数据库中提取数据。通过Udacity提供的工作区，该工作区与数据库连接。
+ 方法一
+写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。
 
-首先查看ci
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -546,9 +704,10 @@
       
         
           
-          问题Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？
-散列表散列表叫Hash Table，即哈希表或者Hash表。散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列表。
-举
+           问题
+Word有个拼写检查功能，一旦输入的英文单词有错，它就会在单词下方画上红色的波浪线。这个功能是如何实现的？
+ 散列表
+散列表叫Hash Table，即哈希表或者Hash表。散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实是数组的一种扩展，由数组演化而来。如果没有数组，就没有散列
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -700,11 +859,14 @@
       
         
           
-          二分查找底层依赖的是数组随机访问的特性，所有只能用数组实现。数据存储在链表中，通过改造链表，也可以支持类似二分的查找算法。这种改造之后的数据结构叫作跳表。跳表是一种各方面性能都比较优秀的动态数据结构，可以支持快速的插入、删除、查找操作。
+          二分查找底层依赖的是数组随机访问的特性，所有只能用数组实现。
+数据存储在链表中，通过改造链表，也可以支持类似二分的查找算法。这种改造之后的数据结构叫作跳表。
+跳表是一种各方面性能都比较优秀的动态数据结构，可以支持快速的插入、删除、查找操作。
 
 可替代红黑树，代码实现比红黑树简单
 
-问题为什么 Redis
+ 问题
+为什么 R
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -856,8 +1018,11 @@
       
         
           
-          问题通过IP地址可用查找到IP归属地。在百度搜索框里，随便输入一个IP地址，就会看到它的归属地。这个功能是通过维护一个很大的IP地址库来实现的，地址库中包括IP地址范围和归属地的对应关系。问题是，如果有12万条这样的IP区间与归属地的对应关系，如何快速定位出一个IP地址的归属地呢？
-二分查找的变形二
+           问题
+通过IP地址可用查找到IP归属地。在百度搜索框里，随便输入一个IP地址，就会看到它的归属地。
+这个功能是通过维护一个很大的IP地址库来实现的，地址库中包括IP地址范围和归属地的对应关系。
+问题是，如果有12万条这样的IP区间与归属地的对应关系，如何快速定位出一个IP地址的归属地呢？
+ 二分查
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1009,11 +1174,14 @@
       
         
           
-          问题假设有1000万个整数数据，每个数据占8字节，如何设计数据结构和算法，快速判断某个整数是否出现在1000万数据中？（存在多次查找的情况）
+           问题
+假设有1000万个整数数据，每个数据占8字节，如何设计数据结构和算法，快速判断某个整数是否出现在1000万数据中？（存在多次查找的情况）
 
 前提：该功能不要太占用内存空间，最好不超过100MB
 
-二分查找思想栗子生活中的“猜数字大小”游戏，猜的过程中，玩家每猜一次，庄家告诉你是猜大了还是猜小了，
+ 二分查找思想
+ 栗子
+生活中的“猜数字大小”游戏，猜的过程中，玩家每猜一次，庄家告诉你是猜大了
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1166,7 +1334,9 @@
         
           
           主要内容，总结前面的几种算法在各方面的性能。
-如何选择合适的排序算法？总结前面几种主要排序算法的性能差异。一些算法在一些指标上达到最优情况，还有一些算法的复杂度虽然相同，但在实践中的表现却有差异。最理想的排序算法是 O(n logn) 时间、O(1)空间、稳定、最好还具有适应性。当然目前，还没找到这
+ 如何选择合适的排序算法？
+总结前面几种主要排序算法的性能差异。一些算法在一些指标上达到最优情况，还有一些算法的复杂度虽然相同，但在实践中的表现却有差异。
+最理想的排序算法是 O(n logn) 时间、O(1)空间、稳定、最好还具有适应性。当然目前，还没
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1319,7 +1489,8 @@
         
           
           三种时间复杂度是 O(n) 的排序算法：桶排序、计数排序、计数排序。这些排序算法的时间复杂度是线性的，因而也叫线性排序。之所以能做到线性的复杂度，主要原因这三种算法都是非基于比较的排序算法，不涉及元素间的比较操作；但是这几种排序算法对数据的要求很苛刻，因而需要重点掌握它们的使用场景。
-问题如何根据年
+ 问题
+如何根
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1471,10 +1642,12 @@
       
         
           
-          之前说的，冒泡排序、插入排序、选择排序三种算法的时间复杂度都是O(n^2)，很高，适用于小规模数据的排序。而，归并排序和快速排序，适用于大规模的数据排序，更为常用。
-问题归并排序和快速排序都用到了分治思想，借助这个思想可以解决非排序问题。
+          之前说的，冒泡排序、插入排序、选择排序三种算法的时间复杂度都是O(n^2)，很高，适用于小规模数据的排序。
+而，归并排序和快速排序，适用于大规模的数据排序，更为常用。
+ 问题
+归并排序和快速排序都用到了分治思想，借助这个思想可以解决非排序问题。
 
-如何在O(n)的时间复杂度内查找一个无序数组中的第K大元素
+如何在O(n)的时间复杂度内查找一个无序数组中的第K
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1626,164 +1799,16 @@
       
         
           
-          问题思考插入排序和冒泡排序的时间复杂度相同，都是O(n^2)，在实际软件开发里，为什么更倾向于使用插入排序算法而不是冒泡排序算法呢？
-如何分析一个排序算法排序算法的执行效率1 . 最好情况、最坏情况、平均情况时间复杂度分析排序算法的时间复杂度是，要分别给出最好情况、最坏情况、平均情况下的时间复杂度。
+           问题思考
+插入排序和冒泡排序的时间复杂度相同，都是O(n^2)，在实际软件开发里，为什么更倾向于使用插入排序算法而不是冒泡排序算法呢？
+ 如何分析一个排序算法
+ 排序算法的执行效率
+1 . 最好情况、最坏情况、平均情况时间复杂度
+分析排序算法的时间复杂度是，要分别给出最好情况、最坏情况、平均情况下
           ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018-10-30/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2018-10-29/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iPine">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iPine's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018-10-29/" itemprop="url">递归</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-29T15:00:00+08:00">
-                2018-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technique-summary/" itemprop="url" rel="index">
-                    <span itemprop="name">technique summary</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          应用场景很多APP都有推荐用户注册返佣金或奖励的功能。在这个功能中，用户A推荐用户B来注册，用户B又推荐用户C来注册。那么用户C的最终推荐人就为A，用户B的最终推荐人也为A，用户A没有最终推荐人。在数据库表中，可以记录两行数据，其中user_id表示用户ID，referrer_id表示推荐人ID。那
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018-10-29/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1879,7 +1904,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

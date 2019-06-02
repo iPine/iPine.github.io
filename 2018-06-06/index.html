@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,13 +78,13 @@
 
 
 
-<meta name="description" content="为了能对区块的产生有一个更直观的认识，想让最新区块的产生有一个动画的展示效果（从无到有的弹入）。这里用js的animate函数来实现。之前有提到每个区块都用了伪类来添加样式，所以这里还需要对伪类样式作一些修改。 伪类样式修改方案元素的before和after伪类的样式修改方案要实现某个元素的before和after伪类的样式修改，方法有4种。CSS中并不能直接选择某一个元素的:before和:af">
+<meta name="description" content="为了能对区块的产生有一个更直观的认识，想让最新区块的产生有一个动画的展示效果（从无到有的弹入）。这里用js的animate函数来实现。之前有提到每个区块都用了伪类来添加样式，所以这里还需要对伪类样式作一些修改。  伪类样式修改方案  元素的before和after伪类的样式修改方案 要实现某个元素的before和after伪类的样式修改，方法有4种。CSS中并不能直接选择某一个元素的:before">
 <meta name="keywords" content="javascript,css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js实现before :after伪类样式修改">
 <meta property="og:url" content="http://ipine.github.io/2018-06-06/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="为了能对区块的产生有一个更直观的认识，想让最新区块的产生有一个动画的展示效果（从无到有的弹入）。这里用js的animate函数来实现。之前有提到每个区块都用了伪类来添加样式，所以这里还需要对伪类样式作一些修改。 伪类样式修改方案元素的before和after伪类的样式修改方案要实现某个元素的before和after伪类的样式修改，方法有4种。CSS中并不能直接选择某一个元素的:before和:af">
+<meta property="og:description" content="为了能对区块的产生有一个更直观的认识，想让最新区块的产生有一个动画的展示效果（从无到有的弹入）。这里用js的animate函数来实现。之前有提到每个区块都用了伪类来添加样式，所以这里还需要对伪类样式作一些修改。  伪类样式修改方案  元素的before和after伪类的样式修改方案 要实现某个元素的before和after伪类的样式修改，方法有4种。CSS中并不能直接选择某一个元素的:before">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-6-6/72925655.jpg">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-6-6/56336466.jpg">
@@ -96,7 +97,7 @@
 <meta property="og:updated_time" content="2019-02-22T11:27:25.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js实现before :after伪类样式修改">
-<meta name="twitter:description" content="为了能对区块的产生有一个更直观的认识，想让最新区块的产生有一个动画的展示效果（从无到有的弹入）。这里用js的animate函数来实现。之前有提到每个区块都用了伪类来添加样式，所以这里还需要对伪类样式作一些修改。 伪类样式修改方案元素的before和after伪类的样式修改方案要实现某个元素的before和after伪类的样式修改，方法有4种。CSS中并不能直接选择某一个元素的:before和:af">
+<meta name="twitter:description" content="为了能对区块的产生有一个更直观的认识，想让最新区块的产生有一个动画的展示效果（从无到有的弹入）。这里用js的animate函数来实现。之前有提到每个区块都用了伪类来添加样式，所以这里还需要对伪类样式作一些修改。  伪类样式修改方案  元素的before和after伪类的样式修改方案 要实现某个元素的before和after伪类的样式修改，方法有4种。CSS中并不能直接选择某一个元素的:before">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/18-6-6/72925655.jpg">
 
 
@@ -394,40 +395,58 @@
 
       
         <p>为了能对区块的产生有一个更直观的认识，想让最新区块的产生有一个动画的展示效果（从无到有的弹入）。这里用js的<code>animate</code>函数来实现。之前有提到每个区块都用了伪类来添加样式，所以这里还需要对伪类样式作一些修改。</p>
-<h3 id="伪类样式修改方案"><a href="#伪类样式修改方案" class="headerlink" title="伪类样式修改方案"></a>伪类样式修改方案</h3><h4 id="元素的before和after伪类的样式修改方案"><a href="#元素的before和after伪类的样式修改方案" class="headerlink" title="元素的before和after伪类的样式修改方案"></a>元素的before和after伪类的样式修改方案</h4><p>要实现某个元素的before和after伪类的样式修改，方法有4种。CSS中并不能直接选择某一个元素的<code>:before</code>和<code>:after</code>伪类元素。</p>
-<h4 id="举个栗子说明4种方案"><a href="#举个栗子说明4种方案" class="headerlink" title="举个栗子说明4种方案"></a>举个栗子说明4种方案</h4><h4 id="HTML结构"><a href="#HTML结构" class="headerlink" title="HTML结构"></a>HTML结构</h4><pre><code>&lt;div class=&quot;box&quot;&gt;Hello,it&apos;s me.&lt;/div&gt;
-</code></pre><h4 id="CSS样式"><a href="#CSS样式" class="headerlink" title="CSS样式"></a>CSS样式</h4><pre><code>.box:after{
-    content: &apos;&apos;,
+<h3 id="伪类样式修改方案"><a class="markdownIt-Anchor" href="#伪类样式修改方案"></a> 伪类样式修改方案</h3>
+<h4 id="元素的before和after伪类的样式修改方案"><a class="markdownIt-Anchor" href="#元素的before和after伪类的样式修改方案"></a> 元素的before和after伪类的样式修改方案</h4>
+<p>要实现某个元素的before和after伪类的样式修改，方法有4种。CSS中并不能直接选择某一个元素的<code>:before</code>和<code>:after</code>伪类元素。</p>
+<h4 id="举个栗子说明4种方案"><a class="markdownIt-Anchor" href="#举个栗子说明4种方案"></a> 举个栗子说明4种方案</h4>
+<h4 id="html结构"><a class="markdownIt-Anchor" href="#html结构"></a> HTML结构</h4>
+<pre><code>&lt;div class=&quot;box&quot;&gt;Hello,it's me.&lt;/div&gt;
+</code></pre>
+<h4 id="css样式"><a class="markdownIt-Anchor" href="#css样式"></a> CSS样式</h4>
+<pre><code>.box:after{
+    content: '',
     font-weight: bold
 }
-</code></pre><h4 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h4><p>使用js或者jQuery改变，为元素添加类</p>
+</code></pre>
+<h4 id="方案1"><a class="markdownIt-Anchor" href="#方案1"></a> 方案1</h4>
+<p>使用js或者jQuery改变，为元素添加类</p>
 <pre><code>.blue:after{
-    content: &apos;&apos;,
+    content: '',
     background-color: blue
 }
 
-$(&apos;div&apos;).addClass(&apos;blue&apos;);
-</code></pre><h4 id="方案2"><a href="#方案2" class="headerlink" title="方案2"></a>方案2</h4><p>在存在的style文档中动态插入样式</p>
-<pre><code>document.styleSheet[0].addRule(&apos;.box:after&apos;,&apos;background-color:blue&apos;);
-document.styleSheet[0].insertRule(&apos;.box:after{background-color:blue}&apos;,0);
-</code></pre><h4 id="方案3"><a href="#方案3" class="headerlink" title="方案3"></a>方案3</h4><p>创建一份新的样式表，并使用js或jQuery将其插入到head标签中</p>
-<pre><code>var style = document.creatElement(&apos;style&apos;);
+$('div').addClass('blue');
+</code></pre>
+<h4 id="方案2"><a class="markdownIt-Anchor" href="#方案2"></a> 方案2</h4>
+<p>在存在的style文档中动态插入样式</p>
+<pre><code>document.styleSheet[0].addRule('.box:after','background-color:blue');
+document.styleSheet[0].insertRule('.box:after{background-color:blue}',0);
+</code></pre>
+<h4 id="方案3"><a class="markdownIt-Anchor" href="#方案3"></a> 方案3</h4>
+<p>创建一份新的样式表，并使用js或jQuery将其插入到head标签中</p>
+<pre><code>var style = document.creatElement('style');
 document.head.appendChild(style);
 
 sheet = style.sheet;
-sheet.addRule(&apos;.box:after&apos;,&apos;background-color:blue&apos;);
-sheet.insetRule(&apos;.box:after{background-color:blue}&apos;,0);
+sheet.addRule('.box:after','background-color:blue');
+sheet.insetRule('.box:after{background-color:blue}',0);
 &lt;!-- 插入操作 --&gt;
-$(&apos;&lt;style&gt;.box:after{background-color:blue}&lt;/style&gt;&apos;).appendTo(&apos;head&apos;);
-</code></pre><h4 id="方案4"><a href="#方案4" class="headerlink" title="方案4"></a>方案4</h4><p>使用HTML5的<code>data-</code>属性，在属性中使用<code>attr()</code>动态修改<br>先给div标签增加<code>data-attr = &#39;orange&#39;</code>属性，然后用jQuery修改该属性值</p>
+$('&lt;style&gt;.box:after{background-color:blue}&lt;/style&gt;').appendTo('head');
+</code></pre>
+<h4 id="方案4"><a class="markdownIt-Anchor" href="#方案4"></a> 方案4</h4>
+<p>使用HTML5的<code>data-</code>属性，在属性中使用<code>attr()</code>动态修改<br>
+先给div标签增加<code>data-attr = 'orange'</code>属性，然后用jQuery修改该属性值</p>
 <pre><code>.box:after{
-        content: &apos;&apos;,
+        content: '',
         font-weight: bold,
-        data-attr: &apos;orange&apos;
+        data-attr: 'orange'
     }
 
-$(&apos;div&apos;).attr(&apos;data-attr&apos;,&apos;blue&apos;);
-</code></pre><h3 id="我的练习"><a href="#我的练习" class="headerlink" title="我的练习"></a>我的练习</h3><h4 id="最新区块修改伪类样式"><a href="#最新区块修改伪类样式" class="headerlink" title="最新区块修改伪类样式"></a>最新区块修改伪类样式</h4><p>说明：每个区块在展示时，因为有额外的图片和时间信息需要展示，所以借助了伪类<code>before</code>和<code>after</code> <a href="https://ipine.github.io/2018-05-20/">具体实现可Pick我</a>。</p>
+$('div').attr('data-attr','blue');
+</code></pre>
+<h3 id="我的练习"><a class="markdownIt-Anchor" href="#我的练习"></a> 我的练习</h3>
+<h4 id="最新区块修改伪类样式"><a class="markdownIt-Anchor" href="#最新区块修改伪类样式"></a> 最新区块修改伪类样式</h4>
+<p>说明：每个区块在展示时，因为有额外的图片和时间信息需要展示，所以借助了伪类<code>before</code>和<code>after</code> <a href="https://ipine.github.io/2018-05-20/">具体实现可Pick我</a>。</p>
 <ul>
 <li>原来的做法：在CSS中选择要应用伪类的元素，然后设置伪类样式</li>
 </ul>
@@ -445,17 +464,24 @@ $(&apos;div&apos;).attr(&apos;data-attr&apos;,&apos;blue&apos;);
 <blockquote>
 <p>图2 给某个类名应用伪类样式，before类设置小三角图片，after类显示区块产生时间</p>
 </blockquote>
-<h3 id="动态弹入效果"><a href="#动态弹入效果" class="headerlink" title="动态弹入效果"></a>动态弹入效果</h3><p>动态展示的最新区块，其HTML结构与其他区块不同，且还需要改变它的伪类样式。</p>
-<h4 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h4><h5 id="动态添加节点"><a href="#动态添加节点" class="headerlink" title="动态添加节点"></a>动态添加节点</h5><p>首先把最新区块与其他区块分开。最新区块在页面加载完时是没有的，在写入区块信息之前，动态添加最新区块的节点。最新区块的HTML结构相比于其他区块，多了一层大的div.bnew，作用是为了显示链条的背景图，小三角，区块的产生时间(用到了<code>before</code>和<code>after</code>伪类，如图2所示)。因为每次刷新都需要动态添加最新区块的节点，因而在添加前需要把上一次的节点remove掉，所以具体实现如下所示。</p>
+<h3 id="动态弹入效果"><a class="markdownIt-Anchor" href="#动态弹入效果"></a> 动态弹入效果</h3>
+<p>动态展示的最新区块，其HTML结构与其他区块不同，且还需要改变它的伪类样式。</p>
+<h4 id="实现过程"><a class="markdownIt-Anchor" href="#实现过程"></a> 实现过程</h4>
+<h5 id="动态添加节点"><a class="markdownIt-Anchor" href="#动态添加节点"></a> 动态添加节点</h5>
+<p>首先把最新区块与其他区块分开。最新区块在页面加载完时是没有的，在写入区块信息之前，动态添加最新区块的节点。最新区块的HTML结构相比于其他区块，多了一层大的div.bnew，作用是为了显示链条的背景图，小三角，区块的产生时间(用到了<code>before</code>和<code>after</code>伪类，如图2所示)。因为每次刷新都需要动态添加最新区块的节点，因而在添加前需要把上一次的节点remove掉，所以具体实现如下所示。</p>
 <p><img src="http://ipineimg.lijundong.com/18-6-6/12410357.jpg" alt="图3"></p>
 <blockquote>
 <p>图3 jQUery动态操作节点</p>
 </blockquote>
-<h5 id="动画方法"><a href="#动画方法" class="headerlink" title="动画方法"></a>动画方法</h5><p>动画实现用到的是jQuery的animate()方法，语法包含4个参数</p>
+<h5 id="动画方法"><a class="markdownIt-Anchor" href="#动画方法"></a> 动画方法</h5>
+<p>动画实现用到的是jQuery的animate()方法，语法包含4个参数</p>
 <pre><code>$(selector).animate(styles,speed,easing,callback)
-</code></pre><p>参数的具体设置如下：</p>
-<p>1 .首先动态修改<code>style</code>参数。通过<code>marginLeft</code>来控制进入方向；<code>width</code>来控制显示范围；<code>opacity</code>控制初始的隐藏状态；<br>2 .然后填加动画时间为2000ms。</p>
-<p>具体如图4所示。<br><img src="http://ipineimg.lijundong.com/18-6-6/92604390.jpg" alt="图4"></p>
+</code></pre>
+<p>参数的具体设置如下：</p>
+<p>1 .首先动态修改<code>style</code>参数。通过<code>marginLeft</code>来控制进入方向；<code>width</code>来控制显示范围；<code>opacity</code>控制初始的隐藏状态；<br>
+2 .然后填加动画时间为2000ms。</p>
+<p>具体如图4所示。<br>
+<img src="http://ipineimg.lijundong.com/18-6-6/92604390.jpg" alt="图4"></p>
 <blockquote>
 <p>图4 给最新区块<code>div.bnew</code>添加动画</p>
 </blockquote>
@@ -472,7 +498,8 @@ $(&apos;div&apos;).attr(&apos;data-attr&apos;,&apos;blue&apos;);
 <p>若要用到其他的运动轨迹需要添加库，然后引用，这里引用的是<code>easeOutBounce</code>。<a href="https://easings.net/zh-tw" target="_blank" rel="noopener">详细参数引用可Pick我</a></p>
 <p><img src="http://ipineimg.lijundong.com/18-6-6/7066421.jpg" alt="图7"></p>
 <p>4 .最后回调函数<code>callback</code>的设置。为<code>div.bnew</code>添加类名<code>bnewT</code>（伪类样式的设置）放在这里，如图4所示。</p>
-<h4 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h4><p><img src="http://ipineimg.lijundong.com/18-6-6/2353727.jpg" alt="效果图"></p>
+<h4 id="实现效果"><a class="markdownIt-Anchor" href="#实现效果"></a> 实现效果</h4>
+<p><img src="http://ipineimg.lijundong.com/18-6-6/2353727.jpg" alt="效果图"></p>
 
       
     </div>
@@ -614,7 +641,7 @@ $(&apos;div&apos;).attr(&apos;data-attr&apos;,&apos;blue&apos;);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -699,7 +726,7 @@ $(&apos;div&apos;).attr(&apos;data-attr&apos;,&apos;blue&apos;);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#伪类样式修改方案"><span class="nav-text">伪类样式修改方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#元素的before和after伪类的样式修改方案"><span class="nav-text">元素的before和after伪类的样式修改方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举个栗子说明4种方案"><span class="nav-text">举个栗子说明4种方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML结构"><span class="nav-text">HTML结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS样式"><span class="nav-text">CSS样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案1"><span class="nav-text">方案1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案2"><span class="nav-text">方案2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案3"><span class="nav-text">方案3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案4"><span class="nav-text">方案4</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的练习"><span class="nav-text">我的练习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最新区块修改伪类样式"><span class="nav-text">最新区块修改伪类样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态弹入效果"><span class="nav-text">动态弹入效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现过程"><span class="nav-text">实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#动态添加节点"><span class="nav-text">动态添加节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动画方法"><span class="nav-text">动画方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现效果"><span class="nav-text">实现效果</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#伪类样式修改方案"><span class="nav-text"> 伪类样式修改方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#元素的before和after伪类的样式修改方案"><span class="nav-text"> 元素的before和after伪类的样式修改方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举个栗子说明4种方案"><span class="nav-text"> 举个栗子说明4种方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#html结构"><span class="nav-text"> HTML结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#css样式"><span class="nav-text"> CSS样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案1"><span class="nav-text"> 方案1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案2"><span class="nav-text"> 方案2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案3"><span class="nav-text"> 方案3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案4"><span class="nav-text"> 方案4</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的练习"><span class="nav-text"> 我的练习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最新区块修改伪类样式"><span class="nav-text"> 最新区块修改伪类样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态弹入效果"><span class="nav-text"> 动态弹入效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现过程"><span class="nav-text"> 实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#动态添加节点"><span class="nav-text"> 动态添加节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动画方法"><span class="nav-text"> 动画方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现效果"><span class="nav-text"> 实现效果</span></a></li></ol></li></ol></div>
             
 
           </div>

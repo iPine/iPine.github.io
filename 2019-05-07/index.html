@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,18 +78,18 @@
 
 
 
-<meta name="description" content="使用 NumPy 而不是列表的原因NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。在Python本身的列表中，保存的是对象的指针。比如，存一个简单数组[0,1,2]，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为list的元素在系统内存中是 分散的，而NumPy数组存储在一个 均匀连续的内存块中。当遍历所有数组元素时，list需要对内存地址进">
+<meta name="description" content="使用 NumPy 而不是列表的原因 NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。 在Python本身的列表中，保存的是对象的指针。 比如，存一个简单数组[0,1,2]，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为list的元素在系统内存中是 分散的，而NumPy数组存储在一个 均匀连续的内存块中。当遍历所有数组元素时，list需要对内">
 <meta name="keywords" content="python,data_analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NumPy与Pandas的查漏补缺">
 <meta property="og:url" content="http://ipine.github.io/2019-05-07/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="使用 NumPy 而不是列表的原因NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。在Python本身的列表中，保存的是对象的指针。比如，存一个简单数组[0,1,2]，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为list的元素在系统内存中是 分散的，而NumPy数组存储在一个 均匀连续的内存块中。当遍历所有数组元素时，list需要对内存地址进">
+<meta property="og:description" content="使用 NumPy 而不是列表的原因 NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。 在Python本身的列表中，保存的是对象的指针。 比如，存一个简单数组[0,1,2]，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为list的元素在系统内存中是 分散的，而NumPy数组存储在一个 均匀连续的内存块中。当遍历所有数组元素时，list需要对内">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-05-07T06:45:35.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NumPy与Pandas的查漏补缺">
-<meta name="twitter:description" content="使用 NumPy 而不是列表的原因NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。在Python本身的列表中，保存的是对象的指针。比如，存一个简单数组[0,1,2]，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为list的元素在系统内存中是 分散的，而NumPy数组存储在一个 均匀连续的内存块中。当遍历所有数组元素时，list需要对内存地址进">
+<meta name="twitter:description" content="使用 NumPy 而不是列表的原因 NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。 在Python本身的列表中，保存的是对象的指针。 比如，存一个简单数组[0,1,2]，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为list的元素在系统内存中是 分散的，而NumPy数组存储在一个 均匀连续的内存块中。当遍历所有数组元素时，list需要对内">
 
 
 
@@ -384,36 +385,52 @@
       
 
       
-        <h4 id="使用-NumPy-而不是列表的原因"><a href="#使用-NumPy-而不是列表的原因" class="headerlink" title="使用 NumPy 而不是列表的原因"></a>使用 NumPy 而不是列表的原因</h4><p>NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。<br>在Python本身的列表中，保存的是对象的指针。<br>比如，存一个简单数组<code>[0,1,2]</code>，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为<code>list</code>的元素在系统内存中是 <strong>分散</strong>的，而<code>NumPy</code>数组存储在一个 <strong>均匀连续</strong>的内存块中。当遍历所有数组元素时，list需要对内存地址进行查找，NumPy不需要，就节省了计算资源。</p>
+        <h4 id="使用-numpy-而不是列表的原因"><a class="markdownIt-Anchor" href="#使用-numpy-而不是列表的原因"></a> 使用 NumPy 而不是列表的原因</h4>
+<p>NumPy是Scipy，Pandas的基础库，它提供的数据结构是Python数据分析的基础。<br>
+在Python本身的列表中，保存的是对象的指针。<br>
+比如，存一个简单数组<code>[0,1,2]</code>，就需要3个指针和3个整数对象，比较费内存和计算时间。且因为<code>list</code>的元素在系统内存中是 <strong>分散</strong>的，而<code>NumPy</code>数组存储在一个 <strong>均匀连续</strong>的内存块中。当遍历所有数组元素时，list需要对内存地址进行查找，NumPy不需要，就节省了计算资源。</p>
 <ul>
 <li>NumPy 更简洁</li>
 <li>在 NumPy 中读写元素更快</li>
 <li>NumPy使用起来更方便，可以自由使用很多向量和矩阵运算—&gt;可采用多线程的方式，充分利用多核CPU计算资源</li>
 <li>NumPy可以更高效地工作，因为它们的实现更高效。</li>
 </ul>
-<p>这里顺便提一个提升内存和提高计算资源利用率的技巧：<br><strong>避免采用隐式拷贝，而采用就地操作方式</strong>。<br>比如：让 <code>x</code> 的值为原来的两倍，直接写成 <code>x *= 2</code>，而不要写成 <code>y = x*2</code></p>
-<h4 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h4><p>NumPy中的<code>ndarray</code>对象数组的维数称为<code>秩rank</code>，一维数组的秩为1，二维数组的秩为2，以此类推。每一个线性的数组称为一个<code>轴axes</code>，秩描述的就是轴的数量。</p>
-<h5 id="初始化NumPy-数组"><a href="#初始化NumPy-数组" class="headerlink" title="初始化NumPy 数组"></a>初始化NumPy 数组</h5><p>若只是想创建一个空数组：</p>
+<p>这里顺便提一个提升内存和提高计算资源利用率的技巧：<br>
+<strong>避免采用隐式拷贝，而采用就地操作方式</strong>。<br>
+比如：让 <code>x</code> 的值为原来的两倍，直接写成 <code>x *= 2</code>，而不要写成 <code>y = x*2</code></p>
+<h4 id="numpy"><a class="markdownIt-Anchor" href="#numpy"></a> NumPy</h4>
+<p>NumPy中的<code>ndarray</code>对象数组的维数称为<code>秩rank</code>，一维数组的秩为1，二维数组的秩为2，以此类推。每一个线性的数组称为一个<code>轴axes</code>，秩描述的就是轴的数量。</p>
+<h5 id="初始化numpy-数组"><a class="markdownIt-Anchor" href="#初始化numpy-数组"></a> 初始化NumPy 数组</h5>
+<p>若只是想创建一个空数组：</p>
 <pre><code>import numpy
 numpy.array([])
-</code></pre><p>若想初始化一个数组，以下几种方式：</p>
+</code></pre>
+<p>若想初始化一个数组，以下几种方式：</p>
 <pre><code>numpy.zeros(shape=(4,2))
 numpy.ones(3)
 numpy.empty(shape=(0,0))
-</code></pre><p>其他初始化 NumPy 数组的方法可<a href="https://docs.scipy.org/doc/numpy/reference/routines.array-creation.html" target="_blank" rel="noopener">参考这里</a></p>
-<h5 id="查看数组的大小"><a href="#查看数组的大小" class="headerlink" title="查看数组的大小"></a>查看数组的大小</h5><p>用<code>.shape</code>，它返回一个元组，元组元素的数量表示数组的秩（维度），元组元素的值表示在该维度上数组的元素个数。</p>
-<h5 id="查看元素的属性"><a href="#查看元素的属性" class="headerlink" title="查看元素的属性"></a>查看元素的属性</h5><p><code>.dtype</code>，可利用dtype来创建 <strong>结构数组</strong>：</p>
+</code></pre>
+<p>其他初始化 NumPy 数组的方法可<a href="https://docs.scipy.org/doc/numpy/reference/routines.array-creation.html" target="_blank" rel="noopener">参考这里</a></p>
+<h5 id="查看数组的大小"><a class="markdownIt-Anchor" href="#查看数组的大小"></a> 查看数组的大小</h5>
+<p>用<code>.shape</code>，它返回一个元组，元组元素的数量表示数组的秩（维度），元组元素的值表示在该维度上数组的元素个数。</p>
+<h5 id="查看元素的属性"><a class="markdownIt-Anchor" href="#查看元素的属性"></a> 查看元素的属性</h5>
+<p><code>.dtype</code>，可利用dtype来创建 <strong>结构数组</strong>：</p>
 <pre><code>import numpy as np
-persontype = np.dtype({ &apos;names&apos;: [&apos;name&apos;,&apos;site&apos;], &apos;formats&apos;: [&apos;S32&apos;,&apos;S32&apos;] })
-person = np.array([(&apos;ipine&apos;,&apos;https://ipine.me/&apos;)], dtype=persontype)
-name = person[:][&apos;name&apos;]
-print(name)  # [b&apos;ipine&apos;]
-</code></pre><h5 id="访问数组元素"><a href="#访问数组元素" class="headerlink" title="访问数组元素"></a>访问数组元素</h5><ul>
+persontype = np.dtype({ 'names': ['name','site'], 'formats': ['S32','S32'] })
+person = np.array([('ipine','https://ipine.me/')], dtype=persontype)
+name = person[:]['name']
+print(name)  # [b'ipine']
+</code></pre>
+<h5 id="访问数组元素"><a class="markdownIt-Anchor" href="#访问数组元素"></a> 访问数组元素</h5>
+<ul>
 <li>对于一维数组，可以通过三种方式，一是用<code>索引</code>；二是用<code>切片</code>，切片要注意<code>含前不含后</code>原则；三是利用<code>循环遍历</code>数组的每个元素。</li>
 <li>对于二维数组，有三种情况，一是查看具体的某一个元素，使用行列号，如<code>a[1,2]</code>；二是查看某一行的元素，如<code>a[0,:]</code>；三是查看某一列的元素，如<code>a[:,0]</code></li>
 </ul>
-<h5 id="Universal-Function运算"><a href="#Universal-Function运算" class="headerlink" title="Universal Function运算"></a>Universal Function运算</h5><p>NumPy方便快捷的原因就是它提供了很多ufunc函数，这些函数都是采用C语言实现，计算速度非常快。</p>
-<p>1 . 统计函数<br>在数据分析中，理解数据，查看数据的统计信息至关重要。通过对数据进行描述性统计分析，能够对数据有更清晰的认识。<br>一些常见的统计函数如下：</p>
+<h5 id="universal-function运算"><a class="markdownIt-Anchor" href="#universal-function运算"></a> Universal Function运算</h5>
+<p>NumPy方便快捷的原因就是它提供了很多ufunc函数，这些函数都是采用C语言实现，计算速度非常快。</p>
+<p>1 . 统计函数<br>
+在数据分析中，理解数据，查看数据的统计信息至关重要。通过对数据进行描述性统计分析，能够对数据有更清晰的认识。<br>
+一些常见的统计函数如下：</p>
 <ul>
 <li>计算数组或者矩阵中的最大值，用<code>amax()</code>；最小值用<code>amin()</code>；第二个可选参数指定轴，<code>0</code>代表<code>行</code>，<code>1</code>代表<code>列</code>；即统计行或者列的最值。</li>
 <li>统计最大值与最小值之差，用<code>ptp()</code>；第二个可选参数指定轴，<code>0</code>代表<code>行</code>，<code>1</code>代表<code>列</code>；即统计行或者列的最值之差。</li>
@@ -422,14 +439,20 @@ print(name)  # [b&apos;ipine&apos;]
 <li>统计数组中的加权平均值，用<code>average(arr, weights)</code>，传入一个权重设置参数。</li>
 <li>统计数组中的标准差，用<code>std()</code>，方差用<code>var()</code>；方差是每个数值与平均值之差的平方和的均值，标准差是方差的算术平方根，表示的是一组数据的离散程度。</li>
 </ul>
-<p><strong>一个栗子</strong>：计算列表分位数<br>分位数对于数据集的summary是必不可少的，临近数据集的最小值和最大值。包括第25、50和75百分位数，它们也被称为第一分位数、中位数和第三分位数。这意味着总共需要5个数字来总结整个数据集：最小值、最大值、中值和两个四分位数（第一和第三）。<br>假设有25个元素，那么第一个四分位为：<code>0.25*25 = 6.25</code>，四舍五入到7；即第一分位数就是列表排序后的第7个元素</p>
+<p><strong>一个栗子</strong>：计算列表分位数<br>
+分位数对于数据集的summary是必不可少的，临近数据集的最小值和最大值。包括第25、50和75百分位数，它们也被称为第一分位数、中位数和第三分位数。这意味着总共需要5个数字来总结整个数据集：最小值、最大值、中值和两个四分位数（第一和第三）。<br>
+假设有25个元素，那么第一个四分位为：<code>0.25*25 = 6.25</code>，四舍五入到7；即第一分位数就是列表排序后的第7个元素</p>
 <pre><code>import numpy as np
 a = np.array([1,2,3,4,5])
 p = np.percentile(a, 50) # 求中位数
-</code></pre><p>2 . 创建连续数组<br>使用 <code>arange()</code> 和 <code>linspace()</code>可以很方便地创建连续数组：</p>
+</code></pre>
+<p>2 . 创建连续数组<br>
+使用 <code>arange()</code> 和 <code>linspace()</code>可以很方便地创建连续数组：</p>
 <pre><code>x1 = np.arange(1,11,2)  # 不包含终值，第三个参数指定步长
 x2 = np.linspace(1,9,5) # 包含终值，第三个参数指定元素个数；在指定间隔返回均匀间隔的数字
-</code></pre><p>3 . 算术运算<br>包括<code>加add</code>，<code>减subtract</code>，<code>乘multiply</code>，<code>除divide</code>，求<code>幂power</code>，<code>取余remainder/mod</code>等</p>
+</code></pre>
+<p>3 . 算术运算<br>
+包括<code>加add</code>，<code>减subtract</code>，<code>乘multiply</code>，<code>除divide</code>，求<code>幂power</code>，<code>取余remainder/mod</code>等</p>
 <pre><code>x1 = np.arange(1,11,2)
 x2 = np.linspace(1,9,5)
 print(np.add(x1, x2))
@@ -438,9 +461,12 @@ print(np.multiply(x1, x2))
 print(np.divide(x1, x2))
 print(np.power(x1, x2))
 print(np.remainder(x1, x2))
-</code></pre><p>4 . 排序<br>排序算法使用频率高，在数据分析中也常用。在 NumPy中，实现排序算法非常容易。<br>只需使用 <code>sort()</code>这一条语句：</p>
+</code></pre>
+<p>4 . 排序<br>
+排序算法使用频率高，在数据分析中也常用。在 NumPy中，实现排序算法非常容易。<br>
+只需使用 <code>sort()</code>这一条语句：</p>
 <blockquote>
-<p>语法说明：sort(a, axis = -1, kind=’quicksort’, order=None)；</p>
+<p>语法说明：sort(a, axis = -1, kind=‘quicksort’, order=None)；</p>
 </blockquote>
 <p><code>axis</code>默认值为-1，沿着数组的最后一个轴进行排序，为0表示按列排，为1表示按行排，若为<code>None</code>则是采用扁平化方式排序。默认使用<code>快排quicksort</code>，<code>kind</code>的值还可以为<code>合并排序mergesort</code>，<code>堆排序heapsort</code>。对于结构化的数组，<code>order</code>字段可以指定按照某个字段进行排序。</p>
 <pre><code>a = np.array([[4,3,2],[2,4,1]])
@@ -448,47 +474,66 @@ print(np.sort(a))
 print(np.sort(a, axis=None))
 print(np.sort(a, axis=0))  
 print(np.sort(a, axis=1))  
-</code></pre><h4 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h4><p>Pandas的使用频率非常高，是数据分析的利器。<br>一方面，Pandas提供的<code>DataFrame</code>与<code>json</code>契合度高，且相比于<code>NumPy</code>的二维数组，<code>DataFrame</code>更利于表示像<code>Excel</code>中的数据，每一列都可以是不同的类型；<br>另一方面，当数据清理工作不是特别复杂时，几句Pandas代码就可以对数据进行规整。</p>
-<h5 id="数据结构Series和DataFrame"><a href="#数据结构Series和DataFrame" class="headerlink" title="数据结构Series和DataFrame"></a>数据结构Series和DataFrame</h5><p>Pandas的一维数组<code>series</code>比<code>NumPy</code>的一维数组<code>array</code>功能更多，<code>series</code>是建立在<code>NumPy</code>基础之上的。 它们的主要区别在于series有索引，可以在定义时使用<code>index</code>来指定。<br><strong>栗子</strong>，定义：</p>
+</code></pre>
+<h4 id="pandas"><a class="markdownIt-Anchor" href="#pandas"></a> Pandas</h4>
+<p>Pandas的使用频率非常高，是数据分析的利器。<br>
+一方面，Pandas提供的<code>DataFrame</code>与<code>json</code>契合度高，且相比于<code>NumPy</code>的二维数组，<code>DataFrame</code>更利于表示像<code>Excel</code>中的数据，每一列都可以是不同的类型；<br>
+另一方面，当数据清理工作不是特别复杂时，几句Pandas代码就可以对数据进行规整。</p>
+<h5 id="数据结构series和dataframe"><a class="markdownIt-Anchor" href="#数据结构series和dataframe"></a> 数据结构Series和DataFrame</h5>
+<p>Pandas的一维数组<code>series</code>比<code>NumPy</code>的一维数组<code>array</code>功能更多，<code>series</code>是建立在<code>NumPy</code>基础之上的。 它们的主要区别在于series有索引，可以在定义时使用<code>index</code>来指定。<br>
+<strong>栗子</strong>，定义：</p>
 <pre><code>import pandas as pd
-data1 = pd.Series(data=[1,2,3,4], index=[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;])
+data1 = pd.Series(data=[1,2,3,4], index=['a', 'b', 'c', 'd'])
 # 或者
-d = {&apos;a&apos;:1, &apos;b&apos;:2, &apos;c&apos;:3, &apos;d&apos;:4}
+d = {'a':1, 'b':2, 'c':3, 'd':4}
 data2 = pd.Series(d)
-</code></pre><p>NumPy数组中每个元素都是同一个类型，虽然在科学计算中很快，但是不利于表示像excel中的数据。<br>Pandas的二维数组DataFrame，类似于数据库表， 具有一维数组series中的<code>index（行）索引</code>功能，此外也有<code>columns（列）索引</code>值。<br><strong>栗子</strong>，定义：</p>
-<pre><code>d = {&apos;Chinese&apos;: [68, 88, 90], &apos;Math&apos;: [70, 66, 89]}
+</code></pre>
+<p>NumPy数组中每个元素都是同一个类型，虽然在科学计算中很快，但是不利于表示像excel中的数据。<br>
+Pandas的二维数组DataFrame，类似于数据库表， 具有一维数组series中的<code>index（行）索引</code>功能，此外也有<code>columns（列）索引</code>值。<br>
+<strong>栗子</strong>，定义：</p>
+<pre><code>d = {'Chinese': [68, 88, 90], 'Math': [70, 66, 89]}
 df1 = pd.DataFrame(d)
 #或者
-df2 = pd.DataFrame(d, index=[&apos;ipine&apos;,&apos;Alex&apos;,&apos;Bob&apos;], columns=[&apos;Chinese&apos;, &apos;Math&apos;])
-</code></pre><p>直接在数据框中传入定义的字典，产生的结果与定义的字典顺序不一致，因为字典是无序的数据结构。<br>可以在将字典传入数据框之前，定义一个有序字典，使字典输出顺序与定义时一样：</p>
+df2 = pd.DataFrame(d, index=['ipine','Alex','Bob'], columns=['Chinese', 'Math'])
+</code></pre>
+<p>直接在数据框中传入定义的字典，产生的结果与定义的字典顺序不一致，因为字典是无序的数据结构。<br>
+可以在将字典传入数据框之前，定义一个有序字典，使字典输出顺序与定义时一样：</p>
 <pre><code>from collections import OrderedDict
 orderedd = OrderedDict(d)
 df3 = pd.DataFrame(orderedd)
-</code></pre><h5 id="查看值"><a href="#查看值" class="headerlink" title="查看值"></a>查看值</h5><p>两种方式，根据位置获取值，<code>iloc</code>，根据索引获取值，<code>loc</code>：</p>
+</code></pre>
+<h5 id="查看值"><a class="markdownIt-Anchor" href="#查看值"></a> 查看值</h5>
+<p>两种方式，根据位置获取值，<code>iloc</code>，根据索引获取值，<code>loc</code>：</p>
 <pre><code># 对于一维数组data2
 data2.iloc[0] # 1
-data2.iloc[&apos;a&apos;]  # 1
+data2.iloc['a']  # 1
 
 # 对于二维数组 df3
 df3.iloc[0,1] #查询第1行第2列的元素，70
 df3.iloc[0,:] #查询第1行所有元素，68,70
 df3.iloc[:,1] #查询第1列所有元素，68,88,90
 
-df3.loc[0,&apos;Math&apos;] #查询第1行第2列的元素，70
+df3.loc[0,'Math'] #查询第1行第2列的元素，70
 df3.loc[0,:] #查询第1行所有元素，这里index没有指定所以默认为从0开始的数字，68,70
 
-df3.loc[:,&apos;Math&apos;] #查询Math列所有元素，68,88,90
+df3.loc[:,'Math'] #查询Math列所有元素，68,88,90
 # 简单方法
-df3[&apos;Math&apos;]
-</code></pre><h5 id="数据框DataFrame还涉及到复杂查询"><a href="#数据框DataFrame还涉及到复杂查询" class="headerlink" title="数据框DataFrame还涉及到复杂查询"></a>数据框DataFrame还涉及到复杂查询</h5><p>利用切片功能和条件判断</p>
+df3['Math']
+</code></pre>
+<h5 id="数据框dataframe还涉及到复杂查询"><a class="markdownIt-Anchor" href="#数据框dataframe还涉及到复杂查询"></a> 数据框DataFrame还涉及到复杂查询</h5>
+<p>利用切片功能和条件判断</p>
 <p>通过列表选择某几列的数据</p>
-<pre><code>df3[[&apos;Chinese&apos;,&apos;Math&apos;]]
-</code></pre><p>通过切片功能，获取指定范围的列</p>
-<pre><code>df3.loc[:, &apos;Chinese&apos;:]
-</code></pre><p>通过条件判断筛选，首先构建查询条件(得到布尔值)，然后利用布尔索引筛选：</p>
-<pre><code>querydf = df3.loc[:, &apos;Math&apos;] &gt;= 70
-df3.loc[querydf, [&apos;Math&apos;]] # 70 89
-</code></pre><h5 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h5><p>Pandas也有许多统计函数可调用。常用的包括但不限于：</p>
+<pre><code>df3[['Chinese','Math']]
+</code></pre>
+<p>通过切片功能，获取指定范围的列</p>
+<pre><code>df3.loc[:, 'Chinese':]
+</code></pre>
+<p>通过条件判断筛选，首先构建查询条件(得到布尔值)，然后利用布尔索引筛选：</p>
+<pre><code>querydf = df3.loc[:, 'Math'] &gt;= 70
+df3.loc[querydf, ['Math']] # 70 89
+</code></pre>
+<h5 id="数据统计"><a class="markdownIt-Anchor" href="#数据统计"></a> 数据统计</h5>
+<p>Pandas也有许多统计函数可调用。常用的包括但不限于：</p>
 <ul>
 <li>计算数据量的<code>count()</code>，空值和<code>NaN</code>不计</li>
 <li>查看数据的前几行或后几行，<code>head()</code>和 <code>tail()</code></li>
@@ -503,44 +548,69 @@ df3.loc[querydf, [&apos;Math&apos;]] # 70 89
 <li>统计最小最大值的索引值，<code>idxmin()</code> 和 <code>idxmax()</code></li>
 </ul>
 <p>如果是数据框，Pandas会自动按列计算。</p>
-<h5 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h5><ul>
-<li>删除列或者行：<code>df.drop(columns=[&#39;Chinese&#39;])</code></li>
-<li>重命名列：<code>df.rename(columns={&#39;Chinese&#39;: &#39;Yuwen&#39;}, inplace=True)</code></li>
+<h5 id="数据清洗"><a class="markdownIt-Anchor" href="#数据清洗"></a> 数据清洗</h5>
+<ul>
+<li>删除列或者行：<code>df.drop(columns=['Chinese'])</code></li>
+<li>重命名列：<code>df.rename(columns={'Chinese': 'Yuwen'}, inplace=True)</code></li>
 <li>去重：<code>df.drop_duplicates()</code></li>
-<li>格式问题,常见的包括：<br>1 . 更改数据列格式，<code>df[&#39;Chinese&#39;].astype(&#39;str&#39;)</code><br>2 . 数据间空格的删除，转成<code>str</code>类型的格式，便于操作，<code>df[&#39;Chinese&#39;] = df[&#39;Chinese&#39;].map(str.strip)</code><br>3 . 删除特殊符号，同样使用 <code>strip</code>函数；例如<code>Math</code>字段有<code>#</code>，删除它，<code>df[&#39;Math&#39;] = df[&#39;Math&#39;].str.strip(&#39;#&#39;)</code><br>4 . 格式转换，经常需要将字段名统一大小写，可直接使用<code>upper()</code>，<code>lower()</code>，<code>title()</code>等函数；例如，转成大写，<code>df.columns = df.columns.str.upper()</code><br>5 . 查找空值和对空值的处理，经常有字段存在<code>空值</code>，通过<code>isnull()</code>函数查找空值，<code>fillna(value)</code>函数将空值替换成其他值，<code>dropna()</code>函数删除空值；例如，<code>df.isnull()</code> 查找整个表的空值；<code>df.isnull().any()</code>查看哪些列存在空值</li>
+<li>格式问题,常见的包括：<br>
+1 . 更改数据列格式，<code>df['Chinese'].astype('str')</code><br>
+2 . 数据间空格的删除，转成<code>str</code>类型的格式，便于操作，<code>df['Chinese'] = df['Chinese'].map(str.strip)</code><br>
+3 . 删除特殊符号，同样使用 <code>strip</code>函数；例如<code>Math</code>字段有<code>#</code>，删除它，<code>df['Math'] = df['Math'].str.strip('#')</code><br>
+4 . 格式转换，经常需要将字段名统一大小写，可直接使用<code>upper()</code>，<code>lower()</code>，<code>title()</code>等函数；例如，转成大写，<code>df.columns = df.columns.str.upper()</code><br>
+5 . 查找空值和对空值的处理，经常有字段存在<code>空值</code>，通过<code>isnull()</code>函数查找空值，<code>fillna(value)</code>函数将空值替换成其他值，<code>dropna()</code>函数删除空值；例如，<code>df.isnull()</code> 查找整个表的空值；<code>df.isnull().any()</code>查看哪些列存在空值</li>
 </ul>
 <blockquote>
-<p>注：在pandas更新到最新版本0.24.2时，慎用<code>fillna()</code>填充缺失值，尤其是填充一些字符串时，虽然这一列不是<code>dtype=&#39;category&#39;</code>，但是也可能会出现<em>ValueError: fill value must be in categories</em>的问题。如果项目在pandas的0.24.2版本中，报这个错误，最简单的方法是将<code>fillna()</code>更换为<code>inplace()</code>函数。</p>
+<p>注：在pandas更新到最新版本0.24.2时，慎用<code>fillna()</code>填充缺失值，尤其是填充一些字符串时，虽然这一列不是<code>dtype='category'</code>，但是也可能会出现<em>ValueError: fill value must be in categories</em>的问题。如果项目在pandas的0.24.2版本中，报这个错误，最简单的方法是将<code>fillna()</code>更换为<code>inplace()</code>函数。</p>
 </blockquote>
-<h5 id="应用apply函数"><a href="#应用apply函数" class="headerlink" title="应用apply函数"></a>应用apply函数</h5><p>若想将字段名格式统一，也可以应用apply函数：</p>
-<pre><code>df[&apos;name&apos;] = df[&apos;name&apos;].apply(str.upper)
-</code></pre><p>当然，最常用的是定义一个函数，在apply中使用，例如：</p>
+<h5 id="应用apply函数"><a class="markdownIt-Anchor" href="#应用apply函数"></a> 应用apply函数</h5>
+<p>若想将字段名格式统一，也可以应用apply函数：</p>
+<pre><code>df['name'] = df['name'].apply(str.upper)
+</code></pre>
+<p>当然，最常用的是定义一个函数，在apply中使用，例如：</p>
 <pre><code>def double(x):    
     return x*2
-df[&apos;Math&apos;] = df[&apos;Math&apos;].apply(double)
-</code></pre><p>还可以定义更复杂的函数，比如，在df中新增1列new，为语文和数学成绩之和的n倍：</p>
+df['Math'] = df['Math'].apply(double)
+</code></pre>
+<p>还可以定义更复杂的函数，比如，在df中新增1列new，为语文和数学成绩之和的n倍：</p>
 <pre><code>def plusMathChinese(df,n):    
-    df[&apos;new&apos;] = (df[&apos;Chinese&apos;] + df[&apos;Math&apos;]) * n    
+    df['new'] = (df['Chinese'] + df['Math']) * n    
     return df
 df = df.apply(plusMathChinese, axis=1, args=(2,)) #axis=1指明按照列为轴进行操作；args是传递参数
-</code></pre><h5 id="数据表的合并"><a href="#数据表的合并" class="headerlink" title="数据表的合并"></a>数据表的合并</h5><p>两个<code>DataFrame</code>数据框的合并，就像两张数据表的合并，使用的是 <code>merge()</code>函数；<br>与SQL中表连接类似，包含以下5种形式：<br>1 . 按指定列进行连接</p>
-<pre><code>df3 = pd.merge(df1, df2, on=&apos;name&apos;)
-</code></pre><p>2 . inner内连接，求两个数据框的交集，是合并时的默认选择</p>
-<pre><code>df3 = pd.merge(df1, df2, how=&apos;inner&apos;)
-</code></pre><p>3 . 左连接，以第一个数据框为主</p>
-<pre><code>df3 = pd.merge(df1, df2, on=&apos;left&apos;)
-</code></pre><p>4 . 右连接，以第二个数据框为主</p>
-<pre><code>df3 = pd.merge(df1, df2, on=&apos;right&apos;)
-</code></pre><p>5 . 外连接，求两个数据框的并集</p>
-<pre><code>df3 = pd.merge(df1, df2, on=&apos;outer&apos;)
-</code></pre><h4 id="用SQL方式打开Pandas"><a href="#用SQL方式打开Pandas" class="headerlink" title="用SQL方式打开Pandas"></a>用SQL方式打开Pandas</h4><p>在Python中可以直接用SQL语句来操作Pandas。<br>利用工具 <code>pandasql</code>，它的主要函数是 <code>sqldf</code>，该函数包含两个参数：<br>一是，SQL查询语句。<br>二是，一组环境变量 <code>globals()</code> 或 <code>locals()</code>。<br><strong>举个栗子</strong>：<br>先在anaconda环境下安装pandasql包：<code>conda install pandasql</code>，然后在jupyter notebook上运行：</p>
+</code></pre>
+<h5 id="数据表的合并"><a class="markdownIt-Anchor" href="#数据表的合并"></a> 数据表的合并</h5>
+<p>两个<code>DataFrame</code>数据框的合并，就像两张数据表的合并，使用的是 <code>merge()</code>函数；<br>
+与SQL中表连接类似，包含以下5种形式：<br>
+1 . 按指定列进行连接</p>
+<pre><code>df3 = pd.merge(df1, df2, on='name')
+</code></pre>
+<p>2 . inner内连接，求两个数据框的交集，是合并时的默认选择</p>
+<pre><code>df3 = pd.merge(df1, df2, how='inner')
+</code></pre>
+<p>3 . 左连接，以第一个数据框为主</p>
+<pre><code>df3 = pd.merge(df1, df2, on='left')
+</code></pre>
+<p>4 . 右连接，以第二个数据框为主</p>
+<pre><code>df3 = pd.merge(df1, df2, on='right')
+</code></pre>
+<p>5 . 外连接，求两个数据框的并集</p>
+<pre><code>df3 = pd.merge(df1, df2, on='outer')
+</code></pre>
+<h4 id="用sql方式打开pandas"><a class="markdownIt-Anchor" href="#用sql方式打开pandas"></a> 用SQL方式打开Pandas</h4>
+<p>在Python中可以直接用SQL语句来操作Pandas。<br>
+利用工具 <code>pandasql</code>，它的主要函数是 <code>sqldf</code>，该函数包含两个参数：<br>
+一是，SQL查询语句。<br>
+二是，一组环境变量 <code>globals()</code> 或 <code>locals()</code>。<br>
+<strong>举个栗子</strong>：<br>
+先在anaconda环境下安装pandasql包：<code>conda install pandasql</code>，然后在jupyter notebook上运行：</p>
 <pre><code>import pandas as pd
 from pandasql import sqldf, load_meat, load_births
-df1 = pd.DataFrame({&apos;name&apos;:[&apos;ZhangFei&apos;, &apos;GuanYu&apos;, &apos;a&apos;, &apos;b&apos;, &apos;c&apos;], &apos;data1&apos;:range(5)})
-sql = &quot;select * from df1 where name =&apos;ZhangFei&apos;&quot;
+df1 = pd.DataFrame({'name':['ZhangFei', 'GuanYu', 'a', 'b', 'c'], 'data1':range(5)})
+sql = &quot;select * from df1 where name ='ZhangFei'&quot;
 pysqldf = lambda sql: sqldf(sql, globals())
 print(pysqldf(sql)) # 查询到`ZhangFei`的data1为0
 </code></pre>
+
       
     </div>
     
@@ -681,7 +751,7 @@ print(pysqldf(sql)) # 查询到`ZhangFei`的data1为0
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -766,7 +836,7 @@ print(pysqldf(sql)) # 查询到`ZhangFei`的data1为0
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-NumPy-而不是列表的原因"><span class="nav-text">使用 NumPy 而不是列表的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NumPy"><span class="nav-text">NumPy</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#初始化NumPy-数组"><span class="nav-text">初始化NumPy 数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看数组的大小"><span class="nav-text">查看数组的大小</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看元素的属性"><span class="nav-text">查看元素的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#访问数组元素"><span class="nav-text">访问数组元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Universal-Function运算"><span class="nav-text">Universal Function运算</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pandas"><span class="nav-text">Pandas</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据结构Series和DataFrame"><span class="nav-text">数据结构Series和DataFrame</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看值"><span class="nav-text">查看值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据框DataFrame还涉及到复杂查询"><span class="nav-text">数据框DataFrame还涉及到复杂查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据统计"><span class="nav-text">数据统计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据清洗"><span class="nav-text">数据清洗</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用apply函数"><span class="nav-text">应用apply函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据表的合并"><span class="nav-text">数据表的合并</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用SQL方式打开Pandas"><span class="nav-text">用SQL方式打开Pandas</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-numpy-而不是列表的原因"><span class="nav-text"> 使用 NumPy 而不是列表的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#numpy"><span class="nav-text"> NumPy</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#初始化numpy-数组"><span class="nav-text"> 初始化NumPy 数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看数组的大小"><span class="nav-text"> 查看数组的大小</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看元素的属性"><span class="nav-text"> 查看元素的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#访问数组元素"><span class="nav-text"> 访问数组元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#universal-function运算"><span class="nav-text"> Universal Function运算</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pandas"><span class="nav-text"> Pandas</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据结构series和dataframe"><span class="nav-text"> 数据结构Series和DataFrame</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看值"><span class="nav-text"> 查看值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据框dataframe还涉及到复杂查询"><span class="nav-text"> 数据框DataFrame还涉及到复杂查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据统计"><span class="nav-text"> 数据统计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据清洗"><span class="nav-text"> 数据清洗</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用apply函数"><span class="nav-text"> 应用apply函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据表的合并"><span class="nav-text"> 数据表的合并</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用sql方式打开pandas"><span class="nav-text"> 用SQL方式打开Pandas</span></a></li></ol></div>
             
 
           </div>

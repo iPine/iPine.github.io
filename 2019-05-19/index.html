@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,13 +78,13 @@
 
 
 
-<meta name="description" content="之前对淘宝婴儿用品销售数据集做了基本的业务指标探索性分析。这里还是以这个数据集为例，进行后续的相关性探索。通过分析两个问题，熟悉机器学习算法建模流程。 两个预测问题： 根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品； 根据父母的购买行为预测孩子的年龄。  分析流程： 提出问题 理解数据  包括：采集数据，导入数据，查看数据集信息，理解字段含义，查看是否有缺失值  预处理/数据清洗  包括">
+<meta name="description" content="之前对淘宝婴儿用品销售数据集做了基本的业务指标探索性分析。这里还是以这个数据集为例，进行后续的相关性探索。通过分析两个问题，熟悉机器学习算法建模流程。  两个预测问题：  根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品； 根据父母的购买行为预测孩子的年龄。   分析流程：  提出问题 理解数据  包括：采集数据，导入数据，查看数据集信息，理解字段含义，查看是否有缺失值  预处理/数据清洗">
 <meta name="keywords" content="python,data_analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="淘宝婴儿用品销售数据分析之预测">
 <meta property="og:url" content="http://ipine.github.io/2019-05-19/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="之前对淘宝婴儿用品销售数据集做了基本的业务指标探索性分析。这里还是以这个数据集为例，进行后续的相关性探索。通过分析两个问题，熟悉机器学习算法建模流程。 两个预测问题： 根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品； 根据父母的购买行为预测孩子的年龄。  分析流程： 提出问题 理解数据  包括：采集数据，导入数据，查看数据集信息，理解字段含义，查看是否有缺失值  预处理/数据清洗  包括">
+<meta property="og:description" content="之前对淘宝婴儿用品销售数据集做了基本的业务指标探索性分析。这里还是以这个数据集为例，进行后续的相关性探索。通过分析两个问题，熟悉机器学习算法建模流程。  两个预测问题：  根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品； 根据父母的购买行为预测孩子的年龄。   分析流程：  提出问题 理解数据  包括：采集数据，导入数据，查看数据集信息，理解字段含义，查看是否有缺失值  预处理/数据清洗">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/pred_1.png">
 <meta property="og:image" content="http://ipineimg.lijundong.com/pred_5.png">
@@ -93,7 +94,7 @@
 <meta property="og:updated_time" content="2019-05-19T12:48:18.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="淘宝婴儿用品销售数据分析之预测">
-<meta name="twitter:description" content="之前对淘宝婴儿用品销售数据集做了基本的业务指标探索性分析。这里还是以这个数据集为例，进行后续的相关性探索。通过分析两个问题，熟悉机器学习算法建模流程。 两个预测问题： 根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品； 根据父母的购买行为预测孩子的年龄。  分析流程： 提出问题 理解数据  包括：采集数据，导入数据，查看数据集信息，理解字段含义，查看是否有缺失值  预处理/数据清洗  包括">
+<meta name="twitter:description" content="之前对淘宝婴儿用品销售数据集做了基本的业务指标探索性分析。这里还是以这个数据集为例，进行后续的相关性探索。通过分析两个问题，熟悉机器学习算法建模流程。  两个预测问题：  根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品； 根据父母的购买行为预测孩子的年龄。   分析流程：  提出问题 理解数据  包括：采集数据，导入数据，查看数据集信息，理解字段含义，查看是否有缺失值  预处理/数据清洗">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/pred_1.png">
 
 
@@ -391,11 +392,13 @@
 
       
         <p>之前对<a href="https://zhuanlan.zhihu.com/p/65241841" target="_blank" rel="noopener">淘宝婴儿用品销售数据集</a>做了基本的业务指标探索性分析。这里还是以这个数据集为例，进行后续的相关性探索。通过分析两个问题，熟悉机器学习算法建模流程。</p>
-<h3 id="两个预测问题："><a href="#两个预测问题：" class="headerlink" title="两个预测问题："></a>两个预测问题：</h3><ol>
+<h3 id="两个预测问题"><a class="markdownIt-Anchor" href="#两个预测问题"></a> 两个预测问题：</h3>
+<ol>
 <li>根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品；</li>
 <li>根据父母的购买行为预测孩子的年龄。</li>
 </ol>
-<h3 id="分析流程："><a href="#分析流程：" class="headerlink" title="分析流程："></a>分析流程：</h3><ul>
+<h3 id="分析流程"><a class="markdownIt-Anchor" href="#分析流程"></a> 分析流程：</h3>
+<ul>
 <li>提出问题</li>
 <li>理解数据</li>
 </ul>
@@ -420,7 +423,8 @@
 <li>建立模型</li>
 </ul>
 <p>选择合适的机器学习算法，用训练集和算法得到机器学习模型，并用测试集来评估得到的模型。</p>
-<h3 id="字段含义："><a href="#字段含义：" class="headerlink" title="字段含义："></a>字段含义：</h3><ul>
+<h3 id="字段含义"><a class="markdownIt-Anchor" href="#字段含义"></a> 字段含义：</h3>
+<ul>
 <li>user_id：用户id</li>
 <li>auction_id：购买行为编号</li>
 <li>cat_id：商品种类ID</li>
@@ -431,87 +435,124 @@
 <li>birthday：出生日期</li>
 <li>gender：性别（0 男性；1 女性）</li>
 </ul>
-<h3 id="问题1：根据孩子的信息预测用户会购买什么样的商品"><a href="#问题1：根据孩子的信息预测用户会购买什么样的商品" class="headerlink" title="问题1：根据孩子的信息预测用户会购买什么样的商品"></a>问题1：根据孩子的信息预测用户会购买什么样的商品</h3><h4 id="一、提出问题"><a href="#一、提出问题" class="headerlink" title="一、提出问题"></a>一、提出问题</h4><p>问题一：根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品。<br>首先确定特征和标签是什么，特征是年龄<code>age</code>和性别<code>gender</code>，标签是预测出商品类别<code>cat1</code>。</p>
-<h4 id="二、理解数据"><a href="#二、理解数据" class="headerlink" title="二、理解数据"></a>二、理解数据</h4><p>下载并导入数据后，查看数据集信息：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fileName1 = <span class="string">'./(sample)sam_tianchi_mum_baby_trade_history.csv'</span></span><br><span class="line">fileName2 = <span class="string">'./(sample)sam_tianchi_mum_baby.csv'</span></span><br><span class="line">trade_data = pd.read_csv(fileName1)</span><br><span class="line">baby_data = pd.read_csv(fileName2)</span><br></pre></td></tr></table></figure></p>
+<h3 id="问题1根据孩子的信息预测用户会购买什么样的商品"><a class="markdownIt-Anchor" href="#问题1根据孩子的信息预测用户会购买什么样的商品"></a> 问题1：根据孩子的信息预测用户会购买什么样的商品</h3>
+<h4 id="一-提出问题"><a class="markdownIt-Anchor" href="#一-提出问题"></a> 一、提出问题</h4>
+<p>问题一：根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品。<br>
+首先确定特征和标签是什么，特征是年龄<code>age</code>和性别<code>gender</code>，标签是预测出商品类别<code>cat1</code>。</p>
+<h4 id="二-理解数据"><a class="markdownIt-Anchor" href="#二-理解数据"></a> 二、理解数据</h4>
+<p>下载并导入数据后，查看数据集信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fileName1 = <span class="string">'./(sample)sam_tianchi_mum_baby_trade_history.csv'</span></span><br><span class="line">fileName2 = <span class="string">'./(sample)sam_tianchi_mum_baby.csv'</span></span><br><span class="line">trade_data = pd.read_csv(fileName1)</span><br><span class="line">baby_data = pd.read_csv(fileName2)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trade_data.info()</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baby_data.info()</span><br></pre></td></tr></table></figure>
-<h4 id="三、数据预处理"><a href="#三、数据预处理" class="headerlink" title="三、数据预处理"></a>三、数据预处理</h4><ul>
+<h4 id="三-数据预处理"><a class="markdownIt-Anchor" href="#三-数据预处理"></a> 三、数据预处理</h4>
+<ul>
 <li>以婴儿信息表为主，合并两个数据集。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data = pd.merge(trade_data,baby_data,on=<span class="string">'user_id'</span>,how=<span class="string">'right'</span>)</span><br><span class="line">combined_data.head()</span><br></pre></td></tr></table></figure>
-<p>查看合并后的数据集信息：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data.info()</span><br></pre></td></tr></table></figure></p>
+<p>查看合并后的数据集信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data.info()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>处理重复数据</li>
 </ul>
-<p>发现有3个<code>user_id</code>重复出现，删除：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data.drop_duplicates(subset=<span class="string">'user_id'</span>,inplace=<span class="keyword">True</span>)</span><br><span class="line">combined_data.info()</span><br></pre></td></tr></table></figure></p>
+<p>发现有3个<code>user_id</code>重复出现，删除：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data.drop_duplicates(subset=<span class="string">'user_id'</span>,inplace=<span class="keyword">True</span>)</span><br><span class="line">combined_data.info()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>处理缺失值</li>
 </ul>
-<p>发现<code>property</code>商品属性这个字段有2条缺失。可以看到每个商品的属性都有多个，以逗号连接。这里采取删除的处理方式：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data.dropna(inplace=<span class="keyword">True</span>)</span><br><span class="line">combined_data.info()</span><br></pre></td></tr></table></figure></p>
+<p>发现<code>property</code>商品属性这个字段有2条缺失。可以看到每个商品的属性都有多个，以逗号连接。这里采取删除的处理方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data.dropna(inplace=<span class="keyword">True</span>)</span><br><span class="line">combined_data.info()</span><br></pre></td></tr></table></figure>
 <p>现在所有字段都不为空，总共951条数据。</p>
 <ul>
 <li>数据类型转换</li>
 </ul>
-<p>将购买商品日期和婴儿出生日期转换为时间格式：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data[<span class="string">'day'</span>] = combined_data[<span class="string">'day'</span>].astype(<span class="string">'str'</span>)</span><br><span class="line">combined_data[<span class="string">'birthday'</span>] = combined_data[<span class="string">'birthday'</span>].astype(<span class="string">'str'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>将购买商品日期和婴儿出生日期转换为时间格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data[<span class="string">'day'</span>] = combined_data[<span class="string">'day'</span>].astype(<span class="string">'str'</span>)</span><br><span class="line">combined_data[<span class="string">'birthday'</span>] = combined_data[<span class="string">'birthday'</span>].astype(<span class="string">'str'</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data[<span class="string">'day'</span>] = pd.to_datetime(combined_data[<span class="string">'day'</span>],format=<span class="string">'%Y-%m-%d'</span>)</span><br><span class="line">combined_data[<span class="string">'birthday'</span>] = pd.to_datetime(combined_data[<span class="string">'birthday'</span>],format=<span class="string">'%Y-%m-%d'</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>处理异常值</li>
 </ul>
-<p>性别<code>gender</code>字段除了0（男），1（女）之外，还存在2的情况，这应该是用户不愿意透露婴儿的性别信息，这部分值只有26个，故删除这部分数据：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data[<span class="string">'gender'</span>].value_counts()</span><br></pre></td></tr></table></figure></p>
+<p>性别<code>gender</code>字段除了0（男），1（女）之外，还存在2的情况，这应该是用户不愿意透露婴儿的性别信息，这部分值只有26个，故删除这部分数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data[<span class="string">'gender'</span>].value_counts()</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data = combined_data[combined_data[<span class="string">'gender'</span>]&lt;<span class="number">2</span>]</span><br><span class="line">combined_data[<span class="string">'gender'</span>].value_counts()</span><br></pre></td></tr></table></figure>
 <p>到目前为止，总共925条数据。</p>
-<h4 id="四、特征提取"><a href="#四、特征提取" class="headerlink" title="四、特征提取"></a>四、特征提取</h4><ul>
+<h4 id="四-特征提取"><a class="markdownIt-Anchor" href="#四-特征提取"></a> 四、特征提取</h4>
+<ul>
 <li>计算婴儿年龄，并进行分段，增加<code>age</code>列和<code>age_group</code>列</li>
 </ul>
-<p>增加年龄列，年龄的计算通过购买日期的年份减去出生日期的年份得到：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data[<span class="string">'age'</span>] = (combined_data[<span class="string">'day'</span>].dt.year - combined_data[<span class="string">'birthday'</span>].dt.year)</span><br><span class="line">combined_data[<span class="string">'age'</span>].describe()</span><br></pre></td></tr></table></figure></p>
-<p>发现年龄有异常大的值28岁，将其删去：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data = combined_data[combined_data[<span class="string">'age'</span>] &lt; <span class="number">28</span>]</span><br><span class="line">combined_data[<span class="string">'age'</span>].describe()</span><br></pre></td></tr></table></figure></p>
-<p>这里只有一个异常大值，所以最终剩下924条数据。然后删除销售时间<code>day</code>字段和出生日期<code>birthday</code>字段：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data.drop([<span class="string">'day'</span>,<span class="string">'birthday'</span>],axis=<span class="number">1</span>,inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p>
-<p>将年龄进行分组，总共分为5个年龄组，增加年龄组列：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bin_labels = [<span class="string">'G0'</span>,<span class="string">'G1'</span>,<span class="string">'G2'</span>,<span class="string">'G3'</span>,<span class="string">'G4'</span>] </span><br><span class="line"><span class="comment">#年龄段标签</span></span><br><span class="line">bin_edges = [<span class="number">-3</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">12</span>]</span><br><span class="line">combined_data[<span class="string">'age_group'</span>] = pd.cut(combined_data[<span class="string">'age'</span>], bin_edges, labels=bin_labels)</span><br><span class="line">combined_data[<span class="string">'age_group'</span>] = combined_data[<span class="string">'age_group'</span>].astype(<span class="string">'str'</span>)</span><br><span class="line"><span class="comment"># 确认所有年龄都被分到正确区间</span></span><br><span class="line">combined_data[<span class="string">'age_group'</span>].isnull().sum()</span><br></pre></td></tr></table></figure></p>
-<p>对年龄组列进行one-hot编码，并将创建的虚拟变量添加到数据集：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ageDf = pd.get_dummies(combined_data[<span class="string">'age_group'</span>])</span><br><span class="line">combined_data = pd.concat([combined_data,ageDf],axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
-<p>查看数据集是否得到预期效果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data.head(<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
-<p>如下图所示：<br><img src="http://ipineimg.lijundong.com/pred_1.png" alt="pred_1"></p>
-<h4 id="五、特征选择"><a href="#五、特征选择" class="headerlink" title="五、特征选择"></a>五、特征选择</h4><p>该问题是根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品。<br>那么选择的特征为：</p>
+<p>增加年龄列，年龄的计算通过购买日期的年份减去出生日期的年份得到：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data[<span class="string">'age'</span>] = (combined_data[<span class="string">'day'</span>].dt.year - combined_data[<span class="string">'birthday'</span>].dt.year)</span><br><span class="line">combined_data[<span class="string">'age'</span>].describe()</span><br></pre></td></tr></table></figure>
+<p>发现年龄有异常大的值28岁，将其删去：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">combined_data = combined_data[combined_data[<span class="string">'age'</span>] &lt; <span class="number">28</span>]</span><br><span class="line">combined_data[<span class="string">'age'</span>].describe()</span><br></pre></td></tr></table></figure>
+<p>这里只有一个异常大值，所以最终剩下924条数据。然后删除销售时间<code>day</code>字段和出生日期<code>birthday</code>字段：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data.drop([<span class="string">'day'</span>,<span class="string">'birthday'</span>],axis=<span class="number">1</span>,inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>将年龄进行分组，总共分为5个年龄组，增加年龄组列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bin_labels = [<span class="string">'G0'</span>,<span class="string">'G1'</span>,<span class="string">'G2'</span>,<span class="string">'G3'</span>,<span class="string">'G4'</span>] </span><br><span class="line"><span class="comment">#年龄段标签</span></span><br><span class="line">bin_edges = [<span class="number">-3</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">12</span>]</span><br><span class="line">combined_data[<span class="string">'age_group'</span>] = pd.cut(combined_data[<span class="string">'age'</span>], bin_edges, labels=bin_labels)</span><br><span class="line">combined_data[<span class="string">'age_group'</span>] = combined_data[<span class="string">'age_group'</span>].astype(<span class="string">'str'</span>)</span><br><span class="line"><span class="comment"># 确认所有年龄都被分到正确区间</span></span><br><span class="line">combined_data[<span class="string">'age_group'</span>].isnull().sum()</span><br></pre></td></tr></table></figure>
+<p>对年龄组列进行one-hot编码，并将创建的虚拟变量添加到数据集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ageDf = pd.get_dummies(combined_data[<span class="string">'age_group'</span>])</span><br><span class="line">combined_data = pd.concat([combined_data,ageDf],axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>查看数据集是否得到预期效果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data.head(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>如下图所示：<br>
+<img src="http://ipineimg.lijundong.com/pred_1.png" alt="pred_1"></p>
+<h4 id="五-特征选择"><a class="markdownIt-Anchor" href="#五-特征选择"></a> 五、特征选择</h4>
+<p>该问题是根据孩子的信息(年龄、性别等)预测用户会购买什么样的商品。<br>
+那么选择的特征为：</p>
 <ul>
 <li>特征：年龄区间<code>age_group</code>或者年龄<code>age</code>，性别<code>gender</code></li>
 <li>标签：商品种类<code>cat1</code></li>
 </ul>
-<p>特征以选择年龄区间<code>age_group</code>和性别<code>gender</code>为例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 特征选择</span></span><br><span class="line">train_features_2 = pd.concat([combined_data[<span class="string">'gender'</span>],ageDf],axis=<span class="number">1</span>)</span><br><span class="line">train_labels_2 = combined_data[<span class="string">'cat1'</span>]</span><br></pre></td></tr></table></figure></p>
-<h4 id="六、构建模型"><a href="#六、构建模型" class="headerlink" title="六、构建模型"></a>六、构建模型</h4><ul>
+<p>特征以选择年龄区间<code>age_group</code>和性别<code>gender</code>为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 特征选择</span></span><br><span class="line">train_features_2 = pd.concat([combined_data[<span class="string">'gender'</span>],ageDf],axis=<span class="number">1</span>)</span><br><span class="line">train_labels_2 = combined_data[<span class="string">'cat1'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="六-构建模型"><a class="markdownIt-Anchor" href="#六-构建模型"></a> 六、构建模型</h4>
+<ul>
 <li>拆分数据集为训练集和测试集</li>
 </ul>
-<p>训练集用于训练模型，测试集用于验证模型：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_X_2, test_X_2, train_y_2, test_y_2 = train_test_split(train_features_2,train_labels_2,test_size=<span class="number">.2</span>)</span><br><span class="line"><span class="comment">#输出数据集大小</span></span><br><span class="line"><span class="keyword">print</span> (<span class="string">'原始数据集特征：'</span>,train_features_2.shape,       <span class="string">'训练数据集特征：'</span>,train_X_2.shape ,      <span class="string">'测试数据集特征：'</span>,test_X_2.shape)<span class="keyword">print</span> (<span class="string">'原始数据集标签：'</span>,train_labels_2.shape,       <span class="string">'训练数据集标签：'</span>,train_y_2.shape ,      <span class="string">'测试数据集标签：'</span>,test_y_2.shape)</span><br></pre></td></tr></table></figure></p>
-<p>打印结果为：<br><img src="http://ipineimg.lijundong.com/pred_5.png" alt="pred_5"></p>
+<p>训练集用于训练模型，测试集用于验证模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_X_2, test_X_2, train_y_2, test_y_2 = train_test_split(train_features_2,train_labels_2,test_size=<span class="number">.2</span>)</span><br><span class="line"><span class="comment">#输出数据集大小</span></span><br><span class="line"><span class="keyword">print</span> (<span class="string">'原始数据集特征：'</span>,train_features_2.shape,       <span class="string">'训练数据集特征：'</span>,train_X_2.shape ,      <span class="string">'测试数据集特征：'</span>,test_X_2.shape)<span class="keyword">print</span> (<span class="string">'原始数据集标签：'</span>,train_labels_2.shape,       <span class="string">'训练数据集标签：'</span>,train_y_2.shape ,      <span class="string">'测试数据集标签：'</span>,test_y_2.shape)</span><br></pre></td></tr></table></figure>
+<p>打印结果为：<br>
+<img src="http://ipineimg.lijundong.com/pred_5.png" alt="pred_5"></p>
 <ul>
 <li>建立模型，训练和验证</li>
 </ul>
-<p>这里选择梯度增强算法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 梯度增强 </span></span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> GradientBoostingClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line">model = GradientBoostingClassifier()</span><br></pre></td></tr></table></figure></p>
+<p>这里选择梯度增强算法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 梯度增强 </span></span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> GradientBoostingClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line">model = GradientBoostingClassifier()</span><br></pre></td></tr></table></figure>
 <ul>
-<li>训练模型，并用测试集验证：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model.fit(train_X_2, train_y_2)</span><br><span class="line">test_pred = model.predict(test_X_2)</span><br><span class="line">accuracy_score(test_pred,test_y_2)</span><br></pre></td></tr></table></figure>
-</li>
+<li>训练模型，并用测试集验证：</li>
 </ul>
-<h3 id="问题2：根据父母的购买行为预测孩子的年龄"><a href="#问题2：根据父母的购买行为预测孩子的年龄" class="headerlink" title="问题2：根据父母的购买行为预测孩子的年龄"></a>问题2：根据父母的购买行为预测孩子的年龄</h3><p>首先确定特征和标签是什么，现在能非常确定的是预测标签是年龄组<code>age_group</code>；而对于特征则是不确定有哪些。</p>
-<h4 id="与问题1的相同之处"><a href="#与问题1的相同之处" class="headerlink" title="与问题1的相同之处"></a>与问题1的相同之处</h4><p>理解数据、数据预处理步骤与问题1相同。</p>
-<h4 id="与问题1的不同之处"><a href="#与问题1的不同之处" class="headerlink" title="与问题1的不同之处"></a>与问题1的不同之处</h4><ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model.fit(train_X_2, train_y_2)</span><br><span class="line">test_pred = model.predict(test_X_2)</span><br><span class="line">accuracy_score(test_pred,test_y_2)</span><br></pre></td></tr></table></figure>
+<h3 id="问题2根据父母的购买行为预测孩子的年龄"><a class="markdownIt-Anchor" href="#问题2根据父母的购买行为预测孩子的年龄"></a> 问题2：根据父母的购买行为预测孩子的年龄</h3>
+<p>首先确定特征和标签是什么，现在能非常确定的是预测标签是年龄组<code>age_group</code>；而对于特征则是不确定有哪些。</p>
+<h4 id="与问题1的相同之处"><a class="markdownIt-Anchor" href="#与问题1的相同之处"></a> 与问题1的相同之处</h4>
+<p>理解数据、数据预处理步骤与问题1相同。</p>
+<h4 id="与问题1的不同之处"><a class="markdownIt-Anchor" href="#与问题1的不同之处"></a> 与问题1的不同之处</h4>
+<ol>
 <li>在第四步特征提取中，增添了对商品属性<code>property</code>的处理，因为商品属性也是购买行为的特征之一。</li>
 </ol>
 <p>商品属性<code>property</code>字段是字符型，每个商品具有多个大类别属性以及大类别属性下的具体属性。每对属性数字，表示大类别属性下的具体属性，即<code>大类别属性 : 具体属性</code>；每对属性数字用<code>;</code>隔开，如下图红框中所示。</p>
 <p><img src="http://ipineimg.lijundong.com/pred_2.png" alt="pred_2"></p>
-<p><strong>处理方式</strong>： </p>
+<p><strong>处理方式</strong>：</p>
 <ul>
 <li>先按分号划分字符串，得到每个商品具有的所有属性对；</li>
 <li>再按冒号划分每个属性对，保留每个商品含有的具体属性。</li>
 </ul>
-<p>首先按属性值将property拆分成多行，并将新的列命名为new_property：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new_prop = combined_data[<span class="string">'property'</span>].str.split(<span class="string">';'</span>,expand=<span class="keyword">True</span>).stack().reset_index(level=<span class="number">1</span>,drop=<span class="keyword">True</span>).rename(<span class="string">'new_property'</span>)</span><br><span class="line">combined_data = combined_data.drop(<span class="string">'property'</span>,axis=<span class="number">1</span>).join(new_prop)</span><br><span class="line">combined_data.head()</span><br></pre></td></tr></table></figure></p>
-<p>如图所示：<br><img src="http://ipineimg.lijundong.com/pred_3.png" alt="pred_3"></p>
-<p>然后，再拆分每个属性对，提取出其中的具体属性；为此定义一个函数：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义函数，提取具体属性</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getTitle</span><span class="params">(property)</span>:</span>    </span><br><span class="line">    str1=property.split( <span class="string">':'</span> )[<span class="number">1</span>]   </span><br><span class="line">    <span class="comment">#strip() 方法用于移除字符串头尾指定的字符（默认为空格）    </span></span><br><span class="line">    str2=str1.strip()    </span><br><span class="line">    <span class="keyword">return</span> str2</span><br></pre></td></tr></table></figure></p>
-<p>调用函数，提取具体属性，并将提取后的特征连接到原数据集上：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#存放提取后的特征</span></span><br><span class="line">propDf = pd.DataFrame()</span><br><span class="line"><span class="comment">#map函数：对Series每个数据应用自定义的函数计算</span></span><br><span class="line">propDf[<span class="string">'property'</span>] = combined_data[<span class="string">'new_property'</span>].map(getTitle)</span><br><span class="line">combined_data = pd.concat([combined_data,propDf],axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
-<p>对数据集进行去重处理，同一个商品若具有多条相同商品属性则删除：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data.drop_duplicates([<span class="string">'cat1'</span>,<span class="string">'property'</span>],inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p>
-<p>最终得到2690条数据，提取具体属性之后的结果：<br><img src="http://ipineimg.lijundong.com/pred_4.png" alt="pred_4"></p>
+<p>首先按属性值将property拆分成多行，并将新的列命名为new_property：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new_prop = combined_data[<span class="string">'property'</span>].str.split(<span class="string">';'</span>,expand=<span class="keyword">True</span>).stack().reset_index(level=<span class="number">1</span>,drop=<span class="keyword">True</span>).rename(<span class="string">'new_property'</span>)</span><br><span class="line">combined_data = combined_data.drop(<span class="string">'property'</span>,axis=<span class="number">1</span>).join(new_prop)</span><br><span class="line">combined_data.head()</span><br></pre></td></tr></table></figure>
+<p>如图所示：<br>
+<img src="http://ipineimg.lijundong.com/pred_3.png" alt="pred_3"></p>
+<p>然后，再拆分每个属性对，提取出其中的具体属性；为此定义一个函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义函数，提取具体属性</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getTitle</span><span class="params">(property)</span>:</span>    </span><br><span class="line">    str1=property.split( <span class="string">':'</span> )[<span class="number">1</span>]   </span><br><span class="line">    <span class="comment">#strip() 方法用于移除字符串头尾指定的字符（默认为空格）    </span></span><br><span class="line">    str2=str1.strip()    </span><br><span class="line">    <span class="keyword">return</span> str2</span><br></pre></td></tr></table></figure>
+<p>调用函数，提取具体属性，并将提取后的特征连接到原数据集上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#存放提取后的特征</span></span><br><span class="line">propDf = pd.DataFrame()</span><br><span class="line"><span class="comment">#map函数：对Series每个数据应用自定义的函数计算</span></span><br><span class="line">propDf[<span class="string">'property'</span>] = combined_data[<span class="string">'new_property'</span>].map(getTitle)</span><br><span class="line">combined_data = pd.concat([combined_data,propDf],axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>对数据集进行去重处理，同一个商品若具有多条相同商品属性则删除：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">combined_data.drop_duplicates([<span class="string">'cat1'</span>,<span class="string">'property'</span>],inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>最终得到2690条数据，提取具体属性之后的结果：<br>
+<img src="http://ipineimg.lijundong.com/pred_4.png" alt="pred_4"></p>
 <ol start="2">
 <li>第五步中特征选择不同</li>
 </ol>
-<p>这里是将所有的字段都作为特征输入，包括提取后的<code>property</code>字段，而标签为年龄组：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_features_1 = combined_data[[<span class="string">'user_id'</span>,<span class="string">'cat_id'</span>,<span class="string">'gender'</span>,<span class="string">'auction_id'</span>,<span class="string">'cat1'</span>,<span class="string">'property'</span>]]</span><br><span class="line">train_labels_1 = combined_data[<span class="string">'age_group'</span>]</span><br></pre></td></tr></table></figure></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>机器学习建模分析的流程与业务指标分析的流程大同小异。特别注意的是机器学习的模型效果很大程度取决于特征工程，特征工程做得好，即便模型简单，参数不优，也能获得很好的性能。本文主要以呈现机器学习算法分析流程为目标，特征工程工作做得相对简单，得到的模型准确率并不高，待后续深入学习这块知识后再作改进。</p>
+<p>这里是将所有的字段都作为特征输入，包括提取后的<code>property</code>字段，而标签为年龄组：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_features_1 = combined_data[[<span class="string">'user_id'</span>,<span class="string">'cat_id'</span>,<span class="string">'gender'</span>,<span class="string">'auction_id'</span>,<span class="string">'cat1'</span>,<span class="string">'property'</span>]]</span><br><span class="line">train_labels_1 = combined_data[<span class="string">'age_group'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<p>机器学习建模分析的流程与业务指标分析的流程大同小异。特别注意的是机器学习的模型效果很大程度取决于特征工程，特征工程做得好，即便模型简单，参数不优，也能获得很好的性能。本文主要以呈现机器学习算法分析流程为目标，特征工程工作做得相对简单，得到的模型准确率并不高，待后续深入学习这块知识后再作改进。</p>
 
       
     </div>
@@ -653,7 +694,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -738,7 +779,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#两个预测问题："><span class="nav-text">两个预测问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析流程："><span class="nav-text">分析流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段含义："><span class="nav-text">字段含义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1：根据孩子的信息预测用户会购买什么样的商品"><span class="nav-text">问题1：根据孩子的信息预测用户会购买什么样的商品</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、提出问题"><span class="nav-text">一、提出问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、理解数据"><span class="nav-text">二、理解数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、数据预处理"><span class="nav-text">三、数据预处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、特征提取"><span class="nav-text">四、特征提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、特征选择"><span class="nav-text">五、特征选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、构建模型"><span class="nav-text">六、构建模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题2：根据父母的购买行为预测孩子的年龄"><span class="nav-text">问题2：根据父母的购买行为预测孩子的年龄</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与问题1的相同之处"><span class="nav-text">与问题1的相同之处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与问题1的不同之处"><span class="nav-text">与问题1的不同之处</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#两个预测问题"><span class="nav-text"> 两个预测问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析流程"><span class="nav-text"> 分析流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段含义"><span class="nav-text"> 字段含义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1根据孩子的信息预测用户会购买什么样的商品"><span class="nav-text"> 问题1：根据孩子的信息预测用户会购买什么样的商品</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-提出问题"><span class="nav-text"> 一、提出问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-理解数据"><span class="nav-text"> 二、理解数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-数据预处理"><span class="nav-text"> 三、数据预处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四-特征提取"><span class="nav-text"> 四、特征提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五-特征选择"><span class="nav-text"> 五、特征选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六-构建模型"><span class="nav-text"> 六、构建模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题2根据父母的购买行为预测孩子的年龄"><span class="nav-text"> 问题2：根据父母的购买行为预测孩子的年龄</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与问题1的相同之处"><span class="nav-text"> 与问题1的相同之处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与问题1的不同之处"><span class="nav-text"> 与问题1的不同之处</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text"> 总结</span></a></li></ol></div>
             
 
           </div>

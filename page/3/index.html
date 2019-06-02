@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -294,6 +295,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2018-10-29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iPine">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iPine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018-10-29/" itemprop="url">递归</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-29T15:00:00+08:00">
+                2018-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technique-summary/" itemprop="url" rel="index">
+                    <span itemprop="name">technique summary</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+           应用场景
+很多APP都有推荐用户注册返佣金或奖励的功能。在这个功能中，用户A推荐用户B来注册，用户B又推荐用户C来注册。那么用户C的最终推荐人就为A，用户B的最终推荐人也为A，用户A没有最终推荐人。在数据库表中，可以记录两行数据，其中user_id表示用户ID，referrer_id表示推荐人ID
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018-10-29/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2018-10-16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -387,8 +541,10 @@
       
         
           
-          引言CPU资源有限，任务的处理速度与线程个数并不是线性正相关。过多的线程会导致CPU频繁切换，处理性能下降。当我们向固定大小的线程池中请求一个线程时，如果线程池中没有空闲资源了，这个时候线程池如何处理这个请求？是拒绝请求还是排队请求？各种处理策略又是怎么实现的呢？这就需要用到队列这个数据结构
-如何理
+           引言
+CPU资源有限，任务的处理速度与线程个数并不是线性正相关。过多的线程会导致CPU频繁切换，处理性能下降。
+当我们向固定大小的线程池中请求一个线程时，如果线程池中没有空闲资源了，这个时候线程池如何处理这个请求？是拒绝请求还是排队请求？各种处理策略又是怎么实现的呢？
+这就需要用到队列这个数据结构
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -540,12 +696,13 @@
       
         
           
-          思考首先思考一个问题，浏览器的前进、后退功能是如何实现的呢？
-理解栈
+           思考
+首先思考一个问题，浏览器的前进、后退功能是如何实现的呢？
+ 理解栈
+
 栈结构：先进的后出，后进的先出。类似于洗好的盘子，叠一摞，下次用的时候只能从最上面那个盘子开始拿。
 操作特性：操作受限的线性表
-什么时候用：当某个数据集合只涉及在一端插入和删除数据，并且满足后进先出的特性，就应该首选栈这种结构。
-
+什么时候用：当某个数据集合只涉及在一端插入和删除数据，并且满足后进先出的特性，就应该首选栈这种
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -698,9 +855,10 @@
         
           
           主要学习几个写链表代码的技巧
-理解指针或引用的含义有些语言有指针概念，比如C语言；有些语言没有指针，取而代之的是引用，比如Java、Python。不管“指针”还是“引用”，都是一个意思，指存储所指对象的内存地址。
+ 理解指针或引用的含义
+有些语言有指针概念，比如C语言；有些语言没有指针，取而代之的是引用，比如Java、Python。不管“指针”还是“引用”，都是一个意思，指存储所指对象的内存地址。
 
-指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）的地
+指针含义：将某个变量（对象）赋值给指针（引用），实际上就是就是将这个变量（对象）
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -852,11 +1010,13 @@
       
         
           
-          如何用链表实现LRU缓存淘汰算法？缓存
+           如何用链表实现LRU缓存淘汰算法？
+ 缓存
+
 缓存定义：一种高效数据读取性能的技术，比如常见的CPU缓存、数据库缓存、浏览器缓存等。缓存在计算机软件、硬件开发中应用都很广。
 缓存特点：大小有限，被用满时，需要清理一部分数据，而哪些数据应该被清理哪些应该被保留，由缓存淘汰策略决定。
 
-缓存淘汰策略常见的缓存
+ 缓存淘汰策略
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1008,12 +1168,17 @@
       
         
           
-          数组定义一组线性表数据结构。它用一组连续的内存空间，来存储一组具有相同类型的数据。
-关键词解释
-线性表：每个线性表上的数据最多只有前和后两个方向。除了数组，链表、队列、栈都是线性表结构
-联想到非线性表：数据之间并不是简单的前后关系。如，二叉树、堆、图等
+           数组定义
+一组线性表数据结构。它用一组连续的内存空间，来存储一组具有相同类型的数据。
+ 关键词解释
 
-连续的内存空间和相同类型的数据正因为有了这两
+线性表：每个线性表上的数据最多只有前和后两个方向。
+除了数组，链表、队列、栈都是线性表结构
+
+联想到非线性表：数据之间并不是简单的前后关系。
+如，二叉树、堆、图等
+
+连续的内存空间和相同类型的数据
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1165,13 +1330,13 @@
       
         
           
-          先举个栗子分析以下这段代码的时间复杂度
-// n 表示数组 array 的长度
-int find(int[] array, int n, int x) {
-  int i = 0;
-  int pos = -1;
-  for (; i &lt; n; ++i) {
-    if (array[i] 
+           先举个栗子
+分析以下这段代码的时间复杂度
+    // n 表示数组 array 的长度
+    int find(int[] array, int n, int x) {
+      int i = 0;
+      int pos = -1;
+      for (; i &lt; n; ++
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1324,9 +1489,13 @@ int find(int[] array, int n, int x) {
         
           
           执行效率是算法优劣的度量指标，而执行效率又是通过时间、空间复杂度分析。
-为什么需要复杂度分析？将代码跑一遍，通过统计、监控，就能得到算法执行时间和占用的内存大小。—–这叫事后统计法存在局限性：1 . 测试结果依赖于测试环境2 . 测试结果受测试数据的规模影响
+ 为什么需要复杂度分析？
+将代码跑一遍，通过统计、监控，就能得到算法执行时间和占用的内存大小。-----这叫事后统计法
+存在局限性：
+1 . 测试结果依赖于测试环境
+2 . 测试结果受测试数据的规模影响
 
-如何能不用具体的测试数据，就可以粗略估
+如何能不用具体的测试数
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1478,7 +1647,9 @@ int find(int[] array, int n, int x) {
       
         
           
-          Title: Evaluating Multi-Dimensional Visualizations for Understanding Fuzzy ClustersAcceptted by IEEE VIS 2018
+           Title: Evaluating Multi-Dimensional Visualizations for Understanding Fuzzy Clusters
+ Acceptted by IEEE VIS 2018
+
 Paper
 Video
 Talk-PPT
@@ -1637,163 +1808,14 @@ Talk-PPT
           
           今天看到一篇很好的文章，教我们如何在Python中创建动画图。很具有实践性，于是跟着码了一遍代码。
 附上文章链接
-问题这过程中遇到两个问题：1 . 用pip install ffmpeg安装了FFmpeg之后，仍然不能正常运行2 . 解决第一个问题后,又报AttributeError:Seaborn
+ 问题
+这过程中遇到两个问题：
+1 . 用pip install ffmpeg安装了FFmpeg之后，仍然不能正常运行
+2 . 解决第一个问题后,又报AttributeError:Sea
           ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018-09-15/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ipine.github.io/2018-09-12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iPine">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iPine's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018-09-12/" itemprop="url">Django入门练习的两个错误</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-12T20:18:00+08:00">
-                2018-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technique-summary/" itemprop="url" rel="index">
-                    <span itemprop="name">technique summary</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&#39;learning_logs&#39; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in includ
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018-09-12/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1889,7 +1911,7 @@ Talk-PPT
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

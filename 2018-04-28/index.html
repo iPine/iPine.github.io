@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,18 +78,18 @@
 
 
 
-<meta name="description" content="题目描述Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out).If everything cancel">
+<meta name="description" content="题目描述 Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out). If everything can">
 <meta name="keywords" content="javascript,codewars">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Directions Reduction">
 <meta property="og:url" content="http://ipine.github.io/2018-04-28/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="题目描述Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out).If everything cancel">
+<meta property="og:description" content="题目描述 Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out). If everything can">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-22T11:27:09.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Directions Reduction">
-<meta name="twitter:description" content="题目描述Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out).If everything cancel">
+<meta name="twitter:description" content="题目描述 Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out). If everything can">
 
 
 
@@ -384,12 +385,16 @@
       
 
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out).<br>If everything cancels out, return an empty array (stay in place);</p>
+        <h3 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h3>
+<p>Write a function which will take an array of strings and return an array of strings with the needless directions removed (WEST and EAST, NORTH and SOUTH cancel each other out).<br>
+If everything cancels out, return an empty array (stay in place);</p>
 <p>For example:</p>
 <blockquote>
-<p>dirReduc([“NORTH”, “SOUTH”, “SOUTH”, “EAST”, “WEST”, “NORTH”, “WEST”]) =&gt; [“WEST”]<br>dirReduc([“NORTH”, “SOUTH”, “SOUTH”, “EAST”, “WEST”, “NORTH”]) =&gt; []</p>
+<p>dirReduc([“NORTH”, “SOUTH”, “SOUTH”, “EAST”, “WEST”, “NORTH”, “WEST”]) =&gt; [“WEST”]<br>
+dirReduc([“NORTH”, “SOUTH”, “SOUTH”, “EAST”, “WEST”, “NORTH”]) =&gt; []</p>
 </blockquote>
-<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function dirReduc(arr){
+<h3 id="我的代码"><a class="markdownIt-Anchor" href="#我的代码"></a> 我的代码</h3>
+<pre><code>function dirReduc(arr){
   // ...
   for(i=0; i&lt;arr.length; i++){
     if(arr[i] == &quot;NORTH&quot;){
@@ -423,16 +428,28 @@
   }
   return arr;
 }
-</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function dirReduc(arr) {
- var str = arr.join(&apos;&apos;), pattern = /NORTHSOUTH|EASTWEST|SOUTHNORTH|WESTEAST/; 
+</code></pre>
+<h3 id="clever"><a class="markdownIt-Anchor" href="#clever"></a> Clever</h3>
+<pre><code>function dirReduc(arr) {
+ var str = arr.join(''), pattern = /NORTHSOUTH|EASTWEST|SOUTHNORTH|WESTEAST/; 
  while (pattern.test(str)) 
-  str = str.replace(pattern,&apos;&apos;);
+  str = str.replace(pattern,'');
  return str.match(/(NORTH|SOUTH|EAST|WEST)/g)||[]; 
 }
-</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
-<li><p>如何考虑重复判断数组arr里是否还有符合要求的字符对？<br>解决办法：下标i回到0，跳出当前循环，又从第一个元素开始判断剩余数组中的内容，重复这个过程，直到没有符合条件的元素</p>
+</code></pre>
+<h3 id="key"><a class="markdownIt-Anchor" href="#key"></a> Key</h3>
+<ul>
+<li>
+<p>如何考虑重复判断数组arr里是否还有符合要求的字符对？<br>
+解决办法：下标i回到0，跳出当前循环，又从第一个元素开始判断剩余数组中的内容，重复这个过程，直到没有符合条件的元素</p>
 </li>
-<li><p>删除的数组的某一项用：<code>splice(index,len,[item])</code><br><em>注：该方法会改变原始数组</em><br>splice有3个参数，它也可以用来替换/删除/添加数组内某一个或者几个值<br><code>index</code>:数组开始下标（要删除的元素的下标）<br><code>len</code>: 替换/删除的长度<br><code>item</code>:替换的值，删除操作的话 item为空</p>
+<li>
+<p>删除的数组的某一项用：<code>splice(index,len,[item])</code>   <br>
+<em>注：该方法会改变原始数组</em><br>
+splice有3个参数，它也可以用来替换/删除/添加数组内某一个或者几个值<br>
+<code>index</code>:数组开始下标（要删除的元素的下标）   <br>
+<code>len</code>: 替换/删除的长度      <br>
+<code>item</code>:替换的值，删除操作的话 item为空</p>
 </li>
 </ul>
 
@@ -576,7 +593,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -661,7 +678,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text">我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clever"><span class="nav-text">Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-text">Key</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text"> 我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clever"><span class="nav-text"> Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-text"> Key</span></a></li></ol></div>
             
 
           </div>

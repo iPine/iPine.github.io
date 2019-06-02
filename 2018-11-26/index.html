@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,19 +78,19 @@
 
 
 
-<meta name="description" content="代码传送门，包括扩展了交互功能的改进版  背景分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。 数据获取从数据库中提取数据。通过Udacity提供的工作区，该工作区与数据库连接。 方法一写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。  首先查看city_list表，country列等于China的城市有哪些;  然后将离自己所在城市长沙最近的城市">
+<meta name="description" content="代码传送门，包括扩展了交互功能的改进版   背景 分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。  数据获取 从数据库中提取数据。通过Udacity提供的工作区，该工作区与数据库连接。  方法一 写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。   首先查看city_list表，country列等于China的城市有哪些;   然后将离自己所在城">
 <meta name="keywords" content="python,data_analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="探索气温趋势">
 <meta property="og:url" content="http://ipine.github.io/2018-11-26/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="代码传送门，包括扩展了交互功能的改进版  背景分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。 数据获取从数据库中提取数据。通过Udacity提供的工作区，该工作区与数据库连接。 方法一写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。  首先查看city_list表，country列等于China的城市有哪些;  然后将离自己所在城市长沙最近的城市">
+<meta property="og:description" content="代码传送门，包括扩展了交互功能的改进版   背景 分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。  数据获取 从数据库中提取数据。通过Udacity提供的工作区，该工作区与数据库连接。  方法一 写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。   首先查看city_list表，country列等于China的城市有哪些;   然后将离自己所在城">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-11-26/34848843.jpg">
 <meta property="og:updated_time" content="2019-02-22T11:28:02.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="探索气温趋势">
-<meta name="twitter:description" content="代码传送门，包括扩展了交互功能的改进版  背景分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。 数据获取从数据库中提取数据。通过Udacity提供的工作区，该工作区与数据库连接。 方法一写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。  首先查看city_list表，country列等于China的城市有哪些;  然后将离自己所在城市长沙最近的城市">
+<meta name="twitter:description" content="代码传送门，包括扩展了交互功能的改进版   背景 分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。  数据获取 从数据库中提取数据。通过Udacity提供的工作区，该工作区与数据库连接。  方法一 写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。   首先查看city_list表，country列等于China的城市有哪些;   然后将离自己所在城">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/18-11-26/34848843.jpg">
 
 
@@ -389,51 +390,66 @@
         <blockquote>
 <p><a href="https://github.com/iPine/data_analysis_project_1" target="_blank" rel="noopener">代码传送门，包括扩展了交互功能的改进版</a></p>
 </blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。</p>
-<h3 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h3><p>从数据库中提取数据。通过<a href="https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/d1865612-f3fd-4db0-80c7-348c594d573d/modules/7b83f9fd-759a-4cc6-8456-ce3783e17475/lessons/dce89631-d141-4a36-b3fd-5e8ec038bc70/concepts/530f21c0-2f37-4390-aaab-3ce440e56d80" target="_blank" rel="noopener">Udacity</a>提供的工作区，该工作区与数据库连接。</p>
-<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。</p>
+<h3 id="背景"><a class="markdownIt-Anchor" href="#背景"></a> 背景</h3>
+<p>分析全球和自己所在地的气温数据，比较所在城市的气温走向与全球气温走向。</p>
+<h3 id="数据获取"><a class="markdownIt-Anchor" href="#数据获取"></a> 数据获取</h3>
+<p>从数据库中提取数据。通过<a href="https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/d1865612-f3fd-4db0-80c7-348c594d573d/modules/7b83f9fd-759a-4cc6-8456-ce3783e17475/lessons/dce89631-d141-4a36-b3fd-5e8ec038bc70/concepts/530f21c0-2f37-4390-aaab-3ce440e56d80" target="_blank" rel="noopener">Udacity</a>提供的工作区，该工作区与数据库连接。</p>
+<h4 id="方法一"><a class="markdownIt-Anchor" href="#方法一"></a> 方法一</h4>
+<p>写入以下SQL语句，导出世界气温数据以及最接近自己居住地的大城市气温数据。</p>
 <ol>
-<li><p>首先查看<code>city_list</code>表，<code>country</code>列等于<code>China</code>的城市有哪些;</p>
+<li>
+<p>首先查看<code>city_list</code>表，<code>country</code>列等于<code>China</code>的城市有哪些;</p>
 </li>
-<li><p>然后将离自己所在城市<code>长沙</code>最近的城市<code>武汉</code>市的数据提取出来;</p>
+<li>
+<p>然后将离自己所在城市<code>长沙</code>最近的城市<code>武汉</code>市的数据提取出来;</p>
 </li>
-<li><p>最后再将全球气温数据提取出来。</p>
-<p> select * from city_list where country=’China’;</p>
-<p> select * from city_data where city=’Wuhan’;</p>
-<p> select * from global_data;</p>
+<li>
+<p>最后再将全球气温数据提取出来。</p>
+<p>select * from city_list where country=‘China’;</p>
+<p>select * from city_data where city=‘Wuhan’;</p>
+<p>select * from global_data;</p>
 </li>
 </ol>
-<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>或者通过以下SQL命令，一次性将两个数据都提取到一个表格：</p>
+<h4 id="方法二"><a class="markdownIt-Anchor" href="#方法二"></a> 方法二</h4>
+<p>或者通过以下SQL命令，一次性将两个数据都提取到一个表格：</p>
 <pre><code>select c.year, c.avg_temp as city_temp, g.avg_temp as global_temp
 from city_data c, global_data g
 where c.year = g.year
-and c.city = &apos;Wuhan&apos;;
-</code></pre><h3 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h3><p>使用Python将提取的数据（<strong>这里的数据是采用方法一提取的</strong>）可视化成一个线条图，便于武汉市和全球气温比较。</p>
-<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><ol>
-<li>绘制图使用<code>matplotlib.pyplot</code>模块；移动平均值计算需使用<code>pandas</code>库；设置坐标轴的ticks需用到<code>matplotlib.ticker</code>模块；matplotlib绘图可视化的各属性设置可参考<a href="http://python.jobbole.com/85106/" target="_blank" rel="noopener">这里</a></li>
-</ol>
-<ol start="2">
-<li><p>为了使绘制的线图更加平滑，便于观察气温走向，所以采用气温的移动平均值，而不是原始的年平均值。因而需要先计算移动平均值—–&gt;函数<code>calculate_moving_average()</code></p>
-<p> 1）移动平均值的计算方法这里采用<a href="http://pandas.pydata.org/pandas-docs/version/0.17.1/generated/pandas.rolling_mean.html" target="_blank" rel="noopener">pandas.rolling_mean</a>函数。但是，按照文档说明传入参数后，会报出<code>AttributeError: module &#39;pandas&#39; has no attribute &#39;rolling_mean&#39;</code>错误，后来发现是<code>pandas</code>库的版本问题，具体解决方案可参考<a href="https://stackoverflow.com/questions/50482884/module-pandas-has-no-attribute-rolling-mean" target="_blank" rel="noopener">这里</a>。</p>
-<p> 2）移动平均值窗口大小的设定需要权衡考虑。设置得过小，起不到平滑的作用，波动仍然会很剧烈；设置得过大，数据越平滑，但是准确性和敏感性就降低的越多。所以需要在数据变化准确性和平滑程度之间进行一个权衡，既想要观察到更多局部的波动，又想要观察长远趋势，10年左右是比较好的选择。</p>
+and c.city = 'Wuhan';
+</code></pre>
+<h3 id="可视化"><a class="markdownIt-Anchor" href="#可视化"></a> 可视化</h3>
+<p>使用Python将提取的数据（<strong>这里的数据是采用方法一提取的</strong>）可视化成一个线条图，便于武汉市和全球气温比较。</p>
+<h4 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h4>
+<ol>
+<li>
+<p>绘制图使用<code>matplotlib.pyplot</code>模块；移动平均值计算需使用<code>pandas</code>库；设置坐标轴的ticks需用到<code>matplotlib.ticker</code>模块；matplotlib绘图可视化的各属性设置可参考<a href="http://python.jobbole.com/85106/" target="_blank" rel="noopener">这里</a></p>
+</li>
+<li>
+<p>为了使绘制的线图更加平滑，便于观察气温走向，所以采用气温的移动平均值，而不是原始的年平均值。因而需要先计算移动平均值-----&gt;函数<code>calculate_moving_average()</code></p>
+<p>1）移动平均值的计算方法这里采用<a href="http://pandas.pydata.org/pandas-docs/version/0.17.1/generated/pandas.rolling_mean.html" target="_blank" rel="noopener">pandas.rolling_mean</a>函数。但是，按照文档说明传入参数后，会报出<code>AttributeError: module 'pandas' has no attribute 'rolling_mean'</code>错误，后来发现是<code>pandas</code>库的版本问题，具体解决方案可参考<a href="https://stackoverflow.com/questions/50482884/module-pandas-has-no-attribute-rolling-mean" target="_blank" rel="noopener">这里</a>。</p>
+<p>2）移动平均值窗口大小的设定需要权衡考虑。设置得过小，起不到平滑的作用，波动仍然会很剧烈；设置得过大，数据越平滑，但是准确性和敏感性就降低的越多。所以需要在数据变化准确性和平滑程度之间进行一个权衡，既想要观察到更多局部的波动，又想要观察长远趋势，10年左右是比较好的选择。</p>
+</li>
+<li>
+<p>有了移动均值后，就可以开始绘制图形了-----&gt;函数<code>show_fig()</code></p>
+<p>1）绘制图形时需要考虑所在城市的数据范围是否与全球气温数据的范围一致。武汉市的数据是从1841年到2013年，而全球气温数据是从1750年到2015年，所以要将城市数据和全球数据处理成在相同时间段内，才能正确比较趋势。</p>
+<p><em>注：只有当采用方法一获取数据时才需考虑第一点</em></p>
+<p>2）需要考虑如何设置图形坐标轴的刻度尺大小，使得图形大小更为合适，便于查看和比较本地城市和全球的气温。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""分析所在城市和全球的气温趋势</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib.ticker <span class="keyword">import</span> MultipleLocator, FormatStrFormatter</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_moving_average</span><span class="params">(row_data,window)</span>:</span></span><br><span class="line">    <span class="string">"""计算移动平均值</span></span><br><span class="line"><span class="string">       参数1：需要计算移动平均值的csv文件</span></span><br><span class="line"><span class="string">       参数2：移动窗口大小</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    data = pd.read_csv(row_data)</span><br><span class="line">    data[<span class="string">'mavg_temp'</span>] = round(data[<span class="string">'avg_temp'</span>].rolling(window).mean(),<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_fig</span><span class="params">(city_data,global_data)</span>:</span></span><br><span class="line">    <span class="string">"""将所在城市与全球平均气温数据绘制成折线图并展示</span></span><br><span class="line"><span class="string">       参数1：城市平均气温数据</span></span><br><span class="line"><span class="string">       参数2：全球平均气温数据</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment">#设置显示的图片大小</span></span><br><span class="line">    figsize = <span class="number">10</span>,<span class="number">5</span> </span><br><span class="line">    figure, ax = plt.subplots(figsize=figsize) </span><br><span class="line">    </span><br><span class="line">    <span class="comment">#X,Y轴的标签</span></span><br><span class="line">    plt.xlabel(<span class="string">'Year'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">'Moving Average Temperature (ºC)'</span>)</span><br><span class="line"></span><br><span class="line">    xmajorLocator   = MultipleLocator(<span class="number">20</span>) <span class="comment">#将x轴主刻度标签设置为20的倍数</span></span><br><span class="line">    xminorLocator   = MultipleLocator(<span class="number">5</span>) <span class="comment">#将x轴次刻度标签设置为5的倍数</span></span><br><span class="line">    ax.xaxis.set_major_locator(xmajorLocator)</span><br><span class="line">    ax.xaxis.set_minor_locator(xminorLocator)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ymajorLocator   = MultipleLocator(<span class="number">1</span>) <span class="comment">#将y轴主刻度标签设置为1的倍数</span></span><br><span class="line">    yminorLocator   = MultipleLocator(<span class="number">0.2</span>) <span class="comment">#将y轴次刻度标签设置为0.2的倍数</span></span><br><span class="line">    ax.yaxis.set_major_locator(ymajorLocator)</span><br><span class="line">    ax.yaxis.set_minor_locator(yminorLocator)</span><br><span class="line">    </span><br><span class="line">    ax.xaxis.grid(<span class="keyword">True</span>, which=<span class="string">'major'</span>) <span class="comment">#x坐标轴的网格使用主刻度</span></span><br><span class="line">    ax.yaxis.grid(<span class="keyword">True</span>, which=<span class="string">'minor'</span>) <span class="comment">#y坐标轴的网格使用次刻度</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    plt.plot(city_data[<span class="string">'year'</span>],city_data[<span class="string">'mavg_temp'</span>],color=<span class="string">'skyblue'</span>,linewidth=<span class="string">'2'</span>,label=<span class="string">'Wuhan'</span>)</span><br><span class="line">    plt.plot(global_data[<span class="string">'year'</span>],global_data[<span class="string">'mavg_temp'</span>],color=<span class="string">'lightgreen'</span>,linewidth=<span class="string">'2'</span>,label=<span class="string">'Global'</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.title(<span class="string">'Temperature Trend'</span>)</span><br><span class="line"></span><br><span class="line">    plt.show() </span><br><span class="line"></span><br><span class="line">city_data_file = <span class="string">'data/avg_temp_wuhan_data.csv'</span></span><br><span class="line">global_data_file = <span class="string">'data/avg_temp_global_data.csv'</span></span><br><span class="line">window = <span class="number">10</span></span><br><span class="line">city_data = calculate_moving_average(city_data_file,window)</span><br><span class="line">global_data = calculate_moving_average(global_data_file,window)</span><br><span class="line"><span class="comment"># print(city_data)</span></span><br><span class="line"><span class="comment"># print(global_data)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(city_data[9:])</span></span><br><span class="line">city_data = city_data[<span class="number">9</span>:] <span class="comment">#计算移动均值后，武汉市数据表前9行没有数据，从1850年起-2013年，共164行，有平均气温数据</span></span><br><span class="line"><span class="comment"># print(global_data[100:-2])</span></span><br><span class="line">global_data = global_data[<span class="number">100</span>:<span class="number">-2</span>] <span class="comment">#故为了正确比较，全球平均气温数据也只取第100行(1850年)到倒数第二行(2013年)之间的164行数据</span></span><br><span class="line"></span><br><span class="line">show_fig(city_data,global_data)</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol start="3">
-<li><p>有了移动均值后，就可以开始绘制图形了—–&gt;函数<code>show_fig()</code></p>
-<p> 1）绘制图形时需要考虑所在城市的数据范围是否与全球气温数据的范围一致。武汉市的数据是从1841年到2013年，而全球气温数据是从1750年到2015年，所以要将城市数据和全球数据处理成在相同时间段内，才能正确比较趋势。</p>
-<p> <em>注：只有当采用方法一获取数据时才需考虑第一点</em></p>
-<p> 2）需要考虑如何设置图形坐标轴的刻度尺大小，使得图形大小更为合适，便于查看和比较本地城市和全球的气温。</p>
-</li>
-</ol>
-<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""分析所在城市和全球的气温趋势</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib.ticker <span class="keyword">import</span> MultipleLocator, FormatStrFormatter</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_moving_average</span><span class="params">(row_data,window)</span>:</span></span><br><span class="line">    <span class="string">"""计算移动平均值</span></span><br><span class="line"><span class="string">       参数1：需要计算移动平均值的csv文件</span></span><br><span class="line"><span class="string">       参数2：移动窗口大小</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    data = pd.read_csv(row_data)</span><br><span class="line">    data[<span class="string">'mavg_temp'</span>] = round(data[<span class="string">'avg_temp'</span>].rolling(window).mean(),<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_fig</span><span class="params">(city_data,global_data)</span>:</span></span><br><span class="line">    <span class="string">"""将所在城市与全球平均气温数据绘制成折线图并展示</span></span><br><span class="line"><span class="string">       参数1：城市平均气温数据</span></span><br><span class="line"><span class="string">       参数2：全球平均气温数据</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment">#设置显示的图片大小</span></span><br><span class="line">    figsize = <span class="number">10</span>,<span class="number">5</span> </span><br><span class="line">    figure, ax = plt.subplots(figsize=figsize) </span><br><span class="line">    </span><br><span class="line">    <span class="comment">#X,Y轴的标签</span></span><br><span class="line">    plt.xlabel(<span class="string">'Year'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">'Moving Average Temperature (ºC)'</span>)</span><br><span class="line"></span><br><span class="line">    xmajorLocator   = MultipleLocator(<span class="number">20</span>) <span class="comment">#将x轴主刻度标签设置为20的倍数</span></span><br><span class="line">    xminorLocator   = MultipleLocator(<span class="number">5</span>) <span class="comment">#将x轴次刻度标签设置为5的倍数</span></span><br><span class="line">    ax.xaxis.set_major_locator(xmajorLocator)</span><br><span class="line">    ax.xaxis.set_minor_locator(xminorLocator)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ymajorLocator   = MultipleLocator(<span class="number">1</span>) <span class="comment">#将y轴主刻度标签设置为1的倍数</span></span><br><span class="line">    yminorLocator   = MultipleLocator(<span class="number">0.2</span>) <span class="comment">#将y轴次刻度标签设置为0.2的倍数</span></span><br><span class="line">    ax.yaxis.set_major_locator(ymajorLocator)</span><br><span class="line">    ax.yaxis.set_minor_locator(yminorLocator)</span><br><span class="line">    </span><br><span class="line">    ax.xaxis.grid(<span class="keyword">True</span>, which=<span class="string">'major'</span>) <span class="comment">#x坐标轴的网格使用主刻度</span></span><br><span class="line">    ax.yaxis.grid(<span class="keyword">True</span>, which=<span class="string">'minor'</span>) <span class="comment">#y坐标轴的网格使用次刻度</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    plt.plot(city_data[<span class="string">'year'</span>],city_data[<span class="string">'mavg_temp'</span>],color=<span class="string">'skyblue'</span>,linewidth=<span class="string">'2'</span>,label=<span class="string">'Wuhan'</span>)</span><br><span class="line">    plt.plot(global_data[<span class="string">'year'</span>],global_data[<span class="string">'mavg_temp'</span>],color=<span class="string">'lightgreen'</span>,linewidth=<span class="string">'2'</span>,label=<span class="string">'Global'</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.title(<span class="string">'Temperature Trend'</span>)</span><br><span class="line"></span><br><span class="line">    plt.show() </span><br><span class="line"></span><br><span class="line">city_data_file = <span class="string">'data/avg_temp_wuhan_data.csv'</span></span><br><span class="line">global_data_file = <span class="string">'data/avg_temp_global_data.csv'</span></span><br><span class="line">window = <span class="number">10</span></span><br><span class="line">city_data = calculate_moving_average(city_data_file,window)</span><br><span class="line">global_data = calculate_moving_average(global_data_file,window)</span><br><span class="line"><span class="comment"># print(city_data)</span></span><br><span class="line"><span class="comment"># print(global_data)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(city_data[9:])</span></span><br><span class="line">city_data = city_data[<span class="number">9</span>:] <span class="comment">#计算移动均值后，武汉市数据表前9行没有数据，从1850年起-2013年，共164行，有平均气温数据</span></span><br><span class="line"><span class="comment"># print(global_data[100:-2])</span></span><br><span class="line">global_data = global_data[<span class="number">100</span>:<span class="number">-2</span>] <span class="comment">#故为了正确比较，全球平均气温数据也只取第100行(1850年)到倒数第二行(2013年)之间的164行数据</span></span><br><span class="line"></span><br><span class="line">show_fig(city_data,global_data)</span><br></pre></td></tr></table></figure>
-</code></pre><p><img src="http://ipineimg.lijundong.com/18-11-26/34848843.jpg" alt="trend"></p>
-<h3 id="问题与观察结论"><a href="#问题与观察结论" class="headerlink" title="问题与观察结论"></a>问题与观察结论</h3><h4 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h4><p>全球气温的整体趋势是怎么样的？本地城市呢？</p>
+<p><img src="http://ipineimg.lijundong.com/18-11-26/34848843.jpg" alt="trend"></p>
+<h3 id="问题与观察结论"><a class="markdownIt-Anchor" href="#问题与观察结论"></a> 问题与观察结论</h3>
+<h4 id="q1"><a class="markdownIt-Anchor" href="#q1"></a> Q1</h4>
+<p>全球气温的整体趋势是怎么样的？本地城市呢？</p>
 <p>从上图中可以看到整体上，从1841年起到2015年之间的70多年间，全球和武汉市的平均气温都是呈上升趋势。世界是真的越来越热了，经过这70多年，全球平均气温上升了1.6度左右，而武汉市上升了1.8度左右。武汉市比全球气温上涨幅度略大。</p>
-<h4 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h4><p>与全球平均气温相比，本地城市平均气温比较热还是比较冷？长期气温差异是否一致？</p>
+<h4 id="q2"><a class="markdownIt-Anchor" href="#q2"></a> Q2</h4>
+<p>与全球平均气温相比，本地城市平均气温比较热还是比较冷？长期气温差异是否一致？</p>
 <p>可以很明显的看到，武汉市比全球更热，其平均气温比全球平均气温高出8度左右。不愧是中国的“四大火炉城市”之一呀！1841年的时候，武汉的平均气温是16.2度，比全球平均气温8度，高出8.2度，到了近几年，武汉市的平均气温升到18度，达到最高峰值，比全球平均气温最高峰值9.6度，高出8.4度。这说明，长期来看，武汉市和全球的气温差异是一致的。</p>
-<h4 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h4><p>在这几十年间，全球的气温波动如何？本地城市呢？</p>
+<h4 id="q3"><a class="markdownIt-Anchor" href="#q3"></a> Q3</h4>
+<p>在这几十年间，全球的气温波动如何？本地城市呢？</p>
 <p>全球的气温几乎是呈平稳上升趋势，但是到了最近几年，尤其是1980年之后，气温增长得越来越快，图形呈负偏斜分布；而武汉市的气温虽然整体上是上升的趋势，但是趋势波动很大，某个时间段内气温下降，之后再上升，图形呈多峰分布。</p>
-<h4 id="Q4"><a href="#Q4" class="headerlink" title="Q4"></a>Q4</h4><p>哪个时间段内，武汉市与全球气温趋势的趋势最为相似？</p>
+<h4 id="q4"><a class="markdownIt-Anchor" href="#q4"></a> Q4</h4>
+<p>哪个时间段内，武汉市与全球气温趋势的趋势最为相似？</p>
 <p>通过图可以观察到1860年-1885年这25年间，武汉市与全球气温趋势最为相近。在这25年，武汉和全球气温都两次达到气温最低峰值。第一次出现在1862年左右，第二次出现在1885年，武汉市大概为15.8度，全球气温大概为7.8度。不知道在这个两个时间点发生了什么，温度出现了下降现象，但在1885年之后，无论是武汉还是全球，尽管气温有波动，但都没有再降到最低峰值。</p>
 
       
@@ -576,7 +592,7 @@ and c.city = &apos;Wuhan&apos;;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -661,7 +677,7 @@ and c.city = &apos;Wuhan&apos;;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据获取"><span class="nav-text">数据获取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一"><span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二"><span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化"><span class="nav-text">可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说明"><span class="nav-text">说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题与观察结论"><span class="nav-text">问题与观察结论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1"><span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2"><span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3"><span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4"><span class="nav-text">Q4</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-text"> 背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据获取"><span class="nav-text"> 数据获取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一"><span class="nav-text"> 方法一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二"><span class="nav-text"> 方法二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化"><span class="nav-text"> 可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说明"><span class="nav-text"> 说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题与观察结论"><span class="nav-text"> 问题与观察结论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#q1"><span class="nav-text"> Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#q2"><span class="nav-text"> Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#q3"><span class="nav-text"> Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#q4"><span class="nav-text"> Q4</span></a></li></ol></li></ol></div>
             
 
           </div>

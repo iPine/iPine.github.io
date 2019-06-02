@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,20 +78,20 @@
 
 
 
-<meta name="description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&amp;#39;learning_logs&amp;#39; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported">
+<meta name="description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&apos;learning_logs&apos; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set th">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django入门练习的两个错误">
 <meta property="og:url" content="http://ipine.github.io/2018-09-12/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&amp;#39;learning_logs&amp;#39; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported">
+<meta property="og:description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&apos;learning_logs&apos; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set th">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-9-13/64291775.jpg">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-9-13/57959414.jpg">
 <meta property="og:updated_time" content="2019-02-22T11:27:33.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django入门练习的两个错误">
-<meta name="twitter:description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&amp;#39;learning_logs&amp;#39; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported">
+<meta name="twitter:description" content="学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到&apos;learning_logs&apos; is not a registered namespace和ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set th">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/18-9-13/64291775.jpg">
 
 
@@ -387,64 +388,82 @@
       
 
       
-        <p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>&#39;learning_logs&#39; is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p>
-<h3 id="第一个错误来源"><a href="#第一个错误来源" class="headerlink" title="第一个错误来源"></a>第一个错误来源</h3><p>在创建显示<code>Topics</code>数据的网页时，按照书中流程走，创建了父模板，然后子模板继承父模板。<br>再按照三步标准流程走完：<br>1 . 添加URL模式;<br>2 . 视图创建;<br>3 . 模板创建</p>
-<p>一切工作就绪，运行，报错了。<br>错误如下：</p>
+        <p>学习《Python从入门到实践》书中的第18章Django入门时，实践书中代码，遇到<code>'learning_logs' is not a registered namespace</code>和<code>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</code></p>
+<h3 id="第一个错误来源"><a class="markdownIt-Anchor" href="#第一个错误来源"></a> 第一个错误来源</h3>
+<p>在创建显示<code>Topics</code>数据的网页时，按照书中流程走，创建了父模板，然后子模板继承父模板。<br>
+再按照三步标准流程走完：<br>
+1 . 添加URL模式;<br>
+2 . 视图创建;<br>
+3 . 模板创建</p>
+<p>一切工作就绪，运行，报错了。<br>
+错误如下：</p>
 <p><img src="http://ipineimg.lijundong.com/18-9-13/64291775.jpg" alt="ERROR"></p>
-<p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>父模板代码如下：</p>
+<p>添加的父模板，里面有两个链接用到了命名空间<code>learning_logs</code>。<br>
+父模板代码如下：</p>
 <pre><code>&lt;p&gt;
   &lt;a href=&quot;{% url 'learning_logs:index' %}&quot;&gt;Learning Log&lt;/a&gt;
   &lt;a href=&quot;{% url 'learning_logs:topics' %}&quot;&gt;Topics&lt;/a&gt;
 &lt;/p&gt;
 &lt;!-- 插入的块标签 content ，是一个占位符，其中包含的信息将由子模板指定。 --&gt;
 {% block content %}{% endblock content %}
-</code></pre><h3 id="排查问题"><a href="#排查问题" class="headerlink" title="排查问题"></a>排查问题</h3><p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p>
+</code></pre>
+<h3 id="排查问题"><a class="markdownIt-Anchor" href="#排查问题"></a> 排查问题</h3>
+<p>1 . 首先看项目文件夹下的<code>settings.py</code>文件，确认应用程序<code>learning_logs</code>是否被添加进去了</p>
 <p><img src="http://ipineimg.lijundong.com/18-9-13/57959414.jpg" alt="settings.py"></p>
 <blockquote>
 <p>不是这里的问题</p>
 </blockquote>
 <p>2 . 定位到<code>urls.py</code>文件，打开项目文件下的<code>urls.py</code>文件；发现有两个版本的<code>urlpatterns</code>列表.</p>
-<h4 id="旧版本，url式的："><a href="#旧版本，url式的：" class="headerlink" title="旧版本，url式的："></a>旧版本，url式的：</h4><pre><code>from django.conf.urls import url, include
+<h4 id="旧版本url式的"><a class="markdownIt-Anchor" href="#旧版本url式的"></a> 旧版本，url式的：</h4>
+<pre><code>from django.conf.urls import url, include
 
 #根据书上的代码写的
 urlpatterns = [
-    url(r&apos;^admin/&apos;,admin.site.urls),
-    url(r&apos;&apos;,include(&apos;learning_logs.urls&apos;)),
+    url(r'^admin/',admin.site.urls),
+    url(r'',include('learning_logs.urls')),
 ]
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>出现新旧版本，原因在于安装的Django的版本，书中的是1.8；而我装的2.1</p>
 </blockquote>
-<h4 id="新版本，path式的："><a href="#新版本，path式的：" class="headerlink" title="新版本，path式的："></a>新版本，path式的：</h4><pre><code>from django.urls import include, path
-
-urlpatterns = [
-    path(&apos;admin/&apos;, admin.site.urls),
-    path(&apos;&apos;,include(&apos;learning_logs.urls&apos;,namespace=&apos;learning_logs&apos;)),
-]
-</code></pre><blockquote>
-<p>我将path式的注释掉了，用的是url式的。这在今天创建新网页之前，运行都是正常的。</p>
-</blockquote>
-<h3 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h3><p>首先想到：将url式注释掉，尝试path式，看能否运行正常；结果，又报另一个错误：(</p>
-<blockquote>
-<p>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</p>
-</blockquote>
-<p>理解下意思，大致就是：应该在include模块中设置app_name属性，或者传递一个包含模式列表和app_name的2元组<br>又百度一番，知道了<code>include</code>模块需包含两个参数，前一个为2元组，后一个为<code>namespace</code>；于是将代码修改成这样：</p>
+<h4 id="新版本path式的"><a class="markdownIt-Anchor" href="#新版本path式的"></a> 新版本，path式的：</h4>
 <pre><code>from django.urls import include, path
 
 urlpatterns = [
-    path(&apos;admin/&apos;, admin.site.urls),
-    path(&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;),namespace=&apos;learning_logs&apos;)),    
+    path('admin/', admin.site.urls),
+    path('',include('learning_logs.urls',namespace='learning_logs')),
 ]
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
+<p>我将path式的注释掉了，用的是url式的。这在今天创建新网页之前，运行都是正常的。</p>
+</blockquote>
+<h3 id="错误解决"><a class="markdownIt-Anchor" href="#错误解决"></a> 错误解决</h3>
+<p>首先想到：将url式注释掉，尝试path式，看能否运行正常；结果，又报另一个错误：(</p>
+<blockquote>
+<p>ImproperlyConfigured: Specifying a namespace in include() without providing an app_name is not supported. Set the app_name attribute in the included module, or pass a 2-tuple containing the list of patterns and app_name instead.</p>
+</blockquote>
+<p>理解下意思，大致就是：应该在include模块中设置app_name属性，或者传递一个包含模式列表和app_name的2元组<br>
+又百度一番，知道了<code>include</code>模块需包含两个参数，前一个为2元组，后一个为<code>namespace</code>；于是将代码修改成这样：</p>
+<pre><code>from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',include(('learning_logs.urls','learning_logs'),namespace='learning_logs')),    
+]
+</code></pre>
+<blockquote>
 <p>OK! 运行正常</p>
 </blockquote>
-<p>网上搜索一番，发现新旧版本的区别在于是否显示声明<code>namespace</code>的值，在旧版本url式中<code>namespace</code>是注册了的，而新版本未注册。<br>用url式的代码如下：</p>
+<p>网上搜索一番，发现新旧版本的区别在于是否显示声明<code>namespace</code>的值，在旧版本url式中<code>namespace</code>是注册了的，而新版本未注册。<br>
+用url式的代码如下：</p>
 <pre><code>from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r&apos;^admin/&apos;,admin.site.urls),
-    url(r&apos;&apos;,include((&apos;learning_logs.urls&apos;,&apos;learning_logs&apos;))),
+    url(r'^admin/',admin.site.urls),
+    url(r'',include(('learning_logs.urls','learning_logs'))),
 ]
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>Include只需包含一个参数arg：2元组；namespace不需要显示声明。</p>
 </blockquote>
 <p>到此，问题解决。 完：）</p>
@@ -587,7 +606,7 @@ urlpatterns = [
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -672,7 +691,7 @@ urlpatterns = [
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个错误来源"><span class="nav-text">第一个错误来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排查问题"><span class="nav-text">排查问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#旧版本，url式的："><span class="nav-text">旧版本，url式的：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新版本，path式的："><span class="nav-text">新版本，path式的：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误解决"><span class="nav-text">错误解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个错误来源"><span class="nav-text"> 第一个错误来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排查问题"><span class="nav-text"> 排查问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#旧版本url式的"><span class="nav-text"> 旧版本，url式的：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新版本path式的"><span class="nav-text"> 新版本，path式的：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误解决"><span class="nav-text"> 错误解决</span></a></li></ol></div>
             
 
           </div>

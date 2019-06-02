@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,13 +78,13 @@
 
 
 
-<meta name="description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。 目录简介提出问题理解数据数据清洗探索性数据分析（建立指标模型与可视化）结论/交流   简介数据集的简介数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  PatientId：病人I">
+<meta name="description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。  目录  简介 提出问题 理解数据 数据清洗 探索性数据分析（建立指标模型与可视化） 结论/交流    简介  数据集的简介 数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  P">
 <meta name="keywords" content="python,data_analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="探索性数据分析基本流程">
 <meta property="og:url" content="http://ipine.github.io/2019-05-14/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。 目录简介提出问题理解数据数据清洗探索性数据分析（建立指标模型与可视化）结论/交流   简介数据集的简介数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  PatientId：病人I">
+<meta property="og:description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。  目录  简介 提出问题 理解数据 数据清洗 探索性数据分析（建立指标模型与可视化） 结论/交流    简介  数据集的简介 数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  P">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/output_19_0.png">
 <meta property="og:image" content="http://ipineimg.lijundong.com/output_22_1.png">
@@ -96,7 +97,7 @@
 <meta property="og:updated_time" content="2019-05-14T11:57:24.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="探索性数据分析基本流程">
-<meta name="twitter:description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。 目录简介提出问题理解数据数据清洗探索性数据分析（建立指标模型与可视化）结论/交流   简介数据集的简介数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  PatientId：病人I">
+<meta name="twitter:description" content="以分析数据集未前往就诊的预约挂号为例，总结一下探索性数据分析的基本流程。  目录  简介 提出问题 理解数据 数据清洗 探索性数据分析（建立指标模型与可视化） 结论/交流    简介  数据集的简介 数据来源kaggle，未前往就诊的挂号预约指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：  P">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/output_19_0.png">
 
 
@@ -394,10 +395,19 @@
 
       
         <p>以分析数据集<code>未前往就诊的预约挂号</code>为例，总结一下探索性数据分析的基本流程。</p>
-<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul><br><li><a href="#intro">简介</a></li><br><li><a href="#wenti">提出问题</a></li><br><li><a href="#lijie">理解数据</a></li><br><li><a href="#qingxi">数据清洗</a></li><br><li><a href="#eda">探索性数据分析（建立指标模型与可视化）</a></li><br><li><a href="#conclusions">结论/交流</a></li><br></ul>
-
+<h3 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h3>
+<ul>
+<li><a href="#intro">简介</a></li>
+<li><a href="#wenti">提出问题</a></li>
+<li><a href="#lijie">理解数据</a></li>
+<li><a href="#qingxi">数据清洗</a></li>
+<li><a href="#eda">探索性数据分析（建立指标模型与可视化）</a></li>
+<li><a href="#conclusions">结论/交流</a></li>
+</ul>
 <p><a id="intro"></a></p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h4 id="数据集的简介"><a href="#数据集的简介" class="headerlink" title="数据集的简介"></a>数据集的简介</h4><p><a href="https://www.kaggle.com/joniarroba/noshowappointments" target="_blank" rel="noopener">数据来源kaggle</a>，<code>未前往就诊的挂号预约</code>指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：</p>
+<h3 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h3>
+<h4 id="数据集的简介"><a class="markdownIt-Anchor" href="#数据集的简介"></a> 数据集的简介</h4>
+<p><a href="https://www.kaggle.com/joniarroba/noshowappointments" target="_blank" rel="noopener">数据来源kaggle</a>，<code>未前往就诊的挂号预约</code>指一个人预约了医生，收到了所有的指示却没有按约去医院就诊。该数据集包含11万条巴西病人预约挂号的求诊信息，每行数据包含有关患者特点的14个变量，具体有：</p>
 <ul>
 <li>PatientId：病人ID，</li>
 <li>AppointmentID：预约流水号ID，</li>
@@ -406,7 +416,7 @@
 <li>AppointmentDay：预约的就诊日期，</li>
 <li>Age：病人年龄，</li>
 <li>Neighbourhood：医院所在位置，</li>
-<li>Scholarship：是否参加巴西福利项目 <a href="https://en.wikipedia.org/wiki/Bolsa_Fam%C3%ADlia" target="_blank" rel="noopener">Bolsa Família</a> </li>
+<li>Scholarship：是否参加巴西福利项目 <a href="https://en.wikipedia.org/wiki/Bolsa_Fam%C3%ADlia" target="_blank" rel="noopener">Bolsa Família</a></li>
 <li>Hipertension： 是否是高血压，</li>
 <li>Diabetes：是否是糖尿病，</li>
 <li>Alcoholism：是否是酗酒，</li>
@@ -415,7 +425,9 @@
 <li>No-show：<code>no</code>表示病人如约就诊，<code>yes</code>表示病人没有前往就诊。</li>
 </ul>
 <p><a id="wenti"></a></p>
-<h3 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h3><p>数据分析的目标就是解决问题，提出感兴趣的或是以业务为导向的问题。一般是两种情况：要么获取一批数据，然后根据它提问；要么先提问，然后根据问题收集数据。<br>这里提的问题如下：</p>
+<h3 id="提出问题"><a class="markdownIt-Anchor" href="#提出问题"></a> 提出问题</h3>
+<p>数据分析的目标就是解决问题，提出感兴趣的或是以业务为导向的问题。一般是两种情况：要么获取一批数据，然后根据它提问；要么先提问，然后根据问题收集数据。<br>
+这里提的问题如下：</p>
 <ul>
 <li>病人的年龄是如何分布的？哪个年龄段的病人更多？</li>
 <li>未按约去就诊的病人有多少？占多大的比例？</li>
@@ -425,108 +437,151 @@
 <li>哪些重要因素会影响病人是否如约去就诊？例如，年龄，性别，是否参加福利项目，一周中的哪天就诊等。</li>
 </ul>
 <p><a id="lijie"></a></p>
-<h3 id="理解数据"><a href="#理解数据" class="headerlink" title="理解数据"></a>理解数据</h3><p>理解数据背景，每个字段的实际含义。主要包括：导入数据和查看数据基本信息，比如，一些描述统计信息。</p>
-<h4 id="导入必要的包和数据："><a href="#导入必要的包和数据：" class="headerlink" title="导入必要的包和数据："></a>导入必要的包和数据：</h4><pre><code>import pandas as pd
+<h3 id="理解数据"><a class="markdownIt-Anchor" href="#理解数据"></a> 理解数据</h3>
+<p>理解数据背景，每个字段的实际含义。主要包括：导入数据和查看数据基本信息，比如，一些描述统计信息。</p>
+<h4 id="导入必要的包和数据"><a class="markdownIt-Anchor" href="#导入必要的包和数据"></a> 导入必要的包和数据：</h4>
+<pre><code>import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 %matplotlib inline
 
-df = pd.read_csv(&apos;noshowappointments-kagglev2-may-2016.csv&apos;)
-</code></pre><h4 id="查看基本信息"><a href="#查看基本信息" class="headerlink" title="查看基本信息"></a>查看基本信息</h4><p>查看数据集中有哪些列</p>
+df = pd.read_csv('noshowappointments-kagglev2-may-2016.csv')
+</code></pre>
+<h4 id="查看基本信息"><a class="markdownIt-Anchor" href="#查看基本信息"></a> 查看基本信息</h4>
+<p>查看数据集中有哪些列</p>
 <pre><code>df.head()
-</code></pre><p>查看数据集是否有缺失值、重复值以及每列的数据类型。共14列，每列都是110527个值，不存在缺失值，也不存在重复值。</p>
+</code></pre>
+<p>查看数据集是否有缺失值、重复值以及每列的数据类型。共14列，每列都是110527个值，不存在缺失值，也不存在重复值。</p>
 <pre><code>df.info()
 df.duplicated().sum()
-</code></pre><p>检查异常值，发现年龄的最小值有误。</p>
+</code></pre>
+<p>检查异常值，发现年龄的最小值有误。</p>
 <pre><code>df.describe()
 df.Age.describe()
-</code></pre><p>输出如下：</p>
-<pre><code>count    110527.000000
-mean         37.088874
-std          23.110205
-min          -1.000000
-25%          18.000000
-50%          37.000000
-75%          55.000000
-max         115.000000
-Name: Age, dtype: float64
-</code></pre><p><a id="qingxi"></a></p>
-<h3 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h3><p>这一步主要是评估数据来识别数据质量或结构中的问题，并通过修改、替换或删除数据来清理数据，以确保数据集具有最高质量和尽可能结构化。</p>
-<h4 id="1、将所有列名统一修改成小写并以下划线连接，便于操作。"><a href="#1、将所有列名统一修改成小写并以下划线连接，便于操作。" class="headerlink" title="1、将所有列名统一修改成小写并以下划线连接，便于操作。"></a>1、将所有列名统一修改成小写并以下划线连接，便于操作。</h4><pre><code>df.rename(columns=lambda x: x.strip().lower().replace(&apos;-&apos;,&apos;_&apos;), inplace=True )
+</code></pre>
+<p>输出如下：</p>
+<pre><code>    count    110527.000000
+    mean         37.088874
+    std          23.110205
+    min          -1.000000
+    25%          18.000000
+    50%          37.000000
+    75%          55.000000
+    max         115.000000
+    Name: Age, dtype: float64
+</code></pre>
+<p><a id="qingxi"></a></p>
+<h3 id="数据清洗"><a class="markdownIt-Anchor" href="#数据清洗"></a> 数据清洗</h3>
+<p>这一步主要是评估数据来识别数据质量或结构中的问题，并通过修改、替换或删除数据来清理数据，以确保数据集具有最高质量和尽可能结构化。</p>
+<h4 id="1-将所有列名统一修改成小写并以下划线连接便于操作"><a class="markdownIt-Anchor" href="#1-将所有列名统一修改成小写并以下划线连接便于操作"></a> 1、将所有列名统一修改成小写并以下划线连接，便于操作。</h4>
+<pre><code>df.rename(columns=lambda x: x.strip().lower().replace('-','_'), inplace=True )
 df.head(2)
-</code></pre><h4 id="2、删除与问题无关的列"><a href="#2、删除与问题无关的列" class="headerlink" title="2、删除与问题无关的列"></a>2、删除与问题无关的列</h4><p>要删除的列包括：</p>
+</code></pre>
+<h4 id="2-删除与问题无关的列"><a class="markdownIt-Anchor" href="#2-删除与问题无关的列"></a> 2、删除与问题无关的列</h4>
+<p>要删除的列包括：</p>
 <ul>
-<li>PatientId：病人ID，</li>
-<li>neighbourhood: 医院位置</li>
-<li>Hipertension： 是否是高血压，</li>
-<li>Diabetes：是否是糖尿病，</li>
-<li>Alcoholism：是否是酗酒，</li>
-<li>Handcap：是否是残障，</li>
-<li>SMS_received：病人是否收到短信通知，</li>
+<li>
+<p>PatientId：病人ID，</p>
+</li>
+<li>
+<p>neighbourhood: 医院位置</p>
+</li>
+<li>
+<p>Hipertension： 是否是高血压，</p>
+</li>
+<li>
+<p>Diabetes：是否是糖尿病，</p>
+</li>
+<li>
+<p>Alcoholism：是否是酗酒，</p>
+</li>
+<li>
+<p>Handcap：是否是残障，</p>
+</li>
+<li>
+<p>SMS_received：病人是否收到短信通知，</p>
+<p>df.drop([‘patientid’,‘hipertension’,‘diabetes’,‘alcoholism’,‘handcap’,‘sms_received’,‘neighbourhood’], axis=1, inplace= True)<br>
+df.tail(2)</p>
+</li>
 </ul>
-<pre><code>df.drop([&apos;patientid&apos;,&apos;hipertension&apos;,&apos;diabetes&apos;,&apos;alcoholism&apos;,&apos;handcap&apos;,&apos;sms_received&apos;,&apos;neighbourhood&apos;], axis=1, inplace= True)
-df.tail(2)
-</code></pre><h4 id="3、处理异常值。"><a href="#3、处理异常值。" class="headerlink" title="3、处理异常值。"></a>3、处理异常值。</h4><p>通过上面的观察发现<code>age</code>列的最小值为-1，最大值为115。最小值明显是错误值，而最大值不确定是否有误，但我觉得它可能是真实的，所以保留。</p>
-<pre><code>df = df[df[&apos;age&apos;] &gt; 0]
+<h4 id="3-处理异常值"><a class="markdownIt-Anchor" href="#3-处理异常值"></a> 3、处理异常值。</h4>
+<p>通过上面的观察发现<code>age</code>列的最小值为-1，最大值为115。最小值明显是错误值，而最大值不确定是否有误，但我觉得它可能是真实的，所以保留。</p>
+<pre><code>df = df[df['age'] &gt; 0]
 df.age.describe()
-</code></pre><h4 id="4、对age列进行分段，并创建新的列-age-group"><a href="#4、对age列进行分段，并创建新的列-age-group" class="headerlink" title="4、对age列进行分段，并创建新的列 age_group"></a>4、对<code>age</code>列进行分段，并创建新的列 <code>age_group</code></h4><pre><code>bin_labels = [&apos;Teenager&apos;,&apos;Young&apos;,&apos;Middle&apos;,&apos;Old&apos;]
+</code></pre>
+<h4 id="4-对age列进行分段并创建新的列-age_group"><a class="markdownIt-Anchor" href="#4-对age列进行分段并创建新的列-age_group"></a> 4、对<code>age</code>列进行分段，并创建新的列 <code>age_group</code></h4>
+<pre><code>bin_labels = ['Teenager','Young','Middle','Old']
 bin_edges = [0,19,38,56,116]
-df[&apos;age_group&apos;] = pd.cut(df[&apos;age&apos;], bin_edges, labels=bin_labels) 
-df[&apos;age_group&apos;].isnull().sum()
-</code></pre><p><a id="eda"></a></p>
-<h3 id="探索性数据分析（建立指标模型与可视化）"><a href="#探索性数据分析（建立指标模型与可视化）" class="headerlink" title="探索性数据分析（建立指标模型与可视化）"></a>探索性数据分析（建立指标模型与可视化）</h3><p>执行EDA，可以探索并扩充数据，以最大限度地发挥自己数据分析、可视化和模型构建的潜力。<br>探索数据涉及在数据中查找模式，可视化数据中的关系，并对正在使用的数据建立直觉。<br>经过探索后，可以删除异常值，并从数据中创建更好的特征。</p>
-<h4 id="问题-1：病人的年龄是如何分布的？哪个年龄段的病人更多？"><a href="#问题-1：病人的年龄是如何分布的？哪个年龄段的病人更多？" class="headerlink" title="问题 1：病人的年龄是如何分布的？哪个年龄段的病人更多？"></a>问题 1：病人的年龄是如何分布的？哪个年龄段的病人更多？</h4><pre><code>plt.subplots(figsize=(6,4))
-df[&apos;age_group&apos;].value_counts().plot(kind=&apos;bar&apos;)
-plt.title(&apos;Age Distribution&apos;)
-plt.xlabel(&apos;Age&apos;)
-plt.ylabel(&apos;Frequence&apos;);
-</code></pre><p><img src="http://ipineimg.lijundong.com/output_19_0.png" alt="19"></p>
+df['age_group'] = pd.cut(df['age'], bin_edges, labels=bin_labels) 
+df['age_group'].isnull().sum()
+</code></pre>
+<p><a id="eda"></a></p>
+<h3 id="探索性数据分析建立指标模型与可视化"><a class="markdownIt-Anchor" href="#探索性数据分析建立指标模型与可视化"></a> 探索性数据分析（建立指标模型与可视化）</h3>
+<p>执行EDA，可以探索并扩充数据，以最大限度地发挥自己数据分析、可视化和模型构建的潜力。<br>
+探索数据涉及在数据中查找模式，可视化数据中的关系，并对正在使用的数据建立直觉。<br>
+经过探索后，可以删除异常值，并从数据中创建更好的特征。</p>
+<h4 id="问题-1病人的年龄是如何分布的哪个年龄段的病人更多"><a class="markdownIt-Anchor" href="#问题-1病人的年龄是如何分布的哪个年龄段的病人更多"></a> 问题 1：病人的年龄是如何分布的？哪个年龄段的病人更多？</h4>
+<pre><code>plt.subplots(figsize=(6,4))
+df['age_group'].value_counts().plot(kind='bar')
+plt.title('Age Distribution')
+plt.xlabel('Age')
+plt.ylabel('Frequence');
+</code></pre>
+<p><img src="http://ipineimg.lijundong.com/output_19_0.png" alt="19"></p>
 <p>可以看到发出预约挂号的病人中，青年人最多，其次是中年人和青少年，老年人最少。</p>
-<h4 id="问题2：未按约去就诊的病人有多少？占多大的比例？"><a href="#问题2：未按约去就诊的病人有多少？占多大的比例？" class="headerlink" title="问题2：未按约去就诊的病人有多少？占多大的比例？"></a>问题2：未按约去就诊的病人有多少？占多大的比例？</h4><pre><code>x_vaule = df[&apos;no_show&apos;].value_counts()
+<h4 id="问题2未按约去就诊的病人有多少占多大的比例"><a class="markdownIt-Anchor" href="#问题2未按约去就诊的病人有多少占多大的比例"></a> 问题2：未按约去就诊的病人有多少？占多大的比例？</h4>
+<pre><code>x_vaule = df['no_show'].value_counts()
 print(x_vaule)
-labels = &apos;Show up&apos;,&apos;No show&apos;
+labels = 'Show up','No show'
 explode = [0, 0.1]
 plt.subplots(figsize=(5,5))
 plt.axes(aspect=1)
 # 设置饼图样式，标签，突出显示，圆上文本格式，显示阴影，文本位置离圆心距离，起始角度，百分比的文本离圆心距离
-plt.pie(x=x_vaule, labels=labels,explode=explode,autopct=&apos;%.1f %%&apos;, shadow=True, labeldistance=1.1, startangle = 90,pctdistance = 0.6 )
-plt.title(&apos;The proportion of patients who did not go to the hospital as appointment &apos;);
-</code></pre><p><img src="http://ipineimg.lijundong.com/output_22_1.png" alt="22"></p>
+plt.pie(x=x_vaule, labels=labels,explode=explode,autopct='%.1f %%', shadow=True, labeldistance=1.1, startangle = 90,pctdistance = 0.6 )
+plt.title('The proportion of patients who did not go to the hospital as appointment ');
+</code></pre>
+<p><img src="http://ipineimg.lijundong.com/output_22_1.png" alt="22"></p>
 <p>通过统计函数可以得出未按约定到医院就诊的病人有21680人，观察饼图可以知道，该人数占据总预约人数的20.3%。</p>
-<h4 id="问题3：人们一般会预约在一周的哪一天就诊？"><a href="#问题3：人们一般会预约在一周的哪一天就诊？" class="headerlink" title="问题3：人们一般会预约在一周的哪一天就诊？"></a>问题3：人们一般会预约在一周的哪一天就诊？</h4><pre><code># 先将预约日期转换成日期类型，然后换成一周表示
-df[&apos;appointmentday&apos;] = pd.to_datetime(df[&apos;appointmentday&apos;], errors=&apos;coerce&apos;)
-df[&apos;appointment_weekday&apos;] =df[&apos;appointmentday&apos;].dt.weekday_name 
+<h4 id="问题3人们一般会预约在一周的哪一天就诊"><a class="markdownIt-Anchor" href="#问题3人们一般会预约在一周的哪一天就诊"></a> 问题3：人们一般会预约在一周的哪一天就诊？</h4>
+<pre><code># 先将预约日期转换成日期类型，然后换成一周表示
+df['appointmentday'] = pd.to_datetime(df['appointmentday'], errors='coerce')
+df['appointment_weekday'] =df['appointmentday'].dt.weekday_name 
 
 plt.subplots(figsize=(8,5))
-plt.plot(df[&apos;appointment_weekday&apos;].value_counts().keys(),df[&apos;appointment_weekday&apos;].value_counts().values)
-plt.title(&apos;Appointment Day Distribution&apos;)
-plt.xlabel(&apos;Appointment Day&apos;)
-plt.ylabel(&apos;Frequence&apos;);
-</code></pre><p><img src="http://ipineimg.lijundong.com/output_26_0.png" alt="26"></p>
+plt.plot(df['appointment_weekday'].value_counts().keys(),df['appointment_weekday'].value_counts().values)
+plt.title('Appointment Day Distribution')
+plt.xlabel('Appointment Day')
+plt.ylabel('Frequence');
+</code></pre>
+<p><img src="http://ipineimg.lijundong.com/output_26_0.png" alt="26"></p>
 <p>可以看到，人们更喜欢在星期三就诊，其次是星期二，星期四和星期五预约就诊的人相对少些，星期六的人最少。这里没有出现星期天，也许是因为星期天是休息日。</p>
-<h4 id="问题4：一天中的哪个时段，预约的人最多？"><a href="#问题4：一天中的哪个时段，预约的人最多？" class="headerlink" title="问题4：一天中的哪个时段，预约的人最多？"></a>问题4：一天中的哪个时段，预约的人最多？</h4><pre><code>#先将scheduleday处理成日期类型，然后提取小时
-df[&apos;scheduledday&apos;] = pd.to_datetime(df[&apos;scheduledday&apos;], errors=&apos;coerce&apos;)
-df[&apos;scheduledhour&apos;] = df[&apos;scheduledday&apos;].dt.hour
-# df[&apos;scheduledhour&apos;].describe()
+<h4 id="问题4一天中的哪个时段预约的人最多"><a class="markdownIt-Anchor" href="#问题4一天中的哪个时段预约的人最多"></a> 问题4：一天中的哪个时段，预约的人最多？</h4>
+<pre><code>#先将scheduleday处理成日期类型，然后提取小时
+df['scheduledday'] = pd.to_datetime(df['scheduledday'], errors='coerce')
+df['scheduledhour'] = df['scheduledday'].dt.hour
+# df['scheduledhour'].describe()
 
 #将一天的时间分成三个时段，上午，下午，晚上
-bin_labels = [&apos;Morning&apos;,&apos;Afternoon&apos;,&apos;Night&apos;]
+bin_labels = ['Morning','Afternoon','Night']
 bin_edges = [5,12,18,22]
-df[&apos;scheduledhour_cut&apos;] = pd.cut(df[&apos;scheduledhour&apos;], bin_edges, labels=bin_labels) 
-# df[&apos;scheduledhour_cut&apos;].isnull().sum()
-df[&apos;scheduledhour_cut&apos;].value_counts()
+df['scheduledhour_cut'] = pd.cut(df['scheduledhour'], bin_edges, labels=bin_labels) 
+# df['scheduledhour_cut'].isnull().sum()
+df['scheduledhour_cut'].value_counts()
 
 plt.subplots(figsize=(6,4))
-df[&apos;scheduledhour_cut&apos;].value_counts().plot(kind=&apos;bar&apos;)
-plt.title(&apos;Scheduled Time Distribution&apos;)
-plt.xlabel(&apos;Scheduled Time&apos;)
-plt.ylabel(&apos;Frequence&apos;);
-</code></pre><p><img src="http://ipineimg.lijundong.com/output_30_0.png" alt="30"></p>
+df['scheduledhour_cut'].value_counts().plot(kind='bar')
+plt.title('Scheduled Time Distribution')
+plt.xlabel('Scheduled Time')
+plt.ylabel('Frequence');
+</code></pre>
+<p><img src="http://ipineimg.lijundong.com/output_30_0.png" alt="30"></p>
 <p>可以看到，绝大多数的病人选择在上午预约，一部分病人选择在下午预约，极少病人选择在晚上预约。一般下午6点以后，医院的医生可能已经下班了，预约成功的几率会下降。</p>
-<h4 id="问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？"><a href="#问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？" class="headerlink" title="问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？"></a>问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？</h4><pre><code>df[&apos;waittime&apos;] = df[&apos;appointmentday&apos;].dt.date - df[&apos;scheduledday&apos;].dt.date
-df[&apos;waittime&apos;].describe()
-</code></pre><p><code>等待时长</code>的统计信息如下：</p>
+<h4 id="问题5一般会提前几天预约挂号即病人等待就诊的时长是多久"><a class="markdownIt-Anchor" href="#问题5一般会提前几天预约挂号即病人等待就诊的时长是多久"></a> 问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？</h4>
+<pre><code>df['waittime'] = df['appointmentday'].dt.date - df['scheduledday'].dt.date
+df['waittime'].describe()
+</code></pre>
+<p><code>等待时长</code>的统计信息如下：</p>
 <pre><code>count                     106987
 mean     10 days 04:00:04.710852
 std      15 days 06:19:27.050399
@@ -536,11 +591,13 @@ min            -6 days +00:00:00
 75%             14 days 00:00:00
 max            179 days 00:00:00
 Name: waittime, dtype: object
-</code></pre><p>得到的<code>等待时长</code>出现了负数值，这些值应该是错误的。至于<code>等待时长</code>很大的数据，不确定是否是错误的。这里留下那些等待时长<code>大于等于0天</code>的数据。</p>
-<pre><code>df = df[df[&apos;appointmentday&apos;].dt.date &gt;= df[&apos;scheduledday&apos;].dt.date]
-df[&apos;waittime&apos;] = (df[&apos;appointmentday&apos;].dt.date - df[&apos;scheduledday&apos;].dt.date)
-df[&apos;waittime&apos;].describe()
-</code></pre><p>处理后的结果：</p>
+</code></pre>
+<p>得到的<code>等待时长</code>出现了负数值，这些值应该是错误的。至于<code>等待时长</code>很大的数据，不确定是否是错误的。这里留下那些等待时长<code>大于等于0天</code>的数据。</p>
+<pre><code>df = df[df['appointmentday'].dt.date &gt;= df['scheduledday'].dt.date]
+df['waittime'] = (df['appointmentday'].dt.date - df['scheduledday'].dt.date)
+df['waittime'].describe()
+</code></pre>
+<p>处理后的结果：</p>
 <pre><code>count                     106982
 mean     10 days 04:00:53.840833
 std      15 days 06:19:37.756884
@@ -550,61 +607,75 @@ min              0 days 00:00:00
 75%             14 days 00:00:00
 max            179 days 00:00:00
 Name: waittime, dtype: object
-</code></pre><p>人们平均提前10天预约，大多数人提前一星期预约，等待时长最短是0天，即当天预约当天就诊，等待时长最久的是179天。</p>
-<h4 id="问题6：哪些重要因素会影响病人是否如约去就诊？"><a href="#问题6：哪些重要因素会影响病人是否如约去就诊？" class="headerlink" title="问题6：哪些重要因素会影响病人是否如约去就诊？"></a>问题6：哪些重要因素会影响病人是否如约去就诊？</h4><p>例如，年龄，性别，是否参加福利项目，一周中的就诊时间等</p>
+</code></pre>
+<p>人们平均提前10天预约，大多数人提前一星期预约，等待时长最短是0天，即当天预约当天就诊，等待时长最久的是179天。</p>
+<h4 id="问题6哪些重要因素会影响病人是否如约去就诊"><a class="markdownIt-Anchor" href="#问题6哪些重要因素会影响病人是否如约去就诊"></a> 问题6：哪些重要因素会影响病人是否如约去就诊？</h4>
+<p>例如，年龄，性别，是否参加福利项目，一周中的就诊时间等</p>
 <p>计算去就诊和未去就诊的人数的比例函数</p>
 <pre><code>def cal_proportion(col_name):
     &quot;&quot;&quot;按传入的列与no-show分组，统计不同类的数量，并计算各类的比例
     &quot;&quot;&quot;
-    counts = df.groupby([&apos;no_show&apos;,col_name]).count()[&apos;appointmentid&apos;]
-    total = df.groupby([&apos;no_show&apos;]).count()[&apos;appointmentid&apos;]
-    no_show_proportions = counts[&apos;Yes&apos;] / total[&apos;Yes&apos;]
-    show_proportions = counts[&apos;No&apos;]/ total[&apos;No&apos;]
+    counts = df.groupby(['no_show',col_name]).count()['appointmentid']
+    total = df.groupby(['no_show']).count()['appointmentid']
+    no_show_proportions = counts['Yes'] / total['Yes']
+    show_proportions = counts['No']/ total['No']
     return no_show_proportions,show_proportions
-</code></pre><p>绘制图形函数</p>
+</code></pre>
+<p>绘制图形函数</p>
 <pre><code>def double_bar(bar_data1,bar_data2,xlabels,xtick_label):
     # 绘制条柱,先设置每个等级组的x坐标位置和每个条柱的宽度
     ind = np.arange(len(bar_data1))
     width = 0.35
-    red_bar = plt.bar(ind,bar_data1, width, color=&apos;r&apos;, alpha=0.7, label=&apos;No show&apos;)
-    blue_bar = plt.bar(ind+width, bar_data2, width, color=&apos;b&apos;,alpha=0.7, label=&apos;Show up&apos;)
+    red_bar = plt.bar(ind,bar_data1, width, color='r', alpha=0.7, label='No show')
+    blue_bar = plt.bar(ind+width, bar_data2, width, color='b',alpha=0.7, label='Show up')
 
     # 标题和标签
-    plt.ylabel(&apos;Proportion&apos;)
+    plt.ylabel('Proportion')
     plt.xlabel(xlabels)
-    plt.title(&apos;Proportion by &apos;+ xlabels + &apos; and No-Show&apos;)
+    plt.title('Proportion by '+ xlabels + ' and No-Show')
     locations = ind + width / 2  # x 坐标刻度位置
     plt.xticks(locations, xtick_label)
 
     # 图例
     plt.legend()
-</code></pre><h5 id="6-1-不同年龄段的病人，如约去就诊的情况怎么样？"><a href="#6-1-不同年龄段的病人，如约去就诊的情况怎么样？" class="headerlink" title="6.1 不同年龄段的病人，如约去就诊的情况怎么样？"></a>6.1 不同年龄段的病人，如约去就诊的情况怎么样？</h5><p>计算各个年龄段，按约去就诊的比例和未按约去就诊的比例</p>
-<pre><code>no_show = cal_proportion(&apos;age_group&apos;)[0]
-show_up = cal_proportion(&apos;age_group&apos;)[1]
-xtick_label =  [&apos;Teenager&apos;, &apos;Young&apos;, &apos;Middle&apos;, &apos;Old&apos;]
-double_bar(no_show,show_up,&apos;Age Group&apos;,xtick_label)
-</code></pre><p><img src="http://ipineimg.lijundong.com/output_45_0.png" alt="45"></p>
+</code></pre>
+<h5 id="61-不同年龄段的病人如约去就诊的情况怎么样"><a class="markdownIt-Anchor" href="#61-不同年龄段的病人如约去就诊的情况怎么样"></a> 6.1 不同年龄段的病人，如约去就诊的情况怎么样？</h5>
+<p>计算各个年龄段，按约去就诊的比例和未按约去就诊的比例</p>
+<pre><code>no_show = cal_proportion('age_group')[0]
+show_up = cal_proportion('age_group')[1]
+xtick_label =  ['Teenager', 'Young', 'Middle', 'Old']
+double_bar(no_show,show_up,'Age Group',xtick_label)
+</code></pre>
+<p><img src="http://ipineimg.lijundong.com/output_45_0.png" alt="45"></p>
 <p>通过上图可以看到，不同年龄段的病人如约去就诊的比例是不同的。年龄越高，去就诊的比例比未去就诊的比例就越高，而青少年和年轻人则是未去就诊的比例高于按约去就诊的比例。</p>
-<h5 id="6-2-不同性别的病人，如约去就诊的情况怎么样？"><a href="#6-2-不同性别的病人，如约去就诊的情况怎么样？" class="headerlink" title="6.2 不同性别的病人，如约去就诊的情况怎么样？"></a>6.2 不同性别的病人，如约去就诊的情况怎么样？</h5><pre><code>no_show = cal_proportion(&apos;gender&apos;)[0]
-show_up = cal_proportion(&apos;gender&apos;)[1]
-xtick_label = [&apos;Female&apos;, &apos;Male&apos;] 
-double_bar(no_show,show_up,&apos;Gender&apos;,xtick_label)
-</code></pre><p><img src="http://ipineimg.lijundong.com/output_48_0.png" alt="48"></p>
+<h5 id="62-不同性别的病人如约去就诊的情况怎么样"><a class="markdownIt-Anchor" href="#62-不同性别的病人如约去就诊的情况怎么样"></a> 6.2 不同性别的病人，如约去就诊的情况怎么样？</h5>
+<pre><code>no_show = cal_proportion('gender')[0]
+show_up = cal_proportion('gender')[1]
+xtick_label = ['Female', 'Male'] 
+double_bar(no_show,show_up,'Gender',xtick_label)
+</code></pre>
+<p><img src="http://ipineimg.lijundong.com/output_48_0.png" alt="48"></p>
 <p>看起来，男女患者去医院就诊的概率相似。但在所有患者里，女性预约患者更多。</p>
-<h5 id="6-3-是否参加福利项目，影响患者如约去就诊吗？"><a href="#6-3-是否参加福利项目，影响患者如约去就诊吗？" class="headerlink" title="6.3 是否参加福利项目，影响患者如约去就诊吗？"></a>6.3 是否参加福利项目，影响患者如约去就诊吗？</h5><pre><code>no_show = cal_proportion(&apos;scholarship&apos;)[0]
-show_up = cal_proportion(&apos;scholarship&apos;)[1]
-xtick_label = [&apos;False&apos;, &apos;True&apos;]
-double_bar(no_show,show_up,&apos;Scholarship&apos;,xtick_label)
-</code></pre><p><img src="http://ipineimg.lijundong.com/output_51_0.png" alt="51"></p>
+<h5 id="63-是否参加福利项目影响患者如约去就诊吗"><a class="markdownIt-Anchor" href="#63-是否参加福利项目影响患者如约去就诊吗"></a> 6.3 是否参加福利项目，影响患者如约去就诊吗？</h5>
+<pre><code>no_show = cal_proportion('scholarship')[0]
+show_up = cal_proportion('scholarship')[1]
+xtick_label = ['False', 'True']
+double_bar(no_show,show_up,'Scholarship',xtick_label)
+</code></pre>
+<p><img src="http://ipineimg.lijundong.com/output_51_0.png" alt="51"></p>
 <p>可以看到，未参加巴西福利项目的病人更倾向于按约就诊；而参加了巴西福利项目的病人按约就诊的比例低于未按约就诊的比例。还可以清楚地看到，绝大多数的病人并没有参加福利项目。</p>
-<h5 id="6-4-在一周的哪天就诊，是否会影响病人如约去就诊？"><a href="#6-4-在一周的哪天就诊，是否会影响病人如约去就诊？" class="headerlink" title="6.4 在一周的哪天就诊，是否会影响病人如约去就诊？"></a>6.4 在一周的哪天就诊，是否会影响病人如约去就诊？</h5><pre><code>no_show = cal_proportion(&apos;appointment_weekday&apos;)[0]
-show_up = cal_proportion(&apos;appointment_weekday&apos;)[1]
-xtick_label = [&apos;Friday&apos;, &apos;Monday&apos;, &apos;Saturday&apos;, &apos;Thursday&apos;, &apos;Tuesday&apos;, &apos;Wednesday&apos;]
-double_bar(no_show,show_up,&apos;Appointment Weekday&apos;,xtick_label)
-</code></pre><p><img src="http://ipineimg.lijundong.com/output_54_0.png" alt="54"></p>
+<h5 id="64-在一周的哪天就诊是否会影响病人如约去就诊"><a class="markdownIt-Anchor" href="#64-在一周的哪天就诊是否会影响病人如约去就诊"></a> 6.4 在一周的哪天就诊，是否会影响病人如约去就诊？</h5>
+<pre><code>no_show = cal_proportion('appointment_weekday')[0]
+show_up = cal_proportion('appointment_weekday')[1]
+xtick_label = ['Friday', 'Monday', 'Saturday', 'Thursday', 'Tuesday', 'Wednesday']
+double_bar(no_show,show_up,'Appointment Weekday',xtick_label)
+</code></pre>
+<p><img src="http://ipineimg.lijundong.com/output_54_0.png" alt="54"></p>
 <p>除开星期六外，病人更喜欢在星期四、星期二和星期三如约去就诊；而约在星期五和星期一的病人，未去就诊的比例更高。同时也可以知道，更多的病人选择在星期二和星期三就诊。</p>
 <p><a id="conclusions"></a></p>
-<h3 id="结论-交流"><a href="#结论-交流" class="headerlink" title="结论/交流"></a>结论/交流</h3><p>得出结论这一步通常使用机器学习或推理性统计来完成，本文的重点是使用描述性统计得出结论。<br>与他人交流结果，要证明发现的见解。如果最终目标是构建系统，那么需要分享构建的结果，解释得出设计结论的方式，并报告该系统的性能。</p>
+<h3 id="结论交流"><a class="markdownIt-Anchor" href="#结论交流"></a> 结论/交流</h3>
+<p>得出结论这一步通常使用机器学习或推理性统计来完成，本文的重点是使用描述性统计得出结论。<br>
+与他人交流结果，要证明发现的见解。如果最终目标是构建系统，那么需要分享构建的结果，解释得出设计结论的方式，并报告该系统的性能。</p>
 <ul>
 <li>交流结果的方法有多种：报告、幻灯片、博客帖子、电子邮件、演示文稿，甚至对话。</li>
 <li>数据可视化在这个过程中可以发挥很大的价值。</li>
@@ -759,7 +830,7 @@ double_bar(no_show,show_up,&apos;Appointment Weekday&apos;,xtick_label)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -844,7 +915,7 @@ double_bar(no_show,show_up,&apos;Appointment Weekday&apos;,xtick_label)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据集的简介"><span class="nav-text">数据集的简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提出问题"><span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解数据"><span class="nav-text">理解数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入必要的包和数据："><span class="nav-text">导入必要的包和数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看基本信息"><span class="nav-text">查看基本信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据清洗"><span class="nav-text">数据清洗</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、将所有列名统一修改成小写并以下划线连接，便于操作。"><span class="nav-text">1、将所有列名统一修改成小写并以下划线连接，便于操作。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、删除与问题无关的列"><span class="nav-text">2、删除与问题无关的列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、处理异常值。"><span class="nav-text">3、处理异常值。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、对age列进行分段，并创建新的列-age-group"><span class="nav-text">4、对age列进行分段，并创建新的列 age_group</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探索性数据分析（建立指标模型与可视化）"><span class="nav-text">探索性数据分析（建立指标模型与可视化）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题-1：病人的年龄是如何分布的？哪个年龄段的病人更多？"><span class="nav-text">问题 1：病人的年龄是如何分布的？哪个年龄段的病人更多？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题2：未按约去就诊的病人有多少？占多大的比例？"><span class="nav-text">问题2：未按约去就诊的病人有多少？占多大的比例？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题3：人们一般会预约在一周的哪一天就诊？"><span class="nav-text">问题3：人们一般会预约在一周的哪一天就诊？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题4：一天中的哪个时段，预约的人最多？"><span class="nav-text">问题4：一天中的哪个时段，预约的人最多？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？"><span class="nav-text">问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题6：哪些重要因素会影响病人是否如约去就诊？"><span class="nav-text">问题6：哪些重要因素会影响病人是否如约去就诊？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-不同年龄段的病人，如约去就诊的情况怎么样？"><span class="nav-text">6.1 不同年龄段的病人，如约去就诊的情况怎么样？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-不同性别的病人，如约去就诊的情况怎么样？"><span class="nav-text">6.2 不同性别的病人，如约去就诊的情况怎么样？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-3-是否参加福利项目，影响患者如约去就诊吗？"><span class="nav-text">6.3 是否参加福利项目，影响患者如约去就诊吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-4-在一周的哪天就诊，是否会影响病人如约去就诊？"><span class="nav-text">6.4 在一周的哪天就诊，是否会影响病人如约去就诊？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论-交流"><span class="nav-text">结论/交流</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-text"> 目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-text"> 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据集的简介"><span class="nav-text"> 数据集的简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提出问题"><span class="nav-text"> 提出问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解数据"><span class="nav-text"> 理解数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入必要的包和数据"><span class="nav-text"> 导入必要的包和数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看基本信息"><span class="nav-text"> 查看基本信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据清洗"><span class="nav-text"> 数据清洗</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-将所有列名统一修改成小写并以下划线连接便于操作"><span class="nav-text"> 1、将所有列名统一修改成小写并以下划线连接，便于操作。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-删除与问题无关的列"><span class="nav-text"> 2、删除与问题无关的列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-处理异常值"><span class="nav-text"> 3、处理异常值。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-对age列进行分段并创建新的列-age_group"><span class="nav-text"> 4、对age列进行分段，并创建新的列 age_group</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探索性数据分析建立指标模型与可视化"><span class="nav-text"> 探索性数据分析（建立指标模型与可视化）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题-1病人的年龄是如何分布的哪个年龄段的病人更多"><span class="nav-text"> 问题 1：病人的年龄是如何分布的？哪个年龄段的病人更多？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题2未按约去就诊的病人有多少占多大的比例"><span class="nav-text"> 问题2：未按约去就诊的病人有多少？占多大的比例？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题3人们一般会预约在一周的哪一天就诊"><span class="nav-text"> 问题3：人们一般会预约在一周的哪一天就诊？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题4一天中的哪个时段预约的人最多"><span class="nav-text"> 问题4：一天中的哪个时段，预约的人最多？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题5一般会提前几天预约挂号即病人等待就诊的时长是多久"><span class="nav-text"> 问题5：一般会提前几天预约挂号，即病人等待就诊的时长是多久？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题6哪些重要因素会影响病人是否如约去就诊"><span class="nav-text"> 问题6：哪些重要因素会影响病人是否如约去就诊？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#61-不同年龄段的病人如约去就诊的情况怎么样"><span class="nav-text"> 6.1 不同年龄段的病人，如约去就诊的情况怎么样？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#62-不同性别的病人如约去就诊的情况怎么样"><span class="nav-text"> 6.2 不同性别的病人，如约去就诊的情况怎么样？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#63-是否参加福利项目影响患者如约去就诊吗"><span class="nav-text"> 6.3 是否参加福利项目，影响患者如约去就诊吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#64-在一周的哪天就诊是否会影响病人如约去就诊"><span class="nav-text"> 6.4 在一周的哪天就诊，是否会影响病人如约去就诊？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论交流"><span class="nav-text"> 结论/交流</span></a></li></ol></div>
             
 
           </div>

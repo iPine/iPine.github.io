@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,19 +78,19 @@
 
 
 
-<meta name="description" content="题目描述Sudoku Background：Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 sub-">
+<meta name="description" content="题目描述 Sudoku Background： Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 s">
 <meta name="keywords" content="javascript,codewars">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sudoku Solution Validator">
 <meta property="og:url" content="http://ipine.github.io/2018-04-30/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="题目描述Sudoku Background：Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 sub-">
+<meta property="og:description" content="题目描述 Sudoku Background： Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 s">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-5-6/15442296.jpg">
 <meta property="og:updated_time" content="2019-02-22T11:27:11.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sudoku Solution Validator">
-<meta name="twitter:description" content="题目描述Sudoku Background：Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 sub-">
+<meta name="twitter:description" content="题目描述 Sudoku Background： Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 s">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/18-5-6/15442296.jpg">
 
 
@@ -386,12 +387,15 @@
       
 
       
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Sudoku Background：<br>Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 sub-grids (also known as blocks) contain all of the digits from 1 to 9. </p>
+        <h3 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h3>
+<p>Sudoku Background：<br>
+Sudoku is a game played on a 9x9 grid. The goal of the game is to fill all cells of the grid with digits from 1 to 9, so that each column, each row, and each of the nine 3x3 sub-grids (also known as blocks) contain all of the digits from 1 to 9.</p>
 <p><img src="http://ipineimg.lijundong.com/18-5-6/15442296.jpg" alt="题目描述"></p>
-<h3 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码"></a>我的代码</h3><pre><code>function validSolution(board){
+<h3 id="我的代码"><a class="markdownIt-Anchor" href="#我的代码"></a> 我的代码</h3>
+<pre><code>function validSolution(board){
   //TODO
   var flag = 1;
-
+  
   for(j=0; j&lt;9; j++){
     var sumcol = 0;
     var sum = 0;
@@ -422,14 +426,16 @@
   if(sumgrid != 45){
     flag = 0;
   }
-
+  
   if(flag){
     return true;
   }else{
     return false;
   }
 }
-</code></pre><h3 id="Clever"><a href="#Clever" class="headerlink" title="Clever"></a>Clever</h3><pre><code>function equals45(n){ 
+</code></pre>
+<h3 id="clever"><a class="markdownIt-Anchor" href="#clever"></a> Clever</h3>
+<pre><code>function equals45(n){ 
 return n == 45;
 } 
 function validSolution(board){
@@ -447,7 +453,9 @@ for (var i=0;i&lt;3;i++)
  if (!osums[i].every(equals45)) 
   return false;
 return (sumh.every(equals45) &amp;&amp; sumv.every(equals45)); }
-</code></pre><h3 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h3><ul>
+</code></pre>
+<h3 id="key"><a class="markdownIt-Anchor" href="#key"></a> Key</h3>
+<ul>
 <li><code>every()</code>方法只有数组中每一项执行回调函数结果合部为true才会返回，不然就会返回false。</li>
 </ul>
 <p><a href="http://www.jb51.net/article/81360.htm" target="_blank" rel="noopener">常见的数组操作方法</a></p>
@@ -593,7 +601,7 @@ return (sumh.every(equals45) &amp;&amp; sumv.every(equals45)); }
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -678,7 +686,7 @@ return (sumh.every(equals45) &amp;&amp; sumv.every(equals45)); }
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text">我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clever"><span class="nav-text">Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key"><span class="nav-text">Key</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的代码"><span class="nav-text"> 我的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clever"><span class="nav-text"> Clever</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-text"> Key</span></a></li></ol></div>
             
 
           </div>

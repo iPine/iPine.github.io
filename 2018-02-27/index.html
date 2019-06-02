@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,18 +78,18 @@
 
 
 
-<meta name="description" content="以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。  低级语言什么叫机器语言 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。 什么叫汇编语言 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是add。  机器语言和汇">
+<meta name="description" content="以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。   低级语言  什么叫机器语言 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。  什么叫汇编语言 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是add。  机器语">
 <meta name="keywords" content="reading notes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="黑客与画家">
 <meta property="og:url" content="http://ipine.github.io/2018-02-27/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。  低级语言什么叫机器语言 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。 什么叫汇编语言 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是add。  机器语言和汇">
+<meta property="og:description" content="以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。   低级语言  什么叫机器语言 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。  什么叫汇编语言 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是add。  机器语">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-02-22T11:27:01.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="黑客与画家">
-<meta name="twitter:description" content="以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。  低级语言什么叫机器语言 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。 什么叫汇编语言 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是add。  机器语言和汇">
+<meta name="twitter:description" content="以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。   低级语言  什么叫机器语言 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。  什么叫汇编语言 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是add。  机器语">
 
 
 
@@ -384,21 +385,26 @@
       
 
       
-        <p> 以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。</p>
+        <p>以下内容是阅读《黑客与画家》时，摘录的关于计算机的一些基础知识。</p>
 <hr>
-<h3 id="低级语言"><a href="#低级语言" class="headerlink" title="低级语言"></a>低级语言</h3><h4 id="什么叫机器语言"><a href="#什么叫机器语言" class="headerlink" title="什么叫机器语言"></a>什么叫机器语言</h4><p> 计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。</p>
-<h4 id="什么叫汇编语言"><a href="#什么叫汇编语言" class="headerlink" title="什么叫汇编语言"></a>什么叫汇编语言</h4><p> 命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是<code>add</code>。</p>
+<h3 id="低级语言"><a class="markdownIt-Anchor" href="#低级语言"></a> 低级语言</h3>
+<h4 id="什么叫机器语言"><a class="markdownIt-Anchor" href="#什么叫机器语言"></a> 什么叫机器语言</h4>
+<p>计算机和其他机器一样，也有一张操作命令清单。比如，可以命令计算机把两个数相加。这种操作命令的总和就是计算机的机器语言（machine language）。</p>
+<h4 id="什么叫汇编语言"><a class="markdownIt-Anchor" href="#什么叫汇编语言"></a> 什么叫汇编语言</h4>
+<p>命令清单还是一样，只是将语言换成更人性化的表达，如计算机中的加，用机器语言表达就是11001101，汇编中就是<code>add</code>。</p>
 <blockquote>
 <p>机器语言和汇编语言的共同问题就是，只能让大多数计算机做一些很简单的事情。</p>
 </blockquote>
-<h4 id="为什么使用低级语言"><a href="#为什么使用低级语言" class="headerlink" title="为什么使用低级语言"></a>为什么使用低级语言</h4><p>当考虑效率问题时。</p>
+<h4 id="为什么使用低级语言"><a class="markdownIt-Anchor" href="#为什么使用低级语言"></a> 为什么使用低级语言</h4>
+<p>当考虑效率问题时。</p>
 <blockquote>
 <p>如果你非常关注运行速度，那么最好使用接近机器的语言。</p>
 </blockquote>
 <p>比如说，C 语言就是一种低层次语言，很接近硬件，几乎堪称可移植的汇编语言。大多数操作系统都是用C语言写的。</p>
 <p><em>那么问题来了，硬件速度越来越快了，底层次语言的作用越来越小，为什么不抛弃C语言呢？</em></p>
 <p><em>原因：人们可能想保留缓存区溢出攻击，使得程序员保持警惕！</em></p>
-<h4 id="缓存区溢出攻击"><a href="#缓存区溢出攻击" class="headerlink" title="缓存区溢出攻击"></a>缓存区溢出攻击</h4><p>当你在C语言中为输入的内容分配出一片内存（<code>缓存</code>）时，它会被分配在当前运行代码的<code>返回地址</code>旁边。</p>
+<h4 id="缓存区溢出攻击"><a class="markdownIt-Anchor" href="#缓存区溢出攻击"></a> 缓存区溢出攻击</h4>
+<p>当你在C语言中为输入的内容分配出一片内存（<code>缓存</code>）时，它会被分配在当前运行代码的<code>返回地址</code>旁边。</p>
 <ul>
 <li><code>返回地址</code>：指的是一块特定内存，当前代码运行完毕以后，就要运行这块内存中包含的代码。</li>
 <li><code>缓冲区(buffer）</code>: 一个内存区域，用来保存程序需要的输入数据，或者将程序的输出数据累积起来，到一定数量后再输出。</li>
@@ -408,9 +414,11 @@
 <blockquote>
 <p>如果使用更抽象的高级语言，上面的事情是不可能发生的。</p>
 </blockquote>
-<h3 id="高级语言-与低级语言的关系"><a href="#高级语言-与低级语言的关系" class="headerlink" title="高级语言,与低级语言的关系"></a>高级语言,与低级语言的关系</h3><p>简便方式书写程序所用的语言就是高级语言，其优点是使得程序更具有可移植性，而不同计算机的机器语言是不一样的。</p>
+<h3 id="高级语言与低级语言的关系"><a class="markdownIt-Anchor" href="#高级语言与低级语言的关系"></a> 高级语言,与低级语言的关系</h3>
+<p>简便方式书写程序所用的语言就是高级语言，其优点是使得程序更具有可移植性，而不同计算机的机器语言是不一样的。</p>
 <p>高级语言（简便方式书写的程序，就像一行<code>if</code> 语句）可以通过编译器转变为低级语言（硬件可以理解的语言）。</p>
-<h3 id="编译器与解释器区别"><a href="#编译器与解释器区别" class="headerlink" title="编译器与解释器区别"></a>编译器与解释器区别</h3><p><code>编译器</code> 不是低级语言唯一的实现方法，另一种方法是使用<code>解释器</code>。</p>
+<h3 id="编译器与解释器区别"><a class="markdownIt-Anchor" href="#编译器与解释器区别"></a> 编译器与解释器区别</h3>
+<p><code>编译器</code> 不是低级语言唯一的实现方法，另一种方法是使用<code>解释器</code>。</p>
 <ul>
 <li>解释器： 实时地将代码解释为相应的机器语言，然后一行行运行。</li>
 <li>编译器： 先将整个程序全部翻译成机器语言，然后再运行。</li>
@@ -557,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -642,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#低级语言"><span class="nav-text">低级语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么叫机器语言"><span class="nav-text">什么叫机器语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么叫汇编语言"><span class="nav-text">什么叫汇编语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么使用低级语言"><span class="nav-text">为什么使用低级语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存区溢出攻击"><span class="nav-text">缓存区溢出攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级语言-与低级语言的关系"><span class="nav-text">高级语言,与低级语言的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器与解释器区别"><span class="nav-text">编译器与解释器区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#低级语言"><span class="nav-text"> 低级语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么叫机器语言"><span class="nav-text"> 什么叫机器语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么叫汇编语言"><span class="nav-text"> 什么叫汇编语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么使用低级语言"><span class="nav-text"> 为什么使用低级语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存区溢出攻击"><span class="nav-text"> 缓存区溢出攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级语言与低级语言的关系"><span class="nav-text"> 高级语言,与低级语言的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器与解释器区别"><span class="nav-text"> 编译器与解释器区别</span></a></li></ol></div>
             
 
           </div>

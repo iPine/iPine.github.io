@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
 
 
 
@@ -77,19 +78,19 @@
 
 
 
-<meta name="description" content="先举个栗子分析以下这段代码的时间复杂度 // n 表示数组 array 的长度 int find(int[] array, int n, int x) {   int i = 0;   int pos = -1;   for (; i &amp;lt; n; ++i) {     if (array[i] == x) pos = i;   }   return pos; } 分析 功能：在一个无序数组ar">
+<meta name="description" content="先举个栗子 分析以下这段代码的时间复杂度     // n 表示数组 array 的长度     int find(int[] array, int n, int x) {       int i = 0;       int pos = -1;       for (; i &amp;lt; n; ++i) {         if (array[i] == x) pos = i;       }">
 <meta name="keywords" content="data_structure,algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法复杂度分析">
 <meta property="og:url" content="http://ipine.github.io/2018-09-29/index.html">
 <meta property="og:site_name" content="iPine&#39;s Blog">
-<meta property="og:description" content="先举个栗子分析以下这段代码的时间复杂度 // n 表示数组 array 的长度 int find(int[] array, int n, int x) {   int i = 0;   int pos = -1;   for (; i &amp;lt; n; ++i) {     if (array[i] == x) pos = i;   }   return pos; } 分析 功能：在一个无序数组ar">
+<meta property="og:description" content="先举个栗子 分析以下这段代码的时间复杂度     // n 表示数组 array 的长度     int find(int[] array, int n, int x) {       int i = 0;       int pos = -1;       for (; i &amp;lt; n; ++i) {         if (array[i] == x) pos = i;       }">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ipineimg.lijundong.com/18-9-29/51560357.jpg">
 <meta property="og:updated_time" content="2019-02-22T11:27:39.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法复杂度分析">
-<meta name="twitter:description" content="先举个栗子分析以下这段代码的时间复杂度 // n 表示数组 array 的长度 int find(int[] array, int n, int x) {   int i = 0;   int pos = -1;   for (; i &amp;lt; n; ++i) {     if (array[i] == x) pos = i;   }   return pos; } 分析 功能：在一个无序数组ar">
+<meta name="twitter:description" content="先举个栗子 分析以下这段代码的时间复杂度     // n 表示数组 array 的长度     int find(int[] array, int n, int x) {       int i = 0;       int pos = -1;       for (; i &amp;lt; n; ++i) {         if (array[i] == x) pos = i;       }">
 <meta name="twitter:image" content="http://ipineimg.lijundong.com/18-9-29/51560357.jpg">
 
 
@@ -386,83 +387,118 @@
       
 
       
-        <h3 id="先举个栗子"><a href="#先举个栗子" class="headerlink" title="先举个栗子"></a>先举个栗子</h3><p>分析以下这段代码的时间复杂度</p>
-<pre><code>// n 表示数组 array 的长度
-int find(int[] array, int n, int x) {
-  int i = 0;
-  int pos = -1;
-  for (; i &lt; n; ++i) {
-    if (array[i] == x) pos = i;
-  }
-  return pos;
-}
-</code></pre><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><ul>
+        <h3 id="先举个栗子"><a class="markdownIt-Anchor" href="#先举个栗子"></a> 先举个栗子</h3>
+<p>分析以下这段代码的时间复杂度</p>
+<pre><code>    // n 表示数组 array 的长度
+    int find(int[] array, int n, int x) {
+      int i = 0;
+      int pos = -1;
+      for (; i &lt; n; ++i) {
+        if (array[i] == x) pos = i;
+      }
+      return pos;
+    }
+</code></pre>
+<h4 id="分析"><a class="markdownIt-Anchor" href="#分析"></a> 分析</h4>
+<ul>
 <li>功能：在一个无序数组array中，查找变量x出现的位置</li>
 <li>时间复杂度：<code>O(n)</code>, n表示数组的长度</li>
 </ul>
 <p>更为优化的方式</p>
-<pre><code>// n 表示数组 array 的长度
-int find(int[] array, int n, int x) {
-  int i = 0;
-  int pos = -1;
-  for (; i &lt; n; ++i) {
-    if (array[i] == x) {
-        pos = i;
-        break;
+<pre><code>    // n 表示数组 array 的长度
+    int find(int[] array, int n, int x) {
+      int i = 0;
+      int pos = -1;
+      for (; i &lt; n; ++i) {
+        if (array[i] == x) {
+            pos = i;
+            break;
+        }
+      }
+      return pos;
     }
-  }
-  return pos;
-}
-</code></pre><blockquote>
+</code></pre>
+<blockquote>
 <p>时间复杂度： 不一定是O(n)了，不同情况下这段代码的时间复杂度是不同的。</p>
 </blockquote>
-<h3 id="引入概念"><a href="#引入概念" class="headerlink" title="引入概念"></a>引入概念</h3><ul>
-<li><p>最好情况时间复杂度：在最理想情况下，执行代码的时间复杂度</p>
+<h3 id="引入概念"><a class="markdownIt-Anchor" href="#引入概念"></a> 引入概念</h3>
+<ul>
+<li>
+<p>最好情况时间复杂度：在最理想情况下，执行代码的时间复杂度</p>
 </li>
-<li><p>最坏情况时间复杂度：在最糟糕情况下，执行代码的时间复杂度</p>
+<li>
+<p>最坏情况时间复杂度：在最糟糕情况下，执行代码的时间复杂度</p>
 </li>
-<li><p>平均情况时间复杂度：最好情况和最坏情况都是属于极端情况，发生的概率并不大。需要表示平均情况下的复杂度</p>
+<li>
+<p>平均情况时间复杂度：最好情况和最坏情况都是属于极端情况，发生的概率并不大。需要表示平均情况下的复杂度</p>
 </li>
 </ul>
-<h3 id="如何分析平均情况时间复杂度"><a href="#如何分析平均情况时间复杂度" class="headerlink" title="如何分析平均情况时间复杂度"></a>如何分析平均情况时间复杂度</h3><p>以上面的例子为例：查找x在数组中的位置，有<code>n+1</code>种情况，在数组<code>0~n-1</code>的位置上和不在数组中。<br>将每种情况下，查找需要遍历的元素个数相加，再除以n+1种情况，就可得到需要遍历的元素个数的平均值<br><code>(1+2+3+...+n+n)/n+1 = n (n+3) /2(n+1)</code><br>省略掉系数、低阶、常量后得到平均时间复杂度为<code>O(n)</code></p>
-<h4 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h4><p>在以上的n+1种情况中，未考虑x在每种情况下出现的概率。<br>现在假设，x在数组中与x不在数组中的概率各为<code>1/2</code>；<br>要查找的x出现在<code>0~n-1</code>这n个位置的可能性是相同的，即<code>1/n</code>；<br>那么，要查找的x出现在<code>0~n-1</code>中任意位置的概率为 <code>1/2*1/n = 1/(2n)</code></p>
+<h3 id="如何分析平均情况时间复杂度"><a class="markdownIt-Anchor" href="#如何分析平均情况时间复杂度"></a> 如何分析平均情况时间复杂度</h3>
+<p>以上面的例子为例：查找x在数组中的位置，有<code>n+1</code>种情况，在数组<code>0~n-1</code>的位置上和不在数组中。<br>
+将每种情况下，查找需要遍历的元素个数相加，再除以n+1种情况，就可得到需要遍历的元素个数的平均值<br>
+<code>(1+2+3+...+n+n)/n+1 = n (n+3) /2(n+1)</code><br>
+省略掉系数、低阶、常量后得到平均时间复杂度为<code>O(n)</code></p>
+<h4 id="存在问题"><a class="markdownIt-Anchor" href="#存在问题"></a> 存在问题</h4>
+<p>在以上的n+1种情况中，未考虑x在每种情况下出现的概率。<br>
+现在假设，x在数组中与x不在数组中的概率各为<code>1/2</code>；<br>
+要查找的x出现在<code>0~n-1</code>这n个位置的可能性是相同的，即<code>1/n</code>；<br>
+那么，要查找的x出现在<code>0~n-1</code>中任意位置的概率为 <code>1/2*1/n = 1/(2n)</code></p>
 <p>将每种情况发生的概率考虑进去后，平均时间复杂度计算过程变成：</p>
 <p><img src="http://ipineimg.lijundong.com/18-9-29/51560357.jpg" alt="平均时间复杂度"></p>
 <p>这个值就是概率论中的加权平均值，也叫作期望值。因而平均时间复杂度的全称为<strong>加权平均时间复杂度</strong>或<strong>期望时间复杂度</strong>。</p>
 <blockquote>
 <p>注：很多时候，我们只使用一个复杂度就可以满足要求。只有同一块代码在不同情况下，时间复杂度有量级的差距，才会使用以上3种复杂度的表示法来区分。</p>
 </blockquote>
-<h3 id="均摊时间复杂度、摊还分析（平摊分析）"><a href="#均摊时间复杂度、摊还分析（平摊分析）" class="headerlink" title="均摊时间复杂度、摊还分析（平摊分析）"></a>均摊时间复杂度、摊还分析（平摊分析）</h3><p>举栗子说明：</p>
-<pre><code>// array 表示一个长度为 n 的数组
-// 代码中的 array.length 就等于 n
-int[] array = new int[n];
-int count = 0;
-void insert(int val) {
-    if (count == array.length) {
-       int sum = 0;
-       for (int i = 0; i &lt; array.length; ++i) {
-          sum = sum + array[i];
-       }
-       array[0] = sum;
-       count = 1;
+<h3 id="均摊时间复杂度-摊还分析平摊分析"><a class="markdownIt-Anchor" href="#均摊时间复杂度-摊还分析平摊分析"></a> 均摊时间复杂度、摊还分析（平摊分析）</h3>
+<p>举栗子说明：</p>
+<pre><code>    // array 表示一个长度为 n 的数组
+    // 代码中的 array.length 就等于 n
+    int[] array = new int[n];
+    int count = 0;
+    void insert(int val) {
+        if (count == array.length) {
+           int sum = 0;
+           for (int i = 0; i &lt; array.length; ++i) {
+              sum = sum + array[i];
+           }
+           array[0] = sum;
+           count = 1;
+        }
+        array[count] = val;
+        ++count;
     }
-    array[count] = val;
-    ++count;
-}
-</code></pre><h4 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h4><ul>
-<li>功能：实现了往数组中插入数据的功能。</li>
-<li><p>具体：<br>1 . 当数组满了<code>count == array.length</code>,就用for循环遍历求和，将求得的和放在数组的第一个位置，并清空数组其余元素；然后再插入新的元素。<br>2 . 当数组一开始就有空闲，则直接将数据插入数组。</p>
+</code></pre>
+<h4 id="分析-2"><a class="markdownIt-Anchor" href="#分析-2"></a> 分析</h4>
+<ul>
+<li>
+<p>功能：实现了往数组中插入数据的功能。</p>
 </li>
-<li><p>复杂度分析：<br>1 . 最好情况：数组中有空闲，直接将数据插入到<code>count</code>的位置，为<code>O(1)</code><br>2 . 最坏情况：数组没有空闲空间，需要先做一个遍历求和，再作插入。所以复杂度为<code>O(n)</code><br>3 . 平均时间复杂度：<code>O(1)</code> </p>
+<li>
+<p>具体：<br>
+1 . 当数组满了<code>count == array.length</code>,就用for循环遍历求和，将求得的和放在数组的第一个位置，并清空数组其余元素；然后再插入新的元素。<br>
+2 . 当数组一开始就有空闲，则直接将数据插入数组。</p>
+</li>
+<li>
+<p>复杂度分析：<br>
+1 . 最好情况：数组中有空闲，直接将数据插入到<code>count</code>的位置，为<code>O(1)</code><br>
+2 . 最坏情况：数组没有空闲空间，需要先做一个遍历求和，再作插入。所以复杂度为<code>O(n)</code><br>
+3 . 平均时间复杂度：<code>O(1)</code></p>
 </li>
 </ul>
-<h5 id="平均时间复杂度如何得到"><a href="#平均时间复杂度如何得到" class="headerlink" title="平均时间复杂度如何得到"></a>平均时间复杂度如何得到</h5><p>总共<code>n+1</code>种情况，前<code>n</code>中情况每种时间复杂度都为<code>O(1)</code>，后一种情况时间复杂度为<code>O(n)</code>；<code>n+1</code>种情况发生的概率一样，为<code>1/(n+1)</code>；根据加权平均计算方法：</p>
+<h5 id="平均时间复杂度如何得到"><a class="markdownIt-Anchor" href="#平均时间复杂度如何得到"></a> 平均时间复杂度如何得到</h5>
+<p>总共<code>n+1</code>种情况，前<code>n</code>中情况每种时间复杂度都为<code>O(1)</code>，后一种情况时间复杂度为<code>O(n)</code>；<code>n+1</code>种情况发生的概率一样，为<code>1/(n+1)</code>；根据加权平均计算方法：</p>
 <blockquote>
 <p><code>1*1/(n+1) + 1*1/(n+1) + ... + n*1/(n+1) = O(1)</code></p>
 </blockquote>
-<h4 id="均摊时间复杂度（amortized-time-complexity）"><a href="#均摊时间复杂度（amortized-time-complexity）" class="headerlink" title="均摊时间复杂度（amortized time complexity）"></a>均摊时间复杂度（amortized time complexity）</h4><p>分析发现:<br>1 . <code>insert()</code>函数在<strong>大部分情况</strong>下，时间复杂度都为<code>O(1)</code>；<strong>极个别情况</strong>下，复杂度才高，为<code>O(n)</code><br>2 . <code>insert()</code>函数中，<code>O(1)</code>时间复杂度的插入和<code>O(n)</code>时间复杂度的插入，<strong>出现频率很有规律</strong>。存在前后时序关系，一般一个<code>O(n)</code>插入之后，紧跟着<code>n-1</code>个<code>O(1)</code>的插入操作，循环往复。</p>
-<h5 id="针对这种场景，引入均摊分析法"><a href="#针对这种场景，引入均摊分析法" class="headerlink" title="针对这种场景，引入均摊分析法"></a>针对这种场景，引入均摊分析法</h5><p>大致思路：每一次 <code>O(n)</code> 的插入操作，都会跟着 <code>n-1</code> 次 <code>O(1)</code> 的插入操作，所以把耗时多的那次操作均摊到接下来的 <code>n-1</code> 次耗时少的操作上，均摊下来，这一组连续的操作的均摊时间复杂度就是 <code>O(1)</code>。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>对一个数据结构进行一组连续操作中，大部分情况下时间复杂度都很低，只有个别情况下时间复杂度比较高，而且这些操作之间存在前后连贯的时序关系，这个时候，我们就可以将这一组操作放在一块儿分析，看是否能将较高时间复杂度那次操作的耗时，平摊到其他那些时间复杂度比较低的操作上。<br>而且，<strong>在能够应用均摊时间复杂度分析的场合，一般均摊时间复杂度就等于最好情况时间复杂度</strong>。</p>
+<h4 id="均摊时间复杂度amortized-time-complexity"><a class="markdownIt-Anchor" href="#均摊时间复杂度amortized-time-complexity"></a> 均摊时间复杂度（amortized time complexity）</h4>
+<p>分析发现:<br>
+1 . <code>insert()</code>函数在<strong>大部分情况</strong>下，时间复杂度都为<code>O(1)</code>；<strong>极个别情况</strong>下，复杂度才高，为<code>O(n)</code><br>
+2 . <code>insert()</code>函数中，<code>O(1)</code>时间复杂度的插入和<code>O(n)</code>时间复杂度的插入，<strong>出现频率很有规律</strong>。存在前后时序关系，一般一个<code>O(n)</code>插入之后，紧跟着<code>n-1</code>个<code>O(1)</code>的插入操作，循环往复。</p>
+<h5 id="针对这种场景引入均摊分析法"><a class="markdownIt-Anchor" href="#针对这种场景引入均摊分析法"></a> 针对这种场景，引入均摊分析法</h5>
+<p>大致思路：每一次 <code>O(n)</code> 的插入操作，都会跟着 <code>n-1</code> 次 <code>O(1)</code> 的插入操作，所以把耗时多的那次操作均摊到接下来的 <code>n-1</code> 次耗时少的操作上，均摊下来，这一组连续的操作的均摊时间复杂度就是 <code>O(1)</code>。</p>
+<h4 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h4>
+<p>对一个数据结构进行一组连续操作中，大部分情况下时间复杂度都很低，只有个别情况下时间复杂度比较高，而且这些操作之间存在前后连贯的时序关系，这个时候，我们就可以将这一组操作放在一块儿分析，看是否能将较高时间复杂度那次操作的耗时，平摊到其他那些时间复杂度比较低的操作上。<br>
+而且，<strong>在能够应用均摊时间复杂度分析的场合，一般均摊时间复杂度就等于最好情况时间复杂度</strong>。</p>
 <blockquote>
 <p>均摊时间复杂度就是一种特殊的平均时间复杂度，没必要花太多精力去区分它们。</p>
 </blockquote>
@@ -607,7 +643,7 @@ void insert(int val) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -692,7 +728,7 @@ void insert(int val) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#先举个栗子"><span class="nav-text">先举个栗子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入概念"><span class="nav-text">引入概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析平均情况时间复杂度"><span class="nav-text">如何分析平均情况时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#存在问题"><span class="nav-text">存在问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#均摊时间复杂度、摊还分析（平摊分析）"><span class="nav-text">均摊时间复杂度、摊还分析（平摊分析）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-1"><span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#平均时间复杂度如何得到"><span class="nav-text">平均时间复杂度如何得到</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#均摊时间复杂度（amortized-time-complexity）"><span class="nav-text">均摊时间复杂度（amortized time complexity）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#针对这种场景，引入均摊分析法"><span class="nav-text">针对这种场景，引入均摊分析法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#先举个栗子"><span class="nav-text"> 先举个栗子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-text"> 分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入概念"><span class="nav-text"> 引入概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析平均情况时间复杂度"><span class="nav-text"> 如何分析平均情况时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#存在问题"><span class="nav-text"> 存在问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#均摊时间复杂度-摊还分析平摊分析"><span class="nav-text"> 均摊时间复杂度、摊还分析（平摊分析）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析-2"><span class="nav-text"> 分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#平均时间复杂度如何得到"><span class="nav-text"> 平均时间复杂度如何得到</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#均摊时间复杂度amortized-time-complexity"><span class="nav-text"> 均摊时间复杂度（amortized time complexity）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#针对这种场景引入均摊分析法"><span class="nav-text"> 针对这种场景，引入均摊分析法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-text"> 总结</span></a></li></ol></li></ol></div>
             
 
           </div>
