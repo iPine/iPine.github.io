@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="iPine&#39;s Blog">
 <meta property="og:description" content="最近因为做毕设，模型要来回跑，数据量也不小，在本地跑的话既耗时又耗资源，所以就移到了Colab上实验。Colab (Colaboratory) 由Google提供，是一个可免费提供GPU等算力的平台，长得像 Jupyter Notebook，在上面进行Python编码很方便。 由于是新手，免不了遇到很多问题，这里记录下来，以便以后查阅。 首先是数据导入导出问题。 Q1：我的实验数据在本地，如何加载">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-19T07:35:02.658Z">
+<meta property="og:updated_time" content="2019-12-19T07:48:37.744Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Colab问题记录">
 <meta name="twitter:description" content="最近因为做毕设，模型要来回跑，数据量也不小，在本地跑的话既耗时又耗资源，所以就移到了Colab上实验。Colab (Colaboratory) 由Google提供，是一个可免费提供GPU等算力的平台，长得像 Jupyter Notebook，在上面进行Python编码很方便。 由于是新手，免不了遇到很多问题，这里记录下来，以便以后查阅。 首先是数据导入导出问题。 Q1：我的实验数据在本地，如何加载">
@@ -423,6 +423,15 @@
 <li>通过设置参数不显示输出，将模型拟合中的 <code>verbose</code> 参数置为0</li>
 <li>若就是想看完整的训练中间结果，那么可以增大内存的限制，让你的训练结果都展示出来。如果使用 <code>Tensorflow</code> 作为后端，可在 <code>Keras</code> 中编写 <code>Tensorflow</code> 回调来查看详细输出，具体操作可参考<a href="https://keras.io/callbacks/#tensorboard" target="_blank" rel="noopener">这里</a>。</li>
 </ol>
+<p>参考链接</p>
+<blockquote>
+<ol>
+<li><a href="https://towardsdatascience.com/3-ways-to-load-csv-files-into-colab-7c14fcbdcb92" target="_blank" rel="noopener">https://towardsdatascience.com/3-ways-to-load-csv-files-into-colab-7c14fcbdcb92</a></li>
+<li><a href="https://stackoverflow.com/questions/58636816/cant-save-export-my-dataframe-to-csv-on-googles-colab" target="_blank" rel="noopener">https://stackoverflow.com/questions/58636816/cant-save-export-my-dataframe-to-csv-on-googles-colab</a></li>
+<li><a href="https://www.jianshu.com/p/ce2e63d1c10c" target="_blank" rel="noopener">https://www.jianshu.com/p/ce2e63d1c10c</a></li>
+<li><a href="https://buomsoo-kim.github.io/colab/2018/04/27/Using-External-fonts-in-colab.md/" target="_blank" rel="noopener">https://buomsoo-kim.github.io/colab/2018/04/27/Using-External-fonts-in-colab.md/</a></li>
+</ol>
+</blockquote>
 
       
     </div>
