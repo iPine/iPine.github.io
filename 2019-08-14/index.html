@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://ipineimg.lijundong.com/result.png">
 <meta property="og:image" content="http://ipineimg.lijundong.com/V.png">
 <meta property="og:image" content="http://ipineimg.lijundong.com/V-result.png">
-<meta property="og:updated_time" content="2019-09-06T12:18:16.379Z">
+<meta property="og:updated_time" content="2019-12-19T06:48:51.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL面试题">
 <meta name="twitter:description" content="关于SQL的几个面试题或练习题，在解题的时候，同时考虑用pandas来解，所以做个总结。  题目一  题目描述 用户日志表log，有用户编号cid，时间dt两个字段，查找每个用户成为新增用户的时间  HiveSQL解 思路：  对每个用户的出现时间进行排名 从排名中挑选出每个用户的排名为1的时间，即首次出现时间，也就是成为新增用户的时间  12345678select a.cid,">
@@ -421,11 +421,11 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cid=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br><span class="line">dt=[<span class="string">'2019-08-01'</span>,<span class="string">'2019-08-01'</span>,<span class="string">'2019-08-02'</span>,<span class="string">'2019-08-02'</span>,<span class="string">'2019-08-03'</span>,<span class="string">'2019-08-04'</span>,<span class="string">'2019-08-01'</span>]</span><br><span class="line">df_log=pd.DataFrame(&#123;<span class="string">'cid'</span>:cid,<span class="string">'dt'</span>:dt&#125;)</span><br></pre></td></tr></table></figure>
 <p>log数据框：<br>
 <img src="http://ipineimg.lijundong.com/log.png" alt="log"></p>
-<ol start="2">
+<ol>
 <li>统计每个用户成为新增用户时间，按cid分组，求最早时间</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minTime = df_log.groupby(<span class="string">'cid'</span>).dt.min().tolist()</span><br></pre></td></tr></table></figure>
-<ol start="3">
+<ol>
 <li>统计独立用户</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cid = set(df_log[<span class="string">'cid'</span>].tolist())</span><br></pre></td></tr></table></figure>
@@ -444,7 +444,7 @@
 <p>有两张表，t1和t2；t1有用户编号uid和页面浏览量pageviews两个字段；t2有用户编号uid和用户所在组别groupid两个字段；查询每组用户的总阅读量<br>
 两张表为：<br>
 <img src="http://ipineimg.lijundong.com/t1.png" alt="t1"> <img src="http://ipineimg.lijundong.com/t2.png" alt="t2"></p>
-<h4 id="hivesql解-2"><a class="markdownIt-Anchor" href="#hivesql解-2"></a> HiveSQL解</h4>
+<h4 id="hivesql-解"><a class="markdownIt-Anchor" href="#hivesql-解"></a> HiveSQL 解</h4>
 <blockquote>
 <p>说明这是列转行问题，用函数<code>lateral view explode</code>拆分字段的多个值。</p>
 </blockquote>
@@ -454,14 +454,14 @@
 <li>以新表为主，左连接t1表，对groupid分组，统计每组pageviews的和</li>
 </ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b.groupid,</span><br><span class="line">        <span class="keyword">sum</span>(b.pageviews) <span class="keyword">as</span> total_pageviews</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    ((<span class="keyword">select</span> t2.uid <span class="keyword">as</span> uid,t3.groupid <span class="keyword">as</span> groupid</span><br><span class="line">        <span class="keyword">from</span> t2</span><br><span class="line">        lateral <span class="keyword">view</span> explode(groupid) t3 <span class="keyword">as</span> groupid)a</span><br><span class="line">    <span class="keyword">left</span> <span class="keyword">join</span> t1 <span class="keyword">on</span> a.uid=t1.uid)b</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> b.groupid;</span><br></pre></td></tr></table></figure>
-<h4 id="python解-2"><a class="markdownIt-Anchor" href="#python解-2"></a> Python解</h4>
+<h4 id="python-解"><a class="markdownIt-Anchor" href="#python-解"></a> Python 解</h4>
 <p><strong>思路：</strong></p>
 <ol>
 <li>先将groupid列按属性值拆分成多行</li>
 <li>合并两张表，对合并后的表按照groupid进行分组，统计pageviews的和</li>
 </ol>
 <p><strong>具体实现：</strong></p>
-<p><strong>说明：data_t1表示t1的数据框， data_t2表示t2的数据框</strong></p>
+<p>** 说明：data_t1 表示 t1 的数据框， data_t2 表示 t2 的数据框 **</p>
 <ol>
 <li>先拆分groupid，并重命名为group</li>
 </ol>
@@ -490,7 +490,7 @@
 <h4 id="题目描述-3"><a class="markdownIt-Anchor" href="#题目描述-3"></a> 题目描述</h4>
 <p>浏览量表V，有用户编号cid，时间dt，浏览量visits字段；<br>
 选出连续3天或以上浏览量大于10的用户。</p>
-<h4 id="hivesql解-3"><a class="markdownIt-Anchor" href="#hivesql解-3"></a> HiveSQL解</h4>
+<h4 id="hivesql解-2"><a class="markdownIt-Anchor" href="#hivesql解-2"></a> HiveSQL解</h4>
 <blockquote>
 <p>巧妙利用排序，把日期进行从小到大排序，用日期(天)本身减去日期的排名，若日期所在行的差值相同说明这些日期是连续的。</p>
 </blockquote>
@@ -500,8 +500,10 @@
 <li>外层查询选择cid，按照用户编号cid和diff分组，having过滤出计数大于等于3的</li>
 </ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b.cid</span><br><span class="line"><span class="keyword">from</span> </span><br><span class="line">        (<span class="keyword">select</span> a.cid,</span><br><span class="line">                a.diff,</span><br><span class="line">                <span class="keyword">count</span>(*) <span class="keyword">as</span> <span class="keyword">num</span></span><br><span class="line">        <span class="keyword">from</span></span><br><span class="line">                (<span class="keyword">select</span> cid,</span><br><span class="line">                        <span class="keyword">date_sub</span>(dt,row_number() <span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> a.cid <span class="keyword">order</span> <span class="keyword">by</span> dt)) <span class="keyword">as</span> diff</span><br><span class="line">                <span class="keyword">from</span> V</span><br><span class="line">                <span class="keyword">where</span> visits&gt;<span class="number">10</span>)a</span><br><span class="line">        <span class="keyword">group</span> <span class="keyword">by</span> a.cid,a.diff)b</span><br><span class="line"><span class="keyword">where</span> b.num&gt;=<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="python解-3"><a class="markdownIt-Anchor" href="#python解-3"></a> Python解</h4>
-<p><strong>具体实现：</strong></p>
+<h4 id="python解-2"><a class="markdownIt-Anchor" href="#python解-2"></a> Python解</h4>
+<ul>
+<li><strong>具体实现：</strong></li>
+</ul>
 <ol>
 <li>构造数据</li>
 </ol>
@@ -568,6 +570,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019-12-30/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -653,7 +659,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -675,7 +681,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -738,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目一"><span class="nav-text"> 题目一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hivesql解"><span class="nav-text"> HiveSQL解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python解"><span class="nav-text"> Python解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目二"><span class="nav-text"> 题目二</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述-2"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hivesql解-2"><span class="nav-text"> HiveSQL解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python解-2"><span class="nav-text"> Python解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目三"><span class="nav-text"> 题目三</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述-3"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hivesql解-3"><span class="nav-text"> HiveSQL解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python解-3"><span class="nav-text"> Python解</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目一"><span class="nav-text"> 题目一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hivesql解"><span class="nav-text"> HiveSQL解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python解"><span class="nav-text"> Python解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目二"><span class="nav-text"> 题目二</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述-2"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hivesql-解"><span class="nav-text"> HiveSQL 解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-解"><span class="nav-text"> Python 解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目三"><span class="nav-text"> 题目三</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述-3"><span class="nav-text"> 题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hivesql解-2"><span class="nav-text"> HiveSQL解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python解-2"><span class="nav-text"> Python解</span></a></li></ol></li></ol></div>
             
 
           </div>
